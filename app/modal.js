@@ -1,29 +1,42 @@
-import { Link } from 'expo-router';
-import { StyleSheet } from 'react-native';
+// Screen: Modal
+/* Vai trò:
+	* Screen Modal (không nằm trong tabs)
+    * Route: /modal
+    * Hiển thị như modal (slide từ dưới lên)
+*/
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function ModalScreen() {
+  const router = useRouter();
+
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">This is a modal</ThemedText>
-      <Link href="/" dismissTo style={styles.link}>
-        <ThemedText type="link">Go to home screen</ThemedText>
-      </Link>
-    </ThemedView>
+    <View style={styles.container}>
+      <Text style={styles.title}>Modal Screen</Text>
+      <Text style={styles.subtitle}>Đây là modal popup</Text>
+
+      {/* Đóng modal */}
+      <Button title="Close" onPress={() => router.back()} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 20,
   },
 });
