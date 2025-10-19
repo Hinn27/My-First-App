@@ -13,11 +13,11 @@ import {
     Pressable,
     ScrollView,
     Switch,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { Link } from "expo-router";
-import { useState } from "react";
-import { useTheme } from "../../src/context/ThemeContext";
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { Link } from 'expo-router';
+import { useState } from 'react';
+import { useTheme } from '../../src/context/ThemeContext';
 
 export default function ProfileScreen() {
     const { theme, isDarkMode, toggleTheme } = useTheme();
@@ -112,7 +112,7 @@ export default function ProfileScreen() {
 
                     <View style={styles.menuItem}>
                         <Ionicons
-                            name={isDarkMode ? "moon" : "moon-outline"}
+                            name={isDarkMode ? 'moon' : 'moon-outline'}
                             size={24}
                             color={theme.onSurface}
                         />
@@ -208,7 +208,7 @@ const createStyles = (theme) =>
             backgroundColor: theme.background,
         },
         container: {
-            alignItems: "center",
+            alignItems: 'center',
             padding: 20,
             paddingTop: 40,
             paddingBottom: 40,
@@ -218,7 +218,7 @@ const createStyles = (theme) =>
         },
         name: {
             fontSize: 24,
-            fontWeight: "bold",
+            fontWeight: 'bold',
             color: theme.onBackground,
             marginBottom: 4,
         },
@@ -228,16 +228,16 @@ const createStyles = (theme) =>
             marginBottom: 32,
         },
         statsContainer: {
-            flexDirection: "row",
+            flexDirection: 'row',
             gap: 40,
             marginBottom: 32,
         },
         stat: {
-            alignItems: "center",
+            alignItems: 'center',
         },
         statNumber: {
             fontSize: 28,
-            fontWeight: "bold",
+            fontWeight: 'bold',
             color: theme.primary,
         },
         statLabel: {
@@ -247,24 +247,24 @@ const createStyles = (theme) =>
         },
         sectionTitle: {
             fontSize: 18,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.onBackground,
-            alignSelf: "flex-start",
+            alignSelf: 'flex-start',
             marginTop: 24,
             marginBottom: 12,
         },
         menuContainer: {
-            width: "100%",
+            width: '100%',
             backgroundColor: theme.surface,
             borderRadius: 16,
-            overflow: "hidden",
+            overflow: 'hidden',
             marginBottom: 16,
-            borderWidth: theme.mode === "dark" ? 1 : 0,
+            borderWidth: theme.mode === 'dark' ? 1 : 0,
             borderColor: theme.outline,
         },
         menuItem: {
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
             padding: 16,
             borderBottomWidth: 1,
             borderBottomColor: theme.outline,
@@ -284,21 +284,21 @@ const createStyles = (theme) =>
             marginRight: 4,
         },
         logoutButton: {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
             backgroundColor: theme.surface,
-            width: "100%",
+            width: '100%',
             padding: 16,
             borderRadius: 16,
             marginTop: 8,
             gap: 8,
-            borderWidth: theme.mode === "dark" ? 1 : 0,
+            borderWidth: theme.mode === 'dark' ? 1 : 0,
             borderColor: theme.outline,
         },
         logoutText: {
             fontSize: 16,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.error,
         },
     });

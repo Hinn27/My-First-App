@@ -10,34 +10,34 @@ import {
     Modal,
     TextInput,
     Animated,
-} from "react-native";
-import { Link } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import { useCart } from "../../src/context/CartContext";
-import { useTheme } from "../../src/context/ThemeContext";
-import { useState, useEffect, useRef } from "react";
-import * as Location from "expo-location";
+} from 'react-native';
+import { Link } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { useCart } from '../../src/context/CartContext';
+import { useTheme } from '../../src/context/ThemeContext';
+import { useState, useEffect, useRef } from 'react';
+import * as Location from 'expo-location';
 
 export default function HomeScreen() {
     const { addToCart, getTotalItems } = useCart();
     const { theme, isDarkMode, toggleTheme } = useTheme();
     const [deliveryAddress, setDeliveryAddress] =
-        useState("Đang lấy vị trí...");
+        useState('Đang lấy vị trí...');
     const [location, setLocation] = useState(null);
     const [loadingLocation, setLoadingLocation] = useState(true);
     const [showAddressModal, setShowAddressModal] = useState(false);
 
     // Toast notification
-    const [toastMessage, setToastMessage] = useState("");
+    const [toastMessage, setToastMessage] = useState('');
     const [showToast, setShowToast] = useState(false);
     const toastAnim = useRef(new Animated.Value(-100)).current;
 
     // Form địa chỉ chi tiết
     const [addressForm, setAddressForm] = useState({
-        houseNumber: "",
-        street: "",
-        ward: "",
-        city: "",
+        houseNumber: '',
+        street: '',
+        ward: '',
+        city: '',
     });
 
     // Danh sách món ăn từ các quán gần đây
@@ -56,13 +56,13 @@ export default function HomeScreen() {
             const { status } =
                 await Location.requestForegroundPermissionsAsync();
 
-            if (status !== "granted") {
+            if (status !== 'granted') {
                 Alert.alert(
-                    "Quyền truy cập vị trí",
-                    "Ứng dụng cần quyền truy cập vị trí để hiển thị địa chỉ giao hàng.",
-                    [{ text: "OK" }],
+                    'Quyền truy cập vị trí',
+                    'Ứng dụng cần quyền truy cập vị trí để hiển thị địa chỉ giao hàng.',
+                    [{ text: 'OK' }],
                 );
-                setDeliveryAddress("Vui lòng cho phép truy cập vị trí");
+                setDeliveryAddress('Vui lòng cho phép truy cập vị trí');
                 setLoadingLocation(false);
                 return;
             }
@@ -84,10 +84,10 @@ export default function HomeScreen() {
                 const addr = address[0];
                 // Format địa chỉ và lưu vào form
                 setAddressForm({
-                    houseNumber: addr.streetNumber || "",
-                    street: addr.street || "",
-                    ward: addr.district || "",
-                    city: addr.city || "Hà Nội",
+                    houseNumber: addr.streetNumber || '',
+                    street: addr.street || '',
+                    ward: addr.district || '',
+                    city: addr.city || 'Hà Nội',
                 });
 
                 const formattedAddress = [
@@ -97,22 +97,22 @@ export default function HomeScreen() {
                     addr.country,
                 ]
                     .filter(Boolean)
-                    .join(", ");
+                    .join(', ');
 
-                setDeliveryAddress(formattedAddress || "Hà Nội, Việt Nam");
+                setDeliveryAddress(formattedAddress || 'Hà Nội, Việt Nam');
             } else {
-                setDeliveryAddress("Hà Nội, Việt Nam");
+                setDeliveryAddress('Hà Nội, Việt Nam');
             }
 
             // Tải món ăn gần vị trí (3km)
             loadNearbyDishes(currentLocation.coords);
         } catch (error) {
-            console.error("Error getting location:", error);
-            setDeliveryAddress("Hà Nội, Việt Nam");
+            console.error('Error getting location:', error);
+            setDeliveryAddress('Hà Nội, Việt Nam');
             Alert.alert(
-                "Lỗi",
-                "Không thể lấy vị trí hiện tại. Vui lòng thử lại.",
-                [{ text: "OK" }],
+                'Lỗi',
+                'Không thể lấy vị trí hiện tại. Vui lòng thử lại.',
+                [{ text: 'OK' }],
             );
         } finally {
             setLoadingLocation(false);
@@ -125,76 +125,76 @@ export default function HomeScreen() {
         // Hiện tại dùng data mẫu
         const mockDishes = [
             {
-                id: "nb-1",
-                name: "Phở Bò Đặc Biệt",
+                id: 'nb-1',
+                name: 'Phở Bò Đặc Biệt',
                 price: 55000,
                 rating: 4.9,
-                restaurant: "Phở Hà Nội",
+                restaurant: 'Phở Hà Nội',
                 distance: 0.8,
-                image: "🍜",
+                image: '🍜',
             },
             {
-                id: "nb-2",
-                name: "Bún Chả Hà Nội",
+                id: 'nb-2',
+                name: 'Bún Chả Hà Nội',
                 price: 50000,
                 rating: 4.8,
-                restaurant: "Bún Chả Đắc Kim",
+                restaurant: 'Bún Chả Đắc Kim',
                 distance: 1.2,
-                image: "🍲",
+                image: '🍲',
             },
             {
-                id: "nb-3",
-                name: "Cơm Tấm Sườn Bì",
+                id: 'nb-3',
+                name: 'Cơm Tấm Sườn Bì',
                 price: 45000,
                 rating: 4.7,
-                restaurant: "Cơm Tấm Sài Gòn",
+                restaurant: 'Cơm Tấm Sài Gòn',
                 distance: 1.5,
-                image: "🍚",
+                image: '🍚',
             },
             {
-                id: "nb-4",
-                name: "Bánh Mì Thịt Nướng",
+                id: 'nb-4',
+                name: 'Bánh Mì Thịt Nướng',
                 price: 25000,
                 rating: 4.9,
-                restaurant: "Bánh Mì Hòa Mã",
+                restaurant: 'Bánh Mì Hòa Mã',
                 distance: 0.5,
-                image: "🥖",
+                image: '🥖',
             },
             {
-                id: "nb-5",
-                name: "Cà Phê Sữa Đá",
+                id: 'nb-5',
+                name: 'Cà Phê Sữa Đá',
                 price: 20000,
                 rating: 4.8,
-                restaurant: "The Coffee House",
+                restaurant: 'The Coffee House',
                 distance: 0.9,
-                image: "☕",
+                image: '☕',
             },
             {
-                id: "nb-6",
-                name: "Trà Sữa Trân Châu",
+                id: 'nb-6',
+                name: 'Trà Sữa Trân Châu',
                 price: 35000,
                 rating: 4.7,
-                restaurant: "Gong Cha",
+                restaurant: 'Gong Cha',
                 distance: 1.1,
-                image: "🧋",
+                image: '🧋',
             },
             {
-                id: "nb-7",
-                name: "Bún Bò Huế",
+                id: 'nb-7',
+                name: 'Bún Bò Huế',
                 price: 50000,
                 rating: 4.8,
-                restaurant: "Bún Bò Huế Miền Trung",
+                restaurant: 'Bún Bò Huế Miền Trung',
                 distance: 2.0,
-                image: "🍜",
+                image: '🍜',
             },
             {
-                id: "nb-8",
-                name: "Hủ Tiếu Nam Vang",
+                id: 'nb-8',
+                name: 'Hủ Tiếu Nam Vang',
                 price: 45000,
                 rating: 4.6,
-                restaurant: "Hủ Tiếu Mỹ Tho",
+                restaurant: 'Hủ Tiếu Mỹ Tho',
                 distance: 2.3,
-                image: "🍜",
+                image: '🍜',
             },
         ];
         setNearbyDishes(mockDishes);
@@ -214,7 +214,7 @@ export default function HomeScreen() {
             !ward.trim() ||
             !city.trim()
         ) {
-            Alert.alert("Lỗi", "Vui lòng nhập đầy đủ thông tin địa chỉ");
+            Alert.alert('Lỗi', 'Vui lòng nhập đầy đủ thông tin địa chỉ');
             return;
         }
 
@@ -224,7 +224,7 @@ export default function HomeScreen() {
         setShowAddressModal(false);
 
         // TODO: Tải lại món ăn dựa trên địa chỉ mới
-        Alert.alert("Thành công", "Đã cập nhật địa chỉ giao hàng");
+        Alert.alert('Thành công', 'Đã cập nhật địa chỉ giao hàng');
     };
 
     const handleUseCurrentLocation = () => {
@@ -483,7 +483,7 @@ export default function HomeScreen() {
                                             •
                                         </Text>
                                         <Text style={styles.featuredPrice}>
-                                            {item.price.toLocaleString("vi-VN")}
+                                            {item.price.toLocaleString('vi-VN')}
                                             đ
                                         </Text>
                                     </View>
@@ -683,9 +683,9 @@ const createStyles = (theme) =>
             backgroundColor: theme.background,
         },
         header: {
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             padding: 16,
             backgroundColor: theme.surface,
             borderBottomWidth: 1,
@@ -693,8 +693,8 @@ const createStyles = (theme) =>
             elevation: 2,
         },
         locationContainer: {
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
             flex: 1,
             gap: 8,
         },
@@ -705,40 +705,40 @@ const createStyles = (theme) =>
             marginBottom: 2,
         },
         addressRow: {
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
             gap: 4,
         },
         locationAddress: {
             fontSize: 15,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.onSurface,
             maxWidth: 200,
         },
         cartButton: {
-            position: "relative",
+            position: 'relative',
             padding: 8,
         },
         cartBadge: {
-            position: "absolute",
+            position: 'absolute',
             top: 4,
             right: 4,
             backgroundColor: theme.error,
             borderRadius: 10,
             minWidth: 18,
             height: 18,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
             paddingHorizontal: 4,
         },
         cartBadgeText: {
             color: theme.onError,
             fontSize: 11,
-            fontWeight: "700",
+            fontWeight: '700',
         },
         searchBar: {
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
             backgroundColor: theme.surfaceVariant,
             margin: 16,
             padding: 14,
@@ -759,9 +759,9 @@ const createStyles = (theme) =>
             backgroundColor: theme.primary,
             borderRadius: 24,
             padding: 24,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             shadowColor: theme.shadow,
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.15,
@@ -771,7 +771,7 @@ const createStyles = (theme) =>
         bannerContent: { flex: 1 },
         bannerTitle: {
             fontSize: 20,
-            fontWeight: "700",
+            fontWeight: '700',
             color: theme.onPrimary,
             marginBottom: 6,
         },
@@ -785,19 +785,19 @@ const createStyles = (theme) =>
             marginBottom: 24,
         },
         sectionHeader: {
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             marginBottom: 16,
         },
         sectionTitle: {
             fontSize: 22,
-            fontWeight: "700",
+            fontWeight: '700',
             color: theme.onBackground,
         },
         seeAllText: {
             fontSize: 14,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.primary,
         },
         categoryScrollContainer: {
@@ -805,7 +805,7 @@ const createStyles = (theme) =>
             gap: 16,
         },
         categoryItem: {
-            alignItems: "center",
+            alignItems: 'center',
             gap: 8,
             paddingHorizontal: 8,
         },
@@ -813,60 +813,60 @@ const createStyles = (theme) =>
             width: 68,
             height: 68,
             borderRadius: 34,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
             shadowColor: theme.shadow,
             shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: theme.mode === "dark" ? 0 : 0.1,
+            shadowOpacity: theme.mode === 'dark' ? 0 : 0.1,
             shadowRadius: 4,
-            elevation: theme.mode === "dark" ? 0 : 2,
+            elevation: theme.mode === 'dark' ? 0 : 2,
         },
         categoryText: {
             fontSize: 13,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.onSurface,
-            textAlign: "center",
+            textAlign: 'center',
             marginTop: 4,
         },
         featuredCard: {
-            flexDirection: "row",
+            flexDirection: 'row',
             backgroundColor: theme.surface,
             borderRadius: 16,
             padding: 14,
             marginBottom: 12,
-            alignItems: "center",
+            alignItems: 'center',
             shadowColor: theme.shadow,
             shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: theme.mode === "dark" ? 0 : 0.06,
+            shadowOpacity: theme.mode === 'dark' ? 0 : 0.06,
             shadowRadius: 4,
-            elevation: theme.mode === "dark" ? 0 : 2,
-            borderWidth: theme.mode === "dark" ? 1 : 0,
+            elevation: theme.mode === 'dark' ? 0 : 2,
+            borderWidth: theme.mode === 'dark' ? 1 : 0,
             borderColor: theme.outline,
         },
         featuredIcon: {
             width: 68,
             height: 68,
             borderRadius: 16,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
             marginRight: 12,
             backgroundColor: theme.surfaceVariant,
         },
         featuredInfo: { flex: 1 },
         featuredName: {
             fontSize: 16,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.onSurface,
             marginBottom: 4,
         },
         featuredMeta: {
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
             gap: 4,
         },
         featuredRating: {
             fontSize: 14,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.onSurface,
         },
         featuredDot: {
@@ -875,7 +875,7 @@ const createStyles = (theme) =>
         },
         featuredPrice: {
             fontSize: 14,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.primary,
         },
         addButton: {
@@ -883,8 +883,8 @@ const createStyles = (theme) =>
             width: 44,
             height: 44,
             borderRadius: 22,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
         },
         dishEmoji: { fontSize: 44 },
         restaurantName: {
@@ -897,7 +897,7 @@ const createStyles = (theme) =>
             color: theme.onSurfaceVariant,
         },
         emptyState: {
-            alignItems: "center",
+            alignItems: 'center',
             paddingVertical: 40,
         },
         emptyStateText: {
@@ -907,8 +907,8 @@ const createStyles = (theme) =>
         },
         modalOverlay: {
             flex: 1,
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            justifyContent: "flex-end",
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            justifyContent: 'flex-end',
         },
         modalContent: {
             backgroundColor: theme.surface,
@@ -916,23 +916,23 @@ const createStyles = (theme) =>
             borderTopRightRadius: 28,
             padding: 24,
             paddingBottom: 40,
-            maxHeight: "80%",
+            maxHeight: '80%',
         },
         modalHeader: {
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             marginBottom: 24,
         },
         modalTitle: {
             fontSize: 20,
-            fontWeight: "700",
+            fontWeight: '700',
             color: theme.onSurface,
         },
         formGroup: { marginBottom: 16 },
         formLabel: {
             fontSize: 14,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.onSurface,
             marginBottom: 8,
         },
@@ -946,9 +946,9 @@ const createStyles = (theme) =>
             borderColor: theme.outline,
         },
         gpsButton: {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
             gap: 8,
             backgroundColor: theme.primaryContainer,
             padding: 16,
@@ -958,31 +958,31 @@ const createStyles = (theme) =>
         },
         gpsButtonText: {
             fontSize: 15,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.primary,
         },
         saveButton: {
             backgroundColor: theme.primary,
             padding: 18,
             borderRadius: 16,
-            alignItems: "center",
+            alignItems: 'center',
             elevation: 2,
         },
         saveButtonText: {
             fontSize: 16,
-            fontWeight: "600",
+            fontWeight: '600',
             color: theme.onPrimary,
         },
         toast: {
-            position: "absolute",
+            position: 'absolute',
             top: 0,
             left: 20,
             right: 20,
             backgroundColor: theme.tertiary,
             borderRadius: 16,
             padding: 18,
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
             gap: 12,
             shadowColor: theme.shadow,
             shadowOffset: { width: 0, height: 4 },
@@ -994,7 +994,7 @@ const createStyles = (theme) =>
         toastText: {
             color: theme.onTertiary,
             fontSize: 15,
-            fontWeight: "600",
+            fontWeight: '600',
             flex: 1,
         },
     });

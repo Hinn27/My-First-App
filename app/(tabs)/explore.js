@@ -4,14 +4,14 @@
  * Route: /explore
  */
 
-import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const DATA = [
-    { id: "1", title: "React Native", icon: "logo-react" },
-    { id: "2", title: "JavaScript", icon: "logo-javascript" },
-    { id: "3", title: "Expo", icon: "rocket-outline" },
-    { id: "4", title: "Mobile Dev", icon: "phone-portrait-outline" },
+    { id: '1', title: 'React Native', icon: 'logo-react' },
+    { id: '2', title: 'JavaScript', icon: 'logo-javascript' },
+    { id: '3', title: 'Expo', icon: 'rocket-outline' },
+    { id: '4', title: 'Mobile Dev', icon: 'phone-portrait-outline' },
 ];
 
 export default function ExploreScreen() {
@@ -41,17 +41,17 @@ export default function ExploreScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f7f8fb",
+        backgroundColor: '#f7f8fb',
         padding: 20,
     },
     title: {
         fontSize: 28,
-        fontWeight: "bold",
+        fontWeight: 'bold',
         marginBottom: 8,
     },
     subtitle: {
         fontSize: 16,
-        color: "#666",
+        color: '#666',
         marginBottom: 24,
     },
     list: {
@@ -59,19 +59,19 @@ const styles = StyleSheet.create({
     },
     card: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         padding: 20,
         margin: 6,
         borderRadius: 12,
-        alignItems: "center",
-        shadowColor: "#000",
+        alignItems: 'center',
+        shadowColor: '#000',
         shadowOpacity: 0.08,
         shadowRadius: 8,
         elevation: 3,
     },
     cardTitle: {
         fontSize: 16,
-        fontWeight: "600",
+        fontWeight: '600',
         marginTop: 8,
     },
 });

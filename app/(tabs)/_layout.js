@@ -3,9 +3,9 @@
  * Define bottom tabs cho nhóm screens trong (tabs)/
  * Config icons, labels, colors cho từng tab
  */
-import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import { useTheme } from "../../src/context/ThemeContext";
+import { Tabs } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '../../src/context/ThemeContext';
 
 export default function TabLayout() {
     const { theme } = useTheme();
@@ -30,9 +30,9 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="index"
                 options={{
-                    title: "Kính chào quý khách",
-                    headerTitle: "Kính chào quý khách",
-                    tabBarLabel: "Home",
+                    title: 'Kính chào quý khách',
+                    headerTitle: 'Kính chào quý khách',
+                    tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="home" size={size} color={color} />
                     ),
@@ -41,7 +41,7 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="explore"
                 options={{
-                    title: "Explore",
+                    title: 'Explore',
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="search" size={size} color={color} />
                     ),
@@ -50,7 +50,7 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="cart"
                 options={{
-                    title: "Cart",
+                    title: 'Cart',
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="cart" size={size} color={color} />
                     ),
@@ -59,7 +59,7 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="profile"
                 options={{
-                    title: "Profile",
+                    title: 'Profile',
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="person" size={size} color={color} />
                     ),
