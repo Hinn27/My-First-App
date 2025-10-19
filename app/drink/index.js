@@ -4,83 +4,83 @@
  * Route: /drink
  */
 
-import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
-import { Link } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import { useCart } from "../../src/context/CartContext";
+import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
+import { Link } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { useCart } from '../../src/context/CartContext';
 
 const DRINK_DATA = [
     {
-        id: "drink-1",
-        name: "Cà Phê Sữa Đá",
-        drink: "ca-phe-sua-da",
+        id: 'drink-1',
+        name: 'Cà Phê Sữa Đá',
+        drink: 'ca-phe-sua-da',
         price: 20000,
-        category: "Cà phê",
-        description: "Cà phê phin truyền thống",
-        image: "cafe",
+        category: 'Cà phê',
+        description: 'Cà phê phin truyền thống',
+        image: 'cafe',
     },
     {
-        id: "drink-2",
-        name: "Trà Sữa Trân Châu",
-        drink: "tra-sua-tran-chau",
+        id: 'drink-2',
+        name: 'Trà Sữa Trân Châu',
+        drink: 'tra-sua-tran-chau',
         price: 35000,
-        category: "Trà sữa",
-        description: "Trà sữa trân châu đường đen",
-        image: "cafe",
+        category: 'Trà sữa',
+        description: 'Trà sữa trân châu đường đen',
+        image: 'cafe',
     },
     {
-        id: "drink-3",
-        name: "Sinh Tố Bơ",
-        drink: "sinh-to-bo",
+        id: 'drink-3',
+        name: 'Sinh Tố Bơ',
+        drink: 'sinh-to-bo',
         price: 30000,
-        category: "Sinh tố",
-        description: "Sinh tố bơ béo ngậy",
-        image: "nutrition",
+        category: 'Sinh tố',
+        description: 'Sinh tố bơ béo ngậy',
+        image: 'nutrition',
     },
     {
-        id: "drink-4",
-        name: "Nước Ép Cam",
-        drink: "nuoc-ep-cam",
+        id: 'drink-4',
+        name: 'Nước Ép Cam',
+        drink: 'nuoc-ep-cam',
         price: 25000,
-        category: "Nước ép",
-        description: "Nước cam tươi 100%",
-        image: "wine",
+        category: 'Nước ép',
+        description: 'Nước cam tươi 100%',
+        image: 'wine',
     },
     {
-        id: "drink-5",
-        name: "Trà Đào Cam Sả",
-        drink: "tra-dao-cam-sa",
+        id: 'drink-5',
+        name: 'Trà Đào Cam Sả',
+        drink: 'tra-dao-cam-sa',
         price: 35000,
-        category: "Trà trái cây",
-        description: "Trà đào cam sả mát lạnh",
-        image: "cafe",
+        category: 'Trà trái cây',
+        description: 'Trà đào cam sả mát lạnh',
+        image: 'cafe',
     },
     {
-        id: "drink-6",
-        name: "Soda Chanh Dây",
-        drink: "soda-chanh-day",
+        id: 'drink-6',
+        name: 'Soda Chanh Dây',
+        drink: 'soda-chanh-day',
         price: 28000,
-        category: "Soda",
-        description: "Soda chanh dây sảng khoái",
-        image: "beer",
+        category: 'Soda',
+        description: 'Soda chanh dây sảng khoái',
+        image: 'beer',
     },
     {
-        id: "drink-7",
-        name: "Matcha Latte",
-        drink: "matcha-latte",
+        id: 'drink-7',
+        name: 'Matcha Latte',
+        drink: 'matcha-latte',
         price: 40000,
-        category: "Cà phê",
-        description: "Matcha latte Nhật Bản",
-        image: "cafe",
+        category: 'Cà phê',
+        description: 'Matcha latte Nhật Bản',
+        image: 'cafe',
     },
     {
-        id: "drink-8",
-        name: "Nước Dừa Tươi",
-        drink: "nuoc-dua-tuoi",
+        id: 'drink-8',
+        name: 'Nước Dừa Tươi',
+        drink: 'nuoc-dua-tuoi',
         price: 22000,
-        category: "Giải khát",
-        description: "Nước dừa xiêm tươi mát",
-        image: "wine",
+        category: 'Giải khát',
+        description: 'Nước dừa xiêm tươi mát',
+        image: 'wine',
     },
 ];
 
@@ -111,7 +111,7 @@ export default function DrinkListScreen() {
                             {item.description}
                         </Text>
                         <Text style={styles.drinkPrice}>
-                            {item.price.toLocaleString("vi-VN")}đ
+                            {item.price.toLocaleString('vi-VN')}đ
                         </Text>
                     </View>
                 </Pressable>
@@ -147,32 +147,32 @@ export default function DrinkListScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f7f8fb",
+        backgroundColor: '#f7f8fb',
     },
     header: {
-        flexDirection: "row",
-        alignItems: "center",
+        flexDirection: 'row',
+        alignItems: 'center',
         padding: 16,
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         borderBottomWidth: 1,
-        borderBottomColor: "#e5e5ea",
+        borderBottomColor: '#e5e5ea',
         gap: 12,
     },
     title: {
         fontSize: 24,
-        fontWeight: "700",
-        color: "#1c1c1e",
+        fontWeight: '700',
+        color: '#1c1c1e',
     },
     listContainer: {
         padding: 16,
     },
     drinkCard: {
-        flexDirection: "row",
-        backgroundColor: "#fff",
+        flexDirection: 'row',
+        backgroundColor: '#fff',
         borderRadius: 12,
         padding: 12,
         marginBottom: 12,
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
@@ -180,15 +180,15 @@ const styles = StyleSheet.create({
     },
     drinkInfo: {
         flex: 1,
-        flexDirection: "row",
+        flexDirection: 'row',
     },
     iconContainer: {
         width: 60,
         height: 60,
-        backgroundColor: "#FFF3E0",
+        backgroundColor: '#FFF3E0',
         borderRadius: 12,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
         marginRight: 12,
     },
     drinkDetails: {
@@ -196,28 +196,28 @@ const styles = StyleSheet.create({
     },
     drinkName: {
         fontSize: 18,
-        fontWeight: "600",
-        color: "#1c1c1e",
+        fontWeight: '600',
+        color: '#1c1c1e',
         marginBottom: 4,
     },
     drinkCategory: {
         fontSize: 12,
-        color: "#8e8e93",
+        color: '#8e8e93',
         marginBottom: 4,
     },
     drinkDescription: {
         fontSize: 14,
-        color: "#666",
+        color: '#666',
         marginBottom: 6,
     },
     drinkPrice: {
         fontSize: 16,
-        fontWeight: "700",
-        color: "#FF9500",
+        fontWeight: '700',
+        color: '#FF9500',
     },
     addButton: {
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
         paddingHorizontal: 8,
     },
 });
