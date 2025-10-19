@@ -1,21 +1,76 @@
 // Screen: Food List
 /* Vai trò:
-    * Hiển thị danh sách món ăn
-    * Route: /food
-*/
+ * Hiển thị danh sách món ăn
+ * Route: /food
+ */
 
-import { View, Text, StyleSheet, FlatList, Pressable, Image } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    Pressable,
+    Image,
+} from 'react-native';
 import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useCart } from '../../src/context/CartContext';
 
 const FOOD_DATA = [
-    { id: 'food-1', name: 'Phở Bò', slug: 'pho-bo', price: 50000, category: 'Món Việt', description: 'Phở bò truyền thống Hà Nội', image: 'restaurant' },
-    { id: 'food-2', name: 'Bún Chả', slug: 'bun-cha', price: 45000, category: 'Món Việt', description: 'Bún chả Hà Nội đặc sản', image: 'restaurant' },
-    { id: 'food-3', name: 'Cơm Tấm', slug: 'com-tam', price: 40000, category: 'Món Việt', description: 'Cơm tấm sườn bì chả', image: 'restaurant' },
-    { id: 'food-4', name: 'Bánh Mì', slug: 'banh-mi', price: 25000, category: 'Ăn sáng', description: 'Bánh mì thịt nguội pate', image: 'fast-food' },
-    { id: 'food-5', name: 'Hủ Tiếu', slug: 'hu-tieu', price: 35000, category: 'Món Việt', description: 'Hủ tiếu Nam Vang', image: 'restaurant' },
-    { id: 'food-6', name: 'Gỏi Cuốn', slug: 'goi-cuon', price: 30000, category: 'Khai vị', description: 'Gỏi cuốn tôm thịt', image: 'nutrition' },
+    {
+        id: 'food-1',
+        name: 'Phở Bò',
+        slug: 'pho-bo',
+        price: 50000,
+        category: 'Món Việt',
+        description: 'Phở bò truyền thống Hà Nội',
+        image: 'restaurant',
+    },
+    {
+        id: 'food-2',
+        name: 'Bún Chả',
+        slug: 'bun-cha',
+        price: 45000,
+        category: 'Món Việt',
+        description: 'Bún chả Hà Nội đặc sản',
+        image: 'restaurant',
+    },
+    {
+        id: 'food-3',
+        name: 'Cơm Tấm',
+        slug: 'com-tam',
+        price: 40000,
+        category: 'Món Việt',
+        description: 'Cơm tấm sườn bì chả',
+        image: 'restaurant',
+    },
+    {
+        id: 'food-4',
+        name: 'Bánh Mì',
+        slug: 'banh-mi',
+        price: 25000,
+        category: 'Ăn sáng',
+        description: 'Bánh mì thịt nguội pate',
+        image: 'fast-food',
+    },
+    {
+        id: 'food-5',
+        name: 'Hủ Tiếu',
+        slug: 'hu-tieu',
+        price: 35000,
+        category: 'Món Việt',
+        description: 'Hủ tiếu Nam Vang',
+        image: 'restaurant',
+    },
+    {
+        id: 'food-6',
+        name: 'Gỏi Cuốn',
+        slug: 'goi-cuon',
+        price: 30000,
+        category: 'Khai vị',
+        description: 'Gỏi cuốn tôm thịt',
+        image: 'nutrition',
+    },
 ];
 
 export default function FoodListScreen() {
@@ -39,8 +94,12 @@ export default function FoodListScreen() {
                     <View style={styles.foodDetails}>
                         <Text style={styles.foodName}>{item.name}</Text>
                         <Text style={styles.foodCategory}>{item.category}</Text>
-                        <Text style={styles.foodDescription}>{item.description}</Text>
-                        <Text style={styles.foodPrice}>{item.price.toLocaleString('vi-VN')}đ</Text>
+                        <Text style={styles.foodDescription}>
+                            {item.description}
+                        </Text>
+                        <Text style={styles.foodPrice}>
+                            {item.price.toLocaleString('vi-VN')}đ
+                        </Text>
                     </View>
                 </Pressable>
             </Link>

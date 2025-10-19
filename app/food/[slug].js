@@ -1,8 +1,8 @@
 // Screen: Food Detail
 /* Vai trò:
-       * Chi tiết món ăn
-     * Route: /food/[slug]
-*/
+ * Chi tiết món ăn
+ * Route: /food/[slug]
+ */
 
 import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -17,7 +17,8 @@ const FOOD_DETAILS = {
         name: 'Phở Bò',
         price: 50000,
         category: 'Món Việt',
-        description: 'Phở bò truyền thống Hà Nội với nước dùng hầm xương 12 tiếng',
+        description:
+            'Phở bò truyền thống Hà Nội với nước dùng hầm xương 12 tiếng',
         ingredients: ['Bánh phở', 'Thịt bò', 'Hành lá', 'Ngò rí', 'Hành tây'],
         rating: 4.8,
         reviews: 156,
@@ -113,7 +114,9 @@ export default function FoodDetailScreen() {
                     <View style={styles.ratingContainer}>
                         <Ionicons name="star" size={16} color="#FFD700" />
                         <Text style={styles.rating}>{food.rating}</Text>
-                        <Text style={styles.reviews}>({food.reviews} đánh giá)</Text>
+                        <Text style={styles.reviews}>
+                            ({food.reviews} đánh giá)
+                        </Text>
                     </View>
                 </View>
 
@@ -121,7 +124,9 @@ export default function FoodDetailScreen() {
                     <Text style={styles.categoryText}>{food.category}</Text>
                 </View>
 
-                <Text style={styles.price}>{food.price.toLocaleString('vi-VN')}đ</Text>
+                <Text style={styles.price}>
+                    {food.price.toLocaleString('vi-VN')}đ
+                </Text>
 
                 <Text style={styles.sectionTitle}>Mô tả</Text>
                 <Text style={styles.description}>{food.description}</Text>
@@ -130,8 +135,14 @@ export default function FoodDetailScreen() {
                 <View style={styles.ingredientsContainer}>
                     {food.ingredients.map((ingredient, index) => (
                         <View key={index} style={styles.ingredientItem}>
-                            <Ionicons name="checkmark-circle" size={20} color="#34C759" />
-                            <Text style={styles.ingredientText}>{ingredient}</Text>
+                            <Ionicons
+                                name="checkmark-circle"
+                                size={20}
+                                color="#34C759"
+                            />
+                            <Text style={styles.ingredientText}>
+                                {ingredient}
+                            </Text>
                         </View>
                     ))}
                 </View>
@@ -141,7 +152,9 @@ export default function FoodDetailScreen() {
                     <View style={styles.quantityControls}>
                         <Pressable
                             style={styles.quantityButton}
-                            onPress={() => setQuantity(Math.max(1, quantity - 1))}
+                            onPress={() =>
+                                setQuantity(Math.max(1, quantity - 1))
+                            }
                         >
                             <Ionicons name="remove" size={20} color="#fff" />
                         </Pressable>
