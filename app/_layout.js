@@ -8,9 +8,9 @@
  * Bọc ThemeProvider để quản lý theme Material You và dark mode
  */
 
-import { Stack } from "expo-router";
-import { CartProvider } from "../src/context/CartContext";
-import { ThemeProvider } from "../src/context/ThemeContext";
+import { Stack } from 'expo-router';
+import { CartProvider } from '../src/context/CartContext';
+import { ThemeProvider } from '../src/context/ThemeContext';
 
 export default function RootLayout() {
     return (
@@ -23,13 +23,13 @@ export default function RootLayout() {
                     />
                     <Stack.Screen
                         name="modal"
-                        options={{ presentation: "modal" }}
+                        options={{ presentation: 'modal' }}
                     />
-                    <Stack.Screen name="food" options={{ title: "Món Ăn" }} />
-                    <Stack.Screen name="drink" options={{ title: "Đồ Uống" }} />
+                    <Stack.Screen name="food" options={{ title: 'Món Ăn' }} />
+                    <Stack.Screen name="drink" options={{ title: 'Đồ Uống' }} />
                     <Stack.Screen
                         name="user"
-                        options={{ title: "Người dùng" }}
+                        options={{ title: 'Người dùng' }}
                     />
                 </Stack>
             </CartProvider>
