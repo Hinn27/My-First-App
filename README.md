@@ -263,13 +263,40 @@ npx expo start --clear
 
 ## 🎨 Thiết kế
 
-### Theme System
+### Material Design 3 (Material You)
 
--   **Material You Design** với dynamic colors
--   **Primary Color**: #0A84FF (Blue)
--   **Secondary Color**: #FF9500 (Orange)
--   **Category buttons**: Border radius 10, responsive layout
--   **Fixed category wrapper**: Prevents FlatList overlap
+Ứng dụng tuân theo **Material Design 3** guidelines của Google:
+
+- **Dynamic Color System**: Màu sắc chủ đạo với Purple (#6750A4)
+- **Elevation System**: 6 levels từ 0 (flat) đến 5 (highest)
+- **Shape System**: 
+  - Small components: 8px radius
+  - Medium components: 12px radius
+  - Large components: 16-24px radius
+- **Typography**: Roboto font family
+- **Components**:
+  - Elevated Cards với shadow
+  - Floating Action Buttons (FAB)
+  - Filled/Outlined/Text buttons
+  - Bottom Navigation với ripple effect
+
+### Color Palette
+
+-   **Primary**: #6750A4 (Purple) - Main brand color
+-   **Secondary**: #625B71 (Purple-gray) - Supporting elements
+-   **Tertiary**: #7D5260 (Pink-brown) - Accents
+-   **Surface**: #FFFBFE - Card backgrounds
+-   **Background**: #FFFBFE - App background
+-   **Error**: #B3261E - Error states
+
+### Elevation Levels
+
+-   **Level 0**: Flat surfaces (no shadow)
+-   **Level 1**: Low elevation (cards, chips)
+-   **Level 2**: Medium elevation (app bar)
+-   **Level 3**: High elevation (FAB, dialogs)
+-   **Level 4**: Very high elevation (menus)
+-   **Level 5**: Highest elevation (modals)
 
 ### Categories
 
