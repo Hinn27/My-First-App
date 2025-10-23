@@ -31,7 +31,7 @@ export const getElevation = (level = 1, shadowColor = '#000000') => {
         2: {
             shadowColor,
             shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.20,
+            shadowOpacity: 0.2,
             shadowRadius: 1.41,
         },
         3: {

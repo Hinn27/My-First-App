@@ -6,22 +6,22 @@ const ThemeContext = createContext();
 // Material Design 3 Color Palette
 const theme = {
     // Primary colors
-    primary: '#6750A4', // Purple (Material You Primary)
+    primary: '#006A6A', // Cyan (Material You Primary)
     onPrimary: '#FFFFFF',
-    primaryContainer: '#EADDFF',
-    onPrimaryContainer: '#21005D',
+    primaryContainer: '#6FF7F7',
+    onPrimaryContainer: '#002020',
 
     // Secondary colors
-    secondary: '#625B71', // Purple-gray
+    secondary: '#4A6363', // Teal-gray
     onSecondary: '#FFFFFF',
-    secondaryContainer: '#E8DEF8',
-    onSecondaryContainer: '#1D192B',
+    secondaryContainer: '#CCE8E7',
+    onSecondaryContainer: '#051F1F',
 
     // Tertiary colors
-    tertiary: '#7D5260', // Pink-brown
+    tertiary: '#4B607C', // Blue-gray
     onTertiary: '#FFFFFF',
-    tertiaryContainer: '#FFD8E4',
-    onTertiaryContainer: '#31111D',
+    tertiaryContainer: '#D3E4FF',
+    onTertiaryContainer: '#041C35',
 
     // Error colors
     error: '#B3261E',
@@ -48,7 +48,7 @@ const theme = {
     scrim: '#000000',
     inverseSurface: '#313033',
     inverseOnSurface: '#F4EFF4',
-    inversePrimary: '#D0BCFF',
+    inversePrimary: '#4FD8D8', // Cyan inverse
 
     // Elevation levels (for shadows)
     elevation: {

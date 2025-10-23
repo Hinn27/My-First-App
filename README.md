@@ -36,13 +36,16 @@
     -   Status: Pending → chờ duyệt trong 24h
     -   Status: Approved → Được bán hàng
 -   ✅ **Đăng sản phẩm**: Form đầy đủ với validation
-    -   Chọn icon emoji
+    -   Upload ảnh sản phẩm thật
     -   Nhập tên, mô tả, danh mục
     -   Set giá theo size (S/M/L)
     -   Nguyên liệu và đặc điểm
+    -   Tự động lưu vào store với AsyncStorage
 -   ✅ **Xem sản phẩm của bạn**: Quản lý danh sách sản phẩm đã đăng
+    -   Hiển thị tất cả sản phẩm đã đăng
+    -   Xem ảnh, tên, giá sản phẩm
     -   Sửa sản phẩm (coming soon)
-    -   Xóa sản phẩm
+    -   Xóa sản phẩm khỏi store
 -   ✅ **Quản lí doanh thu**: Theo dõi đơn hàng và doanh thu
     -   Tab "Đơn mới": Đơn hàng mới từ khách
     -   Tab "Đã giao": Lịch sử đơn đã hoàn thành
@@ -181,7 +184,7 @@ npx expo start --clear
 
 1. **Xem sản phẩm**
 
-    - Mở tab "Coffee Shop" (home-enhanced)
+    - Mở tab **"Home"** (Trang chủ)
     - Dùng search bar để tìm kiếm
     - Chọn category để lọc (Món khô, Món ướt, Ăn vặt, Cà phê, Trà...)
 
@@ -207,7 +210,7 @@ npx expo start --clear
     - Đơn hàng tự động lưu vào lịch sử
 
 5. **Yêu thích**
-    - Tap icon ❤️ để thêm/xóa yêu thích
+    - Ấn vào icon ❤️ để thêm/xóa yêu thích
     - Vào tab "Yêu thích" để xem danh sách
     - Thêm vào giỏ trực tiếp từ Favorites
 
@@ -216,7 +219,7 @@ npx expo start --clear
 1. **Đăng ký bán hàng**
 
     - Vào tab "Profile"
-    - Tap "Đăng ký bán hàng"
+    - Ấn vào "Đăng ký bán hàng"
     - Điền thông tin: Tên, tên cửa hàng, địa chỉ, số điện thoại
     - Upload ảnh cửa hàng
     - Submit → Status "Chờ duyệt trong 24h"
@@ -224,39 +227,41 @@ npx expo start --clear
 2. **Đăng sản phẩm** (sau khi được duyệt)
 
     - Vào tab "Profile"
-    - Tap "Đăng sản phẩm"
+    - Ấn vào "Đăng sản phẩm"
     - Điền form:
-        - Chọn icon emoji
+        - Upload ảnh sản phẩm từ thư viện ảnh
         - Tên sản phẩm
         - Loại (Đồ ăn/Đồ uống)
         - Danh mục
         - Mô tả ngắn & chi tiết
         - Giá theo size
         - Nguyên liệu (optional)
-    - Submit → Sản phẩm được tạo
+    - Submit → Sản phẩm tự động lưu vào store
 
 3. **Xem sản phẩm của bạn**
 
-    - Tap "Xem sản phẩm của bạn" trong Profile
-    - Xem danh sách tất cả sản phẩm đã đăng
-    - Tap "Sửa" để chỉnh sửa (coming soon)
-    - Tap "Xóa" để xóa sản phẩm
+    - Ấn vào "Xem sản phẩm của bạn" trong Profile
+    - Xem danh sách tất cả sản phẩm đã đăng (lưu trong Zustand store)
+    - Hiển thị ảnh thật hoặc icon emoji (fallback)
+    - Xem giá từ thấp đến cao
+    - Ấn vào "Sửa" để chỉnh sửa (coming soon)
+    - Ấn vào "Xóa" để xóa sản phẩm → Tự động xóa khỏi store
 
 4. **Quản lí doanh thu**
 
-    - Tap "Quản lí doanh thu" trong Profile
+    - Ấn vào "Quản lí doanh thu" trong Profile
     - Xem 3 stats cards:
         - Doanh thu đơn mới
         - Doanh thu đơn đã giao
         - Tổng doanh thu
     - Tab "Đơn mới": Đơn hàng mới từ khách
-        - Tap "Đánh dấu đã giao" để chuyển sang tab "Đã giao"
+        - Ấn vào "Đánh dấu đã giao" để chuyển sang tab "Đã giao"
     - Tab "Đã giao": Lịch sử đơn đã hoàn thành
 
 5. **Test nhanh** (Developer)
     - Vào tab "Profile"
     - Scroll xuống cuối Settings
-    - Tap "🧪 Test: Set seller đã duyệt"
+    - Ấn vào "🧪 Test: Set seller đã duyệt"
     - Menu seller sẽ xuất hiện với 3 tính năng
 
 ---
@@ -267,24 +272,24 @@ npx expo start --clear
 
 Ứng dụng tuân theo **Material Design 3** guidelines của Google:
 
-- **Dynamic Color System**: Màu sắc chủ đạo với Purple (#6750A4)
-- **Elevation System**: 6 levels từ 0 (flat) đến 5 (highest)
-- **Shape System**: 
-  - Small components: 8px radius
-  - Medium components: 12px radius
-  - Large components: 16-24px radius
-- **Typography**: Roboto font family
-- **Components**:
-  - Elevated Cards với shadow
-  - Floating Action Buttons (FAB)
-  - Filled/Outlined/Text buttons
-  - Bottom Navigation với ripple effect
+-   **Dynamic Color System**: Màu sắc chủ đạo với Cyan (#006A6A)
+-   **Elevation System**: 6 levels từ 0 (flat) đến 5 (highest)
+-   **Shape System**:
+    -   Small components: 8px radius
+    -   Medium components: 12px radius
+    -   Large components: 16-24px radius
+-   **Typography**: Roboto font family
+-   **Components**:
+    -   Elevated Cards với shadow
+    -   Floating Action Buttons (FAB)
+    -   Filled/Outlined/Text buttons
+    -   Bottom Navigation với ripple effect
 
 ### Color Palette
 
--   **Primary**: #6750A4 (Purple) - Main brand color
--   **Secondary**: #625B71 (Purple-gray) - Supporting elements
--   **Tertiary**: #7D5260 (Pink-brown) - Accents
+-   **Primary**: #006A6A (Cyan) - Main brand color
+-   **Secondary**: #4A6363 (Teal-gray) - Supporting elements
+-   **Tertiary**: #4B607C (Blue-gray) - Accents
 -   **Surface**: #FFFBFE - Card backgrounds
 -   **Background**: #FFFBFE - App background
 -   **Error**: #B3261E - Error states
@@ -366,9 +371,11 @@ npm install
 -   [x] **Seller Management**: Đăng ký bán hàng, đăng sản phẩm
 -   [x] **Revenue Management**: Quản lí đơn hàng và doanh thu
 -   [x] **Product Management**: Xem/xóa sản phẩm của seller
--   [x] **Zustand Store**: User state với persist
+-   [x] **Product Image Upload**: Upload ảnh thật cho sản phẩm
+-   [x] **Zustand Store**: User state và product state với persist
 -   [x] **Dynamic Greeting**: Hiển thị tên user trên Home
 -   [x] **Category UI**: Bo tròn 10, fixed wrapper
+-   [x] **Material Design 3**: Cyan color theme
 
 ### 🚧 In Progress
 
@@ -442,6 +449,7 @@ See the [LICENSE](LICENSE) file for full details.
 -   Material You Design by Google
 -   Icons by Expo Vector Icons
 -   Built with ❤️ using React Native & Expo
+-   Document by GPT-4
 
 ---
 

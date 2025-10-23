@@ -14,23 +14,26 @@ import {
     Pressable,
     Alert,
     Switch,
+    Image,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../../src/context/ThemeContext';
 import * as ImagePicker from 'expo-image-picker';
+import { useTheme } from '../../src/context/ThemeContext';
+import { useProductStore } from '../../src/store/productStore';
 
 export default function AddProductScreen() {
     const router = useRouter();
     const { theme } = useTheme();
     const styles = createStyles(theme);
+    const addProduct = useProductStore((state) => state.addProduct);
 
     // Form state
     const [productData, setProductData] = useState({
         name: '',
         type: 'Food', // Food or Drink
         category: '',
-        imageIcon: '🍜', // Default emoji
+        productImage: null, // Product image
         special_ingredient: '',
         description: '',
         roasted: '',
@@ -76,43 +79,41 @@ export default function AddProductScreen() {
     };
 
     // Pick emoji as icon
-    const handlePickEmoji = () => {
-        const emojis = [
-            '🍜',
-            '🥢',
-            '🍖',
-            '🥖',
-            '🍲',
-            '🥗',
-            '🥞',
-            '🌶️',
-            '☕',
-            '🧋',
-            '🍵',
-            '🍑',
-            '🥑',
-            '🍊',
-            '🥤',
-            '🍰',
-            '🍕',
-            '🍔',
-            '🍱',
-            '🍛',
-        ];
-        Alert.alert(
-            'Chọn icon',
-            'Chọn emoji cho sản phẩm',
-            emojis
-                .map((emoji) => ({
-                    text: emoji,
-                    onPress: () => handleChange('imageIcon', emoji),
-                }))
-                .concat([{ text: 'Hủy', style: 'cancel' }]),
-        );
+    const handlePickImage = async () => {
+        try {
+            const permissionResult =
+                await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+            if (permissionResult.granted === false) {
+                Alert.alert(
+                    'Thông báo',
+                    'Bạn cần cấp quyền truy cập thư viện ảnh!',
+                );
+                return;
+            }
+
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 0.8,
+            });
+
+            if (!result.canceled && result.assets[0]) {
+                handleChange('productImage', result.assets[0].uri);
+            }
+        } catch (error) {
+            console.error('Error picking image:', error);
+            Alert.alert('Lỗi', 'Không thể chọn ảnh. Vui lòng thử lại.');
+        }
     };
 
     // Validate form
     const validateForm = () => {
+        if (!productData.productImage) {
+            Alert.alert('Lỗi', 'Vui lòng chọn ảnh sản phẩm');
+            return false;
+        }
         if (!productData.name.trim()) {
             Alert.alert('Lỗi', 'Vui lòng nhập tên sản phẩm');
             return false;
@@ -164,7 +165,8 @@ export default function AddProductScreen() {
             name: productData.name,
             description: productData.description,
             roasted: productData.roasted || 'Đặc biệt',
-            imageIcon: productData.imageIcon,
+            imagelink_square: productData.productImage,
+            imagelink_portrait: productData.productImage,
             special_ingredient: productData.special_ingredient,
             ingredients: productData.ingredients,
             prices,
@@ -176,8 +178,8 @@ export default function AddProductScreen() {
             index: Date.now(),
         };
 
-        // TODO: Save to store or API
-        console.log('New Product:', newProduct);
+        // Save to store
+        addProduct(newProduct);
 
         Alert.alert('Thành công', 'Sản phẩm đã được đăng thành công!', [
             {
@@ -209,17 +211,30 @@ export default function AddProductScreen() {
                     <View style={{ width: 24 }} />
                 </View>
 
-                {/* Icon Picker */}
+                {/* Product Image */}
                 <View style={styles.section}>
-                    <Text style={styles.label}>Icon sản phẩm *</Text>
+                    <Text style={styles.label}>Ảnh sản phẩm *</Text>
                     <Pressable
-                        style={styles.iconPicker}
-                        onPress={handlePickEmoji}
+                        style={styles.imagePicker}
+                        onPress={handlePickImage}
                     >
-                        <Text style={styles.iconEmoji}>
-                            {productData.imageIcon}
-                        </Text>
-                        <Text style={styles.iconText}>Nhấn để chọn icon</Text>
+                        {productData.productImage ? (
+                            <Image
+                                source={{ uri: productData.productImage }}
+                                style={styles.productImagePreview}
+                            />
+                        ) : (
+                            <View style={styles.imagePickerPlaceholder}>
+                                <Ionicons
+                                    name="camera-outline"
+                                    size={48}
+                                    color={theme.onSurfaceVariant}
+                                />
+                                <Text style={styles.imagePickerText}>
+                                    Nhấn để chọn ảnh
+                                </Text>
+                            </View>
+                        )}
                     </Pressable>
                 </View>
 
@@ -487,21 +502,28 @@ const createStyles = (theme) =>
             minHeight: 100,
             paddingTop: 14,
         },
-        iconPicker: {
+        imagePicker: {
             backgroundColor: theme.surface,
             borderRadius: 12,
-            padding: 20,
+            height: 200,
             alignItems: 'center',
+            justifyContent: 'center',
             borderWidth: 1,
             borderColor: theme.outline,
+            overflow: 'hidden',
         },
-        iconEmoji: {
-            fontSize: 64,
-            marginBottom: 8,
+        imagePickerPlaceholder: {
+            alignItems: 'center',
+            gap: 8,
         },
-        iconText: {
+        imagePickerText: {
             fontSize: 14,
             color: theme.onSurfaceVariant,
+        },
+        productImagePreview: {
+            width: '100%',
+            height: '100%',
+            resizeMode: 'cover',
         },
         typeSelector: {
             flexDirection: 'row',

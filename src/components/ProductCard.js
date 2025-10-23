@@ -1,6 +1,13 @@
 // Component: Product Card cho Home screen
 import React from 'react';
-import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    Pressable,
+    Dimensions,
+    Image,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -12,6 +19,7 @@ export default function ProductCard({
     name,
     special_ingredient,
     imageIcon,
+    imagelink_square,
     average_rating,
     prices,
     onPress,
@@ -44,7 +52,16 @@ export default function ProductCard({
 
                 {/* Image Icon */}
                 <View style={styles.imageContainer}>
-                    <Text style={styles.imageIcon}>{imageIcon || '☕'}</Text>
+                    {imagelink_square ? (
+                        <Image
+                            source={{ uri: imagelink_square }}
+                            style={styles.productImage}
+                        />
+                    ) : (
+                        <Text style={styles.imageIcon}>
+                            {imageIcon || '☕'}
+                        </Text>
+                    )}
                 </View>
 
                 {/* Product Info */}
@@ -144,6 +161,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 12,
+        overflow: 'hidden',
+    },
+    productImage: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover',
     },
     imageIcon: {
         fontSize: 64,

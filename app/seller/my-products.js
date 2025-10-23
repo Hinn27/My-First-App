@@ -15,73 +15,37 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../../src/context/ThemeContext';
+import { useProductStore } from '../../src/store/productStore';
+import { useUserStore } from '../../src/store/userStore';
 
 export default function MyProductsScreen() {
     const { theme } = useTheme();
     const router = useRouter();
     const styles = createStyles(theme);
-    const [products, setProducts] = useState([]);
-    const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        loadProducts();
-    }, []);
+    // Get products from store
+    const drinkList = useProductStore((state) => state.drinkList);
+    const foodList = useProductStore((state) => state.foodList);
+    const deleteProduct = useProductStore((state) => state.deleteProduct);
+    const user = useUserStore((state) => state.user);
 
-    const loadProducts = async () => {
-        try {
-            const userDataStr = await AsyncStorage.getItem('user');
-            if (userDataStr) {
-                const userData = JSON.parse(userDataStr);
-                setUser(userData);
-                // In production, fetch from API
-                // For now, load from AsyncStorage
-                const productsStr = await AsyncStorage.getItem(
-                    'sellerProducts',
-                );
-                if (productsStr) {
-                    const allProducts = JSON.parse(productsStr);
-                    // Filter by seller ID
-                    const myProducts = allProducts.filter(
-                        (p) => p.sellerId === userData.email,
-                    );
-                    setProducts(myProducts);
-                }
-            }
-        } catch (error) {
-            console.error('Error loading products:', error);
-        }
-    };
+    // Combine all products (in production, filter by seller ID)
+    const allProducts = [...drinkList, ...foodList];
 
-    const handleDeleteProduct = async (productId) => {
+    // For now, show all products. In production, filter by seller ID:
+    // const myProducts = allProducts.filter(p => p.sellerId === user?.email);
+    const products = allProducts;
+
+    const handleDeleteProduct = (productId, productType) => {
         Alert.alert('Xác nhận xóa', 'Bạn có chắc muốn xóa sản phẩm này?', [
             { text: 'Hủy', style: 'cancel' },
             {
                 text: 'Xóa',
                 style: 'destructive',
-                onPress: async () => {
-                    try {
-                        const productsStr = await AsyncStorage.getItem(
-                            'sellerProducts',
-                        );
-                        if (productsStr) {
-                            const allProducts = JSON.parse(productsStr);
-                            const updatedProducts = allProducts.filter(
-                                (p) => p.id !== productId,
-                            );
-                            await AsyncStorage.setItem(
-                                'sellerProducts',
-                                JSON.stringify(updatedProducts),
-                            );
-                            loadProducts(); // Reload
-                            Alert.alert('Thành công', 'Đã xóa sản phẩm!');
-                        }
-                    } catch (error) {
-                        console.error('Error deleting product:', error);
-                        Alert.alert('Lỗi', 'Không thể xóa sản phẩm');
-                    }
+                onPress: () => {
+                    deleteProduct(productId, productType);
+                    Alert.alert('Thành công', 'Đã xóa sản phẩm!');
                 },
             },
         ]);
@@ -129,16 +93,26 @@ export default function MyProductsScreen() {
                     <View style={styles.productsContainer}>
                         {products.map((product) => (
                             <View key={product.id} style={styles.productCard}>
-                                {product.image ? (
+                                {product.imagelink_square ? (
                                     <Image
-                                        source={{ uri: product.image }}
+                                        source={{
+                                            uri: product.imagelink_square,
+                                        }}
                                         style={styles.productImage}
                                     />
-                                ) : (
+                                ) : product.imageIcon ? (
                                     <View style={styles.placeholderImage}>
                                         <Text style={styles.emoji}>
-                                            {product.emoji}
+                                            {product.imageIcon}
                                         </Text>
+                                    </View>
+                                ) : (
+                                    <View style={styles.placeholderImage}>
+                                        <Ionicons
+                                            name="image-outline"
+                                            size={48}
+                                            color={theme.onSurfaceVariant}
+                                        />
                                     </View>
                                 )}
 
@@ -150,13 +124,22 @@ export default function MyProductsScreen() {
                                         {product.category}
                                     </Text>
                                     <Text style={styles.productPrice}>
-                                        {product.sizes &&
-                                        product.sizes.length > 0
-                                            ? `${product.sizes[0].price.toLocaleString(
-                                                  'vi-VN',
-                                              )}đ - ${product.sizes[
-                                                  product.sizes.length - 1
-                                              ].price.toLocaleString('vi-VN')}đ`
+                                        {product.prices &&
+                                        product.prices.length > 0
+                                            ? `${parseInt(
+                                                  product.prices[0].price,
+                                              ).toLocaleString('vi-VN')}đ${
+                                                  product.prices.length > 1
+                                                      ? ` - ${parseInt(
+                                                            product.prices[
+                                                                product.prices
+                                                                    .length - 1
+                                                            ].price,
+                                                        ).toLocaleString(
+                                                            'vi-VN',
+                                                        )}đ`
+                                                      : ''
+                                              }`
                                             : 'Chưa có giá'}
                                     </Text>
 
@@ -189,7 +172,10 @@ export default function MyProductsScreen() {
                                         <Pressable
                                             style={styles.actionButton}
                                             onPress={() =>
-                                                handleDeleteProduct(product.id)
+                                                handleDeleteProduct(
+                                                    product.id,
+                                                    product.type,
+                                                )
                                             }
                                         >
                                             <Ionicons

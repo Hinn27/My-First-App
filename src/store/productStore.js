@@ -233,6 +233,40 @@ export const useProductStore = create(
                         state.cartPrice = 0;
                     }),
                 ),
+
+            // Add Product (for sellers)
+            addProduct: (product) =>
+                set(
+                    produce((state) => {
+                        if (
+                            product.type === 'Coffee' ||
+                            product.type === 'Bean'
+                        ) {
+                            state.drinkList.push(product);
+                        } else {
+                            state.foodList.push(product);
+                        }
+                    }),
+                ),
+
+            // Delete Product (for sellers)
+            deleteProduct: (productId, productType) =>
+                set(
+                    produce((state) => {
+                        if (
+                            productType === 'Coffee' ||
+                            productType === 'Bean'
+                        ) {
+                            state.drinkList = state.drinkList.filter(
+                                (item) => item.id !== productId,
+                            );
+                        } else {
+                            state.foodList = state.foodList.filter(
+                                (item) => item.id !== productId,
+                            );
+                        }
+                    }),
+                ),
         }),
         {
             name: 'product-storage',
