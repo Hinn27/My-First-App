@@ -60,7 +60,7 @@ const DRINK_DETAILS = {
         id: 'drink-5',
         name: 'Trà Đào Cam Sả',
         price: 35000,
-        category: 'Trà trái cây',
+        category: 'Trà',
         description: 'Trà đào cam sả mát lạnh, hương vị thanh mát',
         ingredients: ['Trà xanh', 'Đào', 'Cam', 'Sả', 'Đá'],
         size: ['M', 'L'],

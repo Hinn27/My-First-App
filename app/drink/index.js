@@ -51,7 +51,7 @@ const DRINK_DATA = [
         name: 'Trà Đào Cam Sả',
         drink: 'tra-dao-cam-sa',
         price: 35000,
-        category: 'Trà trái cây',
+        category: 'Trà',
         description: 'Trà đào cam sả mát lạnh',
         image: 'cafe',
     },
