@@ -14,10 +14,12 @@ import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../src/context/ThemeContext';
+import { useUserStore } from '../../src/store/userStore';
 
 export default function LoginScreen() {
     const { theme } = useTheme();
     const router = useRouter();
+    const setUser = useUserStore((state) => state.setUser);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -57,7 +59,9 @@ export default function LoginScreen() {
                 loginTime: new Date().toISOString(),
             };
 
+            // Save to both AsyncStorage and Zustand store
             await AsyncStorage.setItem('user', JSON.stringify(userData));
+            setUser(userData);
 
             Alert.alert('Thành công', 'Đăng nhập thành công!', [
                 {

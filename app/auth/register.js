@@ -15,10 +15,12 @@ import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../src/context/ThemeContext';
+import { useUserStore } from '../../src/store/userStore';
 
 export default function RegisterScreen() {
     const { theme } = useTheme();
     const router = useRouter();
+    const setUser = useUserStore((state) => state.setUser);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -73,7 +75,9 @@ export default function RegisterScreen() {
                 isSeller: false,
             };
 
+            // Save to both AsyncStorage and Zustand store
             await AsyncStorage.setItem('user', JSON.stringify(userData));
+            setUser(userData);
 
             Alert.alert('Thành công', 'Đăng ký thành công!', [
                 {

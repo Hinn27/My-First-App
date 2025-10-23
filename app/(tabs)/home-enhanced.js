@@ -16,6 +16,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../src/context/ThemeContext';
 import { useProductStore } from '../../src/store/productStore';
+import { useUserStore } from '../../src/store/userStore';
 import ProductCard from '../../src/components/ProductCard';
 
 const { width } = Dimensions.get('window');
@@ -62,6 +63,9 @@ export default function EnhancedHomeScreen() {
     const deleteFromFavoriteList = useProductStore(
         (state) => state.deleteFromFavoriteList,
     );
+
+    // Get user from store
+    const user = useUserStore((state) => state.user);
 
     // Combine food and drink lists (food first)
     const allProducts = [...foodList, ...drinkList];
@@ -148,7 +152,9 @@ export default function EnhancedHomeScreen() {
             <View style={styles.header}>
                 <View>
                     <Text style={styles.greeting}>Xin chào,</Text>
-                    <Text style={styles.title}>Khách hàng thân mến!</Text>
+                    <Text style={styles.title}>
+                        {user?.name || 'Khách hàng'}!
+                    </Text>
                 </View>
                 <Pressable style={styles.profileButton}>
                     <Ionicons

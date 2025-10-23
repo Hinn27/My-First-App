@@ -5,7 +5,6 @@ const ThemeContext = createContext();
 
 // Material You Color Palette
 const theme = {
-
     // Primary colors
     primary: '#0A84FF',
     onPrimary: '#FFFFFF',

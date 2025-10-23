@@ -17,10 +17,12 @@ import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../src/context/ThemeContext';
+import { useUserStore } from '../../src/store/userStore';
 
 export default function SellerRegisterScreen() {
     const { theme } = useTheme();
     const router = useRouter();
+    const setUser = useUserStore((state) => state.setUser);
     const [sellerName, setSellerName] = useState('');
     const [storeName, setStoreName] = useState('');
     const [address, setAddress] = useState('');
@@ -91,7 +93,7 @@ export default function SellerRegisterScreen() {
             const updatedUser = {
                 ...userData,
                 isSeller: true,
-                sellerStatus: 'approved', // approved, pending, rejected
+                sellerStatus: 'pending', // Change to pending to show "Chờ duyệt 24h" message
                 sellerInfo: {
                     sellerName,
                     storeName,
@@ -102,11 +104,13 @@ export default function SellerRegisterScreen() {
                 },
             };
 
+            // Save to both AsyncStorage and Zustand store
             await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
+            setUser(updatedUser);
 
             Alert.alert(
                 'Thành công',
-                'Đăng ký bán hàng thành công! Tài khoản của bạn đã được kích hoạt.',
+                'Đăng ký bán hàng thành công! Vui lòng chờ duyệt trong 24h.',
                 [
                     {
                         text: 'OK',

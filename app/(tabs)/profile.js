@@ -17,43 +17,28 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../../src/context/ThemeContext';
+import { useUserStore } from '../../src/store/userStore';
 
 export default function ProfileScreen() {
     const { theme } = useTheme();
     const router = useRouter();
     const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-    const [user, setUser] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    // Use Zustand store instead of local state
+    const user = useUserStore((state) => state.user);
+    const setUser = useUserStore((state) => state.setUser);
+    const isLoggedIn = user?.isLoggedIn || false;
 
     // Create dynamic styles
     const styles = createStyles(theme);
-
-    // Check login status
-    useEffect(() => {
-        loadUserData();
-    }, []);
-
-    const loadUserData = async () => {
-        try {
-            const userDataStr = await AsyncStorage.getItem('user');
-            if (userDataStr) {
-                const userData = JSON.parse(userDataStr);
-                setUser(userData);
-                setIsLoggedIn(userData.isLoggedIn || false);
-            }
-        } catch (error) {
-            console.error('Error loading user data:', error);
-        }
-    };
 
     const handleLogout = async () => {
         try {
             await AsyncStorage.removeItem('user');
             setUser(null);
-            setIsLoggedIn(false);
         } catch (error) {
             console.error('Error logging out:', error);
         }
@@ -78,13 +63,11 @@ export default function ProfileScreen() {
                 },
             };
             await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
-            setUser(updatedUser);
-            setIsLoggedIn(true);
+            setUser(updatedUser); // Update Zustand store
             Alert.alert(
                 'Thành công',
-                'Đã set user thành seller đã được duyệt!',
+                'Đã set user thành seller đã được duyệt! Menu sẽ cập nhật ngay.',
             );
-            loadUserData(); // Reload
         } catch (error) {
             console.error('Error setting seller:', error);
         }
@@ -142,6 +125,14 @@ export default function ProfileScreen() {
 
                 {/* Menu */}
                 <View style={styles.menuContainer}>
+                    {/* Debug log */}
+                    {console.log('👤 User Debug:', {
+                        isSeller: user?.isSeller,
+                        sellerStatus: user?.sellerStatus,
+                        showMenu:
+                            user?.isSeller && user?.sellerStatus === 'approved',
+                    })}
+
                     <Link href="/user/123" asChild>
                         <Pressable style={styles.menuItem}>
                             <Ionicons
@@ -162,28 +153,76 @@ export default function ProfileScreen() {
 
                     {/* Show "Add Product" if user is approved seller */}
                     {user?.isSeller && user?.sellerStatus === 'approved' && (
-                        <Link href="/seller/add-product" asChild>
-                            <Pressable style={styles.menuItem}>
-                                <Ionicons
-                                    name="add-circle-outline"
-                                    size={24}
-                                    color={theme.tertiary}
-                                />
-                                <Text
-                                    style={[
-                                        styles.menuText,
-                                        { color: theme.tertiary },
-                                    ]}
-                                >
-                                    Đăng sản phẩm
-                                </Text>
-                                <Ionicons
-                                    name="chevron-forward"
-                                    size={20}
-                                    color={theme.onSurfaceVariant}
-                                />
-                            </Pressable>
-                        </Link>
+                        <>
+                            <Link href="/seller/add-product" asChild>
+                                <Pressable style={styles.menuItem}>
+                                    <Ionicons
+                                        name="add-circle-outline"
+                                        size={24}
+                                        color={theme.tertiary}
+                                    />
+                                    <Text
+                                        style={[
+                                            styles.menuText,
+                                            { color: theme.tertiary },
+                                        ]}
+                                    >
+                                        Đăng sản phẩm
+                                    </Text>
+                                    <Ionicons
+                                        name="chevron-forward"
+                                        size={20}
+                                        color={theme.onSurfaceVariant}
+                                    />
+                                </Pressable>
+                            </Link>
+
+                            <Link href="/seller/my-products" asChild>
+                                <Pressable style={styles.menuItem}>
+                                    <Ionicons
+                                        name="cube-outline"
+                                        size={24}
+                                        color={theme.tertiary}
+                                    />
+                                    <Text
+                                        style={[
+                                            styles.menuText,
+                                            { color: theme.tertiary },
+                                        ]}
+                                    >
+                                        Xem sản phẩm của bạn
+                                    </Text>
+                                    <Ionicons
+                                        name="chevron-forward"
+                                        size={20}
+                                        color={theme.onSurfaceVariant}
+                                    />
+                                </Pressable>
+                            </Link>
+
+                            <Link href="/seller/revenue" asChild>
+                                <Pressable style={styles.menuItem}>
+                                    <Ionicons
+                                        name="bar-chart-outline"
+                                        size={24}
+                                        color={theme.tertiary}
+                                    />
+                                    <Text
+                                        style={[
+                                            styles.menuText,
+                                            { color: theme.tertiary },
+                                        ]}
+                                    >
+                                        Quản lí doanh thu
+                                    </Text>
+                                    <Ionicons
+                                        name="chevron-forward"
+                                        size={20}
+                                        color={theme.onSurfaceVariant}
+                                    />
+                                </Pressable>
+                            </Link>
+                        </>
                     )}
 
                     {/* Show "Register as Seller" if not seller yet */}
@@ -226,7 +265,7 @@ export default function ProfileScreen() {
                                     { color: theme.onSurfaceVariant },
                                 ]}
                             >
-                                Đang chờ duyệt bán hàng
+                                Chờ duyệt trong 24h
                             </Text>
                         </Pressable>
                     )}
@@ -311,37 +350,22 @@ export default function ProfileScreen() {
                         />
                     </Pressable>
 
-                    <Pressable style={[styles.menuItem, styles.menuItemLast]}>
-                        <Ionicons
-                            name="information-circle-outline"
-                            size={24}
-                            color={theme.onSurface}
-                        />
-                        <Text style={styles.menuText}>Về chúng tôi</Text>
-                        <Ionicons
-                            name="chevron-forward"
-                            size={20}
-                            color={theme.onSurfaceVariant}
-                        />
-                    </Pressable>
-                </View>
-
-                {/* TEST BUTTON: Set as approved seller */}
-                <Text style={styles.sectionTitle}>🧪 Test Functions</Text>
-                <View style={styles.menuContainer}>
                     <Pressable
-                        style={styles.menuItem}
+                        style={[styles.menuItem, styles.menuItemLast]}
                         onPress={testSetApprovedSeller}
                     >
                         <Ionicons
                             name="flask-outline"
                             size={24}
-                            color={theme.tertiary}
+                            color={theme.onSurfaceVariant}
                         />
                         <Text
-                            style={[styles.menuText, { color: theme.tertiary }]}
+                            style={[
+                                styles.menuText,
+                                { color: theme.onSurfaceVariant, fontSize: 13 },
+                            ]}
                         >
-                            Set làm Seller đã duyệt
+                            🧪 Test: Set seller đã duyệt
                         </Text>
                     </Pressable>
                 </View>
