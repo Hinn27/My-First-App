@@ -25,11 +25,82 @@ export default function RootLayout() {
                         name="modal"
                         options={{ presentation: 'modal' }}
                     />
-                    <Stack.Screen name="food" options={{ title: 'Món Ăn' }} />
-                    <Stack.Screen name="drink" options={{ title: 'Đồ Uống' }} />
                     <Stack.Screen
-                        name="user"
-                        options={{ title: 'Người dùng' }}
+                        name="food/index"
+                        options={{
+                            title: 'Món Ăn',
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="food/[slug]"
+                        options={{
+                            title: 'Chi tiết món ăn',
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="drink/index"
+                        options={{
+                            title: 'Đồ Uống',
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="drink/[drink]"
+                        options={{
+                            title: 'Chi tiết đồ uống',
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="user/[id]"
+                        options={{
+                            title: 'Người dùng',
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="product/[id]"
+                        options={{
+                            title: 'Chi tiết sản phẩm',
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="payment"
+                        options={{
+                            title: 'Thanh toán',
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="order-history"
+                        options={{
+                            title: 'Lịch sử đơn hàng',
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="auth/login"
+                        options={{
+                            title: 'Đăng nhập',
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="auth/register"
+                        options={{
+                            title: 'Đăng ký',
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="auth/seller-register"
+                        options={{
+                            title: 'Đăng ký bán hàng',
+                            headerShown: false,
+                        }}
                     />
                 </Stack>
             </CartProvider>

@@ -28,9 +28,9 @@ export default function TabLayout() {
             }}
         >
             <Tabs.Screen
-                name="index"
+                name="home-enhanced"
                 options={{
-                    title: 'Kính chào quý khách',
+                    title: 'Trang chủ',
                     headerTitle: 'Kính chào quý khách',
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
@@ -39,21 +39,39 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="explore"
+                name="index"
                 options={{
-                    title: 'Explore',
+                    href: null,
+                }}
+            />
+            <Tabs.Screen
+                name="favorites"
+                options={{
+                    title: 'Yêu thích',
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="search" size={size} color={color} />
+                        <Ionicons name="heart" size={size} color={color} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="cart-enhanced"
+                options={{
+                    title: 'Giỏ hàng',
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="cart" size={size} color={color} />
                     ),
                 }}
             />
             <Tabs.Screen
                 name="cart"
                 options={{
-                    title: 'Cart',
-                    tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="cart" size={size} color={color} />
-                    ),
+                    href: null,
+                }}
+            />
+            <Tabs.Screen
+                name="explore"
+                options={{
+                    href: null,
                 }}
             />
             <Tabs.Screen

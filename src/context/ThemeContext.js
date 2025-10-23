@@ -122,17 +122,11 @@ const darkTheme = {
 };
 
 export const ThemeProvider = ({ children }) => {
-    const systemColorScheme = useColorScheme();
-    const [isDarkMode, setIsDarkMode] = useState(systemColorScheme === 'dark');
-
-    const theme = isDarkMode ? darkTheme : lightTheme;
-
-    const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
-    };
+    // Always use light mode
+    const theme = lightTheme;
 
     return (
-        <ThemeContext.Provider value={{ theme, isDarkMode, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme }}>
             {children}
         </ThemeContext.Provider>
     );
