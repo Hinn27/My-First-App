@@ -2,6 +2,7 @@
 
 [![React Native](https://img.shields.io/badge/React%20Native-0.81-blue.svg)](https://reactnative.dev/)
 [![Expo](https://img.shields.io/badge/Expo-54.0-000020.svg)](https://expo.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 > Ứng dụng đặt đồ ăn & đồ uống, quản lý bán hàng với giao diện Material You Design
 
@@ -323,7 +324,33 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## ‍💻 Author
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+### What does this mean?
+
+✅ **You can:**
+
+-   Use this code for personal or commercial projects
+-   Modify and distribute the code
+-   Use it in private projects
+-   Sell software that includes this code
+
+❗ **You must:**
+
+-   Include the original copyright notice
+-   Include the MIT License text
+
+⚠️ **You cannot:**
+
+-   Hold the author liable for any damages
+
+See the [LICENSE](LICENSE) file for full details.
+
+---
+
+## 👨‍💻 Author
 
 **Hinn27**
 
