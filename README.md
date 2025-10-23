@@ -2,7 +2,6 @@
 
 [![React Native](https://img.shields.io/badge/React%20Native-0.81-blue.svg)](https://reactnative.dev/)
 [![Expo](https://img.shields.io/badge/Expo-54.0-000020.svg)](https://expo.dev/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 > Ứng dụng đặt đồ ăn & đồ uống, quản lý bán hàng với giao diện Material You Design
 
@@ -324,18 +323,12 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 👨‍💻 Author
+## ‍💻 Author
 
 **Hinn27**
 
 -   GitHub: [@Hinn27](https://github.com/Hinn27)
--   Email: your-email@example.com
+-   Email: hduc27760@gmail.com
 
 ---
 
@@ -353,8 +346,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 If you have any questions or need help, please:
 
 -   Open an issue on GitHub
--   Email: your-email@example.com
--   Join our Discord: [Your Discord Link]
+-   Email: hduc27760@gmail.com
 
 ---
 
