@@ -1,12 +1,10 @@
-// Theme Context - Material You Design với AMOLED Dark Mode
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+// Theme Context - Material You Design
+import React, { createContext, useContext } from 'react';
 
 const ThemeContext = createContext();
 
 // Material You Color Palette
-const lightTheme = {
-    mode: 'light',
+const theme = {
 
     // Primary colors
     primary: '#0A84FF',
@@ -63,68 +61,7 @@ const lightTheme = {
     cardFavorite: '#E8F5E9',
 };
 
-const darkTheme = {
-    mode: 'dark',
-
-    // Primary colors
-    primary: '#A8C7FF',
-    onPrimary: '#003062',
-    primaryContainer: '#00468A',
-    onPrimaryContainer: '#D6E7FF',
-
-    // Secondary colors
-    secondary: '#FFB84D',
-    onSecondary: '#4A2800',
-    secondaryContainer: '#6A3A00',
-    onSecondaryContainer: '#FFE0B2',
-
-    // Tertiary colors
-    tertiary: '#6FDB8C',
-    onTertiary: '#00390F',
-    tertiaryContainer: '#005317',
-    onTertiaryContainer: '#C8F7D3',
-
-    // Error colors
-    error: '#FF8A80',
-    onError: '#690005',
-    errorContainer: '#93000A',
-    onErrorContainer: '#FFE5E5',
-
-    // Surface colors (AMOLED - Pure Black)
-    surface: '#000000',
-    onSurface: '#E6E6E6',
-    surfaceVariant: '#121212',
-    onSurfaceVariant: '#C4C4C4',
-
-    // Background colors (AMOLED - Pure Black)
-    background: '#000000',
-    onBackground: '#E6E6E6',
-
-    // Outline colors
-    outline: '#2C2C2E',
-    outlineVariant: '#1C1C1E',
-
-    // Other colors
-    shadow: '#000000',
-    scrim: '#000000',
-    inverseSurface: '#E6E6E6',
-    inverseOnSurface: '#1C1C1E',
-    inversePrimary: '#0A84FF',
-
-    // Rating & special
-    rating: '#FFD700',
-
-    // Card backgrounds (darker versions)
-    cardFood: '#0A1F3D',
-    cardDrink: '#2D1F0A',
-    cardPromo: '#2D0A0A',
-    cardFavorite: '#0A2D12',
-};
-
 export const ThemeProvider = ({ children }) => {
-    // Always use light mode
-    const theme = lightTheme;
-
     return (
         <ThemeContext.Provider value={{ theme }}>
             {children}

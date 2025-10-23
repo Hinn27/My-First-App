@@ -83,7 +83,6 @@ Profile - Hồ sơ người dùng
 
 ### 🎨 Giao diện
 
--   **Dark Mode Support**: Tất cả screens hỗ trợ dark mode
 -   **Material You Design**: Sử dụng theme colors từ ThemeContext
 -   **Gradient UI**: LinearGradient cho cards và backgrounds
 -   **Smooth Animations**: Success animations, toast notifications

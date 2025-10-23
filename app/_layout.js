@@ -5,7 +5,7 @@
  * Wrap tất cả screens
  * Define navigation structure (Stack, Tabs, etc.)
  * Bọc CartProvider để quản lý giỏ hàng global
- * Bọc ThemeProvider để quản lý theme Material You và dark mode
+ * Bọc ThemeProvider để cung cấp theme Material You colors
  */
 
 import { Stack } from 'expo-router';
