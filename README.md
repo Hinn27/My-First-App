@@ -376,6 +376,8 @@ npm install
 -   [x] **Dynamic Greeting**: Hiển thị tên user trên Home
 -   [x] **Category UI**: Bo tròn 10, fixed wrapper
 -   [x] **Material Design 3**: Cyan color theme
+-   [x] **Code Refactor**: Merge duplicate files (home-enhanced, cart-enhanced)
+-   [x] **File Comments**: Thêm comments mô tả chức năng cho tất cả screens
 
 ### 🚧 In Progress
 
