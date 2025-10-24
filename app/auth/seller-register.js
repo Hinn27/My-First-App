@@ -1,4 +1,11 @@
-// Screen: Seller Registration
+// Screen: Seller Register - Đăng ký bán hàng
+/* Chức năng:
+ * - Form đăng ký seller
+ * - Nhập tên, tên cửa hàng, địa chỉ, số điện thoại
+ * - Upload ảnh cửa hàng (expo-image-picker)
+ * - Lưu vào Zustand userStore với status "pending"
+ * - Hiển thị thông báo chờ duyệt 24h
+ */
 import {
     View,
     Text,

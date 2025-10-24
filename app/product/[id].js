@@ -1,4 +1,11 @@
-// Product Detail Screen
+// Screen: Product Detail - Chi tiết sản phẩm
+/* Chức năng:
+ * - Hiển thị thông tin chi tiết sản phẩm (tên, mô tả, giá, đánh giá)
+ * - Chọn size (S/M/L)
+ * - Thêm vào giỏ hàng
+ * - Thêm/xóa yêu thích
+ * - Hiển thị ảnh sản phẩm
+ */
 import React, { useState } from 'react';
 import {
     View,
@@ -69,7 +76,7 @@ export default function ProductDetailScreen() {
         Alert.alert('Thành công', `Đã thêm ${product.name} vào giỏ hàng!`, [
             {
                 text: 'Xem giỏ hàng',
-                onPress: () => router.push('/(tabs)/cart-enhanced'),
+                onPress: () => router.push('/(tabs)/cart'),
             },
             { text: 'Tiếp tục mua' },
         ]);

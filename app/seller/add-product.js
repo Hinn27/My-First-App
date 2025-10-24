@@ -1,7 +1,11 @@
-// Screen: Add Product (Seller only)
-/* Vai trò:
- * Màn hình đăng sản phẩm cho seller đã được duyệt
- * Route: /seller/add-product
+// Screen: Add Product - Đăng sản phẩm (Seller)
+/* Chức năng:
+ * - Form đăng sản phẩm mới cho seller
+ * - Upload ảnh sản phẩm (expo-image-picker)
+ * - Nhập tên, mô tả, category, giá theo size
+ * - Validation form
+ * - Lưu vào Zustand store
+ * - Chỉ seller đã được approve mới truy cập được
  */
 
 import React, { useState } from 'react';

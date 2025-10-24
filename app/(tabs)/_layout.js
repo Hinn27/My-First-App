@@ -28,7 +28,7 @@ export default function TabLayout() {
             }}
         >
             <Tabs.Screen
-                name="home-enhanced"
+                name="home"
                 options={{
                     title: 'Trang chủ',
                     headerTitle: 'Kính chào quý khách',
@@ -54,18 +54,12 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="cart-enhanced"
+                name="cart"
                 options={{
                     title: 'Giỏ hàng',
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="cart" size={size} color={color} />
                     ),
-                }}
-            />
-            <Tabs.Screen
-                name="cart"
-                options={{
-                    href: null,
                 }}
             />
             <Tabs.Screen

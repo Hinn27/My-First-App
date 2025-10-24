@@ -1,4 +1,10 @@
-// Order History Screen
+// Screen: Order History - Lịch sử đơn hàng
+/* Chức năng:
+ * - Hiển thị danh sách đơn hàng đã đặt
+ * - Xem chi tiết từng đơn hàng
+ * - Hiển thị ngày giờ, tổng tiền
+ * - Empty state khi chưa có đơn hàng
+ */
 import React from 'react';
 import {
     View,

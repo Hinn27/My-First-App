@@ -1,7 +1,10 @@
-// Screen: Revenue Management (for sellers)
-/* Vai trò:
- * Quản lí đơn hàng và doanh thu của người bán
- * Route: /seller/revenue
+// Screen: Revenue - Quản lý doanh thu (Seller)
+/* Chức năng:
+ * - Thống kê doanh thu (đơn mới, đã giao, tổng)
+ * - Hiển thị danh sách đơn hàng
+ * - Tab "Đơn mới" và "Đã giao"
+ * - Đánh dấu đơn đã giao
+ * - Mock data (trong production sẽ lấy từ API)
  */
 
 import {

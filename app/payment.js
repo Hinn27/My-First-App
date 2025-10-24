@@ -1,4 +1,11 @@
-// Payment Screen - Coffee Shop Style
+// Screen: Payment - Thanh toán
+/* Chức năng:
+ * - Chọn phương thức thanh toán (Ví điện tử, Tiền mặt, Thẻ, Chuyển khoản)
+ * - Hiển thị tổng tiền từ giỏ hàng
+ * - Xác nhận thanh toán → Lưu vào lịch sử đơn hàng
+ * - Animation success
+ * - Xóa giỏ hàng sau khi thanh toán
+ */
 import React, { useState } from 'react';
 import {
     View,

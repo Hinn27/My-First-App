@@ -1,7 +1,10 @@
-// Screen: My Products (for sellers)
-/* Vai trò:
- * Hiển thị danh sách sản phẩm của người bán
- * Route: /seller/my-products
+// Screen: My Products - Quản lý sản phẩm (Seller)
+/* Chức năng:
+ * - Hiển thị danh sách sản phẩm đã đăng
+ * - Xem ảnh, tên, giá sản phẩm
+ * - Xóa sản phẩm khỏi store
+ * - Sửa sản phẩm (coming soon)
+ * - Lấy data từ Zustand store (drinkList + foodList)
  */
 
 import {

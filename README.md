@@ -69,9 +69,9 @@
 My-First-App/
 ├── app/
 │   ├── (tabs)/                    # Bottom Tab Navigation
-│   │   ├── index.js              # Home screen gốc
-│   │   ├── home-enhanced.js      # Home screen Coffee Shop style ⭐
-│   │   ├── cart-enhanced.js      # Enhanced Cart screen
+│   │   ├── index.js              # Redirect to home
+│   │   ├── home.js               # Home screen ⭐ (search, filter, grid)
+│   │   ├── cart.js               # Cart screen (Zustand store)
 │   │   ├── favorites.js          # Favorites screen
 │   │   ├── profile.js            # Profile & Settings
 │   │   └── _layout.js            # Tab layout config

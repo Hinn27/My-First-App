@@ -1,4 +1,10 @@
-// Favorites Screen
+// Screen: Favorites - Yêu thích
+/* Chức năng:
+ * - Hiển thị danh sách sản phẩm yêu thích
+ * - Xóa khỏi danh sách yêu thích
+ * - Thêm vào giỏ hàng từ favorites
+ * - Empty state khi chưa có sản phẩm yêu thích
+ */
 import React from 'react';
 import {
     View,

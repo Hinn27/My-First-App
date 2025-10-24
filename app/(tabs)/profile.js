@@ -1,8 +1,10 @@
-// Screen: Profile tab
-/* Vai trò:
- * Screen Profile (tab thứ 4)
- * Route: /profile
- * Bao gồm: Info, Menu, Settings
+// Screen: Profile - Trang cá nhân
+/* Chức năng:
+ * - Hiển thị thông tin người dùng từ Zustand store
+ * - Menu seller (nếu là seller): Đăng sản phẩm, Xem sản phẩm, Quản lí doanh thu
+ * - Settings: Theme, notifications
+ * - Test functions: Set seller status
+ * - Đăng xuất
  */
 
 // UI

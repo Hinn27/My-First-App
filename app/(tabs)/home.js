@@ -1,4 +1,11 @@
-// Enhanced Home Screen - Coffee Shop Style
+// Screen: Home - Trang chủ với search, filter category, grid layout
+/* Chức năng:
+ * - Hiển thị danh sách sản phẩm (đồ ăn & đồ uống)
+ * - Search theo tên sản phẩm
+ * - Filter theo category (Món khô, Món ướt, Cà phê, Trà...)
+ * - Thêm vào giỏ hàng, yêu thích
+ * - Hiển thị tên người dùng từ Zustand store
+ */
 import React, { useState, useRef } from 'react';
 import {
     View,
