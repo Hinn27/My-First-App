@@ -6,6 +6,8 @@
 
 > Ứng dụng đặt đồ ăn & đồ uống, quản lý bán hàng với giao diện Material You Design
 
+**[🌍 English Version Below](#english-version)**
+
 ## 📱 Screenshots
 
 -   🏠 Home Screen với category filters (bo tròn 10)
@@ -311,11 +313,11 @@ npx expo start --tunnel
 
 ### Categories
 
--   **Món khô**: Phở, Bún chả, Cơm tấm, Bánh xèo
--   **Món ướt**: Bánh mì, Hủ tiếu, Bún bò Huế
--   **Ăn vặt**: Gỏi cuốn
--   **Cà phê**: Cà phê sữa đá, đen đá, Cappuccino, Latte
--   **Trà**: Matcha latte, Trà đào cam sả
+-   **Món khô**: Phở, Bún chả, Cơm tấm, Bánh xèo,...
+-   **Món ướt**: Bánh mì, Hủ tiếu, Bún bò Huế,...
+-   **Ăn vặt**: Gỏi cuốn,...
+-   **Cà phê**: Cà phê sữa đá, đen đá, Cappuccino, Latte,...
+-   **Trà**: Matcha latte, Trà đào cam sả,...
 -   **Trà sữa, Sinh tố, Nước ép, Soda**
 
 ---
@@ -370,7 +372,7 @@ npm install
 
 ---
 
-## 📝 TODO / Roadmap
+## 📝 TODO List
 
 ### ✅ Completed
 
@@ -392,14 +394,424 @@ npm install
 
 ### 📋 Planned
 
--   [ ] **Backend API integration**: Firebase hoặc Node.js
+-   [ ] **Backend API integration**: Supabase hoặc Node.js
 -   [ ] **Real-time notifications**: Thông báo đơn hàng mới
--   [ ] **Payment gateway**: Tích hợp VNPay, MoMo, ZaloPay
+-   [ ] **Payment gateway**: Tích hợp VNPay, MoMo, ZaloPay,...
 -   [ ] **Google Maps**: Theo dõi giao hàng
 -   [ ] **Chat support**: Khách và seller chat trực tiếp
 -   [ ] **Multi-language**: EN/VI
 -   [ ] **Product reviews & ratings**: Đánh giá sản phẩm
 -   [ ] **Seller analytics**: Biểu đồ doanh thu, thống kê
+-   [ ] **Push notifications**: Expo Notifications
+
+---
+
+---
+
+# English Version
+
+# 🍜 My First App - Food & Drink Ordering App
+
+[![React Native](https://img.shields.io/badge/React%20Native-0.81-blue.svg)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-54.0-000020.svg)](https://expo.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+> Food & drink ordering app with seller management, built with Material You Design
+
+## 📱 Screenshots
+
+-   🏠 Home Screen with category filters (rounded corners)
+-   🛒 Shopping Cart with quantity controls
+-   ❤️ Favorites with beautiful cards
+-   💳 Payment with multiple methods
+-   🎨 Material You Design color scheme
+-   ✨ Smooth animations
+
+---
+
+## ✨ Main Features
+
+### 👥 For Buyers
+
+-   ✅ **Enhanced Home Page**: Search, filter by category, grid layout
+    -   Display "Hello, {Username}!"
+    -   Rounded category buttons
+-   ✅ **Product Details**: View full information, select size, ratings
+-   ✅ **Shopping Cart**: Add/remove/edit quantity, auto-calculate total
+-   ✅ **Favorites**: Save favorite products, quick add to cart
+-   ✅ **Payment**: Multiple methods (E-wallet, Cash, Card, Banking)
+-   ✅ **Order History**: View past orders
+
+### 🏪 For Sellers
+
+-   ✅ **Seller Registration**: Registration form with store info, image upload
+    -   Status: Pending → awaiting approval within 24h
+    -   Status: Approved → Can sell products
+-   ✅ **Add Products**: Complete form with validation
+    -   Upload real product images
+    -   Enter name, description, category
+    -   Set prices by size (S/M/L)
+    -   Ingredients and features
+    -   Auto-save to store with AsyncStorage
+-   ✅ **View Your Products**: Manage posted products list
+    -   Display all posted products
+    -   View images, names, prices
+    -   Edit products (coming soon)
+    -   Delete products from store
+-   ✅ **Revenue Management**: Track orders and revenue
+    -   "New Orders" tab: New orders from customers
+    -   "Delivered" tab: Completed order history
+    -   Stats cards: Revenue from new orders, delivered orders, total revenue
+    -   Mark as delivered to move orders to "Delivered" tab
+
+### 🔐 Authentication & State Management
+
+-   ✅ **Login**: Email/Password with Zustand + AsyncStorage
+-   ✅ **Registration**: New user registration form
+-   ✅ **Profile**: Manage personal information
+-   ✅ **Zustand Store**: State management with persist
+    -   User data auto-saves and restores on app reopen
+    -   Data syncs across all screens
+
+---
+
+## 🗂️ Project Structure
+
+```
+My-First-App/
+├── app/
+│   ├── (tabs)/                    # Bottom Tab Navigation
+│   │   ├── index.js              # Redirect to home
+│   │   ├── home.js               # Home screen ⭐ (search, filter, grid)
+│   │   ├── cart.js               # Cart screen (Zustand store)
+│   │   ├── favorites.js          # Favorites screen
+│   │   ├── profile.js            # Profile & Settings
+│   │   └── _layout.js            # Tab layout config
+│   ├── auth/                     # Authentication
+│   │   ├── login.js
+│   │   ├── register.js
+│   │   └── seller-register.js
+│   ├── product/
+│   │   └── [id].js               # Product detail (dynamic)
+│   ├── seller/
+│   │   ├── add-product.js        # Seller: Add new product
+│   │   ├── my-products.js        # Seller: View & manage products
+│   │   └── revenue.js            # Seller: Revenue & order management
+│   ├── payment.js                # Payment screen
+│   ├── order-history.js          # Order history
+│   └── _layout.js                # Root layout
+├── src/
+│   ├── components/               # Reusable components
+│   │   ├── ProductCard.js
+│   │   ├── CartItemCard.js
+│   │   └── EmptyState.js
+│   ├── context/
+│   │   └── ThemeContext.js       # Material You theme
+│   ├── data/
+│   │   ├── DrinkData.js          # Mock drink data
+│   │   └── FoodData.js           # Mock food data
+│   └── store/
+│       ├── productStore.js       # Zustand store + AsyncStorage
+│       └── userStore.js          # User state management
+└── assets/                       # Images, fonts, etc.
+```
+
+---
+
+## 🚀 Installation & Running
+
+### System Requirements
+
+-   Node.js >= 18.x
+-   npm or yarn
+-   Expo CLI
+-   iOS Simulator or Android Emulator (or Expo Go app)
+
+### Installation
+
+```bash
+# Clone repository
+git clone https://github.com/Hinn27/My-First-App.git
+cd My-First-App
+
+# Install dependencies
+npm install
+
+# Or using yarn
+yarn install
+```
+
+### Run the app
+
+```bash
+# Start Expo development server
+npm start
+
+# Or
+npx expo start
+
+# Run on Android
+npm run android
+
+# Run on iOS (macOS only)
+npm run ios
+
+# Run on web
+npm run web
+```
+
+### Clear cache (if errors occur)
+
+```bash
+npx expo start --clear
+```
+
+### Fix java.io.IOException: Failed to download remote updates
+
+```bash
+npx expo start --tunnel
+```
+
+---
+
+## 📦 Dependencies
+
+### Core
+
+-   **React Native 0.81** - Framework
+-   **Expo 54** - Development platform
+-   **Expo Router 6** - File-based routing
+
+### State Management
+
+-   **zustand** - Lightweight state management
+-   **immer** - Immutable state updates
+
+### Storage & UI
+
+-   **@react-native-async-storage/async-storage** - Persistent storage
+-   **expo-linear-gradient** - Gradient backgrounds
+-   **expo-image-picker** - Image selection
+-   **@expo/vector-icons** - Icon library
+
+---
+
+## 📚 User Guide
+
+### For Buyers
+
+1. **View Products**
+
+    - Open the **"Home"** tab
+    - Use search bar to find products
+    - Select category to filter (Dry dishes, Wet dishes, Snacks, Coffee, Tea...)
+
+2. **Add to Cart**
+
+    - Tap on a product to view details
+    - Select size (S/M/L)
+    - Tap "Add to Cart" button
+    - Or tap "+" button directly from ProductCard
+
+3. **Manage Cart**
+
+    - Go to "Cart" tab
+    - Increase/decrease quantity with +/- buttons
+    - Item auto-removes when quantity = 0
+    - View auto-calculated total
+
+4. **Checkout**
+
+    - Tap "Checkout" in Cart
+    - Select payment method
+    - Confirm → Success animation
+    - Order auto-saves to history
+
+5. **Favorites**
+    - Tap ❤️ icon to add/remove favorites
+    - Go to "Favorites" tab to view list
+    - Add to cart directly from Favorites
+
+### For Sellers
+
+1. **Register as Seller**
+
+    - Go to "Profile" tab
+    - Tap "Register as Seller"
+    - Fill in information: Name, store name, address, phone
+    - Upload store image
+    - Submit → Status "Pending approval within 24h"
+
+2. **Add Products** (after approval)
+
+    - Go to "Profile" tab
+    - Tap "Add Product"
+    - Fill form:
+        - Upload product image from gallery
+        - Product name
+        - Type (Food/Drink)
+        - Category
+        - Short & detailed description
+        - Price by size
+        - Ingredients (optional)
+    - Submit → Product auto-saves to store
+
+3. **View Your Products**
+
+    - Tap "View Your Products" in Profile
+    - View list of all posted products (saved in Zustand store)
+    - Display real images or emoji icons (fallback)
+    - View prices from low to high
+    - Tap "Edit" to modify (coming soon)
+    - Tap "Delete" to remove product → Auto-removes from store
+
+4. **Revenue Management**
+
+    - Tap "Revenue Management" in Profile
+    - View 3 stats cards:
+        - Revenue from new orders
+        - Revenue from delivered orders
+        - Total revenue
+    - "New Orders" tab: New orders from customers
+        - Tap "Mark as Delivered" to move to "Delivered" tab
+    - "Delivered" tab: Completed order history
+
+5. **Quick Test** (Developer)
+    - Go to "Profile" tab
+    - Scroll down to Settings
+    - Tap "🧪 Test: Set approved seller"
+    - Seller menu appears with 3 features
+
+---
+
+## 🎨 Design
+
+### Material Design 3 (Material You)
+
+The app follows **Material Design 3** guidelines by Google:
+
+-   **Dynamic Color System**: Primary color Cyan (#006A6A)
+-   **Elevation System**: 6 levels from 0 (flat) to 5 (highest)
+-   **Shape System**:
+    -   Small components: 8px radius
+    -   Medium components: 12px radius
+    -   Large components: 16-24px radius
+-   **Typography**: Roboto font family
+-   **Components**:
+    -   Elevated Cards with shadow
+    -   Floating Action Buttons (FAB)
+    -   Filled/Outlined/Text buttons
+    -   Bottom Navigation with ripple effect
+
+### Color Palette
+
+-   **Primary**: #006A6A (Cyan) - Main brand color
+-   **Secondary**: #4A6363 (Teal-gray) - Supporting elements
+-   **Tertiary**: #4B607C (Blue-gray) - Accents
+-   **Surface**: #FFFBFE - Card backgrounds
+-   **Background**: #FFFBFE - App background
+-   **Error**: #B3261E - Error states
+
+### Elevation Levels
+
+-   **Level 0**: Flat surfaces (no shadow)
+-   **Level 1**: Low elevation (cards, chips)
+-   **Level 2**: Medium elevation (app bar)
+-   **Level 3**: High elevation (FAB, dialogs)
+-   **Level 4**: Very high elevation (menus)
+-   **Level 5**: Highest elevation (modals)
+
+### Categories
+
+-   **Dry Dishes**: Pho, Bun Cha, Com Tam, Banh Xeo
+-   **Wet Dishes**: Banh Mi, Hu Tieu, Bun Bo Hue
+-   **Snacks**: Goi Cuon
+-   **Coffee**: Vietnamese Iced Coffee, Black Coffee, Cappuccino, Latte
+-   **Tea**: Matcha Latte, Peach Tea with Orange & Lemongrass
+-   **Milk Tea, Smoothies, Juice, Soda**
+
+---
+
+## 🔧 Configuration
+
+### Theme (src/context/ThemeContext.js)
+
+```javascript
+// Access theme
+const { theme } = useTheme();
+// theme contains Material You colors
+```
+
+### Store (src/store/productStore.js)
+
+```javascript
+// Access store
+const addToCart = useProductStore((state) => state.addToCart);
+const cartList = useProductStore((state) => state.cartList);
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Cache issues
+
+```bash
+# Clear Expo cache
+npx expo start --clear
+
+# Clear React Native cache
+npx react-native start --reset-cache
+```
+
+### AsyncStorage reset
+
+-   Go to Profile → Test Functions → Clear cache (if available)
+-   Or delete app and reinstall
+
+### iOS/Android build errors
+
+```bash
+# Update dependencies
+npx expo install --check
+
+# Reinstall node_modules
+rm -rf node_modules package-lock.json
+npm install
+```
+
+---
+
+## 📝 TODO List
+
+### ✅ Completed
+
+-   [x] **Seller Management**: Seller registration, add products
+-   [x] **Revenue Management**: Manage orders and revenue
+-   [x] **Product Management**: View/delete seller products
+-   [x] **Product Image Upload**: Upload real product images
+-   [x] **Zustand Store**: User state and product state with persist
+-   [x] **Dynamic Greeting**: Display username on Home
+-   [x] **Category UI**: Rounded corners, fixed wrapper
+-   [x] **Material Design 3**: Cyan color theme
+-   [x] **Code Refactor**: Merge duplicate files (home-enhanced, cart-enhanced)
+-   [x] **File Comments**: Add function descriptions for all screens
+
+### 🚧 In Progress
+
+-   [ ] **Edit Product**: Product editing feature for sellers
+-   [ ] **Order Management**: Real customer orders
+
+### 📋 Planned
+
+-   [ ] **Backend API integration**: Supabase or Node.js
+-   [ ] **Real-time notifications**: New order notifications
+-   [ ] **Payment gateway**: Integrate VNPay, MoMo, ZaloPay
+-   [ ] **Google Maps**: Delivery tracking
+-   [ ] **Chat support**: Direct chat between customers and sellers
+-   [ ] **Multi-language**: EN/VI
+-   [ ] **Product reviews & ratings**: Product reviews
+-   [ ] **Seller analytics**: Revenue charts, statistics
 -   [ ] **Push notifications**: Expo Notifications
 
 ---
