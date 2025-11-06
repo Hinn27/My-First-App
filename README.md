@@ -136,7 +136,7 @@ yarn install
 npm start
 
 # Hoặc
-npx expo start
+npx expo sta
 
 # Chạy trên Android
 npm run android
@@ -152,6 +152,12 @@ npm run web
 
 ```bash
 npx expo start --clear
+```
+
+# Lỗi java.io.IOException: Failed to download remote updates
+
+```bash
+npx expo start --tunnel
 ```
 
 ---
