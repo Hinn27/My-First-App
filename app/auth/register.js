@@ -1,9 +1,6 @@
 // Screen: Register
 import {
     View,
-    Text,
-    TextInput,
-    Pressable,
     StyleSheet,
     KeyboardAvoidingView,
     Platform,
@@ -13,12 +10,20 @@ import {
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+    Text,
+    TextInput,
+    Button,
+    Card,
+    useTheme as usePaperTheme,
+} from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../src/context/ThemeContext';
 import { useUserStore } from '../../src/store/userStore';
 
 export default function RegisterScreen() {
     const { theme } = useTheme();
+    const paperTheme = usePaperTheme();
     const router = useRouter();
     const setUser = useUserStore((state) => state.setUser);
     const [name, setName] = useState('');
@@ -105,157 +110,129 @@ export default function RegisterScreen() {
                     {/* Header */}
                     <View style={styles.header}>
                         <Ionicons name="cafe" size={80} color={theme.primary} />
-                        <Text style={styles.title}>Đăng ký</Text>
-                        <Text style={styles.subtitle}>
+                        <Text variant="headlineLarge" style={styles.title}>
+                            Đăng ký
+                        </Text>
+                        <Text variant="bodyLarge" style={styles.subtitle}>
                             Tạo tài khoản mới để bắt đầu
                         </Text>
                     </View>
 
-                    {/* Form */}
-                    <View style={styles.form}>
-                        <View style={styles.inputContainer}>
-                            <Ionicons
-                                name="person-outline"
-                                size={20}
-                                color={theme.onSurfaceVariant}
-                                style={styles.inputIcon}
-                            />
+                    {/* Form Card */}
+                    <Card style={styles.card} mode="elevated">
+                        <Card.Content style={styles.cardContent}>
                             <TextInput
-                                style={styles.input}
-                                placeholder="Họ và tên"
-                                placeholderTextColor={theme.onSurfaceVariant}
+                                label="Họ và tên"
                                 value={name}
                                 onChangeText={setName}
+                                mode="outlined"
                                 autoCapitalize="words"
-                            />
-                        </View>
-
-                        <View style={styles.inputContainer}>
-                            <Ionicons
-                                name="mail-outline"
-                                size={20}
-                                color={theme.onSurfaceVariant}
-                                style={styles.inputIcon}
-                            />
-                            <TextInput
+                                left={<TextInput.Icon icon="account-outline" />}
                                 style={styles.input}
-                                placeholder="Email"
-                                placeholderTextColor={theme.onSurfaceVariant}
+                            />
+
+                            <TextInput
+                                label="Email"
                                 value={email}
                                 onChangeText={setEmail}
+                                mode="outlined"
                                 keyboardType="email-address"
                                 autoCapitalize="none"
                                 autoCorrect={false}
-                            />
-                        </View>
-
-                        <View style={styles.inputContainer}>
-                            <Ionicons
-                                name="call-outline"
-                                size={20}
-                                color={theme.onSurfaceVariant}
-                                style={styles.inputIcon}
-                            />
-                            <TextInput
+                                left={<TextInput.Icon icon="email-outline" />}
                                 style={styles.input}
-                                placeholder="Số điện thoại"
-                                placeholderTextColor={theme.onSurfaceVariant}
+                            />
+
+                            <TextInput
+                                label="Số điện thoại"
                                 value={phone}
                                 onChangeText={setPhone}
+                                mode="outlined"
                                 keyboardType="phone-pad"
-                            />
-                        </View>
-
-                        <View style={styles.inputContainer}>
-                            <Ionicons
-                                name="lock-closed-outline"
-                                size={20}
-                                color={theme.onSurfaceVariant}
-                                style={styles.inputIcon}
-                            />
-                            <TextInput
+                                left={<TextInput.Icon icon="phone-outline" />}
                                 style={styles.input}
-                                placeholder="Mật khẩu"
-                                placeholderTextColor={theme.onSurfaceVariant}
+                            />
+
+                            <TextInput
+                                label="Mật khẩu"
                                 value={password}
                                 onChangeText={setPassword}
+                                mode="outlined"
                                 secureTextEntry={!showPassword}
                                 autoCapitalize="none"
-                            />
-                            <Pressable
-                                onPress={() => setShowPassword(!showPassword)}
-                                style={styles.eyeIcon}
-                            >
-                                <Ionicons
-                                    name={showPassword ? 'eye-off' : 'eye'}
-                                    size={20}
-                                    color={theme.onSurfaceVariant}
-                                />
-                            </Pressable>
-                        </View>
-
-                        <View style={styles.inputContainer}>
-                            <Ionicons
-                                name="lock-closed-outline"
-                                size={20}
-                                color={theme.onSurfaceVariant}
-                                style={styles.inputIcon}
-                            />
-                            <TextInput
+                                left={<TextInput.Icon icon="lock-outline" />}
+                                right={
+                                    <TextInput.Icon
+                                        icon={showPassword ? 'eye-off' : 'eye'}
+                                        onPress={() =>
+                                            setShowPassword(!showPassword)
+                                        }
+                                    />
+                                }
                                 style={styles.input}
-                                placeholder="Xác nhận mật khẩu"
-                                placeholderTextColor={theme.onSurfaceVariant}
+                            />
+
+                            <TextInput
+                                label="Xác nhận mật khẩu"
                                 value={confirmPassword}
                                 onChangeText={setConfirmPassword}
+                                mode="outlined"
                                 secureTextEntry={!showConfirmPassword}
                                 autoCapitalize="none"
-                            />
-                            <Pressable
-                                onPress={() =>
-                                    setShowConfirmPassword(!showConfirmPassword)
+                                left={<TextInput.Icon icon="lock-outline" />}
+                                right={
+                                    <TextInput.Icon
+                                        icon={
+                                            showConfirmPassword
+                                                ? 'eye-off'
+                                                : 'eye'
+                                        }
+                                        onPress={() =>
+                                            setShowConfirmPassword(
+                                                !showConfirmPassword,
+                                            )
+                                        }
+                                    />
                                 }
-                                style={styles.eyeIcon}
+                                style={styles.input}
+                            />
+
+                            <Button
+                                mode="contained"
+                                onPress={handleRegister}
+                                loading={loading}
+                                disabled={loading}
+                                style={styles.registerButton}
+                                contentStyle={styles.registerButtonContent}
                             >
-                                <Ionicons
-                                    name={
-                                        showConfirmPassword ? 'eye-off' : 'eye'
-                                    }
-                                    size={20}
-                                    color={theme.onSurfaceVariant}
-                                />
-                            </Pressable>
-                        </View>
-
-                        <Pressable
-                            style={[
-                                styles.registerButton,
-                                loading && styles.registerButtonDisabled,
-                            ]}
-                            onPress={handleRegister}
-                            disabled={loading}
-                        >
-                            <Text style={styles.registerButtonText}>
                                 {loading ? 'Đang đăng ký...' : 'Đăng ký'}
-                            </Text>
-                        </Pressable>
+                            </Button>
 
-                        <Text style={styles.termsText}>
-                            Bằng cách đăng ký, bạn đồng ý với{' '}
-                            <Text style={styles.termsLink}>Điều khoản</Text> và{' '}
-                            <Text style={styles.termsLink}>
-                                Chính sách bảo mật
+                            <Text variant="bodySmall" style={styles.termsText}>
+                                Bằng cách đăng ký, bạn đồng ý với{' '}
+                                <Text style={styles.termsLink}>
+                                    Điều khoản
+                                </Text>{' '}
+                                và{' '}
+                                <Text style={styles.termsLink}>
+                                    Chính sách bảo mật
+                                </Text>
                             </Text>
-                        </Text>
-                    </View>
+                        </Card.Content>
+                    </Card>
 
                     {/* Footer */}
                     <View style={styles.footer}>
-                        <Text style={styles.footerText}>Đã có tài khoản? </Text>
-                        <Pressable onPress={() => router.back()}>
-                            <Text style={styles.footerLink}>
-                                Đăng nhập ngay
-                            </Text>
-                        </Pressable>
+                        <Text variant="bodyMedium" style={styles.footerText}>
+                            Đã có tài khoản?{' '}
+                        </Text>
+                        <Button
+                            mode="text"
+                            onPress={() => router.back()}
+                            labelStyle={styles.footerLink}
+                        >
+                            Đăng nhập ngay
+                        </Button>
                     </View>
                 </View>
             </ScrollView>
@@ -282,67 +259,34 @@ const createStyles = (theme) =>
             marginBottom: 32,
         },
         title: {
-            fontSize: 32,
-            fontWeight: 'bold',
-            color: theme.onBackground,
             marginTop: 16,
+            textAlign: 'center',
         },
         subtitle: {
-            fontSize: 16,
-            color: theme.onSurfaceVariant,
             marginTop: 8,
             textAlign: 'center',
         },
-        form: {
+        card: {
             marginBottom: 24,
         },
-        inputContainer: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: theme.surfaceVariant,
-            borderRadius: 12,
-            marginBottom: 16,
-            paddingHorizontal: 16,
-            borderWidth: 1,
-            borderColor: theme.outline,
-        },
-        inputIcon: {
-            marginRight: 12,
+        cardContent: {
+            paddingTop: 8,
         },
         input: {
-            flex: 1,
-            height: 56,
-            color: theme.onSurface,
-            fontSize: 16,
-        },
-        eyeIcon: {
-            padding: 8,
+            marginBottom: 16,
         },
         registerButton: {
-            backgroundColor: theme.primary,
-            borderRadius: 12,
-            height: 56,
-            justifyContent: 'center',
-            alignItems: 'center',
             marginTop: 8,
             marginBottom: 16,
         },
-        registerButtonDisabled: {
-            opacity: 0.6,
-        },
-        registerButtonText: {
-            color: theme.onPrimary,
-            fontSize: 16,
-            fontWeight: 'bold',
+        registerButtonContent: {
+            paddingVertical: 8,
         },
         termsText: {
-            color: theme.onSurfaceVariant,
-            fontSize: 12,
             textAlign: 'center',
-            lineHeight: 18,
+            marginTop: 8,
         },
         termsLink: {
-            color: theme.primary,
             fontWeight: '600',
         },
         footer: {
@@ -353,10 +297,8 @@ const createStyles = (theme) =>
         },
         footerText: {
             color: theme.onSurfaceVariant,
-            fontSize: 14,
         },
         footerLink: {
-            color: theme.primary,
             fontSize: 14,
             fontWeight: 'bold',
         },

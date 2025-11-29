@@ -8,22 +8,27 @@
 import React from 'react';
 import {
     View,
-    Text,
     StyleSheet,
     FlatList,
-    Pressable,
     StatusBar,
     Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import {
+    Text,
+    Button,
+    IconButton,
+    useTheme as usePaperTheme,
+} from 'react-native-paper';
 import { useTheme } from '../../src/context/ThemeContext';
 import { useProductStore } from '../../src/store/productStore';
 import ProductCard from '../../src/components/ProductCard';
+import ScreenWrapper from '../../src/components/ScreenWrapper';
 
 export default function FavoritesScreen() {
     const router = useRouter();
     const { theme } = useTheme();
+    const paperTheme = usePaperTheme();
     const styles = createStyles(theme);
 
     // Store
@@ -64,7 +69,7 @@ export default function FavoritesScreen() {
     };
 
     return (
-        <View style={styles.container}>
+        <ScreenWrapper style={styles.container}>
             <StatusBar
                 backgroundColor={theme.background}
                 barStyle={
@@ -74,23 +79,24 @@ export default function FavoritesScreen() {
 
             {favoritesList.length === 0 ? (
                 <View style={styles.emptyContainer}>
-                    <Ionicons
-                        name="heart-outline"
+                    <IconButton
+                        icon="heart-outline"
                         size={80}
-                        color={theme.onSurfaceVariant}
+                        iconColor={theme.onSurfaceVariant}
                     />
-                    <Text style={styles.emptyText}>
+                    <Text variant="headlineMedium" style={styles.emptyText}>
                         Chưa có sản phẩm yêu thích
                     </Text>
-                    <Text style={styles.emptySubtext}>
+                    <Text variant="bodyMedium" style={styles.emptySubtext}>
                         Thêm sản phẩm vào danh sách yêu thích để xem lại sau
                     </Text>
-                    <Pressable
-                        style={styles.shopButton}
+                    <Button
+                        mode="contained"
                         onPress={() => router.push('/')}
+                        style={styles.shopButton}
                     >
-                        <Text style={styles.shopButtonText}>Khám phá ngay</Text>
-                    </Pressable>
+                        Khám phá ngay
+                    </Button>
                 </View>
             ) : (
                 <FlatList
@@ -113,7 +119,7 @@ export default function FavoritesScreen() {
                     )}
                 />
             )}
-        </View>
+        </ScreenWrapper>
     );
 }
 
@@ -131,30 +137,16 @@ const createStyles = (theme) =>
             padding: 20,
         },
         emptyText: {
-            fontSize: 24,
-            fontWeight: '700',
-            color: theme.onBackground,
             marginTop: 20,
             textAlign: 'center',
         },
         emptySubtext: {
-            fontSize: 16,
-            color: theme.onSurfaceVariant,
             marginTop: 8,
             textAlign: 'center',
             paddingHorizontal: 32,
         },
         shopButton: {
             marginTop: 24,
-            backgroundColor: theme.primary,
-            paddingHorizontal: 32,
-            paddingVertical: 14,
-            borderRadius: 12,
-        },
-        shopButtonText: {
-            color: '#FFFFFF',
-            fontSize: 16,
-            fontWeight: '600',
         },
         productList: {
             padding: 20,

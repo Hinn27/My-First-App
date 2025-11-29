@@ -3,22 +3,18 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { produce } from 'immer';
 
-// Import data
-import DrinkData from '../data/DrinkData';
 import FoodData from '../data/FoodData';
 
 export const useProductStore = create(
     persist(
         (set, get) => ({
-            // State
-            drinkList: DrinkData,
             foodList: FoodData,
+            drinkList: [],
             favoritesList: [],
             cartList: [],
             cartPrice: 0,
             orderHistoryList: [],
 
-            // Actions - Add to Cart
             addToCart: (cartItem) =>
                 set(
                     produce((state) => {
@@ -60,7 +56,6 @@ export const useProductStore = create(
                     }),
                 ),
 
-            // Calculate Cart Price
             calculateCartPrice: () =>
                 set(
                     produce((state) => {
@@ -86,12 +81,10 @@ export const useProductStore = create(
                     }),
                 ),
 
-            // Add to Favorites
-            addToFavoriteList: (type, id) =>
+            addToFavoriteList: (_type, id) =>
                 set(
                     produce((state) => {
-                        const list =
-                            type === 'Drink' ? state.drinkList : state.foodList;
+                        const list = state.foodList;
                         for (let i = 0; i < list.length; i++) {
                             if (list[i].id === id) {
                                 if (!list[i].favourite) {
@@ -104,12 +97,10 @@ export const useProductStore = create(
                     }),
                 ),
 
-            // Delete from Favorites
-            deleteFromFavoriteList: (type, id) =>
+            deleteFromFavoriteList: (_type, id) =>
                 set(
                     produce((state) => {
-                        const list =
-                            type === 'Drink' ? state.drinkList : state.foodList;
+                        const list = state.foodList;
                         for (let i = 0; i < list.length; i++) {
                             if (list[i].id === id) {
                                 if (list[i].favourite) {
@@ -127,7 +118,6 @@ export const useProductStore = create(
                     }),
                 ),
 
-            // Increment Cart Item Quantity
             incrementCartItemQuantity: (id, size) =>
                 set(
                     produce((state) => {
@@ -151,7 +141,6 @@ export const useProductStore = create(
                     }),
                 ),
 
-            // Decrement Cart Item Quantity
             decrementCartItemQuantity: (id, size) =>
                 set(
                     produce((state) => {
@@ -189,7 +178,6 @@ export const useProductStore = create(
                     }),
                 ),
 
-            // Add to Order History from Cart
             addToOrderHistoryFromCart: () =>
                 set(
                     produce((state) => {
@@ -225,7 +213,6 @@ export const useProductStore = create(
                     }),
                 ),
 
-            // Clear Cart
             clearCart: () =>
                 set(
                     produce((state) => {
@@ -234,43 +221,39 @@ export const useProductStore = create(
                     }),
                 ),
 
-            // Add Product (for sellers)
             addProduct: (product) =>
                 set(
                     produce((state) => {
-                        if (
-                            product.type === 'Coffee' ||
-                            product.type === 'Bean'
-                        ) {
-                            state.drinkList.push(product);
-                        } else {
-                            state.foodList.push(product);
-                        }
+                        state.foodList.unshift(product);
                     }),
                 ),
 
-            // Delete Product (for sellers)
-            deleteProduct: (productId, productType) =>
+            deleteProduct: (productId, _productType) =>
                 set(
                     produce((state) => {
-                        if (
-                            productType === 'Coffee' ||
-                            productType === 'Bean'
-                        ) {
-                            state.drinkList = state.drinkList.filter(
-                                (item) => item.id !== productId,
-                            );
-                        } else {
-                            state.foodList = state.foodList.filter(
-                                (item) => item.id !== productId,
-                            );
-                        }
+                        state.foodList = state.foodList.filter(
+                            (item) => item.id !== productId,
+                        );
                     }),
                 ),
+
+            loadFromApi: async () => {
+                // API functionality has been disabled for now
+            },
         }),
         {
             name: 'product-storage',
             storage: createJSONStorage(() => AsyncStorage),
+            version: 10, 
+            migrate: async (persistedState, version) => {
+                 if (version < 10) {
+                    return {
+                        ...persistedState,
+                        foodList: FoodData,
+                    };
+                }
+                return persistedState;
+            },
         },
     ),
 );

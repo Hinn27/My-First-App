@@ -11,12 +11,13 @@ import { useCart } from '../../src/context/CartContext';
 import { useState } from 'react';
 
 // Mock data - trong thực tế sẽ fetch từ API
+// Chuẩn hoá category về: "Cơm" và "Bún, mì, phở"
 const FOOD_DETAILS = {
     'pho-bo': {
         id: 'food-1',
         name: 'Phở Bò',
         price: 50000,
-        category: 'Món khô',
+        category: 'Bún, mì, phở',
         description:
             'Phở bò truyền thống Hà Nội với nước dùng hầm xương 12 tiếng',
         ingredients: ['Bánh phở', 'Thịt bò', 'Hành lá', 'Ngò rí', 'Hành tây'],
@@ -27,7 +28,7 @@ const FOOD_DETAILS = {
         id: 'food-2',
         name: 'Bún Chả',
         price: 45000,
-        category: 'Món khô',
+        category: 'Bún, mì, phở',
         description: 'Bún chả Hà Nội với thịt nướng than hoa thơm ngon',
         ingredients: ['Bún', 'Thịt nướng', 'Chả', 'Nước mắm', 'Rau sống'],
         rating: 4.7,
@@ -37,7 +38,7 @@ const FOOD_DETAILS = {
         id: 'food-3',
         name: 'Cơm Tấm',
         price: 40000,
-        category: 'Món khô',
+        category: 'Cơm',
         description: 'Cơm tấm sườn bì chả trứng đặc sản Sài Gòn',
         ingredients: ['Cơm tấm', 'Sườn nướng', 'Bì', 'Chả', 'Trứng ốp la'],
         rating: 4.6,
@@ -47,7 +48,7 @@ const FOOD_DETAILS = {
         id: 'food-4',
         name: 'Bánh Mì',
         price: 25000,
-        category: 'Món ướt',
+        category: 'Cơm',
         description: 'Bánh mì thịt nguội pate với bánh giòn tan',
         ingredients: ['Bánh mì', 'Pate', 'Thịt nguội', 'Rau sống', 'Đồ chua'],
         rating: 4.5,
@@ -57,21 +58,11 @@ const FOOD_DETAILS = {
         id: 'food-5',
         name: 'Hủ Tiếu',
         price: 35000,
-        category: 'Món ướt',
+        category: 'Bún, mì, phở',
         description: 'Hủ tiếu Nam Vang với tôm thịt đầy đặn',
         ingredients: ['Hủ tiếu', 'Tôm', 'Thịt băm', 'Gan', 'Giá đỗ'],
         rating: 4.7,
         reviews: 189,
-    },
-    'goi-cuon': {
-        id: 'food-6',
-        name: 'Gỏi Cuốn',
-        price: 30000,
-        category: 'Ăn vặt',
-        description: 'Gỏi cuốn tôm thịt tươi ngon, ăn kèm tương đậu phộng',
-        ingredients: ['Bánh tráng', 'Tôm', 'Thịt', 'Bún', 'Rau sống'],
-        rating: 4.6,
-        reviews: 95,
     },
 };
 

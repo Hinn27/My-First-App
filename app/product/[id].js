@@ -16,6 +16,7 @@ import {
     Dimensions,
     Alert,
     StatusBar,
+    Image,
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -133,11 +134,23 @@ export default function ProductDetailScreen() {
                             />
                         </Pressable>
 
-                        {/* Product Image Icon */}
+                        {/* Product Image */}
                         <View style={styles.imageIconContainer}>
-                            <Text style={styles.imageIcon}>
-                                {product.imageIcon}
-                            </Text>
+                            {product?.imagelink_square ? (
+                                <Image
+                                    source={
+                                        typeof product.imagelink_square === 'string'
+                                            ? { uri: product.imagelink_square }
+                                            : product.imagelink_square
+                                    }
+                                    style={styles.productImage}
+                                    resizeMode="cover"
+                                />
+                            ) : (
+                                <Text style={styles.imageIcon}>
+                                    {product.imageIcon || '🍽️'}
+                                </Text>
+                            )}
                         </View>
 
                         {/* Product Basic Info Overlay */}

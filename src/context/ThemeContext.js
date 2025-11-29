@@ -5,23 +5,23 @@ const ThemeContext = createContext();
 
 // Material Design 3 Color Palette
 const theme = {
-    // Primary colors
-    primary: '#006A6A', // Cyan (Material You Primary)
+    // Primary colors - Light Blue
+    primary: '#87CEEB', // Sky Blue (Light Blue)
     onPrimary: '#FFFFFF',
-    primaryContainer: '#6FF7F7',
-    onPrimaryContainer: '#002020',
+    primaryContainer: '#E0F6FF',
+    onPrimaryContainer: '#003D5C',
 
-    // Secondary colors
-    secondary: '#4A6363', // Teal-gray
-    onSecondary: '#FFFFFF',
-    secondaryContainer: '#CCE8E7',
-    onSecondaryContainer: '#051F1F',
+    // Secondary colors - Light Blue variants
+    secondary: '#B0E0E6', // Powder Blue
+    onSecondary: '#003D5C',
+    secondaryContainer: '#D4F0F5',
+    onSecondaryContainer: '#003D5C',
 
-    // Tertiary colors
-    tertiary: '#4B607C', // Blue-gray
-    onTertiary: '#FFFFFF',
-    tertiaryContainer: '#D3E4FF',
-    onTertiaryContainer: '#041C35',
+    // Tertiary colors - Light Blue variants
+    tertiary: '#ADD8E6', // Light Blue
+    onTertiary: '#003D5C',
+    tertiaryContainer: '#E6F4FE',
+    onTertiaryContainer: '#003D5C',
 
     // Error colors
     error: '#B3261E',
@@ -48,7 +48,7 @@ const theme = {
     scrim: '#000000',
     inverseSurface: '#313033',
     inverseOnSurface: '#F4EFF4',
-    inversePrimary: '#4FD8D8', // Cyan inverse
+    inversePrimary: '#B0E0E6', // Light Blue inverse
 
     // Elevation levels (for shadows)
     elevation: {
@@ -60,13 +60,13 @@ const theme = {
         level5: 12, // Highest
     },
 
-    // Border radius (Material Design 3)
+    // Border radius - Bo cong mềm mại hơn
     radius: {
-        xs: 4,
-        sm: 8,
-        md: 12,
-        lg: 16,
-        xl: 24,
+        xs: 10,
+        sm: 14,
+        md: 18,
+        lg: 28,
+        xl: 36,
         full: 9999,
     },
 

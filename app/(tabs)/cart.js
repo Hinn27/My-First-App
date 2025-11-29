@@ -10,22 +10,28 @@
 import React from 'react';
 import {
     View,
-    Text,
     StyleSheet,
     FlatList,
-    Pressable,
     Alert,
     StatusBar,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import {
+    Text,
+    Button,
+    Card,
+    IconButton,
+    useTheme as usePaperTheme,
+} from 'react-native-paper';
 import { useTheme } from '../../src/context/ThemeContext';
 import { useProductStore } from '../../src/store/productStore';
 import CartItemCard from '../../src/components/CartItemCard';
+import ScreenWrapper from '../../src/components/ScreenWrapper';
 
 export default function CartScreen() {
     const router = useRouter();
     const { theme } = useTheme();
+    const paperTheme = usePaperTheme();
 
     // Zustand store
     const cartList = useProductStore((state) => state.cartList);
@@ -80,7 +86,7 @@ export default function CartScreen() {
     };
 
     return (
-        <View style={styles.container}>
+        <ScreenWrapper style={styles.container}>
             <StatusBar
                 backgroundColor={theme.background}
                 barStyle={
@@ -90,23 +96,24 @@ export default function CartScreen() {
 
             {cartList.length === 0 ? (
                 <View style={styles.emptyContainer}>
-                    <Ionicons
-                        name="cart-outline"
+                    <IconButton
+                        icon="cart-outline"
                         size={80}
-                        color={theme.onSurfaceVariant}
+                        iconColor={theme.onSurfaceVariant}
                     />
-                    <Text style={styles.emptyText}>Giỏ hàng trống</Text>
-                    <Text style={styles.emptySubtext}>
+                    <Text variant="headlineMedium" style={styles.emptyText}>
+                        Giỏ hàng trống
+                    </Text>
+                    <Text variant="bodyMedium" style={styles.emptySubtext}>
                         Thêm sản phẩm để bắt đầu mua sắm
                     </Text>
-                    <Pressable
-                        style={styles.shopButton}
+                    <Button
+                        mode="contained"
                         onPress={() => router.push('/')}
+                        style={styles.shopButton}
                     >
-                        <Text style={styles.shopButtonText}>
-                            Tiếp tục mua sắm
-                        </Text>
-                    </Pressable>
+                        Tiếp tục mua sắm
+                    </Button>
                 </View>
             ) : (
                 <>
@@ -125,41 +132,40 @@ export default function CartScreen() {
                         showsVerticalScrollIndicator={false}
                     />
 
-                    <View style={styles.footer}>
-                        <View style={styles.totalContainer}>
-                            <Text style={styles.totalLabel}>Tổng cộng:</Text>
-                            <Text style={styles.totalPrice}>
-                                {parseInt(cartPrice).toLocaleString('vi-VN')} đ
-                            </Text>
-                        </View>
+                    <Card style={styles.footer} mode="elevated">
+                        <Card.Content>
+                            <View style={styles.totalContainer}>
+                                <Text variant="titleLarge" style={styles.totalLabel}>
+                                    Tổng cộng:
+                                </Text>
+                                <Text variant="headlineSmall" style={styles.totalPrice}>
+                                    {parseInt(cartPrice).toLocaleString('vi-VN')} đ
+                                </Text>
+                            </View>
 
-                        <Pressable
-                            style={styles.checkoutButton}
-                            onPress={handleCheckout}
-                        >
-                            <Ionicons
-                                name="card"
-                                size={20}
-                                color="#fff"
-                                style={{ marginRight: 8 }}
-                            />
-                            <Text style={styles.checkoutButtonText}>
+                            <Button
+                                mode="contained"
+                                icon="credit-card"
+                                onPress={handleCheckout}
+                                style={styles.checkoutButton}
+                                contentStyle={styles.checkoutButtonContent}
+                            >
                                 Thanh toán
-                            </Text>
-                        </Pressable>
+                            </Button>
 
-                        <Pressable
-                            style={styles.clearButton}
-                            onPress={handleClearCart}
-                        >
-                            <Text style={styles.clearButtonText}>
+                            <Button
+                                mode="text"
+                                textColor={theme.error}
+                                onPress={handleClearCart}
+                                style={styles.clearButton}
+                            >
                                 Xóa giỏ hàng
-                            </Text>
-                        </Pressable>
-                    </View>
+                            </Button>
+                        </Card.Content>
+                    </Card>
                 </>
             )}
-        </View>
+        </ScreenWrapper>
     );
 }
 
@@ -177,47 +183,27 @@ const createStyles = (theme) =>
             padding: 20,
         },
         emptyText: {
-            fontSize: 24,
-            fontWeight: '700',
-            color: theme.onBackground,
             marginTop: 20,
+            textAlign: 'center',
         },
         emptySubtext: {
-            fontSize: 16,
-            color: theme.onSurfaceVariant,
             marginTop: 8,
             textAlign: 'center',
         },
         shopButton: {
             marginTop: 24,
-            backgroundColor: theme.primary,
-            paddingHorizontal: 32,
-            paddingVertical: 14,
-            borderRadius: 12,
-        },
-        shopButtonText: {
-            color: '#FFFFFF',
-            fontSize: 16,
-            fontWeight: '600',
         },
         listContainer: {
             padding: 16,
-            paddingBottom: 120,
+            paddingBottom: 200,
         },
         footer: {
             position: 'absolute',
             bottom: 0,
             left: 0,
             right: 0,
-            backgroundColor: theme.surface,
-            padding: 16,
-            borderTopWidth: 1,
-            borderTopColor: theme.outline,
-            elevation: 8,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: -4 },
-            shadowOpacity: 0.1,
-            shadowRadius: 8,
+            margin: 0,
+            borderRadius: 0,
         },
         totalContainer: {
             flexDirection: 'row',
@@ -226,36 +212,18 @@ const createStyles = (theme) =>
             marginBottom: 16,
         },
         totalLabel: {
-            fontSize: 18,
-            fontWeight: '600',
             color: theme.onSurface,
         },
         totalPrice: {
-            fontSize: 24,
-            fontWeight: '700',
             color: theme.primary,
         },
         checkoutButton: {
-            flexDirection: 'row',
-            backgroundColor: theme.primary,
-            padding: 16,
-            borderRadius: 12,
-            alignItems: 'center',
-            justifyContent: 'center',
             marginBottom: 8,
         },
-        checkoutButtonText: {
-            color: '#fff',
-            fontSize: 16,
-            fontWeight: '700',
+        checkoutButtonContent: {
+            paddingVertical: 8,
         },
         clearButton: {
-            padding: 12,
-            alignItems: 'center',
-        },
-        clearButtonText: {
-            color: theme.error,
-            fontSize: 14,
-            fontWeight: '600',
+            marginTop: 4,
         },
     });

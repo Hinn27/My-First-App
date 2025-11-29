@@ -6,15 +6,169 @@
  * Define navigation structure (Stack, Tabs, etc.)
  * Bọc CartProvider để quản lý giỏ hàng global
  * Bọc ThemeProvider để cung cấp theme Material You colors
+ * Bọc PaperProvider để cung cấp Material Design components
  */
 
 import { Stack } from 'expo-router';
+import { Provider as PaperProvider, configureFonts } from 'react-native-paper';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
 import { CartProvider } from '../src/context/CartContext';
-import { ThemeProvider } from '../src/context/ThemeContext';
+import { ThemeProvider, useTheme } from '../src/context/ThemeContext';
+import {
+    PlayfairDisplay_400Regular,
+    PlayfairDisplay_500Medium,
+    PlayfairDisplay_600SemiBold,
+    PlayfairDisplay_700Bold,
+    PlayfairDisplay_800ExtraBold,
+    PlayfairDisplay_900Black,
+    PlayfairDisplay_400Regular_Italic,
+    PlayfairDisplay_700Bold_Italic,
+} from '@expo-google-fonts/playfair-display';
 
-export default function RootLayout() {
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
+
+// Font configuration cho Playfair Display
+const fontConfig = {
+    web: {
+        regular: {
+            fontFamily: 'PlayfairDisplay_400Regular',
+            fontWeight: 'normal',
+        },
+        medium: {
+            fontFamily: 'PlayfairDisplay_500Medium',
+            fontWeight: 'normal',
+        },
+        light: {
+            fontFamily: 'PlayfairDisplay_400Regular',
+            fontWeight: 'normal',
+        },
+        thin: {
+            fontFamily: 'PlayfairDisplay_400Regular',
+            fontWeight: 'normal',
+        },
+        bold: {
+            fontFamily: 'PlayfairDisplay_700Bold',
+            fontWeight: 'bold',
+        },
+    },
+    ios: {
+        regular: {
+            fontFamily: 'PlayfairDisplay_400Regular',
+            fontWeight: 'normal',
+        },
+        medium: {
+            fontFamily: 'PlayfairDisplay_500Medium',
+            fontWeight: 'normal',
+        },
+        light: {
+            fontFamily: 'PlayfairDisplay_400Regular',
+            fontWeight: 'normal',
+        },
+        thin: {
+            fontFamily: 'PlayfairDisplay_400Regular',
+            fontWeight: 'normal',
+        },
+        bold: {
+            fontFamily: 'PlayfairDisplay_700Bold',
+            fontWeight: 'bold',
+        },
+    },
+    android: {
+        regular: {
+            fontFamily: 'PlayfairDisplay_400Regular',
+            fontWeight: 'normal',
+        },
+        medium: {
+            fontFamily: 'PlayfairDisplay_500Medium',
+            fontWeight: 'normal',
+        },
+        light: {
+            fontFamily: 'PlayfairDisplay_400Regular',
+            fontWeight: 'normal',
+        },
+        thin: {
+            fontFamily: 'PlayfairDisplay_400Regular',
+            fontWeight: 'normal',
+        },
+        bold: {
+            fontFamily: 'PlayfairDisplay_700Bold',
+            fontWeight: 'bold',
+        },
+    },
+};
+
+// Helper để convert theme sang Paper theme
+function getPaperTheme(customTheme) {
+    return {
+        ...require('react-native-paper').MD3LightTheme,
+        roundness: 16, // Bo góc mềm mại hơn
+        colors: {
+            primary: customTheme.primary,
+            onPrimary: customTheme.onPrimary,
+            primaryContainer: customTheme.primaryContainer,
+            onPrimaryContainer: customTheme.onPrimaryContainer,
+            secondary: customTheme.secondary,
+            onSecondary: customTheme.onSecondary,
+            secondaryContainer: customTheme.secondaryContainer,
+            onSecondaryContainer: customTheme.onSecondaryContainer,
+            tertiary: customTheme.tertiary,
+            onTertiary: customTheme.onTertiary,
+            tertiaryContainer: customTheme.tertiaryContainer,
+            onTertiaryContainer: customTheme.onTertiaryContainer,
+            error: customTheme.error,
+            onError: customTheme.onError,
+            errorContainer: customTheme.errorContainer,
+            onErrorContainer: customTheme.onErrorContainer,
+            background: customTheme.background,
+            onBackground: customTheme.onBackground,
+            surface: customTheme.surface,
+            onSurface: customTheme.onSurface,
+            surfaceVariant: customTheme.surfaceVariant,
+            onSurfaceVariant: customTheme.onSurfaceVariant,
+            outline: customTheme.outline,
+            outlineVariant: customTheme.outlineVariant,
+            shadow: customTheme.shadow,
+            scrim: customTheme.scrim,
+            inverseSurface: customTheme.inverseSurface,
+            inverseOnSurface: customTheme.inverseOnSurface,
+            inversePrimary: customTheme.inversePrimary,
+        },
+        fonts: configureFonts({ config: fontConfig }),
+    };
+}
+
+// Inner component để có thể sử dụng useTheme
+function AppContent() {
+    const { theme } = useTheme();
+    const paperTheme = getPaperTheme(theme);
+
+    // Load fonts - Playfair Display
+    const [fontsLoaded, fontError] = useFonts({
+        PlayfairDisplay_400Regular,
+        PlayfairDisplay_500Medium,
+        PlayfairDisplay_600SemiBold,
+        PlayfairDisplay_700Bold,
+        PlayfairDisplay_800ExtraBold,
+        PlayfairDisplay_900Black,
+        PlayfairDisplay_400Regular_Italic,
+        PlayfairDisplay_700Bold_Italic,
+    });
+
+    useEffect(() => {
+        if (fontsLoaded || fontError) {
+            SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded, fontError]);
+
+    if (!fontsLoaded && !fontError) {
+        return null;
+    }
+
     return (
-        <ThemeProvider>
+        <PaperProvider theme={paperTheme}>
             <CartProvider>
                 <Stack>
                     <Stack.Screen
@@ -39,20 +193,7 @@ export default function RootLayout() {
                             headerShown: false,
                         }}
                     />
-                    <Stack.Screen
-                        name="drink/index"
-                        options={{
-                            title: 'Đồ Uống',
-                            headerShown: false,
-                        }}
-                    />
-                    <Stack.Screen
-                        name="drink/[drink]"
-                        options={{
-                            title: 'Chi tiết đồ uống',
-                            headerShown: false,
-                        }}
-                    />
+                    {/** Đã xoá các route cho đồ uống theo yêu cầu */}
                     <Stack.Screen
                         name="user/[id]"
                         options={{
@@ -104,6 +245,14 @@ export default function RootLayout() {
                     />
                 </Stack>
             </CartProvider>
+        </PaperProvider>
+    );
+}
+
+export default function RootLayout() {
+    return (
+        <ThemeProvider>
+            <AppContent />
         </ThemeProvider>
     );
 }

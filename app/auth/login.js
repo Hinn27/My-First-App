@@ -1,23 +1,31 @@
 // Screen: Login
 import {
     View,
-    Text,
-    TextInput,
-    Pressable,
     StyleSheet,
     KeyboardAvoidingView,
     Platform,
     Alert,
+    ScrollView,
 } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+    Text,
+    TextInput,
+    Button,
+    Card,
+    IconButton,
+    Divider,
+    useTheme as usePaperTheme,
+} from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../src/context/ThemeContext';
 import { useUserStore } from '../../src/store/userStore';
 
 export default function LoginScreen() {
     const { theme } = useTheme();
+    const paperTheme = usePaperTheme();
     const router = useRouter();
     const setUser = useUserStore((state) => state.setUser);
     const [email, setEmail] = useState('');
@@ -47,14 +55,13 @@ export default function LoginScreen() {
         setLoading(true);
 
         try {
-            // TODO: Replace with actual API call
             // Simulate API call
             await new Promise((resolve) => setTimeout(resolve, 1000));
 
-            // Save user data
+            // Save user data (Fake data for testing)
             const userData = {
                 email,
-                name: email.split('@')[0],
+                name: email.split('@')[0], // Use part before @ as name
                 isLoggedIn: true,
                 loginTime: new Date().toISOString(),
             };
@@ -66,7 +73,7 @@ export default function LoginScreen() {
             Alert.alert('Thành công', 'Đăng nhập thành công!', [
                 {
                     text: 'OK',
-                    onPress: () => router.replace('/(tabs)/profile'),
+                    onPress: () => router.replace('/(tabs)/home'),
                 },
             ]);
         } catch (error) {
@@ -81,129 +88,130 @@ export default function LoginScreen() {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.container}
         >
-            <View style={styles.content}>
-                {/* Header */}
-                <View style={styles.header}>
-                    <Ionicons name="cafe" size={80} color={theme.primary} />
-                    <Text style={styles.title}>Đăng nhập</Text>
-                    <Text style={styles.subtitle}>
-                        Chào mừng bạn quay trở lại!
-                    </Text>
-                </View>
-
-                {/* Form */}
-                <View style={styles.form}>
-                    <View style={styles.inputContainer}>
-                        <Ionicons
-                            name="mail-outline"
-                            size={20}
-                            color={theme.onSurfaceVariant}
-                            style={styles.inputIcon}
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Email"
-                            placeholderTextColor={theme.onSurfaceVariant}
-                            value={email}
-                            onChangeText={setEmail}
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                        />
+            <ScrollView
+                contentContainerStyle={styles.scrollContent}
+                keyboardShouldPersistTaps="handled"
+            >
+                <View style={styles.content}>
+                    {/* Header */}
+                    <View style={styles.header}>
+                        <Ionicons name="cafe" size={80} color={theme.primary} />
+                        <Text variant="headlineLarge" style={styles.title}>
+                            Đăng nhập
+                        </Text>
+                        <Text variant="bodyLarge" style={styles.subtitle}>
+                            Chào mừng bạn quay trở lại!
+                        </Text>
                     </View>
 
-                    <View style={styles.inputContainer}>
-                        <Ionicons
-                            name="lock-closed-outline"
-                            size={20}
-                            color={theme.onSurfaceVariant}
-                            style={styles.inputIcon}
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Mật khẩu"
-                            placeholderTextColor={theme.onSurfaceVariant}
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry={!showPassword}
-                            autoCapitalize="none"
-                        />
-                        <Pressable
-                            onPress={() => setShowPassword(!showPassword)}
-                            style={styles.eyeIcon}
-                        >
-                            <Ionicons
-                                name={showPassword ? 'eye-off' : 'eye'}
-                                size={20}
-                                color={theme.onSurfaceVariant}
+                    {/* Form Card */}
+                    <Card style={styles.card} mode="elevated">
+                        <Card.Content style={styles.cardContent}>
+                            <TextInput
+                                label="Email"
+                                value={email}
+                                onChangeText={setEmail}
+                                mode="outlined"
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                left={<TextInput.Icon icon="email-outline" />}
+                                style={styles.input}
                             />
-                        </Pressable>
+
+                            <TextInput
+                                label="Mật khẩu"
+                                value={password}
+                                onChangeText={setPassword}
+                                mode="outlined"
+                                secureTextEntry={!showPassword}
+                                autoCapitalize="none"
+                                left={<TextInput.Icon icon="lock-outline" />}
+                                right={
+                                    <TextInput.Icon
+                                        icon={showPassword ? 'eye-off' : 'eye'}
+                                        onPress={() =>
+                                            setShowPassword(!showPassword)
+                                        }
+                                    />
+                                }
+                                style={styles.input}
+                            />
+
+                            <Button
+                                mode="text"
+                                onPress={() =>
+                                    Alert.alert(
+                                        'Thông báo',
+                                        'Tính năng đang phát triển',
+                                    )
+                                }
+                                style={styles.forgotPassword}
+                                labelStyle={styles.forgotPasswordText}
+                            >
+                                Quên mật khẩu?
+                            </Button>
+
+                            <Button
+                                mode="contained"
+                                onPress={handleLogin}
+                                loading={loading}
+                                disabled={loading}
+                                style={styles.loginButton}
+                                contentStyle={styles.loginButtonContent}
+                            >
+                                {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
+                            </Button>
+
+                            <Divider style={styles.divider} />
+
+                            <Button
+                                mode="outlined"
+                                onPress={() =>
+                                    Alert.alert(
+                                        'Thông báo',
+                                        'Tính năng đang phát triển',
+                                    )
+                                }
+                                icon="google"
+                                style={styles.socialButton}
+                                contentStyle={styles.socialButtonContent}
+                            >
+                                Đăng nhập với Google
+                            </Button>
+
+                            <Button
+                                mode="outlined"
+                                onPress={() =>
+                                    Alert.alert(
+                                        'Thông báo',
+                                        'Tính năng đang phát triển',
+                                    )
+                                }
+                                icon="facebook"
+                                style={styles.socialButton}
+                                contentStyle={styles.socialButtonContent}
+                            >
+                                Đăng nhập với Facebook
+                            </Button>
+                        </Card.Content>
+                    </Card>
+
+                    {/* Footer */}
+                    <View style={styles.footer}>
+                        <Text variant="bodyMedium" style={styles.footerText}>
+                            Chưa có tài khoản?{' '}
+                        </Text>
+                        <Button
+                            mode="text"
+                            onPress={() => router.push('/auth/register')}
+                            labelStyle={styles.footerLink}
+                        >
+                            Đăng ký ngay
+                        </Button>
                     </View>
-
-                    <Pressable style={styles.forgotPassword}>
-                        <Text style={styles.forgotPasswordText}>
-                            Quên mật khẩu?
-                        </Text>
-                    </Pressable>
-
-                    <Pressable
-                        style={[
-                            styles.loginButton,
-                            loading && styles.loginButtonDisabled,
-                        ]}
-                        onPress={handleLogin}
-                        disabled={loading}
-                    >
-                        <Text style={styles.loginButtonText}>
-                            {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
-                        </Text>
-                    </Pressable>
-
-                    <View style={styles.divider}>
-                        <View style={styles.dividerLine} />
-                        <Text style={styles.dividerText}>Hoặc</Text>
-                        <View style={styles.dividerLine} />
-                    </View>
-
-                    <Pressable
-                        style={styles.socialButton}
-                        onPress={() =>
-                            Alert.alert(
-                                'Thông báo',
-                                'Tính năng đang phát triển',
-                            )
-                        }
-                    >
-                        <Ionicons name="logo-google" size={20} color="#fff" />
-                        <Text style={styles.socialButtonText}>
-                            Đăng nhập với Google
-                        </Text>
-                    </Pressable>
-
-                    <Pressable
-                        style={styles.socialButton}
-                        onPress={() =>
-                            Alert.alert(
-                                'Thông báo',
-                                'Tính năng đang phát triển',
-                            )
-                        }
-                    >
-                        <Ionicons name="logo-facebook" size={20} color="#fff" />
-                        <Text style={styles.socialButtonText}>
-                            Đăng nhập với Facebook
-                        </Text>
-                    </Pressable>
                 </View>
-
-                {/* Footer */}
-                <View style={styles.footer}>
-                    <Text style={styles.footerText}>Chưa có tài khoản? </Text>
-                    <Pressable onPress={() => router.push('/auth/register')}>
-                        <Text style={styles.footerLink}>Đăng ký ngay</Text>
-                    </Pressable>
-                </View>
-            </View>
+            </ScrollView>
         </KeyboardAvoidingView>
     );
 }
@@ -214,6 +222,9 @@ const createStyles = (theme) =>
             flex: 1,
             backgroundColor: theme.background,
         },
+        scrollContent: {
+            flexGrow: 1,
+        },
         content: {
             flex: 1,
             padding: 24,
@@ -221,112 +232,59 @@ const createStyles = (theme) =>
         },
         header: {
             alignItems: 'center',
-            marginBottom: 40,
+            marginBottom: 32,
         },
         title: {
-            fontSize: 32,
-            fontWeight: 'bold',
-            color: theme.onBackground,
             marginTop: 16,
+            textAlign: 'center',
         },
         subtitle: {
-            fontSize: 16,
-            color: theme.onSurfaceVariant,
             marginTop: 8,
+            textAlign: 'center',
         },
-        form: {
+        card: {
             marginBottom: 24,
         },
-        inputContainer: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: theme.surfaceVariant,
-            borderRadius: 12,
-            marginBottom: 16,
-            paddingHorizontal: 16,
-            borderWidth: 1,
-            borderColor: theme.outline,
-        },
-        inputIcon: {
-            marginRight: 12,
+        cardContent: {
+            paddingTop: 8,
         },
         input: {
-            flex: 1,
-            height: 56,
-            color: theme.onSurface,
-            fontSize: 16,
-        },
-        eyeIcon: {
-            padding: 8,
+            marginBottom: 16,
         },
         forgotPassword: {
             alignSelf: 'flex-end',
-            marginBottom: 24,
+            marginTop: -8,
+            marginBottom: 16,
         },
         forgotPasswordText: {
-            color: theme.primary,
             fontSize: 14,
-            fontWeight: '600',
         },
         loginButton: {
-            backgroundColor: theme.primary,
-            borderRadius: 12,
-            height: 56,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: 24,
+            marginTop: 8,
+            marginBottom: 16,
         },
-        loginButtonDisabled: {
-            opacity: 0.6,
-        },
-        loginButtonText: {
-            color: theme.onPrimary,
-            fontSize: 16,
-            fontWeight: 'bold',
+        loginButtonContent: {
+            paddingVertical: 8,
         },
         divider: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 24,
-        },
-        dividerLine: {
-            flex: 1,
-            height: 1,
-            backgroundColor: theme.outline,
-        },
-        dividerText: {
-            marginHorizontal: 16,
-            color: theme.onSurfaceVariant,
-            fontSize: 14,
+            marginVertical: 24,
         },
         socialButton: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: theme.surfaceVariant,
-            borderRadius: 12,
-            height: 56,
             marginBottom: 12,
-            borderWidth: 1,
-            borderColor: theme.outline,
         },
-        socialButtonText: {
-            color: theme.onSurface,
-            fontSize: 16,
-            fontWeight: '600',
-            marginLeft: 12,
+        socialButtonContent: {
+            paddingVertical: 8,
         },
         footer: {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
+            marginTop: 16,
         },
         footerText: {
             color: theme.onSurfaceVariant,
-            fontSize: 14,
         },
         footerLink: {
-            color: theme.primary,
             fontSize: 14,
             fontWeight: 'bold',
         },

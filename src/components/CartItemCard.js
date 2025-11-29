@@ -1,7 +1,13 @@
 // Component: Cart Item
 import React from 'react';
-import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, StyleSheet } from 'react-native';
+import {
+    Text,
+    Card,
+    IconButton,
+    Chip,
+    useTheme as usePaperTheme,
+} from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function CartItemCard({
@@ -16,190 +22,116 @@ export default function CartItemCard({
     decrementHandler,
     theme,
 }) {
-    return (
-        <View style={styles.container}>
-            <LinearGradient
-                colors={
-                    theme?.mode === 'dark'
-                        ? ['#252A32', '#0C0F14']
-                        : ['#FFFFFF', '#F7F8FB']
-                }
-                style={styles.card}
-            >
-                {/* Product Image */}
-                <View style={styles.imageContainer}>
-                    <Text style={styles.imageIcon}>{imageIcon || '☕'}</Text>
-                </View>
+    const paperTheme = usePaperTheme();
 
-                {/* Product Info */}
-                <View style={styles.infoSection}>
-                    <View style={styles.header}>
-                        <Text
-                            style={[
-                                styles.name,
-                                { color: theme?.onSurface || '#1c1c1e' },
-                            ]}
-                        >
-                            {name}
-                        </Text>
-                        <Text
-                            style={[
-                                styles.ingredient,
-                                { color: theme?.onSurfaceVariant || '#8e8e93' },
-                            ]}
-                        >
-                            {special_ingredient}
-                        </Text>
-                        {roasted && (
-                            <Text
-                                style={[
-                                    styles.roasted,
-                                    {
-                                        color:
-                                            theme?.onSurfaceVariant ||
-                                            '#8e8e93',
-                                    },
-                                ]}
-                            >
-                                {roasted}
-                            </Text>
-                        )}
+    return (
+        <Card style={styles.container} mode="elevated">
+            <Card.Content style={styles.cardContent}>
+                <View style={styles.row}>
+                    {/* Product Image */}
+                    <View style={styles.imageContainer}>
+                        <Text style={styles.imageIcon}>{imageIcon || '☕'}</Text>
                     </View>
 
-                    {/* Sizes and Quantities */}
-                    {prices.map((item, index) => (
-                        <View key={index} style={styles.priceRow}>
-                            <View style={styles.sizeContainer}>
-                                <View
-                                    style={[
-                                        styles.sizeBox,
-                                        {
-                                            backgroundColor:
-                                                theme?.mode === 'dark'
-                                                    ? '#0C0F14'
-                                                    : '#F0F0F0',
-                                        },
-                                    ]}
-                                >
-                                    <Text
-                                        style={[
-                                            styles.sizeText,
-                                            {
-                                                color:
-                                                    theme?.onSurface ||
-                                                    '#1c1c1e',
-                                            },
-                                        ]}
+                    {/* Product Info */}
+                    <View style={styles.infoSection}>
+                        <View style={styles.header}>
+                            <Text variant="titleMedium" style={styles.name}>
+                                {name}
+                            </Text>
+                            <Text variant="bodySmall" style={styles.ingredient}>
+                                {special_ingredient}
+                            </Text>
+                            {roasted && (
+                                <Text variant="bodySmall" style={styles.roasted}>
+                                    {roasted}
+                                </Text>
+                            )}
+                        </View>
+
+                        {/* Sizes and Quantities */}
+                        {prices.map((item, index) => (
+                            <View key={index} style={styles.priceRow}>
+                                <View style={styles.sizeContainer}>
+                                    <Chip
+                                        style={styles.sizeChip}
+                                        textStyle={styles.sizeText}
                                     >
                                         {item.size}
+                                    </Chip>
+                                    <Text variant="titleSmall" style={styles.priceText}>
+                                        {parseInt(item.price).toLocaleString(
+                                            'vi-VN',
+                                        )}{' '}
+                                        đ
                                     </Text>
                                 </View>
-                                <Text
-                                    style={[
-                                        styles.priceText,
-                                        {
-                                            color: theme?.primary || '#D17842',
-                                        },
-                                    ]}
-                                >
-                                    {parseInt(item.price).toLocaleString(
-                                        'vi-VN',
-                                    )}{' '}
-                                    đ
-                                </Text>
-                            </View>
 
-                            {/* Quantity Controls */}
-                            <View style={styles.quantityContainer}>
-                                <Pressable
-                                    style={[
-                                        styles.quantityButton,
-                                        {
-                                            backgroundColor:
-                                                theme?.primary || '#D17842',
-                                        },
-                                    ]}
-                                    onPress={() =>
-                                        decrementHandler(id, item.size)
-                                    }
-                                >
-                                    <Ionicons
-                                        name="remove"
-                                        size={16}
-                                        color="#FFF"
-                                    />
-                                </Pressable>
-
-                                <View
-                                    style={[
-                                        styles.quantityBox,
-                                        {
-                                            borderColor:
-                                                theme?.primary || '#D17842',
-                                        },
-                                    ]}
-                                >
-                                    <Text
+                                {/* Quantity Controls */}
+                                <View style={styles.quantityContainer}>
+                                    <IconButton
+                                        icon="minus"
+                                        size={20}
+                                        iconColor="#FFF"
                                         style={[
-                                            styles.quantityText,
-                                            {
-                                                color:
-                                                    theme?.onSurface ||
-                                                    '#1c1c1e',
-                                            },
+                                            styles.quantityButton,
+                                            { backgroundColor: theme?.primary || '#D17842' },
+                                        ]}
+                                        onPress={() =>
+                                            decrementHandler(id, item.size)
+                                        }
+                                    />
+
+                                    <View
+                                        style={[
+                                            styles.quantityBox,
+                                            { borderColor: theme?.primary || '#D17842' },
                                         ]}
                                     >
-                                        {item.quantity}
-                                    </Text>
-                                </View>
+                                        <Text variant="bodyMedium" style={styles.quantityText}>
+                                            {item.quantity}
+                                        </Text>
+                                    </View>
 
-                                <Pressable
-                                    style={[
-                                        styles.quantityButton,
-                                        {
-                                            backgroundColor:
-                                                theme?.primary || '#D17842',
-                                        },
-                                    ]}
-                                    onPress={() =>
-                                        incrementHandler(id, item.size)
-                                    }
-                                >
-                                    <Ionicons
-                                        name="add"
-                                        size={16}
-                                        color="#FFF"
+                                    <IconButton
+                                        icon="plus"
+                                        size={20}
+                                        iconColor="#FFF"
+                                        style={[
+                                            styles.quantityButton,
+                                            { backgroundColor: theme?.primary || '#D17842' },
+                                        ]}
+                                        onPress={() =>
+                                            incrementHandler(id, item.size)
+                                        }
                                     />
-                                </Pressable>
+                                </View>
                             </View>
-                        </View>
-                    ))}
+                        ))}
+                    </View>
                 </View>
-            </LinearGradient>
-        </View>
+            </Card.Content>
+        </Card>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         marginBottom: 16,
-    },
-    card: {
         borderRadius: 16,
+    },
+    cardContent: {
         padding: 12,
+    },
+    row: {
         flexDirection: 'row',
         gap: 12,
-        elevation: 3,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
     },
     imageContainer: {
         width: 80,
         height: 80,
-        borderRadius: 12,
-        backgroundColor: 'rgba(209, 120, 66, 0.1)',
+        borderRadius: 16,
+        backgroundColor: 'rgba(135, 206, 235, 0.1)',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -214,42 +146,41 @@ const styles = StyleSheet.create({
         gap: 2,
     },
     name: {
-        fontSize: 16,
         fontWeight: '700',
+        fontSize: 16,
     },
     ingredient: {
+        opacity: 0.7,
         fontSize: 12,
     },
     roasted: {
+        opacity: 0.6,
         fontSize: 11,
     },
     priceRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginTop: 8,
         paddingTop: 8,
-        borderTopWidth: 1,
-        borderTopColor: 'rgba(0,0,0,0.05)',
+        borderTopWidth: StyleSheet.hairlineWidth, // Dùng nét mảnh nhất của màn hình
+        borderTopColor: 'rgba(0,0,0,0.1)',
     },
     sizeContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 12,
+        gap: 8,
     },
-    sizeBox: {
-        width: 50,
-        height: 32,
-        borderRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
+    sizeChip: {
+        height: 28,
     },
     sizeText: {
-        fontSize: 14,
-        fontWeight: '600',
+        fontSize: 12,
+        lineHeight: 16,
     },
     priceText: {
-        fontSize: 15,
         fontWeight: '700',
+        fontSize: 14,
     },
     quantityContainer: {
         flexDirection: 'row',
@@ -259,20 +190,19 @@ const styles = StyleSheet.create({
     quantityButton: {
         width: 28,
         height: 28,
-        borderRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
+        margin: 0,
     },
     quantityBox: {
-        width: 40,
+        width: 36,
         height: 28,
         borderRadius: 8,
-        borderWidth: 1.5,
+        borderWidth: 0.5, // Giảm tiếp xuống 0.5
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'transparent',
     },
     quantityText: {
-        fontSize: 14,
         fontWeight: '600',
+        fontSize: 14,
     },
 });

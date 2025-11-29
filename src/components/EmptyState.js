@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         marginTop: 24,
         paddingHorizontal: 32,
         paddingVertical: 14,
-        borderRadius: 12,
+        borderRadius: 24,
     },
     buttonText: {
         color: '#FFFFFF',

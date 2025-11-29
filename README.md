@@ -10,12 +10,14 @@
 
 ## 📱 Screenshots
 
--   🏠 Home Screen với category filters (bo tròn 10)
+-   🏠 Home Screen với category filters
 -   🛒 Shopping Cart với quantity controls
 -   ❤️ Favorites với beautiful cards
 -   💳 Payment với multiple methods
--   🎨 Material You Design color scheme
--   ✨ Smooth animations
+-   🎨 Material Design 3 với React Native Paper
+-   ✨ Smooth animations & haptic feedback
+-   🎭 Font Playfair Display việt hóa
+-   💙 Light Blue color scheme
 
 ---
 
@@ -25,7 +27,8 @@
 
 -   ✅ **Trang chủ nâng cao**: Search, filter theo category, grid layout
     -   Hiển thị "Xin chào, {Tên người dùng}!"
-    -   Category buttons bo tròn 10
+    -   Category chips
+    -   Haptic feedback khi tương tác
 -   ✅ **Chi tiết sản phẩm**: Xem đầy đủ thông tin, chọn size, đánh giá
 -   ✅ **Giỏ hàng**: Thêm/xóa/chỉnh sửa số lượng, tính tổng tiền tự động
 -   ✅ **Yêu thích**: Lưu sản phẩm yêu thích, thêm vào giỏ nhanh
@@ -92,9 +95,10 @@ My-First-App/
 │   └── _layout.js                # Root layout
 ├── src/
 │   ├── components/               # Reusable components
-│   │   ├── ProductCard.js
-│   │   ├── CartItemCard.js
-│   │   └── EmptyState.js
+│   │   ├── ProductCard.js        # Product card with animations
+│   │   ├── CartItemCard.js       # Cart item with Paper components
+│   │   ├── EmptyState.js         # Empty state component
+│   │   └── ScreenWrapper.js      # Screen wrapper with fade-in animation
 │   ├── context/
 │   │   └── ThemeContext.js       # Material You theme
 │   ├── data/
@@ -104,6 +108,8 @@ My-First-App/
 │       ├── productStore.js       # Zustand store + AsyncStorage
 │       └── userStore.js          # User state management
 └── assets/                       # Images, fonts, etc.
+    ├── images/                   # App icons, splash screens
+    └── fonts/                    # Custom fonts (if any)
 ```
 
 ---
@@ -276,28 +282,34 @@ npx expo start --tunnel
 
 ## 🎨 Thiết kế
 
-### Material Design 3 (Material You)
+### Material Design 3 với React Native Paper
 
-Ứng dụng tuân theo **Material Design 3** guidelines của Google:
+Ứng dụng sử dụng **React Native Paper** (Material UI cho React Native) và tuân theo **Material Design 3** guidelines:
 
--   **Dynamic Color System**: Màu sắc chủ đạo với Cyan (#006A6A)
+-   **UI Components**: TextInput, Button, Card, List, Chip, IconButton từ React Native Paper
+-   **Dynamic Color System**: Màu sắc chủ đạo Light Blue (#87CEEB)
 -   **Elevation System**: 6 levels từ 0 (flat) đến 5 (highest)
--   **Shape System**:
-    -   Small components: 8px radius
-    -   Medium components: 12px radius
-    -   Large components: 16-24px radius
--   **Typography**: Roboto font family
+-   **Shape System** - Bo góc mềm mại:
+    -   Extra Small: 10px radius
+    -   Small: 14px radius
+    -   Medium: 18px radius
+    -   Large: 28px radius
+    -   Extra Large: 36px radius
+-   **Typography**: Playfair Display font
+-   **Roundness**: 16px cho Paper components
 -   **Components**:
+    -   Flat Cards (không viền, bo góc mềm mại)
     -   Elevated Cards với shadow
-    -   Floating Action Buttons (FAB)
     -   Filled/Outlined/Text buttons
-    -   Bottom Navigation với ripple effect
+    -   Bottom Navigation với animations
+    -   Smooth tab transitions với haptic feedback
 
-### Color Palette
+### Color Palette - Light Blue Theme
 
--   **Primary**: #006A6A (Cyan) - Main brand color
--   **Secondary**: #4A6363 (Teal-gray) - Supporting elements
--   **Tertiary**: #4B607C (Blue-gray) - Accents
+-   **Primary**: #87CEEB (Sky Blue) - Main brand color
+-   **Primary Container**: #E0F6FF - Light blue container
+-   **Secondary**: #B0E0E6 (Powder Blue) - Supporting elements
+-   **Tertiary**: #ADD8E6 (Light Blue) - Accents
 -   **Surface**: #FFFBFE - Card backgrounds
 -   **Background**: #FFFBFE - App background
 -   **Error**: #B3261E - Error states
@@ -382,8 +394,12 @@ npm install
 -   [x] **Product Image Upload**: Upload ảnh thật cho sản phẩm
 -   [x] **Zustand Store**: User state và product state với persist
 -   [x] **Dynamic Greeting**: Hiển thị tên user trên Home
--   [x] **Category UI**: Bo tròn 10, fixed wrapper
--   [x] **Material Design 3**: Cyan color theme
+-   [x] **Category UI**: Chips với animations khi chuyển đổi các tab
+-   [x] **Material Design 3**: Light Blue color theme (#87CEEB)
+-   [x] **React Native Paper**: Tích hợp Material UI components
+-   [x] **Playfair Display Font**: Font chữ t hỗ trợ tiếng Việt
+-   [x] **Animations**: Screen transitions, tab animations, haptic feedback
+-   [x] **Border Radius**: Bo góc mềm mại (10-36px)
 -   [x] **Code Refactor**: Merge duplicate files (home-enhanced, cart-enhanced)
 -   [x] **File Comments**: Thêm comments mô tả chức năng cho tất cả screens
 
@@ -420,12 +436,14 @@ npm install
 
 ## 📱 Screenshots
 
--   🏠 Home Screen with category filters (rounded corners)
+-   🏠 Home Screen with category filters (soft rounded corners)
 -   🛒 Shopping Cart with quantity controls
 -   ❤️ Favorites with beautiful cards
 -   💳 Payment with multiple methods
--   🎨 Material You Design color scheme
--   ✨ Smooth animations
+-   🎨 Material Design 3 with React Native Paper
+-   ✨ Smooth animations & haptic feedback
+-   🎭 Playfair Display font (Vietnamese support)
+-   💙 Light Blue color scheme
 
 ---
 
@@ -435,7 +453,8 @@ npm install
 
 -   ✅ **Enhanced Home Page**: Search, filter by category, grid layout
     -   Display "Hello, {Username}!"
-    -   Rounded category buttons
+    -   Category chips with smooth animations
+    -   Haptic feedback on interactions
 -   ✅ **Product Details**: View full information, select size, ratings
 -   ✅ **Shopping Cart**: Add/remove/edit quantity, auto-calculate total
 -   ✅ **Favorites**: Save favorite products, quick add to cart
@@ -502,9 +521,10 @@ My-First-App/
 │   └── _layout.js                # Root layout
 ├── src/
 │   ├── components/               # Reusable components
-│   │   ├── ProductCard.js
-│   │   ├── CartItemCard.js
-│   │   └── EmptyState.js
+│   │   ├── ProductCard.js        # Product card with animations
+│   │   ├── CartItemCard.js       # Cart item with Paper components
+│   │   ├── EmptyState.js         # Empty state component
+│   │   └── ScreenWrapper.js      # Screen wrapper with fade-in animation
 │   ├── context/
 │   │   └── ThemeContext.js       # Material You theme
 │   ├── data/
@@ -514,6 +534,8 @@ My-First-App/
 │       ├── productStore.js       # Zustand store + AsyncStorage
 │       └── userStore.js          # User state management
 └── assets/                       # Images, fonts, etc.
+    ├── images/                   # App icons, splash screens
+    └── fonts/                    # Custom fonts (if any)
 ```
 
 ---
@@ -587,12 +609,20 @@ npx expo start --tunnel
 -   **zustand** - Lightweight state management
 -   **immer** - Immutable state updates
 
-### Storage & UI
+### UI Components & Design
 
--   **@react-native-async-storage/async-storage** - Persistent storage
+-   **react-native-paper** - Material Design 3 components (MUI)
+-   **@expo-google-fonts/playfair-display** - Playfair Display font (Vietnamese support)
+-   **@expo/vector-icons** - Icon library
 -   **expo-linear-gradient** - Gradient backgrounds
 -   **expo-image-picker** - Image selection
--   **@expo/vector-icons** - Icon library
+-   **expo-haptics** - Haptic feedback for better UX
+
+### Storage & Utilities
+
+-   **@react-native-async-storage/async-storage** - Persistent storage
+-   **react-native-reanimated** - Smooth animations
+-   **react-native-gesture-handler** - Gesture handling
 
 ---
 
@@ -690,33 +720,50 @@ npx expo start --tunnel
 
 The app follows **Material Design 3** guidelines by Google:
 
--   **Dynamic Color System**: Primary color Cyan (#006A6A)
+-   **UI Components**: TextInput, Button, Card, List, Chip, IconButton from React Native Paper
+-   **Dynamic Color System**: Primary color Light Blue (#87CEEB)
 -   **Elevation System**: 6 levels from 0 (flat) to 5 (highest)
--   **Shape System**:
-    -   Small components: 8px radius
-    -   Medium components: 12px radius
-    -   Large components: 16-24px radius
--   **Typography**: Roboto font family
+-   **Shape System** - Soft rounded corners:
+    -   Extra Small: 10px radius
+    -   Small: 14px radius
+    -   Medium: 18px radius
+    -   Large: 28px radius
+    -   Extra Large: 36px radius
+-   **Typography**: Playfair Display font (full Vietnamese support)
+-   **Roundness**: 16px for Paper components
 -   **Components**:
+    -   Flat Cards (no border, soft rounded corners)
     -   Elevated Cards with shadow
-    -   Floating Action Buttons (FAB)
     -   Filled/Outlined/Text buttons
-    -   Bottom Navigation with ripple effect
+    -   Bottom Navigation with animations
+    -   Smooth tab transitions with haptic feedback
 
-### Color Palette
+### Color Palette - Light Blue Theme
 
--   **Primary**: #006A6A (Cyan) - Main brand color
--   **Secondary**: #4A6363 (Teal-gray) - Supporting elements
--   **Tertiary**: #4B607C (Blue-gray) - Accents
+-   **Primary**: #87CEEB (Sky Blue) - Main brand color
+-   **Primary Container**: #E0F6FF - Light blue container
+-   **Secondary**: #B0E0E6 (Powder Blue) - Supporting elements
+-   **Tertiary**: #ADD8E6 (Light Blue) - Accents
 -   **Surface**: #FFFBFE - Card backgrounds
 -   **Background**: #FFFBFE - App background
 -   **Error**: #B3261E - Error states
 
+### Animations & Interactions
+
+-   **Screen Transitions**: Fade-in and slide-up animations when switching screens
+-   **Tab Animations**: Scale and opacity animations for tab icons
+-   **Product Cards**: Press animations with scale effect
+-   **Haptic Feedback**:
+    -   Light impact when switching tabs
+    -   Light impact when selecting category
+    -   Success notification when adding to cart
+-   **Smooth Scrolling**: Optimized FlatList and ScrollView
+
 ### Elevation Levels
 
--   **Level 0**: Flat surfaces (no shadow)
+-   **Level 0**: Flat surfaces (no shadow) - Profile cards
 -   **Level 1**: Low elevation (cards, chips)
--   **Level 2**: Medium elevation (app bar)
+-   **Level 2**: Medium elevation (app bar, tab bar)
 -   **Level 3**: High elevation (FAB, dialogs)
 -   **Level 4**: Very high elevation (menus)
 -   **Level 5**: Highest elevation (modals)
@@ -792,8 +839,12 @@ npm install
 -   [x] **Product Image Upload**: Upload real product images
 -   [x] **Zustand Store**: User state and product state with persist
 -   [x] **Dynamic Greeting**: Display username on Home
--   [x] **Category UI**: Rounded corners, fixed wrapper
--   [x] **Material Design 3**: Cyan color theme
+-   [x] **Category UI**: Chips with smooth animations
+-   [x] **Material Design 3**: Light Blue color theme (#87CEEB)
+-   [x] **React Native Paper**: Material UI components integration
+-   [x] **Playfair Display Font**: Beautiful font with Vietnamese support
+-   [x] **Animations**: Screen transitions, tab animations, haptic feedback
+-   [x] **Border Radius**: Soft rounded corners (10-36px)
 -   [x] **Code Refactor**: Merge duplicate files (home-enhanced, cart-enhanced)
 -   [x] **File Comments**: Add function descriptions for all screens
 

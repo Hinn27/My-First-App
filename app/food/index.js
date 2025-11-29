@@ -16,13 +16,14 @@ import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useCart } from '../../src/context/CartContext';
 
+// Dữ liệu demo (local) đã chuẩn hoá về 2 danh mục: "Cơm" và "Bún, mì, phở"
 const FOOD_DATA = [
     {
         id: 'food-1',
         name: 'Phở Bò',
         slug: 'pho-bo',
-        price: 50000,
-        category: 'Món khô',
+        price: 20000,
+        category: 'Bún, mì, phở',
         description: 'Phở bò truyền thống Hà Nội',
         image: 'restaurant',
     },
@@ -30,8 +31,8 @@ const FOOD_DATA = [
         id: 'food-2',
         name: 'Bún Chả',
         slug: 'bun-cha',
-        price: 45000,
-        category: 'Món khô',
+        price: 45000, // 35
+        category: 'Bún, mì, phở',
         description: 'Bún chả Hà Nội đặc sản',
         image: 'restaurant',
     },
@@ -39,8 +40,8 @@ const FOOD_DATA = [
         id: 'food-3',
         name: 'Cơm Tấm',
         slug: 'com-tam',
-        price: 40000,
-        category: 'Món khô',
+        price: 40000, // 20
+        category: 'Cơm',
         description: 'Cơm tấm sườn bì chả',
         image: 'restaurant',
     },
@@ -48,8 +49,8 @@ const FOOD_DATA = [
         id: 'food-4',
         name: 'Bánh Mì',
         slug: 'banh-mi',
-        price: 25000,
-        category: 'Món ướt',
+        price: 25000, // 10
+        category: 'Cơm',
         description: 'Bánh mì thịt nguội pate',
         image: 'fast-food',
     },
@@ -57,19 +58,10 @@ const FOOD_DATA = [
         id: 'food-5',
         name: 'Hủ Tiếu',
         slug: 'hu-tieu',
-        price: 35000,
-        category: 'Món ướt',
+        price: 35000, // 15
+        category: 'Bún, mì, phở',
         description: 'Hủ tiếu Nam Vang',
         image: 'restaurant',
-    },
-    {
-        id: 'food-6',
-        name: 'Gỏi Cuốn',
-        slug: 'goi-cuon',
-        price: 30000,
-        category: 'Ăn vặt',
-        description: 'Gỏi cuốn tôm thịt',
-        image: 'nutrition',
     },
 ];
 

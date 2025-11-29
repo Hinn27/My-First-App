@@ -1,15 +1,23 @@
 // Component: Product Card cho Home screen
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     View,
-    Text,
     StyleSheet,
     Pressable,
     Dimensions,
     Image,
 } from 'react-native';
+import { Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import Animated, {
+    useAnimatedStyle,
+    useSharedValue,
+    withSpring,
+    withTiming,
+    Easing,
+} from 'react-native-reanimated';
+import * as Haptics from 'expo-haptics';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = width / 2 - 24;
@@ -28,16 +36,61 @@ export default function ProductCard({
     favourite,
     theme,
 }) {
+    const scale = useSharedValue(1);
+    const opacity = useSharedValue(0);
+    const translateY = useSharedValue(20);
+
+    useEffect(() => {
+        opacity.value = withTiming(1, {
+            duration: 400,
+            easing: Easing.out(Easing.ease),
+        });
+        translateY.value = withTiming(0, {
+            duration: 400,
+            easing: Easing.out(Easing.ease),
+        });
+    }, []);
+
+    const animatedStyle = useAnimatedStyle(() => ({
+        transform: [{ scale: scale.value }, { translateY: translateY.value }],
+        opacity: opacity.value,
+    }));
+
+    const handlePressIn = () => {
+        scale.value = withSpring(0.95, {
+            damping: 15,
+            stiffness: 300,
+        });
+    };
+
+    const handlePressOut = () => {
+        scale.value = withSpring(1, {
+            damping: 15,
+            stiffness: 300,
+        });
+    };
+
+    const handlePress = () => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        onPress();
+    };
+
     return (
-        <Pressable onPress={onPress} style={styles.cardContainer}>
-            <LinearGradient
-                colors={
-                    theme?.mode === 'dark'
-                        ? ['#252A32', '#0C0F14']
-                        : ['#FFFFFF', '#F7F8FB']
-                }
-                style={styles.card}
+        <Animated.View style={[styles.cardContainer, animatedStyle]}>
+            <Pressable
+                onPress={handlePress}
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
+                style={styles.pressable}
             >
+                <LinearGradient
+                    colors={
+                        theme?.mode === 'dark'
+                            ? ['#252A32', '#0C0F14']
+                            : ['#FFFFFF', '#F7F8FB']
+                    }
+                    style={styles.card}
+                >
                 {/* Favorite Button */}
                 <Pressable
                     style={styles.favoriteButton}
@@ -54,7 +107,12 @@ export default function ProductCard({
                 <View style={styles.imageContainer}>
                     {imagelink_square ? (
                         <Image
-                            source={{ uri: imagelink_square }}
+                            // Support both static require() module and URI string
+                            source={
+                                typeof imagelink_square === 'string'
+                                    ? { uri: imagelink_square }
+                                    : imagelink_square
+                            }
                             style={styles.productImage}
                         />
                     ) : (
@@ -128,6 +186,7 @@ export default function ProductCard({
                 </View>
             </LinearGradient>
         </Pressable>
+        </Animated.View>
     );
 }
 
@@ -136,8 +195,11 @@ const styles = StyleSheet.create({
         width: CARD_WIDTH,
         marginBottom: 16,
     },
+    pressable: {
+        width: '100%',
+    },
     card: {
-        borderRadius: 16,
+        borderRadius: 24,
         padding: 12,
         elevation: 4,
         shadowColor: '#000',
@@ -156,8 +218,8 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         height: 120,
-        borderRadius: 12,
-        backgroundColor: 'rgba(209, 120, 66, 0.1)',
+        borderRadius: 20,
+        backgroundColor: 'rgba(135, 206, 235, 0.1)',
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 12,
@@ -208,7 +270,7 @@ const styles = StyleSheet.create({
     addButton: {
         width: 32,
         height: 32,
-        borderRadius: 8,
+        borderRadius: 16,
         justifyContent: 'center',
         alignItems: 'center',
     },

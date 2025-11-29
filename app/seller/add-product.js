@@ -35,7 +35,7 @@ export default function AddProductScreen() {
     // Form state
     const [productData, setProductData] = useState({
         name: '',
-        type: 'Food', // Food or Drink
+        type: 'Food', // Chỉ còn Food
         category: '',
         productImage: null, // Product image
         special_ingredient: '',
@@ -49,19 +49,9 @@ export default function AddProductScreen() {
         },
     });
 
-    // Categories based on type
-    const foodCategories = ['Món khô', 'Món ướt', 'Ăn vặt'];
-    const drinkCategories = [
-        'Cà phê',
-        'Trà',
-        'Trà sữa',
-        'Sinh tố',
-        'Nước ép',
-        'Soda',
-    ];
-
-    const currentCategories =
-        productData.type === 'Food' ? foodCategories : drinkCategories;
+    // Categories (chỉ còn món ăn)
+    const foodCategories = ['Cơm', 'Bún, mì, phở'];
+    const currentCategories = foodCategories;
 
     // Handle form change
     const handleChange = (field, value) => {
@@ -259,63 +249,20 @@ export default function AddProductScreen() {
                     <Text style={styles.label}>Loại sản phẩm *</Text>
                     <View style={styles.typeSelector}>
                         <Pressable
-                            style={[
-                                styles.typeButton,
-                                productData.type === 'Food' &&
-                                    styles.typeButtonActive,
-                            ]}
-                            onPress={() => {
-                                handleChange('type', 'Food');
-                                handleChange('category', '');
-                            }}
+                            style={[styles.typeButton, styles.typeButtonActive]}
                         >
                             <Ionicons
                                 name="restaurant"
                                 size={20}
-                                color={
-                                    productData.type === 'Food'
-                                        ? '#FFFFFF'
-                                        : theme.onSurface
-                                }
+                                color={'#FFFFFF'}
                             />
                             <Text
                                 style={[
                                     styles.typeButtonText,
-                                    productData.type === 'Food' &&
-                                        styles.typeButtonTextActive,
+                                    styles.typeButtonTextActive,
                                 ]}
                             >
                                 Đồ ăn
-                            </Text>
-                        </Pressable>
-                        <Pressable
-                            style={[
-                                styles.typeButton,
-                                productData.type === 'Drink' &&
-                                    styles.typeButtonActive,
-                            ]}
-                            onPress={() => {
-                                handleChange('type', 'Drink');
-                                handleChange('category', '');
-                            }}
-                        >
-                            <Ionicons
-                                name="cafe"
-                                size={20}
-                                color={
-                                    productData.type === 'Drink'
-                                        ? '#FFFFFF'
-                                        : theme.onSurface
-                                }
-                            />
-                            <Text
-                                style={[
-                                    styles.typeButtonText,
-                                    productData.type === 'Drink' &&
-                                        styles.typeButtonTextActive,
-                                ]}
-                            >
-                                Đồ uống
                             </Text>
                         </Pressable>
                     </View>

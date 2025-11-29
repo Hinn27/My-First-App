@@ -98,9 +98,11 @@ export default function MyProductsScreen() {
                             <View key={product.id} style={styles.productCard}>
                                 {product.imagelink_square ? (
                                     <Image
-                                        source={{
-                                            uri: product.imagelink_square,
-                                        }}
+                                        source={
+                                            typeof product.imagelink_square === 'string'
+                                                ? { uri: product.imagelink_square }
+                                                : product.imagelink_square
+                                        }
                                         style={styles.productImage}
                                     />
                                 ) : product.imageIcon ? (
