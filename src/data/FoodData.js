@@ -16,7 +16,7 @@ const FoodData = [
         ingredients: 'Bánh phở, Thịt bò, Hành lá, Ngò',
         prices: [
             { size: 'M', price: '35000', currency: 'đ', quantity: 1 },
-            { size: 'L', price: '45000', currency: 'đ', quantity: 1 },
+            { size: 'L', price: '40000', currency: 'đ', quantity: 1 },
         ],
         average_rating: 4.9,
         ratings_count: '3,456',

@@ -67,7 +67,6 @@ export default function EnhancedHomeScreen() {
 
     // Zustand store
     const foodList = useProductStore((state) => state.foodList);
-    const loadFromApi = useProductStore((state) => state.loadFromApi);
     const addToCart = useProductStore((state) => state.addToCart);
     const calculateCartPrice = useProductStore(
         (state) => state.calculateCartPrice
@@ -92,21 +91,6 @@ export default function EnhancedHomeScreen() {
     const [sortedProducts, setSortedProducts] = useState([]);
 
     const listRef = useRef(null);
-
-    // Load data from API on mount
-    useEffect(() => {
-        const fetchData = async () => {
-            console.log("Home: Đang gọi API lấy danh sách món ăn...");
-            try {
-                await loadFromApi();
-                console.log("Home: Đã gọi API xong.");
-            } catch (error) {
-                console.error("Home: Lỗi khi gọi API:", error);
-                Alert.alert("Lỗi", "Không thể tải dữ liệu từ máy chủ. Vui lòng kiểm tra kết nối mạng.");
-            }
-        };
-        fetchData();
-    }, []);
 
     // Recompute categories and filtered list when data changes
     useEffect(() => {

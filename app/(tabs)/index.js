@@ -5,43 +5,39 @@
 * Expo Router sẽ lấy index.js làm Home
  */
 
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {
     View,
     StyleSheet,
     FlatList,
     ScrollView,
-    Dimensions,
     StatusBar,
     Alert,
+    Platform,
 } from "react-native";
-import { useRouter } from "expo-router";
+import {useRouter} from "expo-router";
 import {
     Text,
     TextInput,
     IconButton,
     Chip,
-    useTheme as usePaperTheme,
 } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
-import { Platform } from "react-native";
-import { useTheme } from "../../src/context/ThemeContext";
-import { useProductStore } from "../../src/store/productStore";
-import { useUserStore } from "../../src/store/userStore";
+import {useTheme} from "../../src/context/ThemeContext";
+import {useProductStore} from "../../src/store/productStore";
+import {useUserStore} from "../../src/store/userStore";
 import ProductCard from "../../src/components/ProductCard";
 import ScreenWrapper from "../../src/components/ScreenWrapper";
 
-const { width } = Dimensions.get("window");
 
 // Get categories from data
 const getCategoriesFromData = (data) => {
     const temp = {};
-    for (let i = 0; i < data.length; i++) {
-        if (temp[data[i].category] === undefined) {
-            temp[data[i].category] = 1;
+    for (const item of data) {
+        if (temp[item.category] === undefined) {
+            temp[item.category] = 1;
         } else {
-            temp[data[i].category]++;
+            temp[item.category]++;
         }
     }
     const categories = Object.keys(temp);
@@ -60,13 +56,11 @@ const getFilteredList = (category, data) => {
 
 export default function EnhancedHomeScreen() {
     const router = useRouter();
-    const { theme } = useTheme();
-    const paperTheme = usePaperTheme();
+    const {theme} = useTheme();
     const styles = createStyles(theme);
 
     // Zustand store
     const foodList = useProductStore((state) => state.foodList);
-    const loadFromApi = useProductStore((state) => state.loadFromApi);
     const addToCart = useProductStore((state) => state.addToCart);
     const calculateCartPrice = useProductStore(
         (state) => state.calculateCartPrice
@@ -92,24 +86,9 @@ export default function EnhancedHomeScreen() {
 
     const listRef = useRef(null);
 
-    // Load data from API on mount
-    useEffect(() => {
-        const fetchData = async () => {
-            console.log("Home: Đang gọi API lấy danh sách món ăn...");
-            try {
-                await loadFromApi();
-                console.log("Home: Đã gọi API xong.");
-            } catch (error) {
-                console.error("Home: Lỗi khi gọi API:", error);
-                Alert.alert("Lỗi", "Không thể tải dữ liệu từ máy chủ. Vui lòng kiểm tra kết nối mạng.");
-            }
-        };
-        fetchData();
-    }, []);
 
     // Recompute categories and filtered list when data changes
     useEffect(() => {
-        console.log("Home: foodList thay đổi, số lượng:", foodList.length);
 
         if (foodList && foodList.length > 0) {
             const cats = getCategoriesFromData(foodList);
@@ -121,7 +100,7 @@ export default function EnhancedHomeScreen() {
                 currentCat = cats[0];
             }
 
-            setCategoryIndex({ index: cats.indexOf(currentCat), category: currentCat });
+            setCategoryIndex({index: cats.indexOf(currentCat), category: currentCat});
             setSortedProducts(getFilteredList(currentCat, foodList));
         }
     }, [foodList]);
@@ -129,20 +108,20 @@ export default function EnhancedHomeScreen() {
     // Search function
     const searchProduct = (search) => {
         if (search !== "") {
-            listRef?.current?.scrollToOffset({ animated: true, offset: 0 });
-            setCategoryIndex({ index: 0, category: "Tất cả" }); // Reset về tất cả khi search
-            setSortedProducts([
-                ...foodList.filter((item) =>
+            listRef?.current?.scrollToOffset({animated: true, offset: 0});
+            setCategoryIndex({index: 0, category: "Tất cả"}); // Reset về tất cả khi search
+            setSortedProducts(
+                foodList.filter((item) =>
                     item.name.toLowerCase().includes(search.toLowerCase())
-                ),
-            ]);
+                )
+            );
         }
     };
 
     // Reset search
     const resetSearch = () => {
-        listRef?.current?.scrollToOffset({ animated: true, offset: 0 });
-        setCategoryIndex({ index: 0, category: categories[0] });
+        listRef?.current?.scrollToOffset({animated: true, offset: 0});
+        setCategoryIndex({index: 0, category: categories[0]});
         setSortedProducts([...foodList]);
         setSearchText("");
     };
@@ -153,7 +132,11 @@ export default function EnhancedHomeScreen() {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         }
         // API có thể trả về prices khác format local, cần kiểm tra
-        const defaultPrice = item.prices && item.prices.length > 0 ? item.prices[0] : { size: 'M', price: 0, currency: 'đ' };
+        const defaultPrice = item.prices && item.prices.length > 0 ? item.prices[0] : {
+            size: 'M',
+            price: 0,
+            currency: 'đ'
+        };
 
         addToCart({
             id: item.id,
@@ -163,11 +146,11 @@ export default function EnhancedHomeScreen() {
             imageIcon: item.imageIcon,
             special_ingredient: item.special_ingredient,
             type: item.type || 'Food',
-            prices: [{ ...defaultPrice, quantity: 1 }],
+            prices: [{...defaultPrice, quantity: 1}],
         });
         calculateCartPrice();
         Alert.alert("Thành công", `Đã thêm ${item.name} vào giỏ hàng!`, [
-            { text: "OK" },
+            {text: "OK"},
         ]);
     };
 
@@ -184,7 +167,7 @@ export default function EnhancedHomeScreen() {
     const handleCardPress = (item) => {
         router.push({
             pathname: "/product/[id]",
-            params: { id: item.id, type: item.type || 'Food', index: item.index },
+            params: {id: item.id, type: item.type || 'Food', index: item.index},
         });
     };
 
@@ -225,7 +208,7 @@ export default function EnhancedHomeScreen() {
                         searchProduct(text);
                     }}
                     mode="outlined"
-                    left={<TextInput.Icon icon="magnify" />}
+                    left={<TextInput.Icon icon="magnify"/>}
                     right={
                         searchText.length > 0 ? (
                             <TextInput.Icon
@@ -256,7 +239,7 @@ export default function EnhancedHomeScreen() {
                 >
                     {categories.map((category, index) => (
                         <Chip
-                            key={index}
+                            key={category}
                             selected={categoryIndex.index === index}
                             onPress={() => {
                                 if (Platform.OS !== "web") {
@@ -264,7 +247,7 @@ export default function EnhancedHomeScreen() {
                                         Haptics.ImpactFeedbackStyle.Light
                                     );
                                 }
-                                setCategoryIndex({ index, category });
+                                setCategoryIndex({index, category});
                                 setSortedProducts(
                                     getFilteredList(category, foodList)
                                 );
@@ -308,7 +291,7 @@ export default function EnhancedHomeScreen() {
                         </Text>
                     </View>
                 }
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                     <ProductCard
                         {...item}
                         theme={theme}
@@ -323,3 +306,71 @@ export default function EnhancedHomeScreen() {
         </ScreenWrapper>
     );
 }
+
+const createStyles = (theme) =>
+    StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: theme.background,
+        },
+        header: {
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingTop: 12,
+            paddingBottom: 16,
+            paddingHorizontal: 20,
+        },
+        greeting: {
+            marginBottom: 4,
+        },
+        title: {
+            color: theme.onBackground,
+        },
+        searchContainer: {
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: 20,
+            marginBottom: 20,
+            gap: 12,
+        },
+        searchInput: {
+            flex: 1,
+        },
+        categoryWrapper: {
+            backgroundColor: theme.background,
+            paddingBottom: 12,
+            marginBottom: 4,
+            zIndex: 10,
+            elevation: 2,
+        },
+        categoryScroll: {
+            flexGrow: 0,
+        },
+        categoryContainer: {
+            paddingHorizontal: 20,
+            paddingRight: 20,
+            gap: 8,
+            alignItems: "center",
+            flexDirection: "row",
+        },
+        categoryChip: {
+            marginHorizontal: 0,
+        },
+        categoryChipText: {
+            fontSize: 14,
+        },
+        productList: {
+            paddingHorizontal: 20,
+            paddingTop: 4,
+            paddingBottom: 20,
+        },
+        productRow: {
+            justifyContent: "space-between",
+        },
+        emptyContainer: {
+            fontSize: 16,
+            color: theme.onSurfaceVariant,
+            marginTop: 16,
+        },
+    });

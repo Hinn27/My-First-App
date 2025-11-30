@@ -237,9 +237,6 @@ export const useProductStore = create(
                     }),
                 ),
 
-            loadFromApi: async () => {
-                // API functionality has been disabled for now
-            },
         }),
         {
             name: 'product-storage',
