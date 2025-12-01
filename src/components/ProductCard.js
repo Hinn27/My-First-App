@@ -399,6 +399,7 @@ ProductCard.propTypes = {
         PropTypes.object,
     ]),
     shopId: PropTypes.string,
+    shopName: PropTypes.string,
     onPress: PropTypes.func.isRequired,
     onAddToCart: PropTypes.func,
     onFavoritePress: PropTypes.func,
