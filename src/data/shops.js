@@ -1,13 +1,6 @@
 // Simple shops registry: id, displayName, category (type), and greeting message
 export const shops = [
   {
-    id: 'com_viet',
-    displayName: 'Cơm Việt Nhà Làm',
-    category: 'Cơm',
-    greeting:
-      'Cảm ơn quý khách đã tin tưởng Quán Cơm Việt Nhà Làm của chúng tôi, chúng tôi có thể hỗ trợ gì cho bạn?',
-  },
-  {
     id: 'com_tam_huong_que',
     displayName: 'Cơm Tấm Hương Quê',
     category: 'Cơm',
