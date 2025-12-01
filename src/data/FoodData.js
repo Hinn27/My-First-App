@@ -26,6 +26,7 @@ const FoodData = [
         type: "Food",
         category: "Bún, mì, phở",
         shopId: "pho_gia_truyen_36",
+        shopName: "Phở Gia Truyền 36",
         index: 0,
     },
     {
@@ -45,6 +46,7 @@ const FoodData = [
         type: "Food",
         category: "Bún",
         shopId: "bun_bo_goc_pho",
+        shopName: "Bún Bò Góc Phố",
         index: 1,
     },
     {
@@ -64,6 +66,7 @@ const FoodData = [
         type: "Food",
         category: "Bún, mì, phở",
         shopId: "com_tam_huong_que",
+        shopName: "Cơm Tấm Hương Quê",
         index: 2,
     },
     {
@@ -83,6 +86,7 @@ const FoodData = [
         type: "Food",
         category: "Bún",
         shopId: "bun_rieu_ba_nam",
+        shopName: "Bún Riêu Bà Năm",
         index: 4,
     },
     {
@@ -102,6 +106,7 @@ const FoodData = [
         type: "Food",
         category: "Bún",
         shopId: "bun_thit_nuong_ganh",
+        shopName: "Bún Thịt Nướng Gánh",
         index: 6,
     },
     {
@@ -122,6 +127,7 @@ const FoodData = [
         type: "Food",
         category: "Bún",
         shopId: "bun_bo_goc_pho",
+        shopName: "Bún Bò Góc Phố",
         index: 7,
     },
     {
@@ -141,6 +147,7 @@ const FoodData = [
         type: "Food",
         category: "Bún",
         shopId: "bun_rieu_ba_nam",
+        shopName: "Bún Riêu Bà Năm",
         index: 8,
     },
     {
@@ -161,6 +168,7 @@ const FoodData = [
         type: "Food",
         category: "Bún",
         shopId: "bun_thit_nuong_ganh",
+        shopName: "Bún Thịt Nướng Gánh",
         index: 9,
     },
     {
@@ -181,6 +189,7 @@ const FoodData = [
         type: "Food",
         category: "Bún",
         shopId: "bun_bo_goc_pho",
+        shopName: "Bún Bò Góc Phố",
         index: 10,
     },
     {
@@ -221,6 +230,7 @@ const FoodData = [
         type: "Food",
         category: "Bún",
         shopId: "bun_thit_nuong_ganh",
+        shopName: "Bún Thịt Nướng Gánh",
         index: 12,
     },
     {
@@ -240,7 +250,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bún, mì, phở",
-        shopId: "pho_bo_tai_chin_long_thanh",
+        shopId: "pho_long_thanh",
+        shopName: "Phở Long Thành",
         index: 13,
     },
     {
@@ -261,6 +272,7 @@ const FoodData = [
         type: "Food",
         category: "Bún, mì, phở",
         shopId: "pho_gia_truyen_36",
+        shopName: "Phở Gia Truyền 36",
         index: 14,
     },
     {
@@ -281,7 +293,8 @@ const FoodData = [
         type: "Food",
         category: "Bún, mì, phở",
         shopId: "pho_sai_gon_xua",
-        index: 15,
+        shopName: "Phở Sài Gòn Xưa",
+        index: 11,
     },
     {
         id: "F17",
@@ -301,6 +314,7 @@ const FoodData = [
         type: "Food",
         category: "Phở",
         shopId: "pho_bo_tai_chin_long_thanh",
+        shopName: "Phở Long Thành",
         index: 16,
     },
     {
@@ -321,6 +335,7 @@ const FoodData = [
         type: "Food",
         category: "Bún, mì, phở",
         shopId: "pho_gia_truyen_36",
+        shopName: "Phở Gia Truyền 36",
         index: 17,
     },
     {
@@ -341,6 +356,7 @@ const FoodData = [
         type: "Food",
         category: "Bún, mì, phở",
         shopId: "com_ga_phu_yen",
+        shopName: "Cơm Gà Phú Yên",
         index: 18,
     },
     {
@@ -361,6 +377,7 @@ const FoodData = [
         type: "Food",
         category: "Bún, mì, phở",
         shopId: "com_van_phong_an_nhien",
+        shopName: "Cơm Văn Phòng An Nhiên",
         index: 19,
     },
     // Category: Khác (Drinks)
@@ -384,6 +401,7 @@ const FoodData = [
         type: "Drink",
         category: "Khác",
         shopId: "mecha_drinks",
+        shopName: "Mecha",
         index: 20,
     },
     {
@@ -405,6 +423,7 @@ const FoodData = [
         type: "Drink",
         category: "Khác",
         shopId: "mecha_drinks",
+        shopName: "Mecha",
         index: 21,
     },
     {
@@ -427,6 +446,7 @@ const FoodData = [
         type: "Drink",
         category: "Khác",
         shopId: "mecha_drinks",
+        shopName: "Mecha",
         index: 22,
     },
     {
@@ -449,6 +469,7 @@ const FoodData = [
         type: "Drink",
         category: "Khác",
         shopId: "mecha_drinks",
+        shopName: "Mecha",
         index: 23,
     },
     {
@@ -471,6 +492,7 @@ const FoodData = [
         type: "Drink",
         category: "Khác",
         shopId: "mecha_drinks",
+        shopName: "Mecha",
         index: 24,
     },
 ];

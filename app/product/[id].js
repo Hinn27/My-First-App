@@ -20,7 +20,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"; // Import Sa
 import { useTheme } from "../../src/context/ThemeContext";
 import { useProductStore } from "../../src/store/productStore";
 import { useUserStore } from "../../src/store/userStore";
-import { shops } from "../../src/data/shops";
 
 const { height } = Dimensions.get("window");
 
@@ -310,11 +309,7 @@ export default function ProductDetailScreen() {
         );
     }
 
-    // Assign shop to product using shopId field
-    const shopForProduct = (() => {
-        if (!product || !product.shopId) return null;
-        return shops.find((s) => s.id === product.shopId) || null;
-    })();
+    // No longer need shopForProduct - using product.shopName and product.shopId directly
 
     return (
         <View style={styles.container}>
@@ -464,11 +459,9 @@ export default function ProductDetailScreen() {
                             }}
                         >
                             <Text style={styles.ingredients}>
-                                {shopForProduct
-                                    ? shopForProduct.displayName
-                                    : "Không có"}
+                                {product?.shopName || "Không có"}
                             </Text>
-                            {shopForProduct && (
+                            {product?.shopId && (
                                 <Pressable
                                     onPress={() => {
                                         // Check if user is logged in
@@ -497,7 +490,7 @@ export default function ProductDetailScreen() {
                                         router.push({
                                             pathname: "/chat/[shopId]",
                                             params: {
-                                                shopId: shopForProduct.id,
+                                                shopId: product.shopId,
                                             },
                                         });
                                     }}

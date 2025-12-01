@@ -17,23 +17,23 @@ import {
     Alert,
     ScrollView,
     Image,
-} from 'react-native';
-import { useState } from 'react';
-import { useRouter } from 'expo-router';
-import * as ImagePicker from 'expo-image-picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../../src/context/ThemeContext';
-import { useUserStore } from '../../src/store/userStore';
+} from "react-native";
+import { useState } from "react";
+import { useRouter } from "expo-router";
+import * as ImagePicker from "expo-image-picker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from "../../src/context/ThemeContext";
+import { useUserStore } from "../../src/store/userStore";
 
 export default function SellerRegisterScreen() {
     const { theme } = useTheme();
     const router = useRouter();
     const setUser = useUserStore((state) => state.setUser);
-    const [sellerName, setSellerName] = useState('');
-    const [storeName, setStoreName] = useState('');
-    const [address, setAddress] = useState('');
-    const [phone, setPhone] = useState('');
+    const [sellerName, setSellerName] = useState("");
+    const [storeName, setStoreName] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
     const [storeImages, setStoreImages] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -43,17 +43,17 @@ export default function SellerRegisterScreen() {
         // Request permission
         const { status } =
             await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
+        if (status !== "granted") {
             Alert.alert(
-                'Lỗi',
-                'Cần quyền truy cập thư viện ảnh để chọn hình ảnh',
+                "Lỗi",
+                "Cần quyền truy cập thư viện ảnh để chọn hình ảnh"
             );
             return;
         }
 
         // Pick image
         const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['images'],
+            mediaTypes: ["images"],
             allowsMultipleSelection: true,
             quality: 0.8,
             maxHeight: 1024,
@@ -72,17 +72,17 @@ export default function SellerRegisterScreen() {
     const handleRegister = async () => {
         // Validation
         if (!sellerName || !storeName || !address || !phone) {
-            Alert.alert('Lỗi', 'Vui lòng nhập đầy đủ thông tin');
+            Alert.alert("Lỗi", "Vui lòng nhập đầy đủ thông tin");
             return;
         }
 
         if (phone.length < 10) {
-            Alert.alert('Lỗi', 'Số điện thoại không hợp lệ');
+            Alert.alert("Lỗi", "Số điện thoại không hợp lệ");
             return;
         }
 
         if (storeImages.length === 0) {
-            Alert.alert('Lỗi', 'Vui lòng thêm ít nhất 1 hình ảnh cửa hàng');
+            Alert.alert("Lỗi", "Vui lòng thêm ít nhất 1 hình ảnh cửa hàng");
             return;
         }
 
@@ -93,14 +93,14 @@ export default function SellerRegisterScreen() {
             await new Promise((resolve) => setTimeout(resolve, 1000));
 
             // Get current user data
-            const userDataStr = await AsyncStorage.getItem('user');
+            const userDataStr = await AsyncStorage.getItem("user");
             const userData = userDataStr ? JSON.parse(userDataStr) : {};
 
             // Update with seller info
             const updatedUser = {
                 ...userData,
                 isSeller: true,
-                sellerStatus: 'pending', // Change to pending to show "Chờ duyệt 24h" message
+                sellerStatus: "pending", // Change to pending to show "Chờ duyệt 24h" message
                 sellerInfo: {
                     sellerName,
                     storeName,
@@ -112,22 +112,22 @@ export default function SellerRegisterScreen() {
             };
 
             // Save to both AsyncStorage and Zustand store
-            await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
+            await AsyncStorage.setItem("user", JSON.stringify(updatedUser));
             setUser(updatedUser);
 
             Alert.alert(
-                'Thành công',
-                'Đăng ký bán hàng thành công! Vui lòng chờ duyệt trong 24h.',
+                "Thành công",
+                "Đăng ký bán hàng thành công! Vui lòng chờ duyệt trong 24h.",
                 [
                     {
-                        text: 'OK',
+                        text: "OK",
                         onPress: () => router.back(),
                     },
-                ],
+                ]
             );
         } catch (_error) {
             console.error("Error submitting seller registration:", _error);
-            Alert.alert('Lỗi', 'Đăng ký thất bại. Vui lòng thử lại.');
+            Alert.alert("Lỗi", "Đăng ký thất bại. Vui lòng thử lại.");
         } finally {
             setLoading(false);
         }
@@ -135,7 +135,7 @@ export default function SellerRegisterScreen() {
 
     return (
         <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.container}
         >
             <ScrollView
@@ -300,17 +300,17 @@ export default function SellerRegisterScreen() {
                         >
                             <Text style={styles.registerButtonText}>
                                 {loading
-                                    ? 'Đang đăng ký...'
-                                    : 'Gửi đăng ký bán hàng'}
+                                    ? "Đang đăng ký..."
+                                    : "Gửi đăng ký bán hàng"}
                             </Text>
                         </Pressable>
 
                         <Text style={styles.termsText}>
-                            Bằng cách đăng ký, bạn đồng ý với{' '}
+                            Bằng cách đăng ký, bạn đồng ý với{" "}
                             <Text style={styles.termsLink}>
                                 Điều khoản bán hàng
-                            </Text>{' '}
-                            và{' '}
+                            </Text>{" "}
+                            và{" "}
                             <Text style={styles.termsLink}>
                                 Chính sách hoa hồng
                             </Text>
@@ -336,13 +336,13 @@ const createStyles = (theme) =>
             padding: 24,
         },
         header: {
-            alignItems: 'center',
+            alignItems: "center",
             marginBottom: 24,
             marginTop: 20,
         },
         title: {
             fontSize: 28,
-            fontWeight: 'bold',
+            fontWeight: "bold",
             color: theme.onBackground,
             marginTop: 16,
         },
@@ -350,16 +350,16 @@ const createStyles = (theme) =>
             fontSize: 14,
             color: theme.onSurfaceVariant,
             marginTop: 8,
-            textAlign: 'center',
+            textAlign: "center",
             paddingHorizontal: 20,
         },
         infoBox: {
-            flexDirection: 'row',
+            flexDirection: "row",
             backgroundColor: theme.primaryContainer,
             padding: 16,
             borderRadius: 12,
             marginBottom: 24,
-            alignItems: 'center',
+            alignItems: "center",
         },
         infoText: {
             flex: 1,
@@ -373,14 +373,14 @@ const createStyles = (theme) =>
         },
         sectionTitle: {
             fontSize: 18,
-            fontWeight: 'bold',
+            fontWeight: "bold",
             color: theme.onBackground,
             marginBottom: 16,
             marginTop: 8,
         },
         inputContainer: {
-            flexDirection: 'row',
-            alignItems: 'flex-start',
+            flexDirection: "row",
+            alignItems: "flex-start",
             backgroundColor: theme.surfaceVariant,
             borderRadius: 12,
             marginBottom: 16,
@@ -404,8 +404,8 @@ const createStyles = (theme) =>
             paddingBottom: 16,
         },
         imagesContainer: {
-            flexDirection: 'row',
-            flexWrap: 'wrap',
+            flexDirection: "row",
+            flexWrap: "wrap",
             marginBottom: 8,
         },
         imageWrapper: {
@@ -414,14 +414,14 @@ const createStyles = (theme) =>
             marginRight: 12,
             marginBottom: 12,
             borderRadius: 12,
-            overflow: 'hidden',
+            overflow: "hidden",
         },
         image: {
-            width: '100%',
-            height: '100%',
+            width: "100%",
+            height: "100%",
         },
         removeButton: {
-            position: 'absolute',
+            position: "absolute",
             top: -8,
             right: -8,
             backgroundColor: theme.surface,
@@ -434,16 +434,16 @@ const createStyles = (theme) =>
             borderRadius: 12,
             borderWidth: 2,
             borderColor: theme.outline,
-            borderStyle: 'dashed',
-            justifyContent: 'center',
-            alignItems: 'center',
+            borderStyle: "dashed",
+            justifyContent: "center",
+            alignItems: "center",
             marginBottom: 12,
         },
         addImageText: {
             color: theme.primary,
             fontSize: 12,
             marginTop: 4,
-            fontWeight: '600',
+            fontWeight: "600",
         },
         imageHint: {
             color: theme.onSurfaceVariant,
@@ -454,8 +454,8 @@ const createStyles = (theme) =>
             backgroundColor: theme.secondary,
             borderRadius: 12,
             height: 56,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
             marginBottom: 16,
         },
         registerButtonDisabled: {
@@ -464,16 +464,16 @@ const createStyles = (theme) =>
         registerButtonText: {
             color: theme.onSecondary,
             fontSize: 16,
-            fontWeight: 'bold',
+            fontWeight: "bold",
         },
         termsText: {
             color: theme.onSurfaceVariant,
             fontSize: 12,
-            textAlign: 'center',
+            textAlign: "center",
             lineHeight: 18,
         },
         termsLink: {
             color: theme.primary,
-            fontWeight: '600',
+            fontWeight: "600",
         },
     });

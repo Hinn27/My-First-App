@@ -35,6 +35,7 @@ export default function ProductCard(props) {
         favourite,
         theme,
         shopId,
+        shopName,
     } = props;
 
     const router = useRouter();
@@ -87,19 +88,10 @@ export default function ProductCard(props) {
         displayPrice = price;
     }
 
-    // choose shop from shopId or fall back to deterministic lookup
-    const shop = shopId
-        ? shops.find((s) => s.id === shopId)
-        : (() => {
-              const idx =
-                  Array.from(String(name || id || "")).reduce(
-                      (a, ch) => a + (ch.codePointAt(0) || 0),
-                      0
-                  ) % shops.length;
-              return shops[idx];
-          })();
+    // choose shop from shopId for getting unread count
+    const shop = shopId ? shops.find((s) => s.id === shopId) : null;
     const unreadCount = useChatStore(
-        (s) => (s.unread && s.unread[shop?.id]) || 0
+        (s) => (s.unread && s.unread[shopId]) || 0
     );
 
     return (
@@ -230,14 +222,14 @@ export default function ProductCard(props) {
                             ]}
                             numberOfLines={1}
                         >
-                            {shop ? shop.displayName : "Quán"}
+                            {shopName || "Quán"}
                         </Text>
-                        {shop && (
+                        {shopId && (
                             <Pressable
                                 onPress={() =>
                                     router.push({
-                                        pathname: `/chat/${shop.id}`,
-                                        params: { shopId: shop.id },
+                                        pathname: `/chat/${shopId}`,
+                                        params: { shopId: shopId },
                                     })
                                 }
                                 style={styles.shopChatButton}
