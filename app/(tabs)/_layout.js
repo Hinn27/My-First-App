@@ -90,9 +90,7 @@ export default function TabLayout() {
                     fontWeight: "600",
                     fontSize: 20,
                     color: theme.onBackground,
-                    letterSpacing: -0.3,
-                    lineHeight: 24,
-                    marginTop: -4,
+                    textAlign: "center",
                 },
                 tabBarStyle: {
                     backgroundColor: theme.surface,
@@ -120,12 +118,10 @@ export default function TabLayout() {
                     marginHorizontal: 0,
                 },
                 tabBarLabelStyle: {
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: "500",
                     marginTop: 1,
                     textAlign: "center",
-                    textAlignVertical: "center",
-                    includeFontPadding: false,
                 },
                 tabBarIconStyle: {
                     marginBottom: 0,
@@ -170,8 +166,9 @@ export default function TabLayout() {
                     tabBarIcon: OrderIcon,
                     headerTitleStyle: {
                         fontWeight: "600",
-                        fontSize: 16,
+                        fontSize: 20,
                         color: theme.onBackground,
+                        textAlign: "center",
                     },
                     headerLeft: () => null,
                 }}

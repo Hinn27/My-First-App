@@ -250,12 +250,9 @@ function AppContent() {
                         headerShown: true,
                         title: "Tin nhắn",
                         headerBackTitle: "Quay lại",
+                        headerTitleAlign: "center",
                         headerTitleStyle: {
-                            fontWeight: "600",
-                            fontSize: 20,
-                            letterSpacing: -0.3,
-                            lineHeight: 24,
-                            marginTop: -4,
+                            textAlign: "center",
                         },
                     }}
                 />
