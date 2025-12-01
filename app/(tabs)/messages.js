@@ -13,17 +13,22 @@ import {
     StatusBar,
     TouchableOpacity,
 } from "react-native";
-import { Text, Avatar, List, Divider } from "react-native-paper";
+import { Text, Avatar, List, Divider, Button } from "react-native-paper";
 import { useRouter } from "expo-router";
 import ScreenWrapper from "../../src/components/ScreenWrapper";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useChatStore } from "../../src/store/chatStore";
 import { shops } from "../../src/data/shops";
+import { useUserStore } from "../../src/store/userStore";
 
 export default function MessagesScreen() {
     const { theme } = useTheme();
     const router = useRouter();
     const styles = createStyles(theme);
+
+    // Check if user is logged in
+    const user = useUserStore((state) => state.user);
+    const isLoggedIn = user?.isLoggedIn || false;
 
     // Get real chat data from store
     const messages = useChatStore((state) => state.messages);
@@ -39,11 +44,10 @@ export default function MessagesScreen() {
             .map((shopId) => {
                 const msgs = messages[shopId] || [];
                 const lastMsg = msgs.length > 0 ? msgs[0] : null;
-                const shop =
-                    shops.find((s) => s.id === shopId) || {
-                        id: shopId,
-                        displayName: shopId,
-                    };
+                const shop = shops.find((s) => s.id === shopId) || {
+                    id: shopId,
+                    displayName: shopId,
+                };
 
                 return {
                     shopId,
@@ -70,15 +74,55 @@ export default function MessagesScreen() {
         });
     };
 
+    if (!isLoggedIn) {
+        return (
+            <ScreenWrapper style={styles.container}>
+                <StatusBar
+                    backgroundColor={theme.background}
+                    barStyle={
+                        theme.mode === "dark" ? "light-content" : "dark-content"
+                    }
+                />
+                <View
+                    style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: 20,
+                    }}
+                >
+                    <Text variant="headlineSmall" style={{ marginBottom: 16 }}>
+                        Đăng nhập để nhắn tin
+                    </Text>
+                    <Text
+                        variant="bodyMedium"
+                        style={{
+                            color: theme.onSurfaceVariant,
+                            marginBottom: 24,
+                            textAlign: "center",
+                        }}
+                    >
+                        Bạn cần đăng nhập tài khoản để có thể nhắn tin với các
+                        quán ăn.
+                    </Text>
+                    <Button
+                        mode="contained"
+                        onPress={() => router.push("/auth/login")}
+                    >
+                        Đăng nhập
+                    </Button>
+                </View>
+            </ScreenWrapper>
+        );
+    }
+
     if (!conversations || conversations.length === 0) {
         return (
             <ScreenWrapper style={styles.container}>
                 <StatusBar
                     backgroundColor={theme.background}
                     barStyle={
-                        theme.mode === "dark"
-                            ? "light-content"
-                            : "dark-content"
+                        theme.mode === "dark" ? "light-content" : "dark-content"
                     }
                 />
                 <View
@@ -126,7 +170,10 @@ export default function MessagesScreen() {
                                     <Avatar.Icon
                                         size={48}
                                         icon="store"
-                                        style={{ backgroundColor: theme.surfaceVariant }}
+                                        style={{
+                                            backgroundColor:
+                                                theme.surfaceVariant,
+                                        }}
                                     />
                                 )}
                                 right={(props) => (
