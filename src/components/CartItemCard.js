@@ -1,14 +1,9 @@
 // Component: Cart Item
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import {
-    Text,
-    Card,
-    IconButton,
-    Chip,
-} from 'react-native-paper';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { Text, Card, IconButton, Chip } from "react-native-paper";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export default function CartItemCard({
     id,
@@ -27,7 +22,9 @@ export default function CartItemCard({
                 <View style={styles.row}>
                     {/* Product Image */}
                     <View style={styles.imageContainer}>
-                        <Text style={styles.imageIcon}>{imageIcon || '☕'}</Text>
+                        <Text style={styles.imageIcon}>
+                            {imageIcon || "☕"}
+                        </Text>
                     </View>
 
                     {/* Product Info */}
@@ -40,7 +37,10 @@ export default function CartItemCard({
                                 {special_ingredient}
                             </Text>
                             {roasted && (
-                                <Text variant="bodySmall" style={styles.roasted}>
+                                <Text
+                                    variant="bodySmall"
+                                    style={styles.roasted}
+                                >
                                     {roasted}
                                 </Text>
                             )}
@@ -48,7 +48,10 @@ export default function CartItemCard({
 
                         {/* Sizes and Quantities */}
                         {prices.map((item, index) => (
-                            <View key={item.size || item.id || index} style={styles.priceRow}>
+                            <View
+                                key={item.size || item.id || index}
+                                style={styles.priceRow}
+                            >
                                 <View style={styles.sizeContainer}>
                                     <Chip
                                         style={styles.sizeChip}
@@ -56,8 +59,13 @@ export default function CartItemCard({
                                     >
                                         {item.size}
                                     </Chip>
-                                    <Text variant="titleSmall" style={styles.priceText}>
-                                        {Number.parseInt(item.price).toLocaleString('vi-VN')}{' '}
+                                    <Text
+                                        variant="titleSmall"
+                                        style={styles.priceText}
+                                    >
+                                        {Number.parseInt(
+                                            item.price
+                                        ).toLocaleString("vi-VN")}{" "}
                                         đ
                                     </Text>
                                 </View>
@@ -70,7 +78,7 @@ export default function CartItemCard({
                                         iconColor="#FFF"
                                         style={[
                                             styles.quantityButton,
-                                            { backgroundColor: '#D17842' },
+                                            { backgroundColor: "#D17842" },
                                         ]}
                                         onPress={() =>
                                             decrementHandler(id, item.size)
@@ -80,10 +88,13 @@ export default function CartItemCard({
                                     <View
                                         style={[
                                             styles.quantityBox,
-                                            { borderColor: '#D17842' },
+                                            { borderColor: "#D17842" },
                                         ]}
                                     >
-                                        <Text variant="bodyMedium" style={styles.quantityText}>
+                                        <Text
+                                            variant="bodyMedium"
+                                            style={styles.quantityText}
+                                        >
                                             {item.quantity}
                                         </Text>
                                     </View>
@@ -94,7 +105,7 @@ export default function CartItemCard({
                                         iconColor="#FFF"
                                         style={[
                                             styles.quantityButton,
-                                            { backgroundColor: '#D17842' },
+                                            { backgroundColor: "#D17842" },
                                         ]}
                                         onPress={() =>
                                             incrementHandler(id, item.size)
@@ -119,16 +130,16 @@ const styles = StyleSheet.create({
         padding: 12,
     },
     row: {
-        flexDirection: 'row',
+        flexDirection: "row",
         gap: 12,
     },
     imageContainer: {
         width: 80,
         height: 80,
         borderRadius: 16,
-        backgroundColor: 'rgba(135, 206, 235, 0.1)',
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: "rgba(135, 206, 235, 0.1)",
+        justifyContent: "center",
+        alignItems: "center",
     },
     imageIcon: {
         fontSize: 48,
@@ -141,7 +152,7 @@ const styles = StyleSheet.create({
         gap: 2,
     },
     name: {
-        fontWeight: '700',
+        fontWeight: "700",
         fontSize: 16,
     },
     ingredient: {
@@ -153,17 +164,17 @@ const styles = StyleSheet.create({
         fontSize: 11,
     },
     priceRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
         marginTop: 8,
         paddingTop: 8,
         borderTopWidth: StyleSheet.hairlineWidth, // Dùng nét mảnh nhất của màn hình
-        borderTopColor: 'rgba(0,0,0,0.1)',
+        borderTopColor: "rgba(0,0,0,0.1)",
     },
     sizeContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         gap: 8,
     },
     sizeChip: {
@@ -174,12 +185,12 @@ const styles = StyleSheet.create({
         lineHeight: 16,
     },
     priceText: {
-        fontWeight: '700',
+        fontWeight: "700",
         fontSize: 14,
     },
     quantityContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         gap: 8,
     },
     quantityButton: {
@@ -192,12 +203,12 @@ const styles = StyleSheet.create({
         height: 28,
         borderRadius: 8,
         borderWidth: 0.5, // Giảm tiếp xuống 0.5
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'transparent',
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "transparent",
     },
     quantityText: {
-        fontWeight: '600',
+        fontWeight: "600",
         fontSize: 14,
     },
 });

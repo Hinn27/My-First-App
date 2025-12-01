@@ -93,9 +93,9 @@ android {
         targetCompatibility JavaVersion.VERSION_21
     }
 
-    namespace 'com.hinne.myapp'
+    namespace 'com.hinne.refood'
     defaultConfig {
-        applicationId 'com.hinne.myapp'
+        applicationId 'com.hinne.refood'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

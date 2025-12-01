@@ -1,4 +1,4 @@
-package com.hinne.myapp
+package com.hinne.refood
 
 import android.app.Application
 import android.content.res.Configuration

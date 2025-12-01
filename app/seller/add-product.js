@@ -8,7 +8,7 @@
  * - Chỉ seller đã được approve mới truy cập được
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
     View,
     Text,
@@ -19,12 +19,12 @@ import {
     Alert,
     Switch,
     Image,
-} from 'react-native';
-import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
-import { useTheme } from '../../src/context/ThemeContext';
-import { useProductStore } from '../../src/store/productStore';
+} from "react-native";
+import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
+import { useTheme } from "../../src/context/ThemeContext";
+import { useProductStore } from "../../src/store/productStore";
 
 export default function AddProductScreen() {
     const router = useRouter();
@@ -34,23 +34,23 @@ export default function AddProductScreen() {
 
     // Form state
     const [productData, setProductData] = useState({
-        name: '',
-        type: 'Food', // Chỉ còn Food
-        category: '',
+        name: "",
+        type: "Food", // Chỉ còn Food
+        category: "",
         productImage: null, // Product image
-        special_ingredient: '',
-        description: '',
-        roasted: '',
-        ingredients: '',
+        special_ingredient: "",
+        description: "",
+        roasted: "",
+        ingredients: "",
         prices: {
-            S: { enabled: false, price: '' },
-            M: { enabled: true, price: '' },
-            L: { enabled: false, price: '' },
+            S: { enabled: false, price: "" },
+            M: { enabled: true, price: "" },
+            L: { enabled: false, price: "" },
         },
     });
 
     // Categories (chỉ còn món ăn)
-    const foodCategories = ['Cơm', 'Bún, mì, phở', 'Bánh mì'];
+    const foodCategories = ["Cơm", "Bún, mì, phở", "Bánh mì"];
     const currentCategories = foodCategories;
 
     // Handle form change
@@ -80,8 +80,8 @@ export default function AddProductScreen() {
 
             if (permissionResult.granted === false) {
                 Alert.alert(
-                    'Thông báo',
-                    'Bạn cần cấp quyền truy cập thư viện ảnh!',
+                    "Thông báo",
+                    "Bạn cần cấp quyền truy cập thư viện ảnh!"
                 );
                 return;
             }
@@ -94,43 +94,43 @@ export default function AddProductScreen() {
             });
 
             if (!result.canceled && result.assets[0]) {
-                handleChange('productImage', result.assets[0].uri);
+                handleChange("productImage", result.assets[0].uri);
             }
         } catch (error) {
-            console.error('Error picking image:', error);
-            Alert.alert('Lỗi', 'Không thể chọn ảnh. Vui lòng thử lại.');
+            console.error("Error picking image:", error);
+            Alert.alert("Lỗi", "Không thể chọn ảnh. Vui lòng thử lại.");
         }
     };
 
     // Validate form
     const validateForm = () => {
         if (!productData.productImage) {
-            Alert.alert('Lỗi', 'Vui lòng chọn ảnh sản phẩm');
+            Alert.alert("Lỗi", "Vui lòng chọn ảnh sản phẩm");
             return false;
         }
         if (!productData.name.trim()) {
-            Alert.alert('Lỗi', 'Vui lòng nhập tên sản phẩm');
+            Alert.alert("Lỗi", "Vui lòng nhập tên sản phẩm");
             return false;
         }
         if (!productData.category) {
-            Alert.alert('Lỗi', 'Vui lòng chọn danh mục');
+            Alert.alert("Lỗi", "Vui lòng chọn danh mục");
             return false;
         }
         if (!productData.special_ingredient.trim()) {
-            Alert.alert('Lỗi', 'Vui lòng nhập mô tả ngắn');
+            Alert.alert("Lỗi", "Vui lòng nhập mô tả ngắn");
             return false;
         }
         if (!productData.description.trim()) {
-            Alert.alert('Lỗi', 'Vui lòng nhập mô tả chi tiết');
+            Alert.alert("Lỗi", "Vui lòng nhập mô tả chi tiết");
             return false;
         }
 
         // Check at least one price
         const hasPrice = Object.values(productData.prices).some(
-            (p) => p.enabled && p.price && parseFloat(p.price) > 0,
+            (p) => p.enabled && p.price && parseFloat(p.price) > 0
         );
         if (!hasPrice) {
-            Alert.alert('Lỗi', 'Vui lòng nhập ít nhất 1 giá cho sản phẩm');
+            Alert.alert("Lỗi", "Vui lòng nhập ít nhất 1 giá cho sản phẩm");
             return false;
         }
 
@@ -148,7 +148,7 @@ export default function AddProductScreen() {
                 prices.push({
                     size,
                     price: data.price,
-                    currency: 'đ',
+                    currency: "đ",
                     quantity: 1,
                 });
             }
@@ -158,14 +158,14 @@ export default function AddProductScreen() {
             id: `${productData.type[0]}${Date.now()}`,
             name: productData.name,
             description: productData.description,
-            roasted: productData.roasted || 'Đặc biệt',
+            roasted: productData.roasted || "Đặc biệt",
             imagelink_square: productData.productImage,
             imagelink_portrait: productData.productImage,
             special_ingredient: productData.special_ingredient,
             ingredients: productData.ingredients,
             prices,
             average_rating: 0,
-            ratings_count: '0',
+            ratings_count: "0",
             favourite: false,
             type: productData.type,
             category: productData.category,
@@ -175,9 +175,9 @@ export default function AddProductScreen() {
         // Save to store
         addProduct(newProduct);
 
-        Alert.alert('Thành công', 'Sản phẩm đã được đăng thành công!', [
+        Alert.alert("Thành công", "Sản phẩm đã được đăng thành công!", [
             {
-                text: 'OK',
+                text: "OK",
                 onPress: () => router.back(),
             },
         ]);
@@ -240,7 +240,7 @@ export default function AddProductScreen() {
                         placeholder="VD: Phở Bò, Cà Phê Sữa Đá..."
                         placeholderTextColor={theme.onSurfaceVariant}
                         value={productData.name}
-                        onChangeText={(text) => handleChange('name', text)}
+                        onChangeText={(text) => handleChange("name", text)}
                     />
                 </View>
 
@@ -254,7 +254,7 @@ export default function AddProductScreen() {
                             <Ionicons
                                 name="restaurant"
                                 size={20}
-                                color={'#FFFFFF'}
+                                color={"#FFFFFF"}
                             />
                             <Text
                                 style={[
@@ -280,7 +280,7 @@ export default function AddProductScreen() {
                                     productData.category === cat &&
                                         styles.categoryChipActive,
                                 ]}
-                                onPress={() => handleChange('category', cat)}
+                                onPress={() => handleChange("category", cat)}
                             >
                                 <Text
                                     style={[
@@ -305,7 +305,7 @@ export default function AddProductScreen() {
                         placeholderTextColor={theme.onSurfaceVariant}
                         value={productData.special_ingredient}
                         onChangeText={(text) =>
-                            handleChange('special_ingredient', text)
+                            handleChange("special_ingredient", text)
                         }
                     />
                 </View>
@@ -319,7 +319,7 @@ export default function AddProductScreen() {
                         placeholderTextColor={theme.onSurfaceVariant}
                         value={productData.description}
                         onChangeText={(text) =>
-                            handleChange('description', text)
+                            handleChange("description", text)
                         }
                         multiline
                         numberOfLines={4}
@@ -335,7 +335,7 @@ export default function AddProductScreen() {
                         placeholder="VD: Món nóng, Medium roasted, Món cay..."
                         placeholderTextColor={theme.onSurfaceVariant}
                         value={productData.roasted}
-                        onChangeText={(text) => handleChange('roasted', text)}
+                        onChangeText={(text) => handleChange("roasted", text)}
                     />
                 </View>
 
@@ -348,7 +348,7 @@ export default function AddProductScreen() {
                         placeholderTextColor={theme.onSurfaceVariant}
                         value={productData.ingredients}
                         onChangeText={(text) =>
-                            handleChange('ingredients', text)
+                            handleChange("ingredients", text)
                         }
                     />
                 </View>
@@ -356,12 +356,12 @@ export default function AddProductScreen() {
                 {/* Prices */}
                 <View style={styles.section}>
                     <Text style={styles.label}>Giá sản phẩm *</Text>
-                    {['S', 'M', 'L'].map((size) => (
+                    {["S", "M", "L"].map((size) => (
                         <View key={size} style={styles.priceRow}>
                             <Switch
                                 value={productData.prices[size].enabled}
                                 onValueChange={(val) =>
-                                    handlePriceChange(size, 'enabled', val)
+                                    handlePriceChange(size, "enabled", val)
                                 }
                                 trackColor={{
                                     false: theme.outline,
@@ -381,7 +381,7 @@ export default function AddProductScreen() {
                                 keyboardType="numeric"
                                 value={productData.prices[size].price}
                                 onChangeText={(text) =>
-                                    handlePriceChange(size, 'price', text)
+                                    handlePriceChange(size, "price", text)
                                 }
                                 editable={productData.prices[size].enabled}
                             />
@@ -412,9 +412,9 @@ const createStyles = (theme) =>
             paddingBottom: 40,
         },
         header: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
             marginBottom: 24,
         },
         backButton: {
@@ -422,12 +422,12 @@ const createStyles = (theme) =>
             height: 40,
             borderRadius: 20,
             backgroundColor: theme.surface,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
         },
         title: {
             fontSize: 20,
-            fontWeight: '700',
+            fontWeight: "700",
             color: theme.onBackground,
         },
         section: {
@@ -435,7 +435,7 @@ const createStyles = (theme) =>
         },
         label: {
             fontSize: 15,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onBackground,
             marginBottom: 8,
         },
@@ -457,14 +457,14 @@ const createStyles = (theme) =>
             backgroundColor: theme.surface,
             borderRadius: 12,
             height: 200,
-            alignItems: 'center',
-            justifyContent: 'center',
+            alignItems: "center",
+            justifyContent: "center",
             borderWidth: 1,
             borderColor: theme.outline,
-            overflow: 'hidden',
+            overflow: "hidden",
         },
         imagePickerPlaceholder: {
-            alignItems: 'center',
+            alignItems: "center",
             gap: 8,
         },
         imagePickerText: {
@@ -472,19 +472,19 @@ const createStyles = (theme) =>
             color: theme.onSurfaceVariant,
         },
         productImagePreview: {
-            width: '100%',
-            height: '100%',
-            resizeMode: 'cover',
+            width: "100%",
+            height: "100%",
+            resizeMode: "cover",
         },
         typeSelector: {
-            flexDirection: 'row',
+            flexDirection: "row",
             gap: 12,
         },
         typeButton: {
             flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
             gap: 8,
             paddingVertical: 14,
             borderRadius: 12,
@@ -498,15 +498,15 @@ const createStyles = (theme) =>
         },
         typeButtonText: {
             fontSize: 15,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
         },
         typeButtonTextActive: {
-            color: '#FFFFFF',
+            color: "#FFFFFF",
         },
         categoryGrid: {
-            flexDirection: 'row',
-            flexWrap: 'wrap',
+            flexDirection: "row",
+            flexWrap: "wrap",
             gap: 8,
         },
         categoryChip: {
@@ -523,21 +523,21 @@ const createStyles = (theme) =>
         },
         categoryChipText: {
             fontSize: 14,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
         },
         categoryChipTextActive: {
-            color: '#FFFFFF',
+            color: "#FFFFFF",
         },
         priceRow: {
-            flexDirection: 'row',
-            alignItems: 'center',
+            flexDirection: "row",
+            alignItems: "center",
             marginBottom: 12,
             gap: 12,
         },
         sizeLabel: {
             fontSize: 15,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onBackground,
             width: 60,
         },
@@ -551,7 +551,7 @@ const createStyles = (theme) =>
             color: theme.onSurface,
             borderWidth: 1,
             borderColor: theme.outline,
-            textAlign: 'right',
+            textAlign: "right",
         },
         priceInputDisabled: {
             backgroundColor: theme.surfaceVariant,
@@ -559,23 +559,23 @@ const createStyles = (theme) =>
         },
         currency: {
             fontSize: 15,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurfaceVariant,
             width: 20,
         },
         submitButton: {
-            flexDirection: 'row',
+            flexDirection: "row",
             backgroundColor: theme.primary,
             paddingVertical: 16,
             borderRadius: 12,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
             gap: 8,
             marginTop: 20,
         },
         submitButtonText: {
-            color: '#FFFFFF',
+            color: "#FFFFFF",
             fontSize: 16,
-            fontWeight: '700',
+            fontWeight: "700",
         },
     });

@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { View, Text, StyleSheet } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 
 export default function UserDetailScreen() {
     // Lấy parameter từ URL
@@ -14,7 +14,7 @@ export default function UserDetailScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-    title: { fontSize: 24, fontWeight: 'bold', marginBottom: 10 },
-    text: { fontSize: 16, color: '#666' },
+    container: { flex: 1, justifyContent: "center", alignItems: "center" },
+    title: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
+    text: { fontSize: 16, color: "#666" },
 });

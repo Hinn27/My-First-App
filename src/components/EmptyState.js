@@ -1,12 +1,12 @@
 // Empty State Component
-import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React from "react";
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function EmptyState({
-    icon = 'file-tray-outline',
-    title = 'Không có dữ liệu',
-    message = 'Dữ liệu sẽ hiển thị ở đây',
+    icon = "file-tray-outline",
+    title = "Không có dữ liệu",
+    message = "Dữ liệu sẽ hiển thị ở đây",
     buttonText,
     onButtonPress,
     theme,
@@ -16,12 +16,12 @@ export default function EmptyState({
             <Ionicons
                 name={icon}
                 size={80}
-                color={theme?.onSurfaceVariant || '#8e8e93'}
+                color={theme?.onSurfaceVariant || "#8e8e93"}
             />
             <Text
                 style={[
                     styles.title,
-                    { color: theme?.onBackground || '#1c1c1e' },
+                    { color: theme?.onBackground || "#1c1c1e" },
                 ]}
             >
                 {title}
@@ -29,7 +29,7 @@ export default function EmptyState({
             <Text
                 style={[
                     styles.message,
-                    { color: theme?.onSurfaceVariant || '#8e8e93' },
+                    { color: theme?.onSurfaceVariant || "#8e8e93" },
                 ]}
             >
                 {message}
@@ -38,7 +38,7 @@ export default function EmptyState({
                 <Pressable
                     style={[
                         styles.button,
-                        { backgroundColor: theme?.primary || '#D17842' },
+                        { backgroundColor: theme?.primary || "#D17842" },
                     ]}
                     onPress={onButtonPress}
                 >
@@ -52,20 +52,20 @@ export default function EmptyState({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         padding: 20,
     },
     title: {
         fontSize: 24,
-        fontWeight: '700',
+        fontWeight: "700",
         marginTop: 20,
-        textAlign: 'center',
+        textAlign: "center",
     },
     message: {
         fontSize: 16,
         marginTop: 8,
-        textAlign: 'center',
+        textAlign: "center",
         paddingHorizontal: 32,
     },
     button: {
@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
         borderRadius: 24,
     },
     buttonText: {
-        color: '#FFFFFF',
+        color: "#FFFFFF",
         fontSize: 16,
-        fontWeight: '600',
+        fontWeight: "600",
     },
 });

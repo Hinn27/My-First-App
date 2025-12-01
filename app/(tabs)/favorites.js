@@ -6,19 +6,9 @@
  * - Sử dụng Zustand store để quản lý state
  */
 import React from "react";
-import {
-    View,
-    StyleSheet,
-    FlatList,
-    StatusBar,
-    Alert,
-} from "react-native";
+import { View, StyleSheet, FlatList, StatusBar, Alert } from "react-native";
 import { useRouter } from "expo-router";
-import {
-    Text,
-    Button,
-    IconButton,
-} from "react-native-paper";
+import { Text, Button, IconButton } from "react-native-paper";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useProductStore } from "../../src/store/productStore";
 import { useUserStore } from "../../src/store/userStore";
@@ -38,7 +28,7 @@ export default function FavoritesScreen() {
     const deleteFromFavoriteList = useProductStore(
         (state) => state.deleteFromFavoriteList
     );
-    
+
     // User store
     const user = useUserStore((state) => state.user);
 
@@ -77,7 +67,16 @@ export default function FavoritesScreen() {
     // Render Not Logged In View
     if (!user) {
         return (
-            <ScreenWrapper style={[styles.container, {justifyContent: 'center', alignItems: 'center', padding: 20}]}>
+            <ScreenWrapper
+                style={[
+                    styles.container,
+                    {
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: 20,
+                    },
+                ]}
+            >
                 <StatusBar
                     backgroundColor={theme.background}
                     barStyle={

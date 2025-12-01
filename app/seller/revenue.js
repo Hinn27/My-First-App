@@ -15,17 +15,17 @@ import {
     Pressable,
     StatusBar,
     Platform,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
-import { useState, useEffect } from 'react';
-import { useTheme } from '../../src/context/ThemeContext';
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { useState, useEffect } from "react";
+import { useTheme } from "../../src/context/ThemeContext";
 
 export default function RevenueScreen() {
     const { theme } = useTheme();
     const router = useRouter();
     const styles = createStyles(theme);
-    const [activeTab, setActiveTab] = useState('new'); // 'new' or 'completed'
+    const [activeTab, setActiveTab] = useState("new"); // 'new' or 'completed'
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
@@ -37,54 +37,54 @@ export default function RevenueScreen() {
             // Load mock orders for now (no need to read user from storage)
             const mockOrders = [
                 {
-                    id: '001',
-                    customerName: 'Nguyễn Văn A',
+                    id: "001",
+                    customerName: "Nguyễn Văn A",
                     items: [
-                        { name: 'Cơm tấm sườn', quantity: 2, price: 25000 },
-                        { name: 'Bún nạm chả', quantity: 1, price: 30000 },
+                        { name: "Cơm tấm sườn", quantity: 2, price: 25000 },
+                        { name: "Bún nạm chả", quantity: 1, price: 30000 },
                     ],
                     total: 80000,
-                    status: 'new',
-                    date: '2024-01-15 10:30',
+                    status: "new",
+                    date: "2024-01-15 10:30",
                 },
                 {
-                    id: '002',
-                    customerName: 'Trần Thị B',
+                    id: "002",
+                    customerName: "Trần Thị B",
                     items: [
                         {
-                            name: 'Cơm tấm sườn',
+                            name: "Cơm tấm sườn",
                             quantity: 1,
                             price: 25000,
                         },
                     ],
                     total: 25000,
-                    status: 'new',
-                    date: '2024-01-15 11:15',
+                    status: "new",
+                    date: "2024-01-15 11:15",
                 },
                 {
-                    id: '003',
-                    customerName: 'Lê Văn C',
+                    id: "003",
+                    customerName: "Lê Văn C",
                     items: [
-                        { name: 'Phở bò', quantity: 2, price: 35000 },
-                        { name: 'Bún chả', quantity: 1, price: 30000 },
+                        { name: "Phở bò", quantity: 2, price: 35000 },
+                        { name: "Bún chả", quantity: 1, price: 30000 },
                     ],
                     total: 100000,
-                    status: 'completed',
-                    date: '2024-01-14 09:20',
+                    status: "completed",
+                    date: "2024-01-14 09:20",
                 },
                 {
-                    id: '004',
-                    customerName: 'Phạm Thị D',
-                    items: [{ name: 'Bún nạm chả', quantity: 1, price: 30000 }],
+                    id: "004",
+                    customerName: "Phạm Thị D",
+                    items: [{ name: "Bún nạm chả", quantity: 1, price: 30000 }],
                     total: 30000,
-                    status: 'completed',
-                    date: '2024-01-14 12:00',
+                    status: "completed",
+                    date: "2024-01-14 12:00",
                 },
             ];
 
             setOrders(mockOrders);
         } catch (error) {
-            console.error('Error loading orders:', error);
+            console.error("Error loading orders:", error);
         }
     };
 
@@ -97,10 +97,8 @@ export default function RevenueScreen() {
     const markAsCompleted = (orderId) => {
         setOrders((prevOrders) =>
             prevOrders.map((order) =>
-                order.id === orderId
-                    ? { ...order, status: 'completed' }
-                    : order,
-            ),
+                order.id === orderId ? { ...order, status: "completed" } : order
+            )
         );
     };
 
@@ -133,7 +131,7 @@ export default function RevenueScreen() {
                         color={theme.secondary}
                     />
                     <Text style={styles.statValue}>
-                        {calculateRevenue('new').toLocaleString('vi-VN')}đ
+                        {calculateRevenue("new").toLocaleString("vi-VN")}đ
                     </Text>
                     <Text style={styles.statLabel}>Đơn mới</Text>
                 </View>
@@ -145,7 +143,7 @@ export default function RevenueScreen() {
                         color={theme.tertiary}
                     />
                     <Text style={styles.statValue}>
-                        {calculateRevenue('completed').toLocaleString('vi-VN')}đ
+                        {calculateRevenue("completed").toLocaleString("vi-VN")}đ
                     </Text>
                     <Text style={styles.statLabel}>Đã giao</Text>
                 </View>
@@ -158,9 +156,9 @@ export default function RevenueScreen() {
                     />
                     <Text style={styles.statValue}>
                         {(
-                            calculateRevenue('new') +
-                            calculateRevenue('completed')
-                        ).toLocaleString('vi-VN')}
+                            calculateRevenue("new") +
+                            calculateRevenue("completed")
+                        ).toLocaleString("vi-VN")}
                         đ
                     </Text>
                     <Text style={styles.statLabel}>Tổng doanh thu</Text>
@@ -172,36 +170,36 @@ export default function RevenueScreen() {
                 <Pressable
                     style={[
                         styles.tab,
-                        activeTab === 'new' && styles.activeTab,
+                        activeTab === "new" && styles.activeTab,
                     ]}
-                    onPress={() => setActiveTab('new')}
+                    onPress={() => setActiveTab("new")}
                 >
                     <Text
                         style={[
                             styles.tabText,
-                            activeTab === 'new' && styles.activeTabText,
+                            activeTab === "new" && styles.activeTabText,
                         ]}
                     >
                         Đơn mới (
-                        {orders.filter((o) => o.status === 'new').length})
+                        {orders.filter((o) => o.status === "new").length})
                     </Text>
                 </Pressable>
 
                 <Pressable
                     style={[
                         styles.tab,
-                        activeTab === 'completed' && styles.activeTab,
+                        activeTab === "completed" && styles.activeTab,
                     ]}
-                    onPress={() => setActiveTab('completed')}
+                    onPress={() => setActiveTab("completed")}
                 >
                     <Text
                         style={[
                             styles.tabText,
-                            activeTab === 'completed' && styles.activeTabText,
+                            activeTab === "completed" && styles.activeTabText,
                         ]}
                     >
                         Đã giao (
-                        {orders.filter((o) => o.status === 'completed').length})
+                        {orders.filter((o) => o.status === "completed").length})
                     </Text>
                 </Pressable>
             </View>
@@ -212,22 +210,22 @@ export default function RevenueScreen() {
                     <View style={styles.emptyContainer}>
                         <Ionicons
                             name={
-                                activeTab === 'new'
-                                    ? 'receipt-outline'
-                                    : 'checkmark-done-outline'
+                                activeTab === "new"
+                                    ? "receipt-outline"
+                                    : "checkmark-done-outline"
                             }
                             size={80}
                             color={theme.outline}
                         />
                         <Text style={styles.emptyTitle}>
-                            {activeTab === 'new'
-                                ? 'Chưa có đơn mới'
-                                : 'Chưa có đơn đã giao'}
+                            {activeTab === "new"
+                                ? "Chưa có đơn mới"
+                                : "Chưa có đơn đã giao"}
                         </Text>
                         <Text style={styles.emptyText}>
-                            {activeTab === 'new'
-                                ? 'Đơn hàng mới sẽ xuất hiện ở đây'
-                                : 'Lịch sử đơn hàng đã giao sẽ hiển thị ở đây'}
+                            {activeTab === "new"
+                                ? "Đơn hàng mới sẽ xuất hiện ở đây"
+                                : "Lịch sử đơn hàng đã giao sẽ hiển thị ở đây"}
                         </Text>
                     </View>
                 ) : (
@@ -246,7 +244,7 @@ export default function RevenueScreen() {
                                     <View
                                         style={[
                                             styles.statusBadge,
-                                            order.status === 'new'
+                                            order.status === "new"
                                                 ? styles.statusNew
                                                 : styles.statusCompleted,
                                         ]}
@@ -254,14 +252,14 @@ export default function RevenueScreen() {
                                         <Text
                                             style={[
                                                 styles.statusText,
-                                                order.status === 'new'
+                                                order.status === "new"
                                                     ? styles.statusTextNew
                                                     : styles.statusTextCompleted,
                                             ]}
                                         >
-                                            {order.status === 'new'
-                                                ? 'Mới'
-                                                : 'Đã giao'}
+                                            {order.status === "new"
+                                                ? "Mới"
+                                                : "Đã giao"}
                                         </Text>
                                     </View>
                                 </View>
@@ -289,7 +287,7 @@ export default function RevenueScreen() {
                                             <Text style={styles.itemPrice}>
                                                 {(
                                                     item.quantity * item.price
-                                                ).toLocaleString('vi-VN')}
+                                                ).toLocaleString("vi-VN")}
                                                 đ
                                             </Text>
                                         </View>
@@ -301,11 +299,11 @@ export default function RevenueScreen() {
                                         Tổng cộng:
                                     </Text>
                                     <Text style={styles.totalValue}>
-                                        {order.total.toLocaleString('vi-VN')}đ
+                                        {order.total.toLocaleString("vi-VN")}đ
                                     </Text>
                                 </View>
 
-                                {order.status === 'new' && (
+                                {order.status === "new" && (
                                     <Pressable
                                         style={styles.completeButton}
                                         onPress={() =>
@@ -338,12 +336,15 @@ const createStyles = (theme) =>
             backgroundColor: theme.background,
         },
         header: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
             paddingHorizontal: 16,
             paddingBottom: 12,
-            paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 24) + 12 : 50, // Add padding top for status bar
+            paddingTop:
+                Platform.OS === "android"
+                    ? (StatusBar.currentHeight || 24) + 12
+                    : 50, // Add padding top for status bar
             backgroundColor: theme.surface,
             borderBottomWidth: 1,
             borderBottomColor: theme.outlineVariant,
@@ -353,13 +354,13 @@ const createStyles = (theme) =>
         },
         headerTitle: {
             fontSize: 18,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
             flex: 1,
             marginLeft: 12,
         },
         statsContainer: {
-            flexDirection: 'row',
+            flexDirection: "row",
             padding: 16,
             gap: 12,
         },
@@ -368,13 +369,13 @@ const createStyles = (theme) =>
             backgroundColor: theme.surface,
             borderRadius: 12,
             padding: 16,
-            alignItems: 'center',
+            alignItems: "center",
             borderWidth: 1,
             borderColor: theme.outlineVariant,
         },
         statValue: {
             fontSize: 16,
-            fontWeight: '700',
+            fontWeight: "700",
             color: theme.onSurface,
             marginTop: 8,
         },
@@ -384,7 +385,7 @@ const createStyles = (theme) =>
             marginTop: 4,
         },
         tabContainer: {
-            flexDirection: 'row',
+            flexDirection: "row",
             paddingHorizontal: 16,
             gap: 12,
             marginBottom: 8,
@@ -392,7 +393,7 @@ const createStyles = (theme) =>
         tab: {
             flex: 1,
             paddingVertical: 10,
-            alignItems: 'center',
+            alignItems: "center",
             borderRadius: 8,
             backgroundColor: theme.surfaceVariant,
         },
@@ -401,31 +402,31 @@ const createStyles = (theme) =>
         },
         tabText: {
             fontSize: 14,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurfaceVariant,
         },
         activeTabText: {
-            color: '#fff',
+            color: "#fff",
         },
         scrollContainer: {
             flex: 1,
         },
         emptyContainer: {
-            alignItems: 'center',
-            justifyContent: 'center',
+            alignItems: "center",
+            justifyContent: "center",
             paddingVertical: 60,
             paddingHorizontal: 32,
         },
         emptyTitle: {
             fontSize: 20,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
             marginTop: 16,
         },
         emptyText: {
             fontSize: 14,
             color: theme.onSurfaceVariant,
-            textAlign: 'center',
+            textAlign: "center",
             marginTop: 8,
         },
         ordersContainer: {
@@ -440,14 +441,14 @@ const createStyles = (theme) =>
             borderColor: theme.outlineVariant,
         },
         orderHeader: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
             marginBottom: 12,
         },
         orderId: {
             fontSize: 16,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
         },
         orderDate: {
@@ -468,7 +469,7 @@ const createStyles = (theme) =>
         },
         statusText: {
             fontSize: 12,
-            fontWeight: '600',
+            fontWeight: "600",
         },
         statusTextNew: {
             color: theme.secondary,
@@ -477,8 +478,8 @@ const createStyles = (theme) =>
             color: theme.tertiary,
         },
         customerInfo: {
-            flexDirection: 'row',
-            alignItems: 'center',
+            flexDirection: "row",
+            alignItems: "center",
             gap: 6,
             marginBottom: 12,
             paddingBottom: 12,
@@ -493,8 +494,8 @@ const createStyles = (theme) =>
             marginBottom: 12,
         },
         itemRow: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+            flexDirection: "row",
+            justifyContent: "space-between",
             marginBottom: 6,
         },
         itemName: {
@@ -503,12 +504,12 @@ const createStyles = (theme) =>
         },
         itemPrice: {
             fontSize: 14,
-            fontWeight: '500',
+            fontWeight: "500",
             color: theme.onSurface,
         },
         orderFooter: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+            flexDirection: "row",
+            justifyContent: "space-between",
             paddingTop: 12,
             borderTopWidth: 1,
             borderTopColor: theme.outlineVariant,
@@ -516,18 +517,18 @@ const createStyles = (theme) =>
         },
         totalLabel: {
             fontSize: 15,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
         },
         totalValue: {
             fontSize: 16,
-            fontWeight: '700',
+            fontWeight: "700",
             color: theme.primary,
         },
         completeButton: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
             backgroundColor: theme.tertiary,
             paddingVertical: 10,
             borderRadius: 8,
@@ -535,7 +536,7 @@ const createStyles = (theme) =>
         },
         completeButtonText: {
             fontSize: 14,
-            fontWeight: '600',
-            color: '#fff',
+            fontWeight: "600",
+            color: "#fff",
         },
     });

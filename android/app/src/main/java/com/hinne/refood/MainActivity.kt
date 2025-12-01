@@ -1,4 +1,4 @@
-package com.hinne.myapp
+package com.hinne.refood
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
