@@ -77,7 +77,9 @@ export default function EditProfileScreen() {
                 email: email.trim(),
                 phone: phone.trim(),
                 gender: gender,
-                birthDate: birthDate ? birthDate.toISOString() : user?.birthDate,
+                birthDate: birthDate
+                    ? birthDate.toISOString()
+                    : user?.birthDate,
             };
 
             // Save to AsyncStorage
@@ -135,7 +137,8 @@ export default function EditProfileScreen() {
                     <Card.Content>
                         {/* Name */}
                         <Text variant="labelLarge" style={styles.label}>
-                            Họ và tên <Text style={{ color: theme.error }}>*</Text>
+                            Họ và tên{" "}
+                            <Text style={{ color: theme.error }}>*</Text>
                         </Text>
                         <TextInput
                             mode="outlined"
@@ -148,7 +151,7 @@ export default function EditProfileScreen() {
 
                         {/* Email */}
                         <Text variant="labelLarge" style={styles.label}>
-                            Email <Text style={{ color: theme.error }}>*</Text>
+                            Email
                         </Text>
                         <TextInput
                             mode="outlined"
@@ -163,7 +166,8 @@ export default function EditProfileScreen() {
 
                         {/* Phone */}
                         <Text variant="labelLarge" style={styles.label}>
-                            Số điện thoại
+                            Số điện thoại{" "}
+                            <Text style={{ color: theme.error }}>*</Text>
                         </Text>
                         <TextInput
                             mode="outlined"
@@ -254,7 +258,9 @@ export default function EditProfileScreen() {
                                 icon="calendar"
                                 size={24}
                                 mode="contained"
-                                onPress={() => !hasBirthDate && setShowDatePicker(true)}
+                                onPress={() =>
+                                    !hasBirthDate && setShowDatePicker(true)
+                                }
                                 disabled={hasBirthDate}
                                 style={styles.datePickerButton}
                             />
@@ -264,7 +270,11 @@ export default function EditProfileScreen() {
                             <DateTimePicker
                                 value={birthDate || new Date()}
                                 mode="date"
-                                display={Platform.OS === "ios" ? "spinner" : "default"}
+                                display={
+                                    Platform.OS === "ios"
+                                        ? "spinner"
+                                        : "default"
+                                }
                                 onChange={onDateChange}
                                 maximumDate={new Date()}
                                 minimumDate={new Date(1900, 0, 1)}
@@ -355,4 +365,3 @@ const createStyles = (theme) =>
             paddingVertical: 6,
         },
     });
-

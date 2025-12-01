@@ -88,8 +88,11 @@ export default function TabLayout() {
                 headerTintColor: theme.onSurface,
                 headerTitleStyle: {
                     fontWeight: "600",
-                    fontSize: 18,
+                    fontSize: 20,
                     color: theme.onBackground,
+                    letterSpacing: -0.3,
+                    lineHeight: 24,
+                    marginTop: -4,
                 },
                 tabBarStyle: {
                     backgroundColor: theme.surface,
@@ -163,6 +166,11 @@ export default function TabLayout() {
                     headerTitle: "Lịch sử đơn hàng",
                     tabBarLabel: "Đơn hàng",
                     tabBarIcon: OrderIcon,
+                    headerTitleStyle: {
+                        fontWeight: "600",
+                        fontSize: 16,
+                        color: theme.onBackground,
+                    },
                 }}
                 listeners={{ tabPress: () => handleTabPress("order-history") }}
             />
