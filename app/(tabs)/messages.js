@@ -1,11 +1,11 @@
 // Screen: Messages - Tin nhắn
 /*
  * Chức năng:
- * Hiển thị danh sách tin nhắn với các quán ăn
- * Mock data cho demo
+ * Hiển thị danh sách tin nhắn với các quán ăn (thực)
+ * Dữ liệu từ chatStore
  */
 
-import React from "react";
+import React, { useMemo } from "react";
 import {
     View,
     StyleSheet,
@@ -17,46 +17,92 @@ import { Text, Avatar, List, Divider } from "react-native-paper";
 import { useRouter } from "expo-router";
 import ScreenWrapper from "../../src/components/ScreenWrapper";
 import { useTheme } from "../../src/context/ThemeContext";
-
-const MOCK_MESSAGES = [
-    {
-        id: "1",
-        name: "Phở Gia Truyền",
-        message: "Cảm ơn bạn đã ủng hộ quán!",
-        time: "10:30 AM",
-        avatar: "https://i.pravatar.cc/150?u=1",
-        unread: 2,
-    },
-    {
-        id: "2",
-        name: "Cơm Tấm Sài Gòn",
-        message: "Đơn hàng của bạn đang được chuẩn bị.",
-        time: "Yesterday",
-        avatar: "https://i.pravatar.cc/150?u=2",
-        unread: 0,
-    },
-    {
-        id: "3",
-        name: "Bún Bò Huế",
-        message: "Quán hôm nay nghỉ sớm nha bạn.",
-        time: "Mon",
-        avatar: "https://i.pravatar.cc/150?u=3",
-        unread: 0,
-    },
-];
+import { useChatStore } from "../../src/store/chatStore";
+import { shops } from "../../src/data/shops";
 
 export default function MessagesScreen() {
     const { theme } = useTheme();
     const router = useRouter();
     const styles = createStyles(theme);
 
+    // Get real chat data from store
+    const messages = useChatStore((state) => state.messages);
+    const unread = useChatStore((state) => state.unread || {});
+
+    // Build conversations list from actual messages
+    const conversations = useMemo(() => {
+        if (!messages || Object.keys(messages).length === 0) {
+            return [];
+        }
+
+        return Object.keys(messages)
+            .map((shopId) => {
+                const msgs = messages[shopId] || [];
+                const lastMsg = msgs.length > 0 ? msgs[0] : null;
+                const shop =
+                    shops.find((s) => s.id === shopId) || {
+                        id: shopId,
+                        displayName: shopId,
+                    };
+
+                return {
+                    shopId,
+                    name: shop.displayName,
+                    message: lastMsg ? lastMsg.text : "Chưa có tin nhắn",
+                    time: lastMsg
+                        ? new Date(lastMsg.timestamp).toLocaleString()
+                        : "",
+                    unread: unread[shopId] || 0,
+                };
+            })
+            .sort((a, b) => {
+                const aTime = messages[a.shopId]?.[0]?.timestamp || 0;
+                const bTime = messages[b.shopId]?.[0]?.timestamp || 0;
+                return bTime - aTime;
+            });
+    }, [messages, unread]);
+
     const handlePress = (item) => {
         // Navigate to chat screen with shop ID
         router.push({
             pathname: "/chat/[shopId]",
-            params: { shopId: item.id },
+            params: { shopId: item.shopId },
         });
     };
+
+    if (!conversations || conversations.length === 0) {
+        return (
+            <ScreenWrapper style={styles.container}>
+                <StatusBar
+                    backgroundColor={theme.background}
+                    barStyle={
+                        theme.mode === "dark"
+                            ? "light-content"
+                            : "dark-content"
+                    }
+                />
+                <View
+                    style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: 20,
+                    }}
+                >
+                    <Text variant="headlineSmall" style={{ marginBottom: 8 }}>
+                        Lịch sử tin nhắn trống
+                    </Text>
+                    <Text
+                        variant="bodyMedium"
+                        style={{ color: theme.onSurfaceVariant }}
+                    >
+                        Bạn chưa có cuộc trò chuyện nào. Ấn icon tin nhắn từ sản
+                        phẩm để bắt đầu.
+                    </Text>
+                </View>
+            </ScreenWrapper>
+        );
+    }
 
     return (
         <ScreenWrapper style={styles.container}>
@@ -68,8 +114,8 @@ export default function MessagesScreen() {
             />
 
             <FlatList
-                data={MOCK_MESSAGES}
-                keyExtractor={(item) => item.id}
+                data={conversations}
+                keyExtractor={(item) => item.shopId}
                 renderItem={({ item }) => (
                     <View>
                         <TouchableOpacity onPress={() => handlePress(item)}>
@@ -77,10 +123,10 @@ export default function MessagesScreen() {
                                 title={item.name}
                                 description={item.message}
                                 left={(props) => (
-                                    <Avatar.Image
+                                    <Avatar.Icon
                                         size={48}
-                                        source={{ uri: item.avatar }}
-                                        style={styles.avatar}
+                                        icon="store"
+                                        style={{ backgroundColor: theme.surfaceVariant }}
                                     />
                                 )}
                                 right={(props) => (
@@ -94,7 +140,9 @@ export default function MessagesScreen() {
                                         {item.unread > 0 && (
                                             <View style={styles.badge}>
                                                 <Text style={styles.badgeText}>
-                                                    {item.unread}
+                                                    {item.unread > 99
+                                                        ? "99+"
+                                                        : item.unread}
                                                 </Text>
                                             </View>
                                         )}
@@ -125,10 +173,6 @@ const createStyles = (theme) =>
         container: {
             flex: 1,
             backgroundColor: theme.background,
-        },
-        avatar: {
-            marginRight: 10,
-            marginVertical: 8,
         },
         metaContainer: {
             alignItems: "flex-end",
