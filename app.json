@@ -2,7 +2,7 @@
     "expo": {
         "name": "Re-Food",
         "slug": "refood",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "orientation": "portrait",
         "icon": "./assets/images/logo.png",
         "scheme": "refood",
@@ -49,7 +49,7 @@
         "extra": {
             "router": {},
             "eas": {
-                "projectId": "8fc8c346-cf46-4af3-bb65-9fabd66334c1"
+                "projectId": "d91ad447-9aae-46b0-a60f-cdb8b9e0d80d"
             }
         },
         "owner": "hinn06"
