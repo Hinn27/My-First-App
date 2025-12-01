@@ -29,7 +29,7 @@ const FreeFoodIcon = ({ color, size, focused }) => (
     />
 );
 
-const MessagesIcon = React.memo(({ color, size, focused }) => {
+const MessagesIcon = ({ color, size, focused }) => {
     const unread = useChatStore((state) => state.unread);
     const totalUnread = Object.values(unread || {}).reduce(
         (s, v) => s + (v || 0),
@@ -44,8 +44,7 @@ const MessagesIcon = React.memo(({ color, size, focused }) => {
             badge={totalUnread}
         />
     );
-});
-MessagesIcon.displayName = "MessagesIcon";
+};
 
 const OrderIcon = ({ color, size, focused }) => (
     <TabBarIconWithBadge
