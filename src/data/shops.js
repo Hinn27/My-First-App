@@ -22,115 +22,50 @@ export const shops = [
         greeting:
             "Cảm ơn quý khách đã tin tưởng Cơm Văn Phòng An Nhiên, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
-    // Bún shops
+    // Bún, mì, phở - Gộp tất cả vào 3 quán chính
     {
         id: "bun_bo_goc_pho",
         displayName: "Bún Bò Góc Phố",
         category: "Bún, mì, phở",
         greeting:
-            "Cảm ơn quý khách đã tin tưởng Bún Bò Góc Phố, chúng tôi có thể hỗ trợ gì cho bạn?",
+            "Cảm ơn quý khách đã tin tưởng Bún Bò Góc Phố - Chuyên các món bún đặc sắc, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     {
-        id: "bun_rieu_ba_nam",
-        displayName: "Bún Riêu Bà Năm",
+        id: "pho_gia_truyen_36",
+        displayName: "Phở Gia Truyền 36",
         category: "Bún, mì, phở",
         greeting:
-            "Cảm ơn quý khách đã tin tưởng Bún Riêu Bà Năm, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    {
-        id: "bun_thit_nuong_ganh",
-        displayName: "Bún Thịt Nướng Gánh",
-        category: "Bún, mì, phở",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Bún Thịt Nướng Gánh, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    // Mì shops
-    {
-        id: "mi_quang_hai_mua",
-        displayName: "Mì Quảng Hai Mùa",
-        category: "Bún, mì, phở",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Mì Quảng Hai Mùa, chúng tôi có thể hỗ trợ gì cho bạn?",
+            "Cảm ơn quý khách đã tin tưởng Phở Gia Truyền 36 - Chuyên các món phở truyền thống, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     {
         id: "mi_xao_thanh_dat",
         displayName: "Mì Xào Thành Đạt",
         category: "Bún, mì, phở",
         greeting:
-            "Cảm ơn quý khách đã tin tưởng Mì Xào Thành Đạt, chúng tôi có thể hỗ trợ gì cho bạn?",
+            "Cảm ơn quý khách đã tin tưởng Mì Xào Thành Đạt - Chuyên các món mì đặc sắc, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
+    // Bánh mì shop
     {
-        id: "mi_cay_nhat_ha",
-        displayName: "Mì Cay 7 Cấp Độ Nhật Hạ",
-        category: "Bún, mì, phở",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Mì Cay 7 Cấp Độ Nhật Hạ, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    // Phở shops
-    {
-        id: "pho_gia_truyen_36",
-        displayName: "Phở Gia Truyền 36",
-        category: "Bún, mì, phở",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Phở Gia Truyền 36, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    {
-        id: "pho_sai_gon_xua",
-        displayName: "Phở Sài Gòn Xưa",
-        category: "Bún, mì, phở",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Phở Sài Gòn Xưa, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    {
-        id: "pho_bo_tai_chin_long_thanh",
-        displayName: "Phở Bò Tái Chín Long Thành",
-        category: "Bún, mì, phở",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Phở Bò Tái Chín Long Thành, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    // Bánh mì shops
-    {
-        id: "banh_mi_ong_tu",
-        displayName: "Bánh Mì Ông Tư",
+        id: "banh_mi_huynh_hoa",
+        displayName: "Bánh Mì Huỳnh Hoa",
         category: "Bánh mì",
         greeting:
-            "Cảm ơn quý khách đã tin tưởng Bánh Mì Ông Tư, chúng tôi có thể hỗ trợ gì cho bạn?",
+            "Cảm ơn quý khách đã tin tưởng Bánh Mì Huỳnh Hoa, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
+    // Khác
     {
-        id: "banh_mi_co_han",
-        displayName: "Bánh Mì Muối Ớt Cô Hân",
-        category: "Bánh mì",
+        id: "banh_xeo_ba_duong",
+        displayName: "Bánh Xèo Bà Dương",
+        category: "Khác",
         greeting:
-            "Cảm ơn quý khách đã tin tưởng Bánh Mì Muối Ớt Cô Hân, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    {
-        id: "banh_mi_thit_nuong_79",
-        displayName: "Bánh Mì Thịt Nướng 79",
-        category: "Bánh mì",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Bánh Mì Thịt Nướng 79, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    {
-        id: "banh_mi_sot_bo_trung_88",
-        displayName: "Bánh Mì Sốt Bơ Trứng 88",
-        category: "Bánh mì",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Bánh Mì Sốt Bơ Trứng 88, chúng tôi có thể hỗ trợ gì cho bạn?",
+            "Cảm ơn quý khách đã tin tưởng Bánh Xèo Bà Dương, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     // Quán ăn 0 đồng
     {
         id: "quan_an_0dong_1",
         displayName: "Quán Ăn 0 Đồng Số 1",
-        category: "Quán ăn 0 đồng",
+        category: "Khác",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Quán Ăn 0 Đồng Số 1, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    // Nước (Drinks)
-    {
-        id: "mecha_drinks",
-        displayName: "Mecha",
-        category: "Nước",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Mecha, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
 ];

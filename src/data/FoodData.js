@@ -71,8 +71,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bún, mì, phở",
-        shopId: "bun_rieu_ba_nam",
-        shopName: "Bún Riêu Bà Năm",
+        shopId: "bun_bo_goc_pho",
+        shopName: "Bún Bò Góc Phố",
         index: 4,
     },
     {
@@ -90,8 +90,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bún, mì, phở",
-        shopId: "bun_thit_nuong_ganh",
-        shopName: "Bún Thịt Nướng Gánh",
+        shopId: "bun_bo_goc_pho",
+        shopName: "Bún Bò Góc Phố",
         index: 6,
     },
     {
@@ -147,8 +147,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bún, mì, phở",
-        shopId: "bun_thit_nuong_ganh",
-        shopName: "Bún Thịt Nướng Gánh",
+        shopId: "bun_bo_goc_pho",
+        shopName: "Bún Bò Góc Phố",
         index: 12,
     },
     {
@@ -166,8 +166,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bún, mì, phở",
-        shopId: "pho_long_thanh",
-        shopName: "Phở Long Thành",
+        shopId: "pho_gia_truyen_36",
+        shopName: "Phở Gia Truyền 36",
         index: 13,
     },
     {
