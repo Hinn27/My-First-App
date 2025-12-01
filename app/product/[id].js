@@ -373,19 +373,6 @@ export default function ProductDetailScreen() {
                                             ({ratingsCount})
                                         </Text>
                                     </View>
-
-                                    <View style={styles.divider} />
-
-                                    <View style={styles.statBox}>
-                                        <Ionicons
-                                            name="cafe"
-                                            size={20}
-                                            color={theme.primary}
-                                        />
-                                        <Text style={styles.statText}>
-                                            {product.roasted}
-                                        </Text>
-                                    </View>
                                 </View>
                             </View>
                         </View>
