@@ -475,14 +475,37 @@ export default function ProductDetailScreen() {
                             </Text>
                             {shopForProduct && (
                                 <Pressable
-                                    onPress={() =>
+                                    onPress={() => {
+                                        // Check if user is logged in
+                                        if (!user?.isLoggedIn) {
+                                            Alert.alert(
+                                                "Vui lòng đăng nhập",
+                                                "Bạn cần đăng nhập để nhắn tin với quán.",
+                                                [
+                                                    {
+                                                        text: "Đăng nhập",
+                                                        onPress: () =>
+                                                            router.push(
+                                                                "/auth/login"
+                                                            ),
+                                                    },
+                                                    {
+                                                        text: "Hủy",
+                                                        onPress: () => {},
+                                                    },
+                                                ]
+                                            );
+                                            return;
+                                        }
+
+                                        // Navigate to chat
                                         router.push({
                                             pathname: "/chat/[shopId]",
                                             params: {
                                                 shopId: shopForProduct.id,
                                             },
-                                        })
-                                    }
+                                        });
+                                    }}
                                 >
                                     <Ionicons
                                         name="chatbubble-ellipses-outline"
