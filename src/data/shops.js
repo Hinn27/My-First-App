@@ -55,10 +55,9 @@ export const shops = [
     },
     // Quán ăn 0 đồng
     {
-        id: "quan_an_0dong_1",
-        displayName: "Quán Ăn 0 Đồng Số 1",
+        id: "quan_an_0dong",
+        displayName: "Quán Ăn 0 Đồng Số",
         category: "Khác",
-        greeting:
-            "",
+        greeting: "",
     },
 ];
