@@ -176,10 +176,6 @@ function AppContent() {
             <Stack>
                 <Stack.Screen name="index" options={{ headerShown: false }} />
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen
-                    name="modal"
-                    options={{ presentation: "modal" }}
-                />
                 {/** Đã xoá các route cũ food/index, food/[slug] */}
                 <Stack.Screen
                     name="user/[id]"

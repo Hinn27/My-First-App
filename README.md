@@ -1,166 +1,319 @@
-# 🍜 My First App - Food & Drink Ordering App
+# 🍜 My First App - Ứng Dụng Đặt Đồ Ăn# 🍜 My First App - Food & Drink Ordering App
 
-[![React Native](https://img.shields.io/badge/React%20Native-0.81-blue.svg)](https://reactnative.dev/)
+Ứng dụng di động để người dùng đặt đồ ăn từ các quán ăn và quản lý đơn hàng.[![React Native](https://img.shields.io/badge/React%20Native-0.81-blue.svg)](https://reactnative.dev/)
+
 [![Expo](https://img.shields.io/badge/Expo-54.0-000020.svg)](https://expo.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> Ứng dụng đặt đồ ăn & đồ uống, quản lý bán hàng với giao diện Material You Design
+## 📱 Tính năng chính[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**[🌍 English Version Below](#english-version)**
+### Cho khách hàng> Ứng dụng đặt đồ ăn & đồ uống, quản lý bán hàng với giao diện Material You Design
 
-## 📱 Screenshots
+-   🏠 **Trang chủ**: Xem danh sách đồ ăn, tìm kiếm, lọc theo danh mục
 
--   🏠 Home Screen với category filters
+-   🛒 **Giỏ hàng**: Thêm/xóa sản phẩm, chỉnh sửa số lượng**[🌍 English Version Below](#english-version)**
+
+-   ❤️ **Yêu thích**: Lưu những sản phẩm yêu thích
+
+-   💬 **Tin nhắn**: Nhắn tin trực tiếp với các quán ăn## 📱 Screenshots
+
+-   📋 **Lịch sử đơn**: Xem những đơn hàng đã đặt
+
+-   💳 **Thanh toán**: Nhiều phương thức thanh toán- 🏠 Home Screen với category filters
+
 -   🛒 Shopping Cart với quantity controls
--   ❤️ Favorites với beautiful cards
--   💳 Payment với multiple methods
--   🎨 Material Design 3 với React Native Paper
--   ✨ Smooth animations & haptic feedback
+
+### Cho người bán- ❤️ Favorites với beautiful cards
+
+-   📝 **Đăng ký bán**: Tạo tài khoản bán hàng- 💳 Payment với multiple methods
+
+-   ➕ **Thêm sản phẩm**: Đăng sản phẩm với ảnh, giá tiền, mô tả- 🎨 Material Design 3 với React Native Paper
+
+-   📊 **Quản lý doanh thu**: Xem đơn hàng và thu nhập- ✨ Smooth animations & haptic feedback
+
 -   🎭 Font Playfair Display việt hóa
--   💙 Light Blue color scheme
 
----
+## 🚀 Cài đặt- 💙 Light Blue color scheme
 
-## ✨ Tính năng chính
+### Yêu cầu---
 
-### 👥 Cho người mua (Buyer)
+-   Node.js (phiên bản 18 trở lên)
 
--   ✅ **Trang chủ nâng cao**: Search, filter theo category, grid layout
-    -   Hiển thị "Xin chào, {Tên người dùng}!"
-    -   Category chips
+-   npm hoặc yarn## ✨ Tính năng chính
+
+### Hướng dẫn### 👥 Cho người mua (Buyer)
+
+```bash
+
+# Tải code-   ✅ **Trang chủ nâng cao**: Search, filter theo category, grid layout
+
+git clone https://github.com/Hinn27/My-First-App.git    -   Hiển thị "Xin chào, {Tên người dùng}!"
+
+cd My-First-App    -   Category chips
+
     -   Haptic feedback khi tương tác
--   ✅ **Chi tiết sản phẩm**: Xem đầy đủ thông tin, chọn size, đánh giá
--   ✅ **Giỏ hàng**: Thêm/xóa/chỉnh sửa số lượng, tính tổng tiền tự động
+
+# Cài đặt thư viện-   ✅ **Chi tiết sản phẩm**: Xem đầy đủ thông tin, chọn size, đánh giá
+
+npm install-   ✅ **Giỏ hàng**: Thêm/xóa/chỉnh sửa số lượng, tính tổng tiền tự động
+
 -   ✅ **Yêu thích**: Lưu sản phẩm yêu thích, thêm vào giỏ nhanh
--   ✅ **Thanh toán**: Nhiều phương thức (Ví điện tử, Tiền mặt, Thẻ, Banking)
--   ✅ **Lịch sử đơn hàng**: Xem lại các đơn đã đặt
+
+# Chạy ứng dụng-   ✅ **Thanh toán**: Nhiều phương thức (Ví điện tử, Tiền mặt, Thẻ, Banking)
+
+npm start-   ✅ **Lịch sử đơn hàng**: Xem lại các đơn đã đặt
+
+```
 
 ### 🏪 Cho người bán (Seller)
 
+## 📱 Chạy trên điện thoại
+
 -   ✅ **Đăng ký bán hàng**: Form đăng ký với thông tin cửa hàng, upload ảnh
-    -   Status: Pending → chờ duyệt trong 24h
-    -   Status: Approved → Được bán hàng
--   ✅ **Đăng sản phẩm**: Form đầy đủ với validation
-    -   Upload ảnh sản phẩm thật
+
+### Android - Status: Pending → chờ duyệt trong 24h
+
+````bash -   Status: Approved → Được bán hàng
+
+npm run android-   ✅ **Đăng sản phẩm**: Form đầy đủ với validation
+
+```    -   Upload ảnh sản phẩm thật
+
     -   Nhập tên, mô tả, danh mục
-    -   Set giá theo size (S/M/L)
-    -   Nguyên liệu và đặc điểm
-    -   Tự động lưu vào store với AsyncStorage
--   ✅ **Xem sản phẩm của bạn**: Quản lý danh sách sản phẩm đã đăng
+
+### iOS (chỉ trên Mac)    -   Set giá theo size (S/M/L)
+
+```bash    -   Nguyên liệu và đặc điểm
+
+npm run ios    -   Tự động lưu vào store với AsyncStorage
+
+```-   ✅ **Xem sản phẩm của bạn**: Quản lý danh sách sản phẩm đã đăng
+
     -   Hiển thị tất cả sản phẩm đã đăng
-    -   Xem ảnh, tên, giá sản phẩm
-    -   Sửa sản phẩm (coming soon)
-    -   Xóa sản phẩm khỏi store
--   ✅ **Quản lí doanh thu**: Theo dõi đơn hàng và doanh thu
+
+### Web    -   Xem ảnh, tên, giá sản phẩm
+
+```bash    -   Sửa sản phẩm (coming soon)
+
+npm run web    -   Xóa sản phẩm khỏi store
+
+```-   ✅ **Quản lí doanh thu**: Theo dõi đơn hàng và doanh thu
+
     -   Tab "Đơn mới": Đơn hàng mới từ khách
-    -   Tab "Đã giao": Lịch sử đơn đã hoàn thành
+
+## 🛠️ Cấu trúc thư mục    -   Tab "Đã giao": Lịch sử đơn đã hoàn thành
+
     -   Stats cards: Doanh thu đơn mới, đơn đã giao, tổng doanh thu
-    -   Đánh dấu đã giao để chuyển đơn sang tab "Đã giao"
 
-### 🔐 Authentication & State Management
+```    -   Đánh dấu đã giao để chuyển đơn sang tab "Đã giao"
 
--   ✅ **Đăng nhập**: Email/Password với Zustand + AsyncStorage
--   ✅ **Đăng ký**: Form đăng ký người dùng mới
--   ✅ **Profile**: Quản lý thông tin cá nhân
--   ✅ **Zustand Store**: State management với persist
-    -   User data tự động lưu và restore khi mở lại app
-    -   Đồng bộ data giữa tất cả màn hình
-
----
-
-## 🗂️ Cấu trúc Project
-
-```
 My-First-App/
-├── app/
-│   ├── (tabs)/                    # Bottom Tab Navigation
-│   │   ├── index.js              # Redirect to home
-│   │   ├── home.js               # Home screen ⭐ (search, filter, grid)
-│   │   ├── cart.js               # Cart screen (Zustand store)
-│   │   ├── favorites.js          # Favorites screen
-│   │   ├── profile.js            # Profile & Settings
-│   │   └── _layout.js            # Tab layout config
-│   ├── auth/                     # Authentication
-│   │   ├── login.js
-│   │   ├── register.js
-│   │   └── seller-register.js
-│   ├── product/
-│   │   └── [id].js               # Product detail (dynamic)
-│   ├── seller/
-│   │   ├── add-product.js        # Seller: Add new product
-│   │   ├── my-products.js        # Seller: View & manage products
-│   │   └── revenue.js            # Seller: Revenue & order management
-│   ├── payment.js                # Payment screen
-│   ├── order-history.js          # Order history
-│   └── _layout.js                # Root layout
+
+├── app/                    # Các màn hình chính### 🔐 Authentication & State Management
+
+│   ├── (tabs)/            # Thanh điều hướng dưới
+
+│   │   ├── index.js       # Trang chủ-   ✅ **Đăng nhập**: Email/Password với Zustand + AsyncStorage
+
+│   │   ├── cart.js        # Giỏ hàng-   ✅ **Đăng ký**: Form đăng ký người dùng mới
+
+│   │   ├── favorites.js   # Yêu thích-   ✅ **Profile**: Quản lý thông tin cá nhân
+
+│   │   ├── messages.js    # Tin nhắn-   ✅ **Zustand Store**: State management với persist
+
+│   │   ├── order-history.js # Lịch sử đơn    -   User data tự động lưu và restore khi mở lại app
+
+│   │   └── profile.js     # Hồ sơ cá nhân    -   Đồng bộ data giữa tất cả màn hình
+
+│   ├── chat/              # Màn hình chat
+
+│   ├── auth/              # Đăng nhập, đăng ký---
+
+│   ├── seller/            # Chức năng bán hàng
+
+│   └── product/           # Chi tiết sản phẩm## 🗂️ Cấu trúc Project
+
 ├── src/
-│   ├── components/               # Reusable components
-│   │   ├── ProductCard.js        # Product card with animations
-│   │   ├── CartItemCard.js       # Cart item with Paper components
-│   │   ├── EmptyState.js         # Empty state component
+
+│   ├── components/        # Các thành phần tái sử dụng```
+
+│   ├── context/           # Chủ đề và cài đặt giao diệnMy-First-App/
+
+│   ├── data/              # Dữ liệu tĩnh (quán ăn, sản phẩm)├── app/
+
+│   └── store/             # Quản lý dữ liệu (Zustand)│   ├── (tabs)/                    # Bottom Tab Navigation
+
+└── assets/                # Hình ảnh và font chữ│   │   ├── index.js              # Redirect to home
+
+```│   │   ├── home.js               # Home screen ⭐ (search, filter, grid)
+
+│   │   ├── cart.js               # Cart screen (Zustand store)
+
+## 🎨 Giao diện│   │   ├── favorites.js          # Favorites screen
+
+│   │   ├── profile.js            # Profile & Settings
+
+- Material Design 3 (giao diện hiện đại của Google)│   │   └── _layout.js            # Tab layout config
+
+- Màu chủ đạo: Xanh da trời (#00BCD4)│   ├── auth/                     # Authentication
+
+- Font chữ: Playfair Display (hỗ trợ tiếng Việt)│   │   ├── login.js
+
+- Hoạt ảnh mượt mà│   │   ├── register.js
+
+│   │   └── seller-register.js
+
+## 📦 Công nghệ sử dụng│   ├── product/
+
+│   │   └── [id].js               # Product detail (dynamic)
+
+- **React Native 0.81**: Framework để tạo ứng dụng di động│   ├── seller/
+
+- **Expo 54**: Nền tảng phát triển React Native│   │   ├── add-product.js        # Seller: Add new product
+
+- **React Native Paper**: Thư viện giao diện Material Design│   │   ├── my-products.js        # Seller: View & manage products
+
+- **Zustand**: Quản lý dữ liệu toàn cục│   │   └── revenue.js            # Seller: Revenue & order management
+
+- **Expo Router**: Điều hướng trang│   ├── payment.js                # Payment screen
+
+│   ├── order-history.js          # Order history
+
+## 🐛 Lỗi thường gặp│   └── _layout.js                # Root layout
+
+├── src/
+
+### Lỗi "java.io.IOException"│   ├── components/               # Reusable components
+
+```bash│   │   ├── ProductCard.js        # Product card with animations
+
+npx expo start --tunnel│   │   ├── CartItemCard.js       # Cart item with Paper components
+
+```│   │   ├── EmptyState.js         # Empty state component
+
 │   │   └── ScreenWrapper.js      # Screen wrapper with fade-in animation
-│   ├── context/
-│   │   └── ThemeContext.js       # Material You theme
-│   ├── data/
-│   │   ├── DrinkData.js          # Mock drink data
+
+### Clear cache│   ├── context/
+
+```bash│   │   └── ThemeContext.js       # Material You theme
+
+npx expo start --clear│   ├── data/
+
+```│   │   ├── DrinkData.js          # Mock drink data
+
 │   │   └── FoodData.js           # Mock food data
-│   └── store/
-│       ├── productStore.js       # Zustand store + AsyncStorage
-│       └── userStore.js          # User state management
-└── assets/                       # Images, fonts, etc.
-    ├── images/                   # App icons, splash screens
+
+### Lỗi khi chạy Android│   └── store/
+
+```bash│       ├── productStore.js       # Zustand store + AsyncStorage
+
+rm -rf node_modules package-lock.json│       └── userStore.js          # User state management
+
+npm install└── assets/                       # Images, fonts, etc.
+
+```    ├── images/                   # App icons, splash screens
+
     └── fonts/                    # Custom fonts (if any)
-```
 
----
+## 💡 Cách sử dụng```
 
-## 🚀 Cài đặt & Chạy
 
-### Yêu cầu hệ thống
 
--   Node.js >= 18.x
--   npm hoặc yarn
--   Expo CLI
--   iOS Simulator hoặc Android Emulator (hoặc Expo Go app)
+### Khách hàng---
+
+1. Mở app → Xem danh sách đồ ăn trên trang chủ
+
+2. Chọn sản phẩm → Thêm vào giỏ## 🚀 Cài đặt & Chạy
+
+3. Vào giỏ hàng → Thanh toán
+
+4. Đơn được lưu vào lịch sử### Yêu cầu hệ thống
+
+
+
+### Người bán-   Node.js >= 18.x
+
+1. Tạo tài khoản → Đăng ký bán hàng-   npm hoặc yarn
+
+2. Chờ duyệt (24h) → Được phép bán-   Expo CLI
+
+3. Thêm sản phẩm → Chờ khách đặt-   iOS Simulator hoặc Android Emulator (hoặc Expo Go app)
+
+4. Xem doanh thu trong tab "Quản lý doanh thu"
 
 ### Cài đặt
 
-```bash
-# Clone repository
-git clone https://github.com/Hinn27/My-First-App.git
-cd My-First-App
+## 📝 Danh sách công việc
 
-# Cài đặt dependencies
-npm install
+```bash
+
+✅ Hoàn tất:# Clone repository
+
+- Trang chủ với lọc danh mụcgit clone https://github.com/Hinn27/My-First-App.git
+
+- Giỏ hàng và thanh toáncd My-First-App
+
+- Yêu thích sản phẩm
+
+- Chat với quán# Cài đặt dependencies
+
+- Quản lý cho người bánnpm install
+
+- Lịch sử đơn hàng
 
 # Hoặc nếu dùng yarn
-yarn install
-```
 
-### Chạy app
+⏳ Đang làm:yarn install
 
-```bash
-# Start Expo development server
-npm start
+- Sửa sản phẩm```
+
+
+
+❌ Sắp tới:### Chạy app
+
+- Đồng bộ dữ liệu với máy chủ (Backend API)
+
+- Thông báo khi có đơn hàng```bash
+
+- Thanh toán online thực (VNPay, MoMo...)# Start Expo development server
+
+- Xem vị trí giao hàngnpm start
+
+- Đánh giá sản phẩm
 
 # Hoặc
-npx expo sta
 
-# Chạy trên Android
-npm run android
+## 👨‍💻 Tác giảnpx expo sta
+
+
+
+**Hinn27**# Chạy trên Android
+
+- GitHub: [@Hinn27](https://github.com/Hinn27)npm run android
+
+- Email: hduc27760@gmail.com
 
 # Chạy trên iOS (macOS only)
-npm run ios
 
-# Chạy trên web
+## 📄 Giấy phépnpm run ios
+
+
+
+MIT License - Bạn có thể sử dụng cho bất kỳ mục đích nào# Chạy trên web
+
 npm run web
-```
 
-### Clear cache (nếu gặp lỗi)
+## 🙏 Cảm ơn```
 
-```bash
+
+
+- React Native & Expo### Clear cache (nếu gặp lỗi)
+
+- Material Design
+
+- Icon từ Expo Vector Icons```bash
+
 npx expo start --clear
-```
+````
 
 # Lỗi java.io.IOException: Failed to download remote updates
 
