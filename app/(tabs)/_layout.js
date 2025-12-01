@@ -7,6 +7,7 @@ import { Platform } from "react-native";
 import TabBarIconWithBadge from "../../src/components/TabBarIconWithBadge";
 import React from "react";
 import { useChatStore } from "../../src/store/chatStore";
+import { useUserStore } from "../../src/store/userStore";
 
 // Tab Icons - Modern & Clean Design
 const HomeIcon = ({ color, size, focused }) => (
@@ -31,10 +32,13 @@ const FreeFoodIcon = ({ color, size, focused }) => (
 
 const MessagesIcon = ({ color, size, focused }) => {
     const unread = useChatStore((state) => state.unread);
-    const totalUnread = Object.values(unread || {}).reduce(
-        (s, v) => s + (v || 0),
-        0
-    );
+    const user = useUserStore((state) => state.user);
+    const isLoggedIn = user?.isLoggedIn || false;
+    
+    const totalUnread = isLoggedIn
+        ? Object.values(unread || {}).reduce((s, v) => s + (v || 0), 0)
+        : 0;
+    
     return (
         <TabBarIconWithBadge
             focused={focused}

@@ -25,6 +25,7 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bún, mì, phở",
+        shopId: "pho_gia_truyen_36",
         index: 0,
     },
     {
@@ -42,7 +43,8 @@ const FoodData = [
         ratings_count: "2,234",
         favourite: false,
         type: "Food",
-        category: "Bún, mì, phở",
+        category: "Bún",
+        shopId: "bun_bo_goc_pho",
         index: 1,
     },
     {
@@ -60,7 +62,8 @@ const FoodData = [
         ratings_count: "1,890",
         favourite: false,
         type: "Food",
-        category: "Cơm",
+        category: "Bún, mì, phở",
+        shopId: "com_tam_huong_que",
         index: 2,
     },
     {
@@ -78,7 +81,8 @@ const FoodData = [
         ratings_count: "1,678",
         favourite: false,
         type: "Food",
-        category: "Bún, mì, phở",
+        category: "Bún",
+        shopId: "bun_rieu_ba_nam",
         index: 4,
     },
     {
@@ -96,7 +100,8 @@ const FoodData = [
         ratings_count: "2,456",
         favourite: false,
         type: "Food",
-        category: "Bún, mì, phở",
+        category: "Bún",
+        shopId: "bun_thit_nuong_ganh",
         index: 6,
     },
     {
@@ -115,7 +120,8 @@ const FoodData = [
         ratings_count: "120",
         favourite: false,
         type: "Food",
-        category: "Bún, mì, phở",
+        category: "Bún",
+        shopId: "bun_bo_goc_pho",
         index: 7,
     },
     {
@@ -133,7 +139,8 @@ const FoodData = [
         ratings_count: "230",
         favourite: false,
         type: "Food",
-        category: "Bún, mì, phở",
+        category: "Bún",
+        shopId: "bun_rieu_ba_nam",
         index: 8,
     },
     {
@@ -152,7 +159,8 @@ const FoodData = [
         ratings_count: "89",
         favourite: false,
         type: "Food",
-        category: "Bún, mì, phở",
+        category: "Bún",
+        shopId: "bun_thit_nuong_ganh",
         index: 9,
     },
     {
@@ -171,7 +179,8 @@ const FoodData = [
         ratings_count: "340",
         favourite: false,
         type: "Food",
-        category: "Bún, mì, phở",
+        category: "Bún",
+        shopId: "bun_bo_goc_pho",
         index: 10,
     },
     {
@@ -190,7 +199,8 @@ const FoodData = [
         ratings_count: "450",
         favourite: false,
         type: "Food",
-        category: "Bún, mì, phở",
+        category: "Phở",
+        shopId: "pho_sai_gon_xua",
         index: 11,
     },
     {
@@ -209,7 +219,8 @@ const FoodData = [
         ratings_count: "560",
         favourite: false,
         type: "Food",
-        category: "Bún, mì, phở",
+        category: "Bún",
+        shopId: "bun_thit_nuong_ganh",
         index: 12,
     },
     {
@@ -229,6 +240,7 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bún, mì, phở",
+        shopId: "pho_bo_tai_chin_long_thanh",
         index: 13,
     },
     {
@@ -248,6 +260,7 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bún, mì, phở",
+        shopId: "pho_gia_truyen_36",
         index: 14,
     },
     {
@@ -267,6 +280,7 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bún, mì, phở",
+        shopId: "pho_sai_gon_xua",
         index: 15,
     },
     {
@@ -285,7 +299,8 @@ const FoodData = [
         ratings_count: "150",
         favourite: false,
         type: "Food",
-        category: "Bún, mì, phở",
+        category: "Phở",
+        shopId: "pho_bo_tai_chin_long_thanh",
         index: 16,
     },
     {
@@ -305,6 +320,7 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bún, mì, phở",
+        shopId: "pho_gia_truyen_36",
         index: 17,
     },
     {
@@ -323,7 +339,8 @@ const FoodData = [
         ratings_count: "1100",
         favourite: false,
         type: "Food",
-        category: "Cơm",
+        category: "Bún, mì, phở",
+        shopId: "com_ga_phu_yen",
         index: 18,
     },
     {
@@ -342,7 +359,8 @@ const FoodData = [
         ratings_count: "950",
         favourite: false,
         type: "Food",
-        category: "Cơm",
+        category: "Bún, mì, phở",
+        shopId: "com_van_phong_an_nhien",
         index: 19,
     },
     // Category: Khác (Drinks)
@@ -365,6 +383,7 @@ const FoodData = [
         favourite: false,
         type: "Drink",
         category: "Khác",
+        shopId: "mecha_drinks",
         index: 20,
     },
     {
@@ -385,6 +404,7 @@ const FoodData = [
         favourite: false,
         type: "Drink",
         category: "Khác",
+        shopId: "mecha_drinks",
         index: 21,
     },
     {
@@ -406,6 +426,7 @@ const FoodData = [
         favourite: false,
         type: "Drink",
         category: "Khác",
+        shopId: "mecha_drinks",
         index: 22,
     },
     {
@@ -427,6 +448,7 @@ const FoodData = [
         favourite: false,
         type: "Drink",
         category: "Khác",
+        shopId: "mecha_drinks",
         index: 23,
     },
     {
@@ -448,6 +470,7 @@ const FoodData = [
         favourite: false,
         type: "Drink",
         category: "Khác",
+        shopId: "mecha_drinks",
         index: 24,
     },
 ];
