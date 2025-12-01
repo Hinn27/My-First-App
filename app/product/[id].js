@@ -350,26 +350,26 @@ export default function ProductDetailScreen() {
                         {/* Product Basic Info Overlay */}
                         <View style={styles.overlayInfo}>
                             <View style={styles.basicInfo}>
-                                <View style={styles.nameSection}>
-                                    <Text style={styles.productName}>
-                                        {product.name}
-                                    </Text>
-                                    <Text style={styles.specialIngredient}>
-                                        {product.special_ingredient}
-                                    </Text>
-                                </View>
+                                <View style={styles.nameRatingRow}>
+                                    <View style={styles.nameSection}>
+                                        <Text style={styles.productName}>
+                                            {product.name}
+                                        </Text>
+                                        <Text style={styles.specialIngredient}>
+                                            {product.special_ingredient}
+                                        </Text>
+                                    </View>
 
-                                <View style={styles.statsRow}>
-                                    <View style={styles.statBox}>
+                                    <View style={styles.ratingBox}>
                                         <Ionicons
                                             name="star"
-                                            size={20}
+                                            size={18}
                                             color="#FFD700"
                                         />
-                                        <Text style={styles.statText}>
+                                        <Text style={styles.ratingText}>
                                             {avgRating}
                                         </Text>
-                                        <Text style={styles.statLabel}>
+                                        <Text style={styles.ratingCount}>
                                             ({ratingsCount})
                                         </Text>
                                     </View>
@@ -747,10 +747,17 @@ const createStyles = (theme) =>
             borderTopRightRadius: 24,
         },
         basicInfo: {
-            gap: 16,
+            gap: 12,
+        },
+        nameRatingRow: {
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            gap: 12,
         },
         nameSection: {
             gap: 4,
+            flex: 1,
         },
         productName: {
             fontSize: 24,
@@ -761,30 +768,26 @@ const createStyles = (theme) =>
             fontSize: 14,
             color: theme.onSurfaceVariant,
         },
-        statsRow: {
+        ratingBox: {
             flexDirection: "row",
             alignItems: "center",
-            gap: 16,
+            gap: 4,
+            backgroundColor:
+                theme.mode === "dark"
+                    ? "rgba(255,215,0,0.15)"
+                    : "rgba(255,215,0,0.1)",
+            paddingHorizontal: 10,
+            paddingVertical: 6,
+            borderRadius: 12,
         },
-        statBox: {
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 6,
-            flex: 1,
-        },
-        statText: {
+        ratingText: {
             fontSize: 15,
-            fontWeight: "600",
+            fontWeight: "700",
             color: theme.onSurface,
         },
-        statLabel: {
-            fontSize: 13,
+        ratingCount: {
+            fontSize: 12,
             color: theme.onSurfaceVariant,
-        },
-        divider: {
-            width: 1,
-            height: 30,
-            backgroundColor: theme.outline,
         },
         contentSection: {
             padding: 20,
