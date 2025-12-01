@@ -244,6 +244,20 @@ function AppContent() {
                         headerShown: false,
                     }}
                 />
+                <Stack.Screen
+                    name="chat/[shopId]"
+                    options={{
+                        headerShown: true,
+                        title: "Tin nhắn",
+                        headerBackTitle: "Quay lại",
+                    }}
+                />
+                <Stack.Screen
+                    name="user/edit-profile"
+                    options={{
+                        headerShown: false,
+                    }}
+                />
             </Stack>
         </PaperProvider>
     );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import {
     View,
     StyleSheet,
@@ -13,7 +13,7 @@ import {
     Button,
     Avatar,
 } from "react-native-paper";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter, useFocusEffect } from "expo-router";
 import { useChatStore } from "../../src/store/chatStore";
 import { shops } from "../../src/data/shops";
 import { useTheme } from "../../src/context/ThemeContext";
@@ -50,10 +50,14 @@ export default function ChatScreen() {
     // Initialize conversation with greeting when first opened
     const hasInitialized = useRef(false);
 
-    useEffect(() => {
-        // Mark as read when opening
-        markAsRead(shopId);
+    // Mark as read whenever screen is focused
+    useFocusEffect(
+        useCallback(() => {
+            markAsRead(shopId);
+        }, [shopId, markAsRead])
+    );
 
+    useEffect(() => {
         // Only add greeting on initial open, not every render
         if (!hasInitialized.current && shop?.greeting) {
             hasInitialized.current = true;
@@ -66,7 +70,7 @@ export default function ChatScreen() {
                 timestamp: Date.now(),
             });
         }
-    }, [shopId, shop?.greeting, markAsRead, addMessage]);
+    }, [shopId, shop?.greeting, addMessage]);
 
     useEffect(() => {
         // scroll to top (newest-first list) when messages change
@@ -142,15 +146,28 @@ export default function ChatScreen() {
                     { backgroundColor: theme.background },
                 ]}
             >
-                <View style={styles.header}>
-                    <IconButton
-                        icon="arrow-left"
-                        onPress={() => router.back()}
+                {/* Shop Name Subheader */}
+                <View style={styles.subheader}>
+                    <Avatar.Text
+                        size={32}
+                        label={shop.displayName
+                            .split(" ")
+                            .slice(0, 2)
+                            .map((w) => w[0])
+                            .join("")
+                            .toUpperCase()}
+                        style={{ backgroundColor: theme.primaryContainer }}
                     />
-                    <Text variant="titleMedium" style={{ fontWeight: "600" }}>
+                    <Text
+                        variant="titleMedium"
+                        style={{
+                            fontWeight: "600",
+                            marginLeft: 12,
+                            color: theme.onSurface,
+                        }}
+                    >
                         {shop.displayName}
                     </Text>
-                    <View style={{ flex: 1 }} />
                 </View>
 
                 {!messages || messages.length === 0 ? (
@@ -203,12 +220,13 @@ export default function ChatScreen() {
 const createStyles = (theme) =>
     StyleSheet.create({
         container: { flex: 1 },
-        header: {
+        subheader: {
             flexDirection: "row",
             alignItems: "center",
             padding: 12,
+            backgroundColor: theme.surface,
             borderBottomWidth: 1,
-            borderBottomColor: theme.surfaceVariant,
+            borderBottomColor: theme.outlineVariant,
         },
         emptyContainer: {
             flex: 1,

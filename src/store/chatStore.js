@@ -28,7 +28,9 @@ export const useChatStore = create(
             markAsRead: (shopId) =>
                 set((state) => {
                     const newUnread = { ...state.unread };
-                    newUnread[shopId] = 0;
+                    if (shopId in newUnread) {
+                        delete newUnread[shopId];
+                    }
                     return { unread: newUnread };
                 }),
 

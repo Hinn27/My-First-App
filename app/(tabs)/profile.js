@@ -202,7 +202,7 @@ export default function ProfileScreen() {
                             {/* Hide info & order history if not logged in */}
                             {isLoggedIn && (
                                 <>
-                                    <Link href="/user/123" asChild>
+                                    <Link href="/user/edit-profile" asChild>
                                         <List.Item
                                             title="Thông tin cá nhân"
                                             left={(props) => (
