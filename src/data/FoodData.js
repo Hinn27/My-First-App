@@ -52,8 +52,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Cơm",
-        shopId: "com_tam_huong_que",
-        shopName: "Cơm Tấm Hương Quê",
+        shopId: "com_huong_que",
+        shopName: "Cơm Hương Quê",
         index: 2,
     },
     {
@@ -185,8 +185,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Cơm",
-        shopId: "com_ga_phu_yen",
-        shopName: "Cơm Gà Phú Yên",
+        shopId: "com_huong_que",
+        shopName: "Cơm Hương Quê",
         index: 18,
     },
     {
@@ -195,8 +195,7 @@ const FoodData = [
         description:
             "Cơm chiên Dương Châu đầy màu sắc với lạp xưởng, tôm khô, trứng, đậu hà lan và cà rốt.",
         imageIcon: "🍚",
-        // TODO: Add com-chien-duong-chau.jpg image (using com-tam-suon-nuong.jpg as placeholder)
-        imagelink_square: require("../../assets/images/food/com-chien-duong-chau.jpg"), // Updated from placeholder
+        imagelink_square: require("../../assets/images/food/com-chien-duong-chau.jpg"),
         special_ingredient: "Lạp xưởng & Tôm",
         ingredients: "Cơm, Lạp xưởng, Tôm, Trứng, Rau củ",
         prices: [{ size: "M", price: "25000", currency: "đ", quantity: 1 }],
@@ -205,8 +204,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Cơm",
-        shopId: "com_van_phong_an_nhien",
-        shopName: "Cơm Văn Phòng An Nhiên",
+        shopId: "com_huong_que",
+        shopName: "Cơm Hương Quê",
         index: 19,
     },
 
@@ -245,8 +244,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bánh mì",
-        shopId: "banh_mi_huynh_hoa",
-        shopName: "Bánh Mì Huỳnh Hoa",
+        shopId: "banh_mi_truong_sa",
+        shopName: "Bánh Mì Trường Sa",
         index: 20,
     },
     {
@@ -264,8 +263,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bánh mì",
-        shopId: "banh_mi_huynh_hoa",
-        shopName: "Bánh Mì Huỳnh Hoa",
+        shopId: "banh_mi_truong_sa",
+        shopName: "Bánh Mì Trường Sa",
         index: 21,
     },
     {
@@ -283,8 +282,8 @@ const FoodData = [
         favourite: false,
         type: "Food",
         category: "Bánh mì",
-        shopId: "banh_mi_huynh_hoa",
-        shopName: "Bánh Mì Huỳnh Hoa",
+        shopId: "banh_mi_truong_sa",
+        shopName: "Bánh Mì Trường Sa",
         index: 22,
     },
     // Category: Khác

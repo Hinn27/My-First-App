@@ -1,26 +1,12 @@
 // Simple shops registry: id, displayName, category (type), and greeting message
 export const shops = [
-    // Cơm shops
+    // Cơm shop - chỉ còn 1 quán
     {
-        id: "com_tam_huong_que",
-        displayName: "Cơm Tấm Hương Quê",
+        id: "com_huong_que",
+        displayName: "Cơm Hương Quê",
         category: "Cơm",
         greeting:
-            "Cảm ơn quý khách đã tin tưởng Cơm Tấm Hương Quê, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    {
-        id: "com_ga_phu_yen",
-        displayName: "Cơm Gà Phú Yên",
-        category: "Cơm",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Cơm Gà Phú Yên, chúng tôi có thể hỗ trợ gì cho bạn?",
-    },
-    {
-        id: "com_van_phong_an_nhien",
-        displayName: "Cơm Văn Phòng An Nhiên",
-        category: "Cơm",
-        greeting:
-            "Cảm ơn quý khách đã tin tưởng Cơm Văn Phòng An Nhiên, chúng tôi có thể hỗ trợ gì cho bạn?",
+            "Cảm ơn quý khách đã tin tưởng Cơm Hương Quê - Chuyên các món cơm đặc sắc, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     // Bún, mì, phở - Gộp tất cả vào 3 quán chính
     {
@@ -46,11 +32,11 @@ export const shops = [
     },
     // Bánh mì shop
     {
-        id: "banh_mi_huynh_hoa",
-        displayName: "Bánh Mì Huỳnh Hoa",
+        id: "banh_mi_truong_sa",
+        displayName: "Bánh Mì Trường Sa",
         category: "Bánh mì",
         greeting:
-            "Cảm ơn quý khách đã tin tưởng Bánh Mì Huỳnh Hoa, chúng tôi có thể hỗ trợ gì cho bạn?",
+            "Cảm ơn quý khách đã tin tưởng Bánh Mì Trường Sa, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     // Khác
     {
