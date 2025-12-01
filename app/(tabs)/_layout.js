@@ -34,11 +34,11 @@ const MessagesIcon = ({ color, size, focused }) => {
     const unread = useChatStore((state) => state.unread);
     const user = useUserStore((state) => state.user);
     const isLoggedIn = user?.isLoggedIn || false;
-    
+
     const totalUnread = isLoggedIn
         ? Object.values(unread || {}).reduce((s, v) => s + (v || 0), 0)
         : 0;
-    
+
     return (
         <TabBarIconWithBadge
             focused={focused}

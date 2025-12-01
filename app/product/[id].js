@@ -310,15 +310,10 @@ export default function ProductDetailScreen() {
         );
     }
 
-    // Assign shop to product deterministically
+    // Assign shop to product using shopId field
     const shopForProduct = (() => {
-        if (!product) return null;
-        const index =
-            Array.from(String(product.id)).reduce(
-                (a, ch) => a + (ch.codePointAt(0) || 0),
-                0
-            ) % shops.length;
-        return shops[index];
+        if (!product || !product.shopId) return null;
+        return shops.find((s) => s.id === product.shopId) || null;
     })();
 
     return (
