@@ -19,9 +19,7 @@ import { useChatStore } from "../store/chatStore";
 
 export default function ProductCard(props) {
     const {
-        id,
         name,
-        special_ingredient: _special_ingredient,
         imageIcon,
         imagelink_square,
         average_rating,

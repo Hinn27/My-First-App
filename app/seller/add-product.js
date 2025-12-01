@@ -50,7 +50,7 @@ export default function AddProductScreen() {
     });
 
     // Categories (chỉ còn món ăn)
-    const foodCategories = ['Cơm', 'Bún, mì, phở'];
+    const foodCategories = ['Cơm', 'Bún, mì, phở', 'Bánh mì'];
     const currentCategories = foodCategories;
 
     // Handle form change

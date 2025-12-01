@@ -294,9 +294,9 @@ export const useProductStore = create(
         {
             name: "product-storage",
             storage: createJSONStorage(() => AsyncStorage),
-            version: 13, // Tăng version để clear cache cũ
+            version: 18, // Tăng version để clear cache cũ
             migrate: async (persistedState, version) => {
-                if (version < 13) {
+                if (version < 17) {
                     // Force reload FoodData để lấy shopName mới
                     return {
                         ...persistedState,

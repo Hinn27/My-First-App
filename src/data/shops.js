@@ -26,21 +26,21 @@ export const shops = [
     {
         id: "bun_bo_goc_pho",
         displayName: "Bún Bò Góc Phố",
-        category: "Bún",
+        category: "Bún, mì, phở",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Bún Bò Góc Phố, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     {
         id: "bun_rieu_ba_nam",
         displayName: "Bún Riêu Bà Năm",
-        category: "Bún",
+        category: "Bún, mì, phở",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Bún Riêu Bà Năm, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     {
         id: "bun_thit_nuong_ganh",
         displayName: "Bún Thịt Nướng Gánh",
-        category: "Bún",
+        category: "Bún, mì, phở",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Bún Thịt Nướng Gánh, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
@@ -48,21 +48,21 @@ export const shops = [
     {
         id: "mi_quang_hai_mua",
         displayName: "Mì Quảng Hai Mùa",
-        category: "Mì",
+        category: "Bún, mì, phở",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Mì Quảng Hai Mùa, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     {
         id: "mi_xao_thanh_dat",
         displayName: "Mì Xào Thành Đạt",
-        category: "Mì",
+        category: "Bún, mì, phở",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Mì Xào Thành Đạt, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     {
         id: "mi_cay_nhat_ha",
         displayName: "Mì Cay 7 Cấp Độ Nhật Hạ",
-        category: "Mì",
+        category: "Bún, mì, phở",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Mì Cay 7 Cấp Độ Nhật Hạ, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
@@ -70,21 +70,21 @@ export const shops = [
     {
         id: "pho_gia_truyen_36",
         displayName: "Phở Gia Truyền 36",
-        category: "Phở",
+        category: "Bún, mì, phở",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Phở Gia Truyền 36, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     {
         id: "pho_sai_gon_xua",
         displayName: "Phở Sài Gòn Xưa",
-        category: "Phở",
+        category: "Bún, mì, phở",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Phở Sài Gòn Xưa, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     {
         id: "pho_bo_tai_chin_long_thanh",
         displayName: "Phở Bò Tái Chín Long Thành",
-        category: "Phở",
+        category: "Bún, mì, phở",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Phở Bò Tái Chín Long Thành, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
@@ -116,6 +116,14 @@ export const shops = [
         category: "Bánh mì",
         greeting:
             "Cảm ơn quý khách đã tin tưởng Bánh Mì Sốt Bơ Trứng 88, chúng tôi có thể hỗ trợ gì cho bạn?",
+    },
+    // Quán ăn 0 đồng
+    {
+        id: "quan_an_0dong_1",
+        displayName: "Quán Ăn 0 Đồng Số 1",
+        category: "Quán ăn 0 đồng",
+        greeting:
+            "Cảm ơn quý khách đã tin tưởng Quán Ăn 0 Đồng Số 1, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
     // Nước (Drinks)
     {

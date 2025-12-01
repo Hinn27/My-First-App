@@ -5,7 +5,7 @@
  * Expo Router sẽ lấy index.js làm Home
  */
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import {
     View,
     StyleSheet,
@@ -36,6 +36,10 @@ const getCategoriesFromData = (data, hasViewed = false) => {
         }
     }
     const categories = Object.keys(temp);
+    // Always include "Quán ăn 0 đồng" even if empty
+    if (!categories.includes("Quán ăn 0 đồng")) {
+        categories.push("Quán ăn 0 đồng");
+    }
     categories.unshift("Tất cả");
     if (hasViewed) {
         categories.push("Đã xem gần đây");
@@ -93,6 +97,57 @@ export default function EnhancedHomeScreen() {
 
     const listRef = useRef(null);
 
+    // Filter logic
+    const applyFilter = useCallback(
+        (category, type) => {
+            let list;
+
+            if (category === "Đã xem gần đây") {
+                list = viewedProducts || [];
+            } else {
+                list = getFilteredList(category, foodList);
+            }
+
+            if (searchText) {
+                list = list.filter((item) =>
+                    item.name.toLowerCase().includes(searchText.toLowerCase())
+                );
+            }
+
+            let sorted = [...list];
+            if (type === "price_asc") {
+                sorted.sort((a, b) => {
+                    const priceA =
+                        a.prices && a.prices.length > 0
+                            ? a.prices[0].price
+                            : a.price || 0;
+                    const priceB =
+                        b.prices && b.prices.length > 0
+                            ? b.prices[0].price
+                            : b.price || 0;
+                    return priceA - priceB;
+                });
+            } else if (type === "price_desc") {
+                sorted.sort((a, b) => {
+                    const priceA =
+                        a.prices && a.prices.length > 0
+                            ? a.prices[0].price
+                            : a.price || 0;
+                    const priceB =
+                        b.prices && b.prices.length > 0
+                            ? b.prices[0].price
+                            : b.price || 0;
+                    return priceB - priceA;
+                });
+            } else if (type === "rating_desc") {
+                sorted.sort((a, b) => b.average_rating - a.average_rating);
+            }
+
+            setSortedProducts(sorted);
+        },
+        [foodList, viewedProducts, searchText]
+    );
+
     // Recompute categories and filtered list when data changes
     useEffect(() => {
         if (foodList && foodList.length > 0) {
@@ -117,60 +172,18 @@ export default function EnhancedHomeScreen() {
             // Apply current filter and category
             applyFilter(currentCat, filterType);
         }
-    }, [foodList, viewedProducts]);
-
-    // Filter logic
-    const applyFilter = (category, type) => {
-        let list;
-
-        if (category === "Đã xem gần đây") {
-            list = viewedProducts || [];
-        } else {
-            list = getFilteredList(category, foodList);
-        }
-
-        if (searchText) {
-            list = list.filter((item) =>
-                item.name.toLowerCase().includes(searchText.toLowerCase())
-            );
-        }
-
-        let sorted = [...list];
-        if (type === "price_asc") {
-            sorted.sort((a, b) => {
-                const priceA =
-                    a.prices && a.prices.length > 0
-                        ? a.prices[0].price
-                        : a.price || 0;
-                const priceB =
-                    b.prices && b.prices.length > 0
-                        ? b.prices[0].price
-                        : b.price || 0;
-                return priceA - priceB;
-            });
-        } else if (type === "price_desc") {
-            sorted.sort((a, b) => {
-                const priceA =
-                    a.prices && a.prices.length > 0
-                        ? a.prices[0].price
-                        : a.price || 0;
-                const priceB =
-                    b.prices && b.prices.length > 0
-                        ? b.prices[0].price
-                        : b.price || 0;
-                return priceB - priceA;
-            });
-        } else if (type === "rating_desc") {
-            sorted.sort((a, b) => b.average_rating - a.average_rating);
-        }
-
-        setSortedProducts(sorted);
-    };
+    }, [
+        foodList,
+        viewedProducts,
+        applyFilter,
+        categoryIndex.category,
+        filterType,
+    ]);
 
     // Effect to re-apply filter when type changes
     useEffect(() => {
         applyFilter(categoryIndex.category, filterType);
-    }, [filterType, searchText]);
+    }, [filterType, searchText, applyFilter, categoryIndex.category]);
 
     // Search function
     const searchProduct = (search) => {
@@ -529,8 +542,8 @@ const createStyles = (theme) =>
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
-            paddingTop: 12,
-            paddingBottom: 20,
+            paddingTop: 8,
+            paddingBottom: 12,
             paddingHorizontal: 20,
         },
         locationContainer: {

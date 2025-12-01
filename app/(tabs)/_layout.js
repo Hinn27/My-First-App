@@ -20,16 +20,6 @@ const HomeIcon = ({ color, size, focused }) => (
     />
 );
 
-const FreeFoodIcon = ({ color, size, focused }) => (
-    <TabBarIconWithBadge
-        focused={focused}
-        iconName={focused ? "gift" : "gift-outline"}
-        color={color}
-        size={size}
-        badge={0}
-    />
-);
-
 function MessagesIcon({ color, size, focused }) {
     const unread = useChatStore((state) => state.unread);
     const user = useUserStore((state) => state.user);
@@ -114,35 +104,25 @@ export default function TabLayout() {
                     shadowOpacity: 0.12,
                     shadowRadius: 12,
                     height: Platform.OS === "ios" ? 85 : 65,
-                    paddingBottom: Platform.OS === "ios" ? 20 : 8,
+                    paddingBottom: Platform.OS === "ios" ? 20 : 4,
                     paddingTop: 4,
-                    paddingHorizontal: 0,
-                    marginHorizontal: 0,
-                    display: "flex",
-                    justifyContent: "space-around",
-                    alignItems: "center",
+                    paddingHorizontal: 4,
                 },
                 tabBarItemStyle: {
-                    paddingVertical: 2,
                     flex: 1,
                     alignItems: "center",
                     justifyContent: "center",
-                    marginHorizontal: 0,
-                    paddingHorizontal: 0,
-                    gap: 1,
-                    width: "20%",
-                    minWidth: "20%",
+                    paddingVertical: 4,
+                    paddingHorizontal: 4,
                 },
                 tabBarLabelStyle: {
-                    fontSize: 9,
+                    fontSize: 10,
                     fontWeight: "500",
-                    marginTop: 2,
-                    marginBottom: 0,
+                    marginTop: 4,
                     textAlign: "center",
                 },
                 tabBarIconStyle: {
-                    marginTop: 0,
-                    marginBottom: 2,
+                    marginBottom: 0,
                 },
                 animation: "shift",
                 tabBarShowLabel: true,
@@ -160,18 +140,6 @@ export default function TabLayout() {
                 listeners={{
                     tabPress: () => handleTabPress("home"),
                 }}
-            />
-
-            {/* Tab: Free Food / Quán ăn 0đ */}
-            <Tabs.Screen
-                name="free-food"
-                options={{
-                    title: "Quán ăn 0đ",
-                    headerTitle: "Quán ăn 0 đồng",
-                    tabBarLabel: "0 đồng",
-                    tabBarIcon: FreeFoodIcon,
-                }}
-                listeners={{ tabPress: () => handleTabPress("free-food") }}
             />
 
             {/* Tab: Messages / Tin nhắn */}
@@ -216,17 +184,13 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="cart"
                 options={{
-                    title: "Giỏ hàng",
-                    tabBarButton: () => null,
-                    tabBarItemStyle: { width: 0, padding: 0, margin: 0 },
+                    href: null,
                 }}
             />
             <Tabs.Screen
                 name="favorites"
                 options={{
-                    title: "Yêu thích",
-                    tabBarButton: () => null,
-                    tabBarItemStyle: { width: 0, padding: 0, margin: 0 },
+                    href: null,
                 }}
             />
         </Tabs>

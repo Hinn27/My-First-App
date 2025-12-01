@@ -16,7 +16,6 @@ import { Button } from "react-native-paper";
 import { useTheme } from "../src/context/ThemeContext";
 import { useProductStore } from "../src/store/productStore";
 import { useChatStore } from "../src/store/chatStore";
-import { shops } from "../src/data/shops";
 
 export default function PaymentScreen() {
     const router = useRouter();
