@@ -156,7 +156,7 @@ export default function ChatScreen() {
                 {!messages || messages.length === 0 ? (
                     <View style={styles.emptyContainer}>
                         <Text variant="headlineSmall">
-                            Lịch sử chat đang trống
+                            Lịch sử tin nhắn trống
                         </Text>
                         <Text
                             variant="bodyMedium"

@@ -23,7 +23,8 @@ import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useUserStore } from "../../src/store/userStore";
-import { useProductStore } from "../../src/store/productStore"; // Import Product Store
+import { useProductStore } from "../../src/store/productStore";
+import { useChatStore } from "../../src/store/chatStore"; // Import Chat Store
 import ScreenWrapper from "../../src/components/ScreenWrapper";
 
 export default function ProfileScreen() {
@@ -45,6 +46,9 @@ export default function ProfileScreen() {
         (state) => state.clearOrderHistory
     );
     const clearFavorites = useProductStore((state) => state.clearFavorites);
+
+    // Access Chat Store actions
+    const clearChat = useChatStore((state) => state.clearChat);
 
     // Create dynamic styles
     const styles = createStyles(theme);
@@ -76,7 +80,10 @@ export default function ProfileScreen() {
             if (clearOrderHistory) clearOrderHistory();
             if (clearFavorites) clearFavorites();
 
-            // 5. Navigate to Home (Guest mode)
+            // 5. Clear Chat Store
+            if (clearChat) clearChat();
+
+            // 6. Navigate to Home (Guest mode)
             router.replace("/(tabs)");
         } catch (error) {
             console.error("Error clearing data:", error);

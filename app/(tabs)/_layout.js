@@ -30,7 +30,8 @@ const FreeFoodIcon = ({ color, size, focused }) => (
 );
 
 const MessagesIcon = ({ color, size, focused }) => {
-    const totalUnread = useChatStore((state) => state.getTotalUnread());
+    const unread = useChatStore((state) => state.unread || {});
+    const totalUnread = Object.values(unread).reduce((s, v) => s + (v || 0), 0);
     return (
         <TabBarIconWithBadge
             focused={focused}

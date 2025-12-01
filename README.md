@@ -26,7 +26,7 @@
 
 -   📝 **Đăng ký bán**: Tạo tài khoản bán hàng- 💳 Payment với multiple methods
 
--   ➕ **Thêm sản phẩm**: Đăng sản phẩm với ảnh, giá tiền, mô tả- 🎨 Material Design 3 với React Native Paper
+-   ➕ **Thêm sản phẩm**: Đăng sản phẩm với ảnh, giá tiền, mô tả - 🎨 Material Design 3 với React Native Paper
 
 -   📊 **Quản lý doanh thu**: Xem đơn hàng và thu nhập- ✨ Smooth animations & haptic feedback
 

@@ -15,6 +15,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
 import { useTheme } from "../src/context/ThemeContext";
 import { useProductStore } from "../src/store/productStore";
+import { useChatStore } from "../src/store/chatStore";
+import { shops } from "../src/data/shops";
 
 export default function PaymentScreen() {
     const router = useRouter();
@@ -22,12 +24,16 @@ export default function PaymentScreen() {
     const styles = createStyles(theme);
 
     const cartPrice = useProductStore((state) => state.cartPrice);
+    const cartList = useProductStore((state) => state.cartList);
     const addToOrderHistoryFromCart = useProductStore(
         (state) => state.addToOrderHistoryFromCart
     );
     const calculateCartPrice = useProductStore(
         (state) => state.calculateCartPrice
     );
+
+    // Access chat store to send thank you message
+    const addMessage = useChatStore((state) => state.addMessage);
 
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
@@ -47,6 +53,21 @@ export default function PaymentScreen() {
 
         addToOrderHistoryFromCart();
         calculateCartPrice();
+
+        // Send thank you message to each shop in the order
+        if (cartList && cartList.length > 0) {
+            cartList.forEach((product) => {
+                const shopId = product.shopId;
+                if (shopId) {
+                    addMessage(shopId, {
+                        id: `thank-you-${shopId}-${Date.now()}`,
+                        text: `Cảm ơn bạn đã đặt hàng! Chúng tôi sẽ chuẩn bị sớm nhất.`,
+                        from: "me",
+                        timestamp: Date.now(),
+                    });
+                }
+            });
+        }
 
         setTimeout(() => {
             setShowSuccess(false);

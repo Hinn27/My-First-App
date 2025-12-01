@@ -477,7 +477,7 @@ export default function ProductDetailScreen() {
                                 <Pressable
                                     onPress={() =>
                                         router.push({
-                                            pathname: "/chat",
+                                            pathname: "/chat/[shopId]",
                                             params: {
                                                 shopId: shopForProduct.id,
                                             },
