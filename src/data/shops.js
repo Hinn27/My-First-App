@@ -46,12 +46,19 @@ export const shops = [
         greeting:
             "Cảm ơn quý khách đã tin tưởng Bánh Xèo Bà Dương, chúng tôi có thể hỗ trợ gì cho bạn?",
     },
+    {
+        id: "quan_di_hoa",
+        displayName: "Quán Dì Hoa",
+        category: "Khác",
+        greeting:
+            "Cảm ơn quý khách đã tin tưởng Quán Dì Hoa - Chuyên bánh lọc, bánh cuốn, bò né và các món ăn vặt đặc sắc, chúng tôi có thể hỗ trợ gì cho bạn?",
+    },
     // Quán ăn 0 đồng
     {
         id: "quan_an_0dong_1",
         displayName: "Quán Ăn 0 Đồng Số 1",
         category: "Khác",
         greeting:
-            "Cảm ơn quý khách đã tin tưởng Quán Ăn 0 Đồng Số 1, chúng tôi có thể hỗ trợ gì cho bạn?",
+            "",
     },
 ];
