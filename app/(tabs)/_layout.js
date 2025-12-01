@@ -5,7 +5,7 @@ import { useTheme } from "../../src/context/ThemeContext";
 import * as Haptics from "expo-haptics";
 import { Platform } from "react-native";
 import TabBarIconWithBadge from "../../src/components/TabBarIconWithBadge";
-import React from "react";
+import React, { useMemo } from "react";
 import { useChatStore } from "../../src/store/chatStore";
 import { useUserStore } from "../../src/store/userStore";
 
@@ -30,14 +30,16 @@ const FreeFoodIcon = ({ color, size, focused }) => (
     />
 );
 
-const MessagesIcon = ({ color, size, focused }) => {
+function MessagesIcon({ color, size, focused }) {
     const unread = useChatStore((state) => state.unread);
     const user = useUserStore((state) => state.user);
-    const isLoggedIn = user?.isLoggedIn || false;
+    const isLoggedIn = !!user;
 
-    const totalUnread = isLoggedIn
-        ? Object.values(unread || {}).reduce((s, v) => s + (v || 0), 0)
-        : 0;
+    const totalUnread = useMemo(() => {
+        return isLoggedIn
+            ? Object.values(unread || {}).reduce((s, v) => s + (v || 0), 0)
+            : 0;
+    }, [isLoggedIn, unread]);
 
     return (
         <TabBarIconWithBadge
@@ -48,7 +50,7 @@ const MessagesIcon = ({ color, size, focused }) => {
             badge={totalUnread}
         />
     );
-};
+}
 
 const OrderIcon = ({ color, size, focused }) => (
     <TabBarIconWithBadge

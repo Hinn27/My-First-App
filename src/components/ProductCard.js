@@ -15,7 +15,6 @@ import * as Haptics from "expo-haptics";
 import { wp } from "../utils/Responsive"; // Sử dụng wp để responsive
 import PropTypes from "prop-types";
 import { useRouter } from "expo-router";
-import { shops } from "../data/shops";
 import { useChatStore } from "../store/chatStore";
 
 export default function ProductCard(props) {
@@ -88,8 +87,7 @@ export default function ProductCard(props) {
         displayPrice = price;
     }
 
-    // choose shop from shopId for getting unread count
-    const shop = shopId ? shops.find((s) => s.id === shopId) : null;
+    // Get unread count from chat store
     const unreadCount = useChatStore(
         (s) => (s.unread && s.unread[shopId]) || 0
     );
@@ -159,7 +157,7 @@ export default function ProductCard(props) {
                             ]}
                             numberOfLines={1}
                         >
-                            {shop ? shop.displayName : ""}
+                            {shopName || ""}
                         </Text>
 
                         {/* Rating and Price */}

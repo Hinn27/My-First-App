@@ -87,6 +87,12 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
+    // Set Java compatibility to Java 21
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+
     namespace 'com.hinne.myapp'
     defaultConfig {
         applicationId 'com.hinne.myapp'
