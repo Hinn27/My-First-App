@@ -470,7 +470,7 @@ export default function ProductDetailScreen() {
                         >
                             <Text style={styles.ingredients}>
                                 {shopForProduct
-                                    ? `${shopForProduct.id} - ${shopForProduct.displayName}`
+                                    ? shopForProduct.displayName
                                     : "Không có"}
                             </Text>
                             {shopForProduct && (
