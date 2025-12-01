@@ -1,9 +1,9 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { produce } from 'immer';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { produce } from "immer";
 
-import FoodData from '../data/FoodData';
+import FoodData from "../data/FoodData";
 
 export const useProductStore = create(
     persist(
@@ -40,7 +40,7 @@ export const useProductStore = create(
                                 }
                                 if (!sizeFound) {
                                     state.cartList[i].prices.push(
-                                        cartItem.prices[0],
+                                        cartItem.prices[0]
                                     );
                                 }
                                 state.cartList[i].prices.sort((a, b) => {
@@ -54,7 +54,7 @@ export const useProductStore = create(
                         if (!found) {
                             state.cartList.push(cartItem);
                         }
-                    }),
+                    })
                 ),
 
             calculateCartPrice: () =>
@@ -70,7 +70,7 @@ export const useProductStore = create(
                             ) {
                                 tempPrice +=
                                     parseFloat(
-                                        state.cartList[i].prices[j].price,
+                                        state.cartList[i].prices[j].price
                                     ) * state.cartList[i].prices[j].quantity;
                             }
                             state.cartList[i].itemPrice = tempPrice
@@ -79,7 +79,7 @@ export const useProductStore = create(
                             totalPrice += tempPrice;
                         }
                         state.cartPrice = totalPrice.toFixed(0).toString();
-                    }),
+                    })
                 ),
 
             addToFavoriteList: (_type, id) =>
@@ -95,7 +95,7 @@ export const useProductStore = create(
                                 break;
                             }
                         }
-                    }),
+                    })
                 ),
 
             deleteFromFavoriteList: (_type, id) =>
@@ -111,12 +111,12 @@ export const useProductStore = create(
                             }
                         }
                         const favIndex = state.favoritesList.findIndex(
-                            (item) => item.id === id,
+                            (item) => item.id === id
                         );
                         if (favIndex !== -1) {
                             state.favoritesList.splice(favIndex, 1);
                         }
-                    }),
+                    })
                 ),
 
             incrementCartItemQuantity: (id, size) =>
@@ -139,7 +139,7 @@ export const useProductStore = create(
                                 }
                             }
                         }
-                    }),
+                    })
                 ),
 
             decrementCartItemQuantity: (id, size) =>
@@ -165,7 +165,7 @@ export const useProductStore = create(
                                         } else {
                                             state.cartList[i].prices.splice(
                                                 j,
-                                                1,
+                                                1
                                             );
                                         }
                                         break;
@@ -176,7 +176,7 @@ export const useProductStore = create(
                                 }
                             }
                         }
-                    }),
+                    })
                 ),
 
             addToOrderHistoryFromCart: () =>
@@ -185,7 +185,7 @@ export const useProductStore = create(
                         const orderDate = new Date().toDateString();
                         const orderTime = new Date()
                             .toTimeString()
-                            .split(' ')[0];
+                            .split(" ")[0];
 
                         const temp = state.cartList.reduce((acc, item) => {
                             acc.push({ ...item });
@@ -211,7 +211,7 @@ export const useProductStore = create(
                         }
                         state.cartList = [];
                         state.cartPrice = 0;
-                    }),
+                    })
                 ),
 
             clearCart: () =>
@@ -219,47 +219,61 @@ export const useProductStore = create(
                     produce((state) => {
                         state.cartList = [];
                         state.cartPrice = 0;
-                    }),
+                    })
                 ),
-            
+
             // Action xóa danh sách đã xem
             clearViewedProducts: () =>
                 set(
                     produce((state) => {
                         state.viewedProducts = [];
-                    }),
+                    })
                 ),
-            
+
             // Action xóa lịch sử đơn hàng
             clearOrderHistory: () =>
                 set(
                     produce((state) => {
                         state.orderHistoryList = [];
-                    }),
+                    })
+                ),
+
+            // Action xóa yêu thích
+            clearFavorites: () =>
+                set(
+                    produce((state) => {
+                        state.favoritesList = [];
+                        // Cũng reset favorite flag cho từng sản phẩm
+                        state.foodList.forEach((item) => {
+                            item.favourite = false;
+                        });
+                    })
                 ),
 
             addProduct: (product) =>
                 set(
                     produce((state) => {
                         state.foodList.unshift(product);
-                    }),
+                    })
                 ),
 
             deleteProduct: (productId, _productType) =>
                 set(
                     produce((state) => {
                         state.foodList = state.foodList.filter(
-                            (item) => item.id !== productId,
+                            (item) => item.id !== productId
                         );
-                    }),
+                    })
                 ),
-            
+
             // Action thêm vào danh sách đã xem
             addToViewedProducts: (product) =>
                 set(
                     produce((state) => {
                         // Xóa nếu đã tồn tại để đưa lên đầu
-                        const index = state.viewedProducts.findIndex((item) => item.id === product.id);
+                        const index = state.viewedProducts.findIndex(
+                            (item) => item.id === product.id
+                        );
                         if (index !== -1) {
                             state.viewedProducts.splice(index, 1);
                         }
@@ -269,16 +283,15 @@ export const useProductStore = create(
                         if (state.viewedProducts.length > 10) {
                             state.viewedProducts.pop();
                         }
-                    }),
+                    })
                 ),
-
         }),
         {
-            name: 'product-storage',
+            name: "product-storage",
             storage: createJSONStorage(() => AsyncStorage),
             version: 12, // Tăng version để kích hoạt migration mới
             migrate: async (persistedState, version) => {
-                 if (version < 12) {
+                if (version < 12) {
                     // Nếu version cũ thấp hơn 12, cập nhật lại foodList từ FoodData mới nhất
                     return {
                         ...persistedState,
@@ -287,6 +300,6 @@ export const useProductStore = create(
                 }
                 return persistedState;
             },
-        },
-    ),
+        }
+    )
 );

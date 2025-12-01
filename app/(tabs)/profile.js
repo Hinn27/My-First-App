@@ -35,11 +35,16 @@ export default function ProfileScreen() {
     const user = useUserStore((state) => state.user);
     const setUser = useUserStore((state) => state.setUser);
     const isLoggedIn = user?.isLoggedIn || false;
-    
+
     // Access Product Store actions
     const clearCart = useProductStore((state) => state.clearCart);
-    const clearViewedProducts = useProductStore((state) => state.clearViewedProducts);
-    const clearOrderHistory = useProductStore((state) => state.clearOrderHistory); // New action
+    const clearViewedProducts = useProductStore(
+        (state) => state.clearViewedProducts
+    );
+    const clearOrderHistory = useProductStore(
+        (state) => state.clearOrderHistory
+    );
+    const clearFavorites = useProductStore((state) => state.clearFavorites);
 
     // Create dynamic styles
     const styles = createStyles(theme);
@@ -52,32 +57,32 @@ export default function ProfileScreen() {
             console.error("Error logging out:", error);
         }
     };
-    
+
     // Function to clear all data and reset app
     const handleClearDataAndLogout = async () => {
         try {
             // 1. Clear All AsyncStorage first
             await AsyncStorage.clear();
-            
+
             // 2. IMPORTANT: Set viewedOnboarding back to true so we don't see it again
-            await AsyncStorage.setItem('@viewedOnboarding', 'true');
-            
+            await AsyncStorage.setItem("@viewedOnboarding", "true");
+
             // 3. Reset User Store
             setUser(null);
-            
-            // 4. Reset Product Store
+
+            // 4. Reset Product Store - clear everything
             if (clearCart) clearCart();
             if (clearViewedProducts) clearViewedProducts();
             if (clearOrderHistory) clearOrderHistory();
-            
+            if (clearFavorites) clearFavorites();
+
             // 5. Navigate to Home (Guest mode)
-            router.replace("/(tabs)"); 
-            
+            router.replace("/(tabs)");
         } catch (error) {
             console.error("Error clearing data:", error);
             Alert.alert("Lỗi", "Không thể xoá dữ liệu.");
         }
-    }
+    };
 
     // TEST FUNCTION: Set user as approved seller
     const testSetApprovedSeller = async () => {
@@ -443,8 +448,8 @@ export default function ProfileScreen() {
                             />
 
                             <Divider style={styles.divider} />
-                            
-                             <List.Item
+
+                            <List.Item
                                 title="🧪 Test: Xoá dữ liệu & Reset"
                                 titleStyle={{ fontSize: 13 }}
                                 descriptionStyle={{ fontSize: 11 }}
