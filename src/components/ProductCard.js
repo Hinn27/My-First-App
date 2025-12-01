@@ -34,6 +34,7 @@ export default function ProductCard(props) {
         onFavoritePress,
         favourite,
         theme,
+        shopId,
     } = props;
 
     const router = useRouter();
@@ -86,13 +87,17 @@ export default function ProductCard(props) {
         displayPrice = price;
     }
 
-    // choose shop deterministically from name/id
-    const idx =
-        Array.from(String(name || id || "")).reduce(
-            (a, ch) => a + (ch.codePointAt(0) || 0),
-            0
-        ) % shops.length;
-    const shop = shops[idx];
+    // choose shop from shopId or fall back to deterministic lookup
+    const shop = shopId
+        ? shops.find((s) => s.id === shopId)
+        : (() => {
+              const idx =
+                  Array.from(String(name || id || "")).reduce(
+                      (a, ch) => a + (ch.codePointAt(0) || 0),
+                      0
+                  ) % shops.length;
+              return shops[idx];
+          })();
     const unreadCount = useChatStore(
         (s) => (s.unread && s.unread[shop?.id]) || 0
     );
@@ -401,6 +406,7 @@ ProductCard.propTypes = {
         PropTypes.number,
         PropTypes.object,
     ]),
+    shopId: PropTypes.string,
     onPress: PropTypes.func.isRequired,
     onAddToCart: PropTypes.func,
     onFavoritePress: PropTypes.func,
