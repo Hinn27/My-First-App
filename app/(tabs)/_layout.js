@@ -115,18 +115,19 @@ export default function TabLayout() {
                     flex: 1,
                     alignItems: "center",
                     justifyContent: "center",
-                    paddingVertical: 4,
+                    paddingVertical: 0,
                     paddingHorizontal: 0,
                     marginHorizontal: 0,
                 },
                 tabBarLabelStyle: {
                     fontSize: 10,
                     fontWeight: "500",
-                    marginTop: 4,
+                    marginTop: 2,
                     textAlign: "center",
                 },
                 tabBarIconStyle: {
                     marginBottom: 0,
+                    marginTop: 0,
                 },
                 animation: "shift",
                 tabBarShowLabel: true,
@@ -166,11 +167,7 @@ export default function TabLayout() {
                     headerTitle: "Lịch sử đơn hàng",
                     tabBarLabel: "Đơn hàng",
                     tabBarIcon: OrderIcon,
-                    headerTitleStyle: {
-                        fontWeight: "600",
-                        fontSize: 16,
-                        color: theme.onBackground,
-                    },
+                    headerLeft: () => null,
                 }}
                 listeners={{ tabPress: () => handleTabPress("order-history") }}
             />
