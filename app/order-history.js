@@ -5,7 +5,7 @@
  * - Hiển thị ngày giờ, tổng tiền
  * - Empty state khi chưa có đơn hàng
  */
-import React from 'react';
+import React from "react";
 import {
     View,
     Text,
@@ -13,12 +13,14 @@ import {
     ScrollView,
     StatusBar,
     Pressable,
-} from 'react-native';
-import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-import { useTheme } from '../src/context/ThemeContext';
-import { useProductStore } from '../src/store/productStore';
+    Platform,
+    Alert,
+} from "react-native";
+import { useRouter, Stack } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import { useTheme } from "../src/context/ThemeContext";
+import { useProductStore } from "../src/store/productStore";
 
 export default function OrderHistoryScreen() {
     const router = useRouter();
@@ -28,12 +30,17 @@ export default function OrderHistoryScreen() {
     // Store
     const orderHistoryList = useProductStore((state) => state.orderHistoryList);
 
+    const handleReview = (orderId) => {
+        Alert.alert("Đánh giá", "Tính năng đánh giá đang được phát triển");
+    };
+
     return (
         <View style={styles.container}>
+            <Stack.Screen options={{ headerShown: false }} />
             <StatusBar
                 backgroundColor={theme.background}
                 barStyle={
-                    theme.mode === 'dark' ? 'light-content' : 'dark-content'
+                    theme.mode === "dark" ? "light-content" : "dark-content"
                 }
             />
 
@@ -50,7 +57,6 @@ export default function OrderHistoryScreen() {
                     />
                 </Pressable>
                 <Text style={styles.headerTitle}>Lịch sử đơn hàng</Text>
-                <View style={styles.placeholder} />
             </View>
 
             {orderHistoryList.length === 0 ? (
@@ -66,7 +72,7 @@ export default function OrderHistoryScreen() {
                     </Text>
                     <Pressable
                         style={styles.shopButton}
-                        onPress={() => router.push('/')}
+                        onPress={() => router.push("/")}
                     >
                         <Text style={styles.shopButtonText}>
                             Bắt đầu mua sắm
@@ -82,9 +88,9 @@ export default function OrderHistoryScreen() {
                         <View key={index} style={styles.orderCard}>
                             <LinearGradient
                                 colors={
-                                    theme.mode === 'dark'
-                                        ? ['#252A32', '#0C0F14']
-                                        : ['#FFFFFF', '#F7F8FB']
+                                    theme.mode === "dark"
+                                        ? ["#252A32", "#0C0F14"]
+                                        : ["#FFFFFF", "#F7F8FB"]
                                 }
                                 style={styles.cardGradient}
                             >
@@ -118,9 +124,6 @@ export default function OrderHistoryScreen() {
                                             style={styles.orderItem}
                                         >
                                             <View style={styles.itemLeft}>
-                                                <Text style={styles.itemIcon}>
-                                                    {item.imageIcon}
-                                                </Text>
                                                 <View style={styles.itemInfo}>
                                                     <Text
                                                         style={styles.itemName}
@@ -153,7 +156,7 @@ export default function OrderHistoryScreen() {
                                                                     styles.sizeText
                                                                 }
                                                             >
-                                                                {price.size} x{' '}
+                                                                {price.size} x{" "}
                                                                 {price.quantity}
                                                             </Text>
                                                             <Text
@@ -162,31 +165,65 @@ export default function OrderHistoryScreen() {
                                                                 }
                                                             >
                                                                 {parseInt(
-                                                                    price.price,
+                                                                    price.price
                                                                 ).toLocaleString(
-                                                                    'vi-VN',
-                                                                )}{' '}
+                                                                    "vi-VN"
+                                                                )}{" "}
                                                                 đ
                                                             </Text>
                                                         </View>
-                                                    ),
+                                                    )
                                                 )}
                                             </View>
                                         </View>
                                     ))}
                                 </View>
 
-                                {/* Order Total */}
-                                <View style={styles.totalContainer}>
-                                    <Text style={styles.totalLabel}>
-                                        Tổng cộng:
-                                    </Text>
-                                    <Text style={styles.totalValue}>
-                                        {parseInt(
-                                            order.cartListPrice,
-                                        ).toLocaleString('vi-VN')}{' '}
-                                        đ
-                                    </Text>
+                                {/* Order Total & Actions */}
+                                <View style={styles.footerContainer}>
+                                    <View style={styles.totalRow}>
+                                        <Text style={styles.totalLabel}>
+                                            Tổng cộng:
+                                        </Text>
+                                        <Text style={styles.totalValue}>
+                                            {parseInt(
+                                                order.cartListPrice
+                                            ).toLocaleString("vi-VN")}{" "}
+                                            đ
+                                        </Text>
+                                    </View>
+
+                                    <View style={styles.actionRow}>
+                                        <Pressable
+                                            style={styles.reviewButton}
+                                            onPress={() => handleReview(index)}
+                                        >
+                                            <Ionicons
+                                                name="star-outline"
+                                                size={16}
+                                                color={theme.primary}
+                                            />
+                                            <Text
+                                                style={styles.reviewButtonText}
+                                            >
+                                                Đánh giá quán
+                                            </Text>
+                                        </Pressable>
+
+                                        <Pressable
+                                            style={styles.reorderButton}
+                                            onPress={() => {
+                                                // Reorder logic would go here
+                                                router.push("/");
+                                            }}
+                                        >
+                                            <Text
+                                                style={styles.reorderButtonText}
+                                            >
+                                                Mua lại
+                                            </Text>
+                                        </Pressable>
+                                    </View>
                                 </View>
                             </LinearGradient>
                         </View>
@@ -205,38 +242,42 @@ const createStyles = (theme) =>
             backgroundColor: theme.background,
         },
         header: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: 16,
-            borderBottomWidth: 1,
-            borderBottomColor: theme.outline,
+            flexDirection: "row",
+            alignItems: "center",
+            // justifyContent: 'space-between', // Removed to align left
+            paddingHorizontal: 16,
+            paddingVertical: 12,
+            paddingTop:
+                Platform.OS === "android"
+                    ? (StatusBar.currentHeight || 24) + 12
+                    : 50, // Padding top safe area
+            borderBottomWidth: 0.5,
+            borderBottomColor: theme.outlineVariant,
+            backgroundColor: theme.surface, // Ensure header has background
         },
         backButton: {
-            width: 40,
-            height: 40,
-            borderRadius: 12,
-            backgroundColor: theme.surface,
-            justifyContent: 'center',
-            alignItems: 'center',
+            padding: 4,
+            // Không cần width/height cố định nếu muốn nút gọn hơn
+            justifyContent: "center",
+            alignItems: "center",
         },
         headerTitle: {
-            fontSize: 20,
-            fontWeight: '700',
+            fontSize: 18, // Giảm font size xuống 18 cho đồng bộ
+            fontWeight: "600", // Giảm weight xuống 600
             color: theme.onBackground,
-        },
-        placeholder: {
-            width: 40,
+            flex: 1,
+            marginLeft: 16, // Khoảng cách vừa phải với nút back
+            textAlign: "left", // Căn trái thay vì giữa
         },
         emptyContainer: {
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
             padding: 20,
         },
         emptyText: {
             fontSize: 24,
-            fontWeight: '700',
+            fontWeight: "700",
             color: theme.onBackground,
             marginTop: 20,
         },
@@ -244,7 +285,7 @@ const createStyles = (theme) =>
             fontSize: 16,
             color: theme.onSurfaceVariant,
             marginTop: 8,
-            textAlign: 'center',
+            textAlign: "center",
         },
         shopButton: {
             marginTop: 24,
@@ -254,9 +295,9 @@ const createStyles = (theme) =>
             borderRadius: 12,
         },
         shopButtonText: {
-            color: '#FFFFFF',
+            color: "#FFFFFF",
             fontSize: 16,
-            fontWeight: '600',
+            fontWeight: "600",
         },
         scrollContent: {
             padding: 20,
@@ -268,15 +309,15 @@ const createStyles = (theme) =>
             borderRadius: 16,
             padding: 16,
             elevation: 4,
-            shadowColor: '#000',
+            shadowColor: "#000",
             shadowOffset: { width: 0, height: 2 },
             shadowOpacity: 0.1,
             shadowRadius: 8,
         },
         orderHeader: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
             marginBottom: 16,
             paddingBottom: 12,
             borderBottomWidth: 1,
@@ -287,7 +328,7 @@ const createStyles = (theme) =>
         },
         orderDate: {
             fontSize: 16,
-            fontWeight: '700',
+            fontWeight: "700",
             color: theme.onSurface,
         },
         orderTime: {
@@ -295,36 +336,33 @@ const createStyles = (theme) =>
             color: theme.onSurfaceVariant,
         },
         statusBadge: {
-            flexDirection: 'row',
-            alignItems: 'center',
+            flexDirection: "row",
+            alignItems: "center",
             gap: 4,
-            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+            backgroundColor: "rgba(76, 175, 80, 0.1)",
             paddingHorizontal: 12,
             paddingVertical: 6,
             borderRadius: 12,
         },
         statusText: {
             fontSize: 13,
-            fontWeight: '600',
-            color: '#4CAF50',
+            fontWeight: "600",
+            color: "#4CAF50",
         },
         itemsContainer: {
             gap: 12,
             marginBottom: 16,
         },
         orderItem: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
         },
         itemLeft: {
-            flexDirection: 'row',
-            alignItems: 'center',
+            flexDirection: "row",
+            alignItems: "center",
             gap: 12,
             flex: 1,
-        },
-        itemIcon: {
-            fontSize: 36,
         },
         itemInfo: {
             flex: 1,
@@ -332,7 +370,7 @@ const createStyles = (theme) =>
         },
         itemName: {
             fontSize: 15,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
         },
         itemSpecial: {
@@ -340,13 +378,13 @@ const createStyles = (theme) =>
             color: theme.onSurfaceVariant,
         },
         itemRight: {
-            alignItems: 'flex-end',
+            alignItems: "flex-end",
             gap: 4,
         },
         priceRow: {
-            flexDirection: 'row',
+            flexDirection: "row",
             gap: 8,
-            alignItems: 'center',
+            alignItems: "center",
         },
         sizeText: {
             fontSize: 13,
@@ -354,25 +392,59 @@ const createStyles = (theme) =>
         },
         priceText: {
             fontSize: 14,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.primary,
         },
-        totalContainer: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+        footerContainer: {
             paddingTop: 12,
             borderTopWidth: 1,
             borderTopColor: theme.outline,
         },
+        totalRow: {
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 16,
+        },
         totalLabel: {
             fontSize: 16,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
         },
         totalValue: {
             fontSize: 20,
-            fontWeight: '700',
+            fontWeight: "700",
             color: theme.primary,
+        },
+        actionRow: {
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            gap: 12,
+        },
+        reviewButton: {
+            flexDirection: "row",
+            alignItems: "center",
+            paddingVertical: 8,
+            paddingHorizontal: 16,
+            borderRadius: 20,
+            borderWidth: 1,
+            borderColor: theme.primary,
+            gap: 6,
+        },
+        reviewButtonText: {
+            fontSize: 14,
+            fontWeight: "600",
+            color: theme.primary,
+        },
+        reorderButton: {
+            paddingVertical: 8,
+            paddingHorizontal: 16,
+            borderRadius: 20,
+            backgroundColor: theme.primary,
+        },
+        reorderButtonText: {
+            fontSize: 14,
+            fontWeight: "600",
+            color: "#FFF",
         },
     });

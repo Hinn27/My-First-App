@@ -4,18 +4,20 @@
  * Layout chính của toàn bộ app
  * Wrap tất cả screens
  * Define navigation structure (Stack, Tabs, etc.)
- * Bọc CartProvider để quản lý giỏ hàng global
  * Bọc ThemeProvider để cung cấp theme Material You colors
  * Bọc PaperProvider để cung cấp Material Design components
  */
 
-import { Stack } from 'expo-router';
-import { Provider as PaperProvider, configureFonts } from 'react-native-paper';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import { CartProvider } from '../src/context/CartContext';
-import { ThemeProvider, useTheme } from '../src/context/ThemeContext';
+import { Stack } from "expo-router";
+import {
+    Provider as PaperProvider,
+    configureFonts,
+    MD3LightTheme,
+} from "react-native-paper";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+import { ThemeProvider, useTheme } from "../src/context/ThemeContext";
 import {
     PlayfairDisplay_400Regular,
     PlayfairDisplay_500Medium,
@@ -25,7 +27,7 @@ import {
     PlayfairDisplay_900Black,
     PlayfairDisplay_400Regular_Italic,
     PlayfairDisplay_700Bold_Italic,
-} from '@expo-google-fonts/playfair-display';
+} from "@expo-google-fonts/playfair-display";
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -34,78 +36,80 @@ SplashScreen.preventAutoHideAsync();
 const fontConfig = {
     web: {
         regular: {
-            fontFamily: 'PlayfairDisplay_400Regular',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_400Regular",
+            fontWeight: "normal",
         },
         medium: {
-            fontFamily: 'PlayfairDisplay_500Medium',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_500Medium",
+            fontWeight: "normal",
         },
         light: {
-            fontFamily: 'PlayfairDisplay_400Regular',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_400Regular",
+            fontWeight: "normal",
         },
         thin: {
-            fontFamily: 'PlayfairDisplay_400Regular',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_400Regular",
+            fontWeight: "normal",
         },
         bold: {
-            fontFamily: 'PlayfairDisplay_700Bold',
-            fontWeight: 'bold',
+            fontFamily: "PlayfairDisplay_700Bold",
+            fontWeight: "bold",
         },
     },
     ios: {
         regular: {
-            fontFamily: 'PlayfairDisplay_400Regular',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_400Regular",
+            fontWeight: "normal",
         },
         medium: {
-            fontFamily: 'PlayfairDisplay_500Medium',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_500Medium",
+            fontWeight: "normal",
         },
         light: {
-            fontFamily: 'PlayfairDisplay_400Regular',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_400Regular",
+            fontWeight: "normal",
         },
         thin: {
-            fontFamily: 'PlayfairDisplay_400Regular',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_400Regular",
+            fontWeight: "normal",
         },
         bold: {
-            fontFamily: 'PlayfairDisplay_700Bold',
-            fontWeight: 'bold',
+            fontFamily: "PlayfairDisplay_700Bold",
+            fontWeight: "bold",
         },
     },
     android: {
         regular: {
-            fontFamily: 'PlayfairDisplay_400Regular',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_400Regular",
+            fontWeight: "normal",
         },
         medium: {
-            fontFamily: 'PlayfairDisplay_500Medium',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_500Medium",
+            fontWeight: "normal",
         },
         light: {
-            fontFamily: 'PlayfairDisplay_400Regular',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_400Regular",
+            fontWeight: "normal",
         },
         thin: {
-            fontFamily: 'PlayfairDisplay_400Regular',
-            fontWeight: 'normal',
+            fontFamily: "PlayfairDisplay_400Regular",
+            fontWeight: "normal",
         },
         bold: {
-            fontFamily: 'PlayfairDisplay_700Bold',
-            fontWeight: 'bold',
+            fontFamily: "PlayfairDisplay_700Bold",
+            fontWeight: "bold",
         },
     },
 };
 
 // Helper để convert theme sang Paper theme
 function getPaperTheme(customTheme) {
+    const defaultTheme = MD3LightTheme;
     return {
-        ...require('react-native-paper').MD3LightTheme,
+        ...defaultTheme,
         roundness: 16, // Bo góc mềm mại hơn
         colors: {
+            ...defaultTheme.colors, // QUAN TRỌNG: Giữ lại các colors mặc định (như elevation)
             primary: customTheme.primary,
             onPrimary: customTheme.onPrimary,
             primaryContainer: customTheme.primaryContainer,
@@ -169,82 +173,82 @@ function AppContent() {
 
     return (
         <PaperProvider theme={paperTheme}>
-            <CartProvider>
-                <Stack>
-                    <Stack.Screen
-                        name="(tabs)"
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="modal"
-                        options={{ presentation: 'modal' }}
-                    />
-                    <Stack.Screen
-                        name="food/index"
-                        options={{
-                            title: 'Món Ăn',
-                            headerShown: false,
-                        }}
-                    />
-                    <Stack.Screen
-                        name="food/[slug]"
-                        options={{
-                            title: 'Chi tiết món ăn',
-                            headerShown: false,
-                        }}
-                    />
-                    {/** Đã xoá các route cho đồ uống theo yêu cầu */}
-                    <Stack.Screen
-                        name="user/[id]"
-                        options={{
-                            title: 'Người dùng',
-                            headerShown: false,
-                        }}
-                    />
-                    <Stack.Screen
-                        name="product/[id]"
-                        options={{
-                            title: 'Chi tiết sản phẩm',
-                            headerShown: false,
-                        }}
-                    />
-                    <Stack.Screen
-                        name="payment"
-                        options={{
-                            title: 'Thanh toán',
-                            headerShown: false,
-                        }}
-                    />
-                    <Stack.Screen
-                        name="order-history"
-                        options={{
-                            title: 'Lịch sử đơn hàng',
-                            headerShown: false,
-                        }}
-                    />
-                    <Stack.Screen
-                        name="auth/login"
-                        options={{
-                            title: 'Đăng nhập',
-                            headerShown: false,
-                        }}
-                    />
-                    <Stack.Screen
-                        name="auth/register"
-                        options={{
-                            title: 'Đăng ký',
-                            headerShown: false,
-                        }}
-                    />
-                    <Stack.Screen
-                        name="auth/seller-register"
-                        options={{
-                            title: 'Đăng ký bán hàng',
-                            headerShown: false,
-                        }}
-                    />
-                </Stack>
-            </CartProvider>
+            <Stack>
+                <Stack.Screen name="index" options={{ headerShown: false }} />
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen
+                    name="modal"
+                    options={{ presentation: "modal" }}
+                />
+                {/** Đã xoá các route cũ food/index, food/[slug] */}
+                <Stack.Screen
+                    name="user/[id]"
+                    options={{
+                        title: "Người dùng",
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="product/[id]"
+                    options={{
+                        title: "Chi tiết sản phẩm",
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="payment"
+                    options={{
+                        title: "Thanh toán",
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="order-history"
+                    options={{
+                        title: "Lịch sử đơn hàng",
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="auth/login"
+                    options={{
+                        title: "Đăng nhập",
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="auth/register"
+                    options={{
+                        title: "Đăng ký",
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="auth/seller-register"
+                    options={{
+                        title: "Đăng ký bán hàng",
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="seller/my-products"
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="seller/revenue"
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="seller/add-product"
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+            </Stack>
         </PaperProvider>
     );
 }

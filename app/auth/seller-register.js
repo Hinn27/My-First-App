@@ -125,7 +125,8 @@ export default function SellerRegisterScreen() {
                     },
                 ],
             );
-        } catch (error) {
+        } catch (_error) {
+            console.error("Error submitting seller registration:", _error);
             Alert.alert('Lỗi', 'Đăng ký thất bại. Vui lòng thử lại.');
         } finally {
             setLoading(false);

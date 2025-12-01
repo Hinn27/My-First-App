@@ -15,12 +15,14 @@ import {
     Pressable,
     Image,
     Alert,
+    StatusBar,
+    Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, Stack } from 'expo-router';
 import { useTheme } from '../../src/context/ThemeContext';
 import { useProductStore } from '../../src/store/productStore';
-import { useUserStore } from '../../src/store/userStore';
+// useUserStore not used here
 
 export default function MyProductsScreen() {
     const { theme } = useTheme();
@@ -31,7 +33,6 @@ export default function MyProductsScreen() {
     const drinkList = useProductStore((state) => state.drinkList);
     const foodList = useProductStore((state) => state.foodList);
     const deleteProduct = useProductStore((state) => state.deleteProduct);
-    const user = useUserStore((state) => state.user);
 
     // Combine all products (in production, filter by seller ID)
     const allProducts = [...drinkList, ...foodList];
@@ -56,6 +57,7 @@ export default function MyProductsScreen() {
 
     return (
         <View style={styles.container}>
+            <Stack.Screen options={{ headerShown: false }} />
             {/* Header */}
             <View style={styles.header}>
                 <Pressable
@@ -220,6 +222,7 @@ const createStyles = (theme) =>
             justifyContent: 'space-between',
             paddingHorizontal: 16,
             paddingVertical: 12,
+            paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 24) + 12 : 50, // Add padding top for status bar
             backgroundColor: theme.surface,
             borderBottomWidth: 1,
             borderBottomColor: theme.outlineVariant,

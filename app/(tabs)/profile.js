@@ -17,18 +17,17 @@ import {
     Switch,
     IconButton,
     Divider,
-    useTheme as usePaperTheme,
 } from "react-native-paper";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useUserStore } from "../../src/store/userStore";
+import { useProductStore } from "../../src/store/productStore"; // Import Product Store
 import ScreenWrapper from "../../src/components/ScreenWrapper";
 
 export default function ProfileScreen() {
     const { theme } = useTheme();
-    const paperTheme = usePaperTheme();
     const router = useRouter();
     const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
@@ -36,6 +35,11 @@ export default function ProfileScreen() {
     const user = useUserStore((state) => state.user);
     const setUser = useUserStore((state) => state.setUser);
     const isLoggedIn = user?.isLoggedIn || false;
+    
+    // Access Product Store actions
+    const clearCart = useProductStore((state) => state.clearCart);
+    const clearViewedProducts = useProductStore((state) => state.clearViewedProducts);
+    const clearOrderHistory = useProductStore((state) => state.clearOrderHistory); // New action
 
     // Create dynamic styles
     const styles = createStyles(theme);
@@ -48,6 +52,32 @@ export default function ProfileScreen() {
             console.error("Error logging out:", error);
         }
     };
+    
+    // Function to clear all data and reset app
+    const handleClearDataAndLogout = async () => {
+        try {
+            // 1. Clear All AsyncStorage first
+            await AsyncStorage.clear();
+            
+            // 2. IMPORTANT: Set viewedOnboarding back to true so we don't see it again
+            await AsyncStorage.setItem('@viewedOnboarding', 'true');
+            
+            // 3. Reset User Store
+            setUser(null);
+            
+            // 4. Reset Product Store
+            if (clearCart) clearCart();
+            if (clearViewedProducts) clearViewedProducts();
+            if (clearOrderHistory) clearOrderHistory();
+            
+            // 5. Navigate to Home (Guest mode)
+            router.replace("/(tabs)"); 
+            
+        } catch (error) {
+            console.error("Error clearing data:", error);
+            Alert.alert("Lỗi", "Không thể xoá dữ liệu.");
+        }
+    }
 
     // TEST FUNCTION: Set user as approved seller
     const testSetApprovedSeller = async () => {
@@ -157,34 +187,30 @@ export default function ProfileScreen() {
                         contentStyle={styles.cardContentStyle}
                     >
                         <Card.Content style={styles.cardContent}>
-                            {/* Debug log */}
-                            {console.log("👤 User Debug:", {
-                                isSeller: user?.isSeller,
-                                sellerStatus: user?.sellerStatus,
-                                showMenu:
-                                    user?.isSeller &&
-                                    user?.sellerStatus === "approved",
-                            })}
-
-                            <Link href="/user/123" asChild>
-                                <List.Item
-                                    title="Thông tin cá nhân"
-                                    left={(props) => (
-                                        <List.Icon
-                                            {...props}
-                                            icon="account-outline"
+                            {/* Hide info & order history if not logged in */}
+                            {isLoggedIn && (
+                                <>
+                                    <Link href="/user/123" asChild>
+                                        <List.Item
+                                            title="Thông tin cá nhân"
+                                            left={(props) => (
+                                                <List.Icon
+                                                    {...props}
+                                                    icon="account-outline"
+                                                />
+                                            )}
+                                            right={(props) => (
+                                                <List.Icon
+                                                    {...props}
+                                                    icon="chevron-right"
+                                                />
+                                            )}
                                         />
-                                    )}
-                                    right={(props) => (
-                                        <List.Icon
-                                            {...props}
-                                            icon="chevron-right"
-                                        />
-                                    )}
-                                />
-                            </Link>
+                                    </Link>
 
-                            <Divider style={styles.divider} />
+                                    <Divider style={styles.divider} />
+                                </>
+                            )}
 
                             {/* Show "Add Product" if user is approved seller */}
                             {user?.isSeller &&
@@ -270,8 +296,8 @@ export default function ProfileScreen() {
                                     </>
                                 )}
 
-                            {/* Show "Register as Seller" if not seller yet */}
-                            {!user?.isSeller && (
+                            {/* Show "Register as Seller" if not seller yet AND logged in */}
+                            {isLoggedIn && !user?.isSeller && (
                                 <>
                                     <Link href="/auth/seller-register" asChild>
                                         <List.Item
@@ -318,22 +344,7 @@ export default function ProfileScreen() {
                                     </>
                                 )}
 
-                            <List.Item
-                                title="Lịch sử mua hàng"
-                                left={(props) => (
-                                    <List.Icon
-                                        {...props}
-                                        icon="receipt-outline"
-                                    />
-                                )}
-                                right={(props) => (
-                                    <List.Icon
-                                        {...props}
-                                        icon="chevron-right"
-                                    />
-                                )}
-                                onPress={() => router.push("/order-history")}
-                            />
+                            {/* Order history moved to a top-level tab; keep functionality via tab */}
                         </Card.Content>
                     </Card>
 
@@ -429,6 +440,23 @@ export default function ProfileScreen() {
                                         "Tính năng đang phát triển"
                                     )
                                 }
+                            />
+
+                            <Divider style={styles.divider} />
+                            
+                             <List.Item
+                                title="🧪 Test: Xoá dữ liệu & Reset"
+                                titleStyle={{ fontSize: 13 }}
+                                descriptionStyle={{ fontSize: 11 }}
+                                description="Xoá dữ liệu, không hỏi lại"
+                                left={(props) => (
+                                    <List.Icon
+                                        {...props}
+                                        icon="trash-can-outline"
+                                        color={theme.error}
+                                    />
+                                )}
+                                onPress={handleClearDataAndLogout}
                             />
 
                             <Divider style={styles.divider} />

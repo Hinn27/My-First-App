@@ -13,12 +13,12 @@ import {
     StyleSheet,
     ScrollView,
     Pressable,
-    Image,
+    StatusBar,
+    Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../../src/context/ThemeContext';
 
 export default function RevenueScreen() {
@@ -27,7 +27,6 @@ export default function RevenueScreen() {
     const styles = createStyles(theme);
     const [activeTab, setActiveTab] = useState('new'); // 'new' or 'completed'
     const [orders, setOrders] = useState([]);
-    const [user, setUser] = useState(null);
 
     useEffect(() => {
         loadOrders();
@@ -35,62 +34,55 @@ export default function RevenueScreen() {
 
     const loadOrders = async () => {
         try {
-            const userDataStr = await AsyncStorage.getItem('user');
-            if (userDataStr) {
-                const userData = JSON.parse(userDataStr);
-                setUser(userData);
+            // Load mock orders for now (no need to read user from storage)
+            const mockOrders = [
+                {
+                    id: '001',
+                    customerName: 'Nguyễn Văn A',
+                    items: [
+                        { name: 'Cơm tấm sườn', quantity: 2, price: 25000 },
+                        { name: 'Bún nạm chả', quantity: 1, price: 30000 },
+                    ],
+                    total: 80000,
+                    status: 'new',
+                    date: '2024-01-15 10:30',
+                },
+                {
+                    id: '002',
+                    customerName: 'Trần Thị B',
+                    items: [
+                        {
+                            name: 'Cơm tấm sườn',
+                            quantity: 1,
+                            price: 25000,
+                        },
+                    ],
+                    total: 25000,
+                    status: 'new',
+                    date: '2024-01-15 11:15',
+                },
+                {
+                    id: '003',
+                    customerName: 'Lê Văn C',
+                    items: [
+                        { name: 'Phở bò', quantity: 2, price: 35000 },
+                        { name: 'Bún chả', quantity: 1, price: 30000 },
+                    ],
+                    total: 100000,
+                    status: 'completed',
+                    date: '2024-01-14 09:20',
+                },
+                {
+                    id: '004',
+                    customerName: 'Phạm Thị D',
+                    items: [{ name: 'Bún nạm chả', quantity: 1, price: 30000 }],
+                    total: 30000,
+                    status: 'completed',
+                    date: '2024-01-14 12:00',
+                },
+            ];
 
-                // Mock data for demonstration
-                // In production, fetch from API
-                const mockOrders = [
-                    {
-                        id: '001',
-                        customerName: 'Nguyễn Văn A',
-                        items: [
-                            { name: 'Cà phê đen', quantity: 2, price: 25000 },
-                            { name: 'Bánh mì thịt', quantity: 1, price: 20000 },
-                        ],
-                        total: 70000,
-                        status: 'new',
-                        date: '2024-01-15 10:30',
-                    },
-                    {
-                        id: '002',
-                        customerName: 'Trần Thị B',
-                        items: [
-                            {
-                                name: 'Trà sữa trân châu',
-                                quantity: 1,
-                                price: 35000,
-                            },
-                        ],
-                        total: 35000,
-                        status: 'new',
-                        date: '2024-01-15 11:15',
-                    },
-                    {
-                        id: '003',
-                        customerName: 'Lê Văn C',
-                        items: [
-                            { name: 'Phở bò', quantity: 2, price: 50000 },
-                            { name: 'Nước cam', quantity: 2, price: 15000 },
-                        ],
-                        total: 130000,
-                        status: 'completed',
-                        date: '2024-01-14 09:20',
-                    },
-                    {
-                        id: '004',
-                        customerName: 'Phạm Thị D',
-                        items: [{ name: 'Bún chả', quantity: 1, price: 45000 }],
-                        total: 45000,
-                        status: 'completed',
-                        date: '2024-01-14 12:00',
-                    },
-                ];
-
-                setOrders(mockOrders);
-            }
+            setOrders(mockOrders);
         } catch (error) {
             console.error('Error loading orders:', error);
         }
@@ -350,7 +342,8 @@ const createStyles = (theme) =>
             alignItems: 'center',
             justifyContent: 'space-between',
             paddingHorizontal: 16,
-            paddingVertical: 12,
+            paddingBottom: 12,
+            paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 24) + 12 : 50, // Add padding top for status bar
             backgroundColor: theme.surface,
             borderBottomWidth: 1,
             borderBottomColor: theme.outlineVariant,

@@ -1,54 +1,55 @@
 // Theme Context - Material Design 3 (Material You)
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext } from "react";
 
 const ThemeContext = createContext();
 
-// Material Design 3 Color Palette
+// Material Design 3 Color Palette - Cyan Theme
 const theme = {
-    // Primary colors - Light Blue
-    primary: '#87CEEB', // Sky Blue (Light Blue)
-    onPrimary: '#FFFFFF',
-    primaryContainer: '#E0F6FF',
-    onPrimaryContainer: '#003D5C',
+    // Primary colors - Cyan Gradient Base
+    primary: "#00BCD4", // Cyan
+    primaryGradientEnd: "#26C6DA", // Light Cyan
+    onPrimary: "#FFFFFF",
+    primaryContainer: "#B2EBF2",
+    onPrimaryContainer: "#001F24",
 
-    // Secondary colors - Light Blue variants
-    secondary: '#B0E0E6', // Powder Blue
-    onSecondary: '#003D5C',
-    secondaryContainer: '#D4F0F5',
-    onSecondaryContainer: '#003D5C',
+    // Secondary colors - Teal variants
+    secondary: "#4DD0E1",
+    onSecondary: "#FFFFFF",
+    secondaryContainer: "#B2EBF2",
+    onSecondaryContainer: "#001F24",
 
-    // Tertiary colors - Light Blue variants
-    tertiary: '#ADD8E6', // Light Blue
-    onTertiary: '#003D5C',
-    tertiaryContainer: '#E6F4FE',
-    onTertiaryContainer: '#003D5C',
+    // Tertiary colors - Blue accent
+    tertiary: "#4FC3F7",
+    onTertiary: "#FFFFFF",
+    tertiaryContainer: "#BBDEFB",
+    onTertiaryContainer: "#001B3A",
 
     // Error colors
-    error: '#B3261E',
-    onError: '#FFFFFF',
-    errorContainer: '#F9DEDC',
-    onErrorContainer: '#410E0B',
+    error: "#BA1A1A",
+    onError: "#FFFFFF",
+    errorContainer: "#FFDAD6",
+    onErrorContainer: "#410002",
 
-    // Surface colors
-    surface: '#FFFBFE',
-    onSurface: '#1C1B1F',
-    surfaceVariant: '#E7E0EC',
-    onSurfaceVariant: '#49454F',
+    // Surface colors - Clean whites
+    surface: "#FFFBFF",
+    onSurface: "#1A1C1E",
+    surfaceVariant: "#DBE4E6",
+    onSurfaceVariant: "#3E494A",
 
     // Background colors
-    background: '#FFFBFE',
-    onBackground: '#1C1B1F',
+    background: "#FAFDFC",
+    onBackground: "#1A1C1E",
 
     // Outline colors
-    outline: '#79747E',
-    outlineVariant: '#CAC4D0',
+    outline: "#6F797A",
+    outlineVariant: "#BEC8CA",
 
     // Other colors
-    shadow: '#000000',
-    scrim: '#000000',
-    inverseSurface: '#313033',
-    inverseOnSurface: '#F4EFF4',
-    inversePrimary: '#B0E0E6', // Light Blue inverse
+    shadow: "#000000",
+    scrim: "#000000",
+    inverseSurface: "#2E3132",
+    inverseOnSurface: "#F0F1F1",
+    inversePrimary: "#00BCD4",
 
     // Elevation levels (for shadows)
     elevation: {
@@ -60,13 +61,13 @@ const theme = {
         level5: 12, // Highest
     },
 
-    // Border radius - Bo cong mềm mại hơn
+    // Border radius - Modern rounded corners
     radius: {
-        xs: 10,
-        sm: 14,
-        md: 18,
-        lg: 28,
-        xl: 36,
+        xs: 12,
+        sm: 16,
+        md: 20,
+        lg: 32,
+        xl: 40,
         full: 9999,
     },
 
@@ -92,7 +93,7 @@ export const ThemeProvider = ({ children }) => {
 export const useTheme = () => {
     const context = useContext(ThemeContext);
     if (!context) {
-        throw new Error('useTheme must be used within ThemeProvider');
+        throw new Error("useTheme must be used within ThemeProvider");
     }
     return context;
 };

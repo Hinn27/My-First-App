@@ -6,9 +6,9 @@ import {
     Card,
     IconButton,
     Chip,
-    useTheme as usePaperTheme,
 } from 'react-native-paper';
-import { LinearGradient } from 'expo-linear-gradient';
+
+import PropTypes from 'prop-types';
 
 export default function CartItemCard({
     id,
@@ -20,10 +20,7 @@ export default function CartItemCard({
     type,
     incrementHandler,
     decrementHandler,
-    theme,
 }) {
-    const paperTheme = usePaperTheme();
-
     return (
         <Card style={styles.container} mode="elevated">
             <Card.Content style={styles.cardContent}>
@@ -51,7 +48,7 @@ export default function CartItemCard({
 
                         {/* Sizes and Quantities */}
                         {prices.map((item, index) => (
-                            <View key={index} style={styles.priceRow}>
+                            <View key={item.size || item.id || index} style={styles.priceRow}>
                                 <View style={styles.sizeContainer}>
                                     <Chip
                                         style={styles.sizeChip}
@@ -60,9 +57,7 @@ export default function CartItemCard({
                                         {item.size}
                                     </Chip>
                                     <Text variant="titleSmall" style={styles.priceText}>
-                                        {parseInt(item.price).toLocaleString(
-                                            'vi-VN',
-                                        )}{' '}
+                                        {Number.parseInt(item.price).toLocaleString('vi-VN')}{' '}
                                         đ
                                     </Text>
                                 </View>
@@ -75,7 +70,7 @@ export default function CartItemCard({
                                         iconColor="#FFF"
                                         style={[
                                             styles.quantityButton,
-                                            { backgroundColor: theme?.primary || '#D17842' },
+                                            { backgroundColor: '#D17842' },
                                         ]}
                                         onPress={() =>
                                             decrementHandler(id, item.size)
@@ -85,7 +80,7 @@ export default function CartItemCard({
                                     <View
                                         style={[
                                             styles.quantityBox,
-                                            { borderColor: theme?.primary || '#D17842' },
+                                            { borderColor: '#D17842' },
                                         ]}
                                     >
                                         <Text variant="bodyMedium" style={styles.quantityText}>
@@ -99,7 +94,7 @@ export default function CartItemCard({
                                         iconColor="#FFF"
                                         style={[
                                             styles.quantityButton,
-                                            { backgroundColor: theme?.primary || '#D17842' },
+                                            { backgroundColor: '#D17842' },
                                         ]}
                                         onPress={() =>
                                             incrementHandler(id, item.size)
@@ -206,3 +201,15 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
 });
+
+CartItemCard.propTypes = {
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    name: PropTypes.string.isRequired,
+    imageIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    special_ingredient: PropTypes.string,
+    roasted: PropTypes.string,
+    prices: PropTypes.array.isRequired,
+    type: PropTypes.string,
+    incrementHandler: PropTypes.func.isRequired,
+    decrementHandler: PropTypes.func.isRequired,
+};

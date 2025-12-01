@@ -1,99 +1,63 @@
-// Screen: Payment - Thanh toán
-/* Chức năng:
- * - Chọn phương thức thanh toán (Ví điện tử, Tiền mặt, Thẻ, Chuyển khoản)
- * - Hiển thị tổng tiền từ giỏ hàng
- * - Xác nhận thanh toán → Lưu vào lịch sử đơn hàng
- * - Animation success
- * - Xóa giỏ hàng sau khi thanh toán
- */
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
     View,
     Text,
     StyleSheet,
     ScrollView,
     Pressable,
-    Image,
     Alert,
     StatusBar,
     Animated,
-} from 'react-native';
-import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-import { useTheme } from '../src/context/ThemeContext';
-import { useProductStore } from '../src/store/productStore';
-
-const PaymentMethods = [
-    {
-        id: 'wallet',
-        name: 'Ví điện tử',
-        icon: 'wallet',
-        isIcon: true,
-    },
-    {
-        id: 'cash',
-        name: 'Tiền mặt',
-        icon: 'cash',
-        isIcon: true,
-    },
-    {
-        id: 'card',
-        name: 'Thẻ tín dụng',
-        icon: 'card',
-        isIcon: true,
-    },
-    {
-        id: 'banking',
-        name: 'Chuyển khoản',
-        icon: 'business',
-        isIcon: true,
-    },
-];
+    Modal,
+} from "react-native";
+import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { Button } from "react-native-paper";
+import { useTheme } from "../src/context/ThemeContext";
+import { useProductStore } from "../src/store/productStore";
 
 export default function PaymentScreen() {
     const router = useRouter();
     const { theme } = useTheme();
     const styles = createStyles(theme);
 
-    // Store
     const cartPrice = useProductStore((state) => state.cartPrice);
     const addToOrderHistoryFromCart = useProductStore(
-        (state) => state.addToOrderHistoryFromCart,
+        (state) => state.addToOrderHistoryFromCart
     );
     const calculateCartPrice = useProductStore(
-        (state) => state.calculateCartPrice,
+        (state) => state.calculateCartPrice
     );
 
-    const [selectedPayment, setSelectedPayment] = useState(
-        PaymentMethods[0].id,
-    );
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const scaleAnim = useState(new Animated.Value(0))[0];
 
-    const handlePayment = () => {
-        // Show success animation
+    const handlePlaceOrder = () => {
+        setShowConfirmDialog(true);
+    };
+
+    const confirmOrder = () => {
+        setShowConfirmDialog(false);
         setShowSuccess(true);
         Animated.spring(scaleAnim, {
             toValue: 1,
             useNativeDriver: true,
         }).start();
 
-        // Add to order history and clear cart
         addToOrderHistoryFromCart();
         calculateCartPrice();
 
-        // Navigate after delay
         setTimeout(() => {
             setShowSuccess(false);
-            Alert.alert('Thành công', 'Đơn hàng của bạn đã được đặt!', [
+            Alert.alert("Thành công", "Đơn hàng của bạn đã được đặt!", [
                 {
-                    text: 'Xem lịch sử',
-                    onPress: () => router.push('/order-history'),
+                    text: "Xem lịch sử",
+                    onPress: () => router.push("/order-history"),
                 },
                 {
-                    text: 'Về trang chủ',
-                    onPress: () => router.push('/'),
+                    text: "Về trang chủ",
+                    onPress: () => router.push("/"),
                 },
             ]);
         }, 2000);
@@ -104,11 +68,10 @@ export default function PaymentScreen() {
             <StatusBar
                 backgroundColor={theme.background}
                 barStyle={
-                    theme.mode === 'dark' ? 'light-content' : 'dark-content'
+                    theme.mode === "dark" ? "light-content" : "dark-content"
                 }
             />
 
-            {/* Success Animation Overlay */}
             {showSuccess && (
                 <View style={styles.successOverlay}>
                     <Animated.View
@@ -125,13 +88,12 @@ export default function PaymentScreen() {
                             />
                         </View>
                         <Text style={styles.successText}>
-                            Thanh toán thành công!
+                            Đặt hàng thành công!
                         </Text>
                     </Animated.View>
                 </View>
             )}
 
-            {/* Header */}
             <View style={styles.header}>
                 <Pressable
                     style={styles.backButton}
@@ -143,150 +105,95 @@ export default function PaymentScreen() {
                         color={theme.onSurface}
                     />
                 </Pressable>
-                <Text style={styles.headerTitle}>Thanh toán</Text>
+                <Text style={styles.headerTitle}>Xác nhận đặt hàng</Text>
                 <View style={styles.placeholder} />
             </View>
 
             <ScrollView
+                style={styles.scrollContent}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.scrollContent}
             >
-                {/* Payment Amount Card */}
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Tổng thanh toán</Text>
-                    <LinearGradient
-                        colors={
-                            theme.mode === 'dark'
-                                ? ['#D17842', '#C2691F']
-                                : ['#D17842', '#E89A5C']
-                        }
-                        style={styles.amountCard}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 1 }}
-                    >
-                        <View style={styles.amountContent}>
-                            <Text style={styles.amountLabel}>Tổng cộng</Text>
-                            <Text style={styles.amountValue}>
-                                {parseInt(cartPrice).toLocaleString('vi-VN')} đ
-                            </Text>
-                        </View>
-                        <Ionicons
-                            name="wallet"
-                            size={48}
-                            color="rgba(255,255,255,0.3)"
-                        />
-                    </LinearGradient>
-                </View>
-
-                {/* Payment Methods */}
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>
-                        Phương thức thanh toán
-                    </Text>
-                    {PaymentMethods.map((method) => (
-                        <Pressable
-                            key={method.id}
-                            style={[
-                                styles.paymentMethod,
-                                selectedPayment === method.id &&
-                                    styles.paymentMethodActive,
-                            ]}
-                            onPress={() => setSelectedPayment(method.id)}
-                        >
-                            <View style={styles.methodLeft}>
-                                {method.isIcon ? (
-                                    <View
-                                        style={[
-                                            styles.iconContainer,
-                                            selectedPayment === method.id &&
-                                                styles.iconContainerActive,
-                                        ]}
-                                    >
-                                        <Ionicons
-                                            name={method.icon}
-                                            size={24}
-                                            color={
-                                                selectedPayment === method.id
-                                                    ? theme.primary
-                                                    : theme.onSurfaceVariant
-                                            }
-                                        />
-                                    </View>
-                                ) : (
-                                    <Image
-                                        source={method.icon}
-                                        style={styles.paymentImage}
-                                    />
-                                )}
-                                <Text style={styles.methodName}>
-                                    {method.name}
-                                </Text>
-                            </View>
-
-                            <View
-                                style={[
-                                    styles.radio,
-                                    selectedPayment === method.id &&
-                                        styles.radioActive,
-                                ]}
-                            >
-                                {selectedPayment === method.id && (
-                                    <View style={styles.radioInner} />
-                                )}
-                            </View>
-                        </Pressable>
-                    ))}
-                </View>
-
-                {/* Order Summary */}
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Chi tiết đơn hàng</Text>
+                    <Text style={styles.sectionTitle}>Tổng tiền</Text>
                     <View style={styles.summaryCard}>
                         <View style={styles.summaryRow}>
-                            <Text style={styles.summaryLabel}>Tạm tính:</Text>
-                            <Text style={styles.summaryValue}>
-                                {parseInt(cartPrice).toLocaleString('vi-VN')} đ
-                            </Text>
-                        </View>
-                        <View style={styles.summaryRow}>
                             <Text style={styles.summaryLabel}>
-                                Phí giao hàng:
+                                Tổng tiền hàng:
                             </Text>
-                            <Text style={styles.summaryValue}>0 đ</Text>
-                        </View>
-                        <View style={styles.summaryRow}>
-                            <Text style={styles.summaryLabel}>Giảm giá:</Text>
-                            <Text style={styles.summaryValue}>0 đ</Text>
+                            <Text style={styles.summaryValue}>
+                                {parseInt(cartPrice).toLocaleString("vi-VN")} đ
+                            </Text>
                         </View>
                         <View style={styles.divider} />
-                        <View style={styles.summaryRow}>
+                        <View style={styles.totalRow}>
                             <Text style={styles.totalLabel}>Tổng cộng:</Text>
                             <Text style={styles.totalValue}>
-                                {parseInt(cartPrice).toLocaleString('vi-VN')} đ
+                                {parseInt(cartPrice).toLocaleString("vi-VN")} đ
                             </Text>
                         </View>
                     </View>
                 </View>
             </ScrollView>
 
-            {/* Footer - Pay Button */}
             <View style={styles.footer}>
-                <Pressable style={styles.payButton} onPress={handlePayment}>
+                <Pressable style={styles.payButton} onPress={handlePlaceOrder}>
                     <Ionicons
                         name="checkmark-circle"
                         size={24}
                         color="#FFFFFF"
                     />
-                    <Text style={styles.payButtonText}>
-                        Xác nhận thanh toán
-                    </Text>
+                    <Text style={styles.payButtonText}>Đặt hàng</Text>
                 </Pressable>
             </View>
+
+            <Modal
+                visible={showConfirmDialog}
+                transparent={true}
+                animationType="fade"
+                onRequestClose={() => setShowConfirmDialog(false)}
+            >
+                <View style={styles.modalOverlay}>
+                    <View style={styles.confirmDialog}>
+                        <Ionicons
+                            name="help-circle"
+                            size={60}
+                            color={theme.primary}
+                        />
+                        <Text style={styles.confirmTitle}>
+                            Xác nhận đặt hàng
+                        </Text>
+                        <Text style={styles.confirmMessage}>
+                            Bạn có chắc chắn muốn đặt hàng với tổng tiền
+                            <Text style={styles.confirmPrice}>
+                                {parseInt(cartPrice).toLocaleString("vi-VN")} đ
+                            </Text>
+                            không?
+                        </Text>
+                        <View style={styles.confirmButtons}>
+                            <Button
+                                mode="outlined"
+                                onPress={() => setShowConfirmDialog(false)}
+                                style={styles.cancelButton}
+                                textColor={theme.onSurface}
+                            >
+                                Hủy
+                            </Button>
+                            <Button
+                                mode="contained"
+                                onPress={confirmOrder}
+                                style={styles.confirmButton}
+                                buttonColor={theme.primary}
+                            >
+                                Xác nhận
+                            </Button>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
 
-// Dynamic styles
 const createStyles = (theme) =>
     StyleSheet.create({
         container: {
@@ -294,9 +201,9 @@ const createStyles = (theme) =>
             backgroundColor: theme.background,
         },
         header: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
             padding: 16,
             borderBottomWidth: 1,
             borderBottomColor: theme.outline,
@@ -306,13 +213,13 @@ const createStyles = (theme) =>
             height: 40,
             borderRadius: 12,
             backgroundColor: theme.surface,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
         },
         headerTitle: {
             fontSize: 20,
-            fontWeight: '700',
-            color: theme.onBackground,
+            fontWeight: "700",
+            color: theme.onSurface,
         },
         placeholder: {
             width: 40,
@@ -326,126 +233,56 @@ const createStyles = (theme) =>
         },
         sectionTitle: {
             fontSize: 18,
-            fontWeight: '700',
+            fontWeight: "700",
             color: theme.onBackground,
             marginBottom: 16,
         },
-        amountCard: {
-            padding: 24,
-            borderRadius: 16,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-        },
-        amountContent: {
-            gap: 8,
-        },
-        amountLabel: {
-            fontSize: 14,
-            color: 'rgba(255,255,255,0.8)',
-        },
-        amountValue: {
-            fontSize: 32,
-            fontWeight: '700',
-            color: '#FFFFFF',
-        },
-        paymentMethod: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: 16,
-            backgroundColor: theme.surface,
-            borderRadius: 12,
-            marginBottom: 12,
-            borderWidth: 2,
-            borderColor: 'transparent',
-        },
-        paymentMethodActive: {
-            borderColor: theme.primary,
-            backgroundColor:
-                theme.mode === 'dark'
-                    ? 'rgba(209, 120, 66, 0.15)'
-                    : 'rgba(209, 120, 66, 0.08)',
-        },
-        methodLeft: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 12,
-        },
-        iconContainer: {
-            width: 48,
-            height: 48,
-            borderRadius: 12,
-            backgroundColor: theme.mode === 'dark' ? '#0C0F14' : '#F0F0F0',
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        iconContainerActive: {
-            backgroundColor:
-                theme.mode === 'dark'
-                    ? 'rgba(209, 120, 66, 0.2)'
-                    : 'rgba(209, 120, 66, 0.15)',
-        },
-        methodName: {
-            fontSize: 16,
-            fontWeight: '600',
-            color: theme.onSurface,
-        },
-        radio: {
-            width: 24,
-            height: 24,
-            borderRadius: 12,
-            borderWidth: 2,
-            borderColor: theme.outline,
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        radioActive: {
-            borderColor: theme.primary,
-        },
-        radioInner: {
-            width: 12,
-            height: 12,
-            borderRadius: 6,
-            backgroundColor: theme.primary,
-        },
         summaryCard: {
-            backgroundColor: theme.surface,
             padding: 20,
             borderRadius: 16,
-            gap: 12,
+            backgroundColor: theme.surface,
+            elevation: 2,
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.1,
+            shadowRadius: 8,
         },
         summaryRow: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginBottom: 12,
         },
         summaryLabel: {
-            fontSize: 15,
+            fontSize: 16,
             color: theme.onSurfaceVariant,
         },
         summaryValue: {
-            fontSize: 15,
-            fontWeight: '600',
+            fontSize: 16,
+            fontWeight: "600",
             color: theme.onSurface,
         },
         divider: {
             height: 1,
-            backgroundColor: theme.outline,
-            marginVertical: 4,
+            backgroundColor: theme.outlineVariant,
+            marginVertical: 16,
+        },
+        totalRow: {
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
         },
         totalLabel: {
             fontSize: 18,
-            fontWeight: '700',
+            fontWeight: "700",
             color: theme.onSurface,
         },
         totalValue: {
             fontSize: 20,
-            fontWeight: '700',
+            fontWeight: "700",
             color: theme.primary,
         },
         footer: {
-            position: 'absolute',
+            position: "absolute",
             bottom: 0,
             left: 0,
             right: 0,
@@ -455,45 +292,92 @@ const createStyles = (theme) =>
             borderTopColor: theme.outline,
         },
         payButton: {
-            flexDirection: 'row',
+            flexDirection: "row",
             backgroundColor: theme.primary,
             padding: 16,
             borderRadius: 12,
-            alignItems: 'center',
-            justifyContent: 'center',
+            alignItems: "center",
+            justifyContent: "center",
             gap: 8,
         },
         payButtonText: {
-            color: '#FFFFFF',
+            color: "#FFFFFF",
             fontSize: 16,
-            fontWeight: '700',
+            fontWeight: "700",
         },
         successOverlay: {
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            justifyContent: 'center',
-            alignItems: 'center',
+            backgroundColor: "rgba(0,0,0,0.8)",
+            justifyContent: "center",
+            alignItems: "center",
             zIndex: 1000,
         },
         successContainer: {
-            alignItems: 'center',
+            alignItems: "center",
             gap: 24,
         },
         successCircle: {
             width: 120,
             height: 120,
             borderRadius: 60,
-            backgroundColor: '#4CAF50',
-            justifyContent: 'center',
-            alignItems: 'center',
+            backgroundColor: "#4CAF50",
+            justifyContent: "center",
+            alignItems: "center",
         },
         successText: {
             fontSize: 24,
-            fontWeight: '700',
-            color: '#FFFFFF',
+            fontWeight: "700",
+            color: "#FFFFFF",
+        },
+        modalOverlay: {
+            flex: 1,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 20,
+        },
+        confirmDialog: {
+            backgroundColor: "#FFFFFF",
+            borderRadius: 16,
+            padding: 24,
+            alignItems: "center",
+            width: "100%",
+            maxWidth: 400,
+            gap: 16,
+        },
+        confirmTitle: {
+            fontSize: 20,
+            fontWeight: "700",
+            color: "#1C1B1F",
+            textAlign: "center",
+        },
+        confirmMessage: {
+            fontSize: 16,
+            color: "#49454F",
+            textAlign: "center",
+            lineHeight: 24,
+        },
+        confirmPrice: {
+            fontSize: 18,
+            fontWeight: "700",
+            color: "#00BCD4",
+        },
+        confirmButtons: {
+            flexDirection: "row",
+            gap: 12,
+            marginTop: 8,
+            width: "100%",
+        },
+        cancelButton: {
+            flex: 1,
+            borderRadius: 12,
+        },
+        confirmButton: {
+            flex: 1,
+            borderRadius: 12,
         },
     });

@@ -1,50 +1,71 @@
 // Layout cho tabs
-/* Vai trò:
- * Define bottom tabs cho nhóm screens trong (tabs)/
- * Config icons, labels, colors cho từng tab
- * Thêm animations và haptic feedback
- */
+/* Define bottom tabs and icons */
 import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../../src/context/ThemeContext";
 import * as Haptics from "expo-haptics";
 import { Platform } from "react-native";
-import Animated, {
-    useAnimatedStyle,
-    withSpring,
-    withTiming,
-} from "react-native-reanimated";
-import { useEffect, useRef } from "react";
+import TabBarIconWithBadge from "../../src/components/TabBarIconWithBadge";
+import React from "react";
+import { useChatStore } from "../../src/store/chatStore";
 
-// Animated Tab Icon Component
-function AnimatedTabIcon({ focused, iconName, color, size = 24 }) {
-    const scale = useAnimatedStyle(() => ({
-        transform: [
-            {
-                scale: withSpring(focused ? 1.15 : 1, {
-                    damping: 15,
-                    stiffness: 150,
-                }),
-            },
-        ],
-    }));
+// Tab Icons - Modern & Clean Design
+const HomeIcon = ({ color, size, focused }) => (
+    <TabBarIconWithBadge
+        focused={focused}
+        iconName={focused ? "home" : "home-outline"}
+        color={color}
+        size={size}
+        badge={0}
+    />
+);
 
-    const opacity = useAnimatedStyle(() => ({
-        opacity: withTiming(focused ? 1 : 0.6, { duration: 200 }),
-    }));
+const FreeFoodIcon = ({ color, size, focused }) => (
+    <TabBarIconWithBadge
+        focused={focused}
+        iconName={focused ? "gift" : "gift-outline"}
+        color={color}
+        size={size}
+        badge={0}
+    />
+);
 
+const MessagesIcon = ({ color, size, focused }) => {
+    const totalUnread = useChatStore((state) => state.getTotalUnread());
     return (
-        <Animated.View style={[scale, opacity]}>
-            <Ionicons name={iconName} size={size} color={color} />
-        </Animated.View>
+        <TabBarIconWithBadge
+            focused={focused}
+            iconName={focused ? "chatbubbles" : "chatbubbles-outline"}
+            color={color}
+            size={size}
+            badge={totalUnread}
+        />
     );
-}
+};
+
+const OrderIcon = ({ color, size, focused }) => (
+    <TabBarIconWithBadge
+        focused={focused}
+        iconName={focused ? "receipt" : "receipt-outline"}
+        color={color}
+        size={size}
+        badge={0}
+    />
+);
+
+const ProfileIcon = ({ color, size, focused }) => (
+    <TabBarIconWithBadge
+        focused={focused}
+        iconName={focused ? "person-circle" : "person-circle-outline"}
+        color={color}
+        size={size}
+        badge={0}
+    />
+);
 
 export default function TabLayout() {
     const { theme } = useTheme();
-    const prevTabRef = useRef(null);
 
-    const handleTabPress = (routeName) => {
+    const handleTabPress = (_routeName) => {
         // Haptic feedback khi chuyển tab
         if (Platform.OS !== "web") {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -59,112 +80,143 @@ export default function TabLayout() {
                 headerShown: true,
                 headerStyle: {
                     backgroundColor: theme.surface,
-                    elevation: 0,
-                    shadowOpacity: 0,
-                    borderBottomWidth: 0,
+                    elevation: 4,
+                    shadowOpacity: 0.1,
+                    borderBottomWidth: 0.5,
+                    borderBottomColor: theme.outlineVariant,
                 },
                 headerTintColor: theme.onSurface,
                 headerTitleStyle: {
                     fontWeight: "600",
                     fontSize: 18,
+                    color: theme.onBackground,
                 },
                 tabBarStyle: {
                     backgroundColor: theme.surface,
-                    borderTopWidth: 0,
-                    elevation: 8,
+                    borderTopWidth: 1,
+                    borderTopColor:
+                        theme.mode === "dark"
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.05)",
+                    elevation: 16,
                     shadowColor: "#000",
-                    shadowOffset: { width: 0, height: -2 },
-                    shadowOpacity: 0.1,
-                    shadowRadius: 8,
-                    height: Platform.OS === "ios" ? 88 : 64,
-                    paddingBottom: Platform.OS === "ios" ? 24 : 8,
-                    paddingTop: 8,
+                    shadowOffset: { width: 0, height: -4 },
+                    shadowOpacity: 0.12,
+                    shadowRadius: 12,
+                    height: Platform.OS === "ios" ? 85 : 65,
+                    paddingBottom: Platform.OS === "ios" ? 20 : 8,
+                    paddingTop: 4,
+                    paddingHorizontal: 0,
+                    marginHorizontal: 0,
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                },
+                tabBarItemStyle: {
+                    paddingVertical: 2,
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginHorizontal: 0,
+                    paddingHorizontal: 0,
+                    gap: 1,
+                    width: "20%",
+                    minWidth: "20%",
                 },
                 tabBarLabelStyle: {
-                    fontSize: 12,
-                    fontWeight: "600",
-                    marginTop: 4,
+                    fontSize: 9,
+                    fontWeight: "500",
+                    marginTop: 2,
+                    marginBottom: 0,
+                    textAlign: "center",
                 },
                 tabBarIconStyle: {
-                    marginTop: 4,
+                    marginTop: 0,
+                    marginBottom: 2,
                 },
                 animation: "shift",
+                tabBarShowLabel: true,
             }}
         >
+            {/* Main Tab: Home */}
             <Tabs.Screen
                 name="index"
                 options={{
                     title: "Trang chủ",
                     headerTitle: "Kính chào quý khách",
-                    tabBarLabel: "Home",
-                    tabBarIcon: ({ color, size, focused }) => (
-                        <AnimatedTabIcon
-                            focused={focused}
-                            iconName="home"
-                            color={color}
-                            size={size}
-                        />
-                    ),
+                    tabBarLabel: "Trang chủ",
+                    tabBarIcon: HomeIcon,
                 }}
                 listeners={{
                     tabPress: () => handleTabPress("home"),
+                }}
+            />
+
+            {/* Tab: Free Food / Quán ăn 0đ */}
+            <Tabs.Screen
+                name="free-food"
+                options={{
+                    title: "Quán ăn 0đ",
+                    headerTitle: "Quán ăn 0 đồng",
+                    tabBarLabel: "0 đồng",
+                    tabBarIcon: FreeFoodIcon,
+                }}
+                listeners={{ tabPress: () => handleTabPress("free-food") }}
+            />
+
+            {/* Tab: Messages / Tin nhắn */}
+            <Tabs.Screen
+                name="messages"
+                options={{
+                    title: "Tin nhắn",
+                    headerTitle: "Tin nhắn",
+                    tabBarLabel: "Tin nhắn",
+                    tabBarIcon: MessagesIcon,
+                }}
+                listeners={{ tabPress: () => handleTabPress("messages") }}
+            />
+
+            {/* Tab: Order History */}
+            <Tabs.Screen
+                name="order-history"
+                options={{
+                    title: "Đơn hàng",
+                    headerTitle: "Lịch sử đơn hàng",
+                    tabBarLabel: "Đơn hàng",
+                    tabBarIcon: OrderIcon,
+                }}
+                listeners={{ tabPress: () => handleTabPress("order-history") }}
+            />
+
+            {/* Tab: Profile */}
+            <Tabs.Screen
+                name="profile"
+                options={{
+                    title: "Cá nhân",
+                    headerTitle: "Tài khoản của tôi",
+                    tabBarLabel: "Cá nhân",
+                    tabBarIcon: ProfileIcon,
+                }}
+                listeners={{
+                    tabPress: () => handleTabPress("profile"),
+                }}
+            />
+
+            {/* Hidden Tabs */}
+            <Tabs.Screen
+                name="cart"
+                options={{
+                    title: "Giỏ hàng",
+                    tabBarButton: () => null,
+                    tabBarItemStyle: { width: 0, padding: 0, margin: 0 },
                 }}
             />
             <Tabs.Screen
                 name="favorites"
                 options={{
                     title: "Yêu thích",
-                    tabBarIcon: ({ color, size, focused }) => (
-                        <AnimatedTabIcon
-                            focused={focused}
-                            iconName="heart"
-                            color={color}
-                            size={size}
-                        />
-                    ),
-                }}
-                listeners={{
-                    tabPress: () => handleTabPress("favorites"),
-                }}
-            />
-            <Tabs.Screen
-                name="cart"
-                options={{
-                    title: "Giỏ hàng",
-                    tabBarIcon: ({ color, size, focused }) => (
-                        <AnimatedTabIcon
-                            focused={focused}
-                            iconName="cart"
-                            color={color}
-                            size={size}
-                        />
-                    ),
-                }}
-                listeners={{
-                    tabPress: () => handleTabPress("cart"),
-                }}
-            />
-            <Tabs.Screen
-                name="explore"
-                options={{
-                    href: null,
-                }}
-            />
-            <Tabs.Screen
-                name="profile"
-                options={{
-                    title: "Profile",
-                    tabBarIcon: ({ color, size, focused }) => (
-                        <AnimatedTabIcon
-                            focused={focused}
-                            iconName="person"
-                            color={color}
-                            size={size}
-                        />
-                    ),
-                }}
-                listeners={{
-                    tabPress: () => handleTabPress("profile"),
+                    tabBarButton: () => null,
+                    tabBarItemStyle: { width: 0, padding: 0, margin: 0 },
                 }}
             />
         </Tabs>

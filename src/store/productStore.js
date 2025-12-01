@@ -14,6 +14,7 @@ export const useProductStore = create(
             cartList: [],
             cartPrice: 0,
             orderHistoryList: [],
+            viewedProducts: [], // Thêm state cho sản phẩm đã xem
 
             addToCart: (cartItem) =>
                 set(
@@ -220,6 +221,22 @@ export const useProductStore = create(
                         state.cartPrice = 0;
                     }),
                 ),
+            
+            // Action xóa danh sách đã xem
+            clearViewedProducts: () =>
+                set(
+                    produce((state) => {
+                        state.viewedProducts = [];
+                    }),
+                ),
+            
+            // Action xóa lịch sử đơn hàng
+            clearOrderHistory: () =>
+                set(
+                    produce((state) => {
+                        state.orderHistoryList = [];
+                    }),
+                ),
 
             addProduct: (product) =>
                 set(
@@ -236,14 +253,33 @@ export const useProductStore = create(
                         );
                     }),
                 ),
+            
+            // Action thêm vào danh sách đã xem
+            addToViewedProducts: (product) =>
+                set(
+                    produce((state) => {
+                        // Xóa nếu đã tồn tại để đưa lên đầu
+                        const index = state.viewedProducts.findIndex((item) => item.id === product.id);
+                        if (index !== -1) {
+                            state.viewedProducts.splice(index, 1);
+                        }
+                        // Thêm vào đầu danh sách
+                        state.viewedProducts.unshift(product);
+                        // Giới hạn số lượng (ví dụ: 10 sản phẩm)
+                        if (state.viewedProducts.length > 10) {
+                            state.viewedProducts.pop();
+                        }
+                    }),
+                ),
 
         }),
         {
             name: 'product-storage',
             storage: createJSONStorage(() => AsyncStorage),
-            version: 10, 
+            version: 12, // Tăng version để kích hoạt migration mới
             migrate: async (persistedState, version) => {
-                 if (version < 10) {
+                 if (version < 12) {
+                    // Nếu version cũ thấp hơn 12, cập nhật lại foodList từ FoodData mới nhất
                     return {
                         ...persistedState,
                         foodList: FoodData,
