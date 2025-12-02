@@ -191,15 +191,19 @@ export default function TabLayout() {
 
             {/* Hidden Tabs */}
             <Tabs.Screen
-                name="Giỏ hàng"
+                name="cart"
                 options={{
                     href: null,
+                    title: "Giỏ hàng",
+                    headerTitle: "Giỏ hàng",
                 }}
             />
             <Tabs.Screen
-                name="Yêu thích"
+                name="favorites"
                 options={{
                     href: null,
+                    title: "Yêu thích",
+                    headerTitle: "Yêu thích",
                 }}
             />
         </Tabs>
