@@ -1,57 +1,57 @@
 {
-  "expo": {
-    "name": "ReFood",
-    "slug": "refood",
-    "version": "1.0.7",
-    "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
-    "scheme": "refood",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.hinne.refood"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#FFFFFF",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
-      },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
-      "package": "com.hinne.refood"
-    },
-    "web": {
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/logo.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#FFFFFF",
-          "dark": {
-            "backgroundColor": "#FFFFFF"
-          }
-        }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "7c27aaf4-2f87-49ed-b4c1-3f61cb004e06"
-      }
-    },
-    "owner": "hinn27726"
-  }
+    "expo": {
+        "name": "ReFood",
+        "slug": "refood",
+        "version": "1.0.8",
+        "orientation": "portrait",
+        "icon": "./assets/images/logo.png",
+        "scheme": "refood",
+        "userInterfaceStyle": "automatic",
+        "newArchEnabled": true,
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.hinne.refood"
+        },
+        "android": {
+            "adaptiveIcon": {
+                "backgroundColor": "#FFFFFF",
+                "foregroundImage": "./assets/images/android-icon-foreground.png",
+                "backgroundImage": "./assets/images/android-icon-background.png",
+                "monochromeImage": "./assets/images/android-icon-monochrome.png"
+            },
+            "edgeToEdgeEnabled": true,
+            "predictiveBackGestureEnabled": false,
+            "package": "com.hinne.refood"
+        },
+        "web": {
+            "output": "static",
+            "favicon": "./assets/images/favicon.png"
+        },
+        "plugins": [
+            "expo-router",
+            [
+                "expo-splash-screen",
+                {
+                    "image": "./assets/images/logo.png",
+                    "imageWidth": 200,
+                    "resizeMode": "contain",
+                    "backgroundColor": "#FFFFFF",
+                    "dark": {
+                        "backgroundColor": "#FFFFFF"
+                    }
+                }
+            ]
+        ],
+        "experiments": {
+            "typedRoutes": true,
+            "reactCompiler": true
+        },
+        "extra": {
+            "router": {},
+            "eas": {
+                "projectId": "7c27aaf4-2f87-49ed-b4c1-3f61cb004e06"
+            }
+        },
+        "owner": "hinn27726"
+    }
 }
