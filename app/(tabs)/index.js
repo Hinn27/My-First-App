@@ -496,18 +496,11 @@ export default function EnhancedHomeScreen() {
                             iconColor={theme.onSurfaceVariant}
                         />
                         <Text variant="bodyLarge" style={styles.emptyText}>
-                            {foodList.length === 0
+                            {categoryIndex.category === "Quán ăn 0 đồng"
+                                ? "Hiện tại chưa có quán ăn đăng món, quý khách vui lòng quay lại sau"
+                                : foodList.length === 0
                                 ? "Đang tải dữ liệu..."
                                 : "Không tìm thấy sản phẩm"}
-                        </Text>
-                        <Text
-                            variant="bodySmall"
-                            style={{
-                                color: theme.onSurfaceVariant,
-                                marginTop: 8,
-                            }}
-                        >
-                            (Kiểm tra kết nối API nếu đợi quá lâu)
                         </Text>
                     </View>
                 }
