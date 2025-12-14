@@ -294,13 +294,16 @@ export const useProductStore = create(
         {
             name: "product-storage",
             storage: createJSONStorage(() => AsyncStorage),
-            version: 18, // Tăng version để clear cache cũ
+            version: 19, // Tăng version để xóa món "Quán ăn 0 đồng"
             migrate: async (persistedState, version) => {
-                if (version < 17) {
-                    // Force reload FoodData để lấy shopName mới
+                if (version < 19) {
+                    // Filter out "Quán ăn 0 đồng" items from foodList
+                    const filteredFoodList = FoodData.filter(
+                        (item) => item.category !== "Quán ăn 0 đồng"
+                    );
                     return {
                         ...persistedState,
-                        foodList: FoodData,
+                        foodList: filteredFoodList,
                     };
                 }
                 return persistedState;
