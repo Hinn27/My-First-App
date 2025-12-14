@@ -135,7 +135,7 @@ export default function TabLayout() {
                 name="index"
                 options={{
                     title: "Trang chủ",
-                    headerTitle: "Kính chào quý khách",
+                    headerTitle: "Trang chủ",
                     tabBarLabel: "Trang chủ",
                     tabBarIcon: HomeIcon,
                 }}
@@ -161,16 +161,9 @@ export default function TabLayout() {
                 name="order-history"
                 options={{
                     title: "Đơn hàng",
-                    headerTitle: "Lịch sử đơn hàng",
+                    headerTitle: "Đơn hàng",
                     tabBarLabel: "Đơn hàng",
                     tabBarIcon: OrderIcon,
-                    headerTitleStyle: {
-                        fontWeight: "600",
-                        fontSize: 20,
-                        color: theme.onBackground,
-                        textAlign: "center",
-                    },
-                    headerLeft: () => null,
                 }}
                 listeners={{ tabPress: () => handleTabPress("order-history") }}
             />
@@ -180,7 +173,7 @@ export default function TabLayout() {
                 name="profile"
                 options={{
                     title: "Cá nhân",
-                    headerTitle: "Tài khoản của tôi",
+                    headerTitle: "Tài khoản",
                     tabBarLabel: "Cá nhân",
                     tabBarIcon: ProfileIcon,
                 }}

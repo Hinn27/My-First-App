@@ -36,28 +36,13 @@ export default function OrderHistoryScreen() {
 
     return (
         <View style={styles.container}>
-            <Stack.Screen options={{ headerShown: false }} />
+            <Stack.Screen options={{ headerShown: true }} />
             <StatusBar
                 backgroundColor={theme.background}
                 barStyle={
                     theme.mode === "dark" ? "light-content" : "dark-content"
                 }
             />
-
-            {/* Header */}
-            <View style={styles.header}>
-                <Pressable
-                    style={styles.backButton}
-                    onPress={() => router.back()}
-                >
-                    <Ionicons
-                        name="arrow-back"
-                        size={24}
-                        color={theme.onSurface}
-                    />
-                </Pressable>
-                <Text style={styles.headerTitle}>Lịch sử đơn hàng</Text>
-            </View>
 
             {orderHistoryList.length === 0 ? (
                 <View style={styles.emptyContainer}>
