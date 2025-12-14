@@ -35,9 +35,9 @@ export default function AddProductScreen() {
     // Form state
     const [productData, setProductData] = useState({
         name: "",
-        type: "Food", // Chỉ còn Food
+        type: "Food",
         category: "",
-        productImage: null, // Product image
+        productImage: null,
         special_ingredient: "",
         description: "",
         roasted: "",
@@ -50,12 +50,31 @@ export default function AddProductScreen() {
     });
 
     // Categories (chỉ còn món ăn)
-    const foodCategories = ["Cơm", "Bún, mì, phở", "Bánh mì"];
+    const foodCategories = [
+        "Cơm",
+        "Bún, mì, phở",
+        "Bánh mì",
+        "Quán ăn 0 đồng",
+        "Khác",
+    ];
     const currentCategories = foodCategories;
 
     // Handle form change
     const handleChange = (field, value) => {
-        setProductData((prev) => ({ ...prev, [field]: value }));
+        setProductData((prev) => {
+            const updated = { ...prev, [field]: value };
+
+            // Nếu chọn category "Quán ăn 0 đồng", tự động set giá = 0
+            if (field === "category" && value === "Quán ăn 0 đồng") {
+                updated.prices = {
+                    S: { enabled: false, price: "0" },
+                    M: { enabled: true, price: "0" },
+                    L: { enabled: false, price: "0" },
+                };
+            }
+
+            return updated;
+        });
     };
 
     // Handle price change
@@ -81,7 +100,7 @@ export default function AddProductScreen() {
             if (permissionResult.granted === false) {
                 Alert.alert(
                     "Thông báo",
-                    "Bạn cần cấp quyền truy cập thư viện ảnh!"
+                    "Bạn cần cấp quyền truy cập thư viện ảnh!",
                 );
                 return;
             }
@@ -126,8 +145,15 @@ export default function AddProductScreen() {
         }
 
         // Check at least one price
+        // Nếu category là "Quán ăn 0 đồng", cho phép giá = 0
+        const isFreeFood = productData.category === "Quán ăn 0 đồng";
         const hasPrice = Object.values(productData.prices).some(
-            (p) => p.enabled && p.price && parseFloat(p.price) > 0
+            (p) =>
+                p.enabled &&
+                p.price !== "" &&
+                (isFreeFood
+                    ? parseFloat(p.price) >= 0
+                    : parseFloat(p.price) > 0),
         );
         if (!hasPrice) {
             Alert.alert("Lỗi", "Vui lòng nhập ít nhất 1 giá cho sản phẩm");
@@ -142,9 +168,16 @@ export default function AddProductScreen() {
         if (!validateForm()) return;
 
         // Build prices array
+        const isFreeFood = productData.category === "Quán ăn 0 đồng";
         const prices = [];
         Object.entries(productData.prices).forEach(([size, data]) => {
-            if (data.enabled && data.price && parseFloat(data.price) > 0) {
+            if (
+                data.enabled &&
+                data.price !== "" &&
+                (isFreeFood
+                    ? parseFloat(data.price) >= 0
+                    : parseFloat(data.price) > 0)
+            ) {
                 prices.push({
                     size,
                     price: data.price,
@@ -356,6 +389,19 @@ export default function AddProductScreen() {
                 {/* Prices */}
                 <View style={styles.section}>
                     <Text style={styles.label}>Giá sản phẩm *</Text>
+                    {productData.category === "Quán ăn 0 đồng" && (
+                        <View style={styles.infoBox}>
+                            <Ionicons
+                                name="information-circle"
+                                size={20}
+                                color={theme.primary}
+                            />
+                            <Text style={styles.infoText}>
+                                Món này thuộc "Quán ăn 0 đồng" - Giá tự động
+                                được đặt là 0đ
+                            </Text>
+                        </View>
+                    )}
                     {["S", "M", "L"].map((size) => (
                         <View key={size} style={styles.priceRow}>
                             <Switch
@@ -368,12 +414,17 @@ export default function AddProductScreen() {
                                     true: theme.primary,
                                 }}
                                 thumbColor="#FFFFFF"
+                                disabled={
+                                    productData.category === "Quán ăn 0 đồng"
+                                }
                             />
                             <Text style={styles.sizeLabel}>Size {size}</Text>
                             <TextInput
                                 style={[
                                     styles.priceInput,
-                                    !productData.prices[size].enabled &&
+                                    (!productData.prices[size].enabled ||
+                                        productData.category ===
+                                            "Quán ăn 0 đồng") &&
                                         styles.priceInputDisabled,
                                 ]}
                                 placeholder="0"
@@ -383,7 +434,10 @@ export default function AddProductScreen() {
                                 onChangeText={(text) =>
                                     handlePriceChange(size, "price", text)
                                 }
-                                editable={productData.prices[size].enabled}
+                                editable={
+                                    productData.prices[size].enabled &&
+                                    productData.category !== "Quán ăn 0 đồng"
+                                }
                             />
                             <Text style={styles.currency}>đ</Text>
                         </View>
@@ -438,6 +492,23 @@ const createStyles = (theme) =>
             fontWeight: "600",
             color: theme.onBackground,
             marginBottom: 8,
+        },
+        infoBox: {
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 8,
+            backgroundColor: theme.primaryContainer || theme.surface,
+            padding: 12,
+            borderRadius: 10,
+            marginBottom: 12,
+            borderWidth: 1,
+            borderColor: theme.primary + "30",
+        },
+        infoText: {
+            flex: 1,
+            fontSize: 13,
+            color: theme.onSurface,
+            lineHeight: 18,
         },
         input: {
             backgroundColor: theme.surface,
