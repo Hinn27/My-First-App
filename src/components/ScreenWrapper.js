@@ -1,13 +1,13 @@
 // Screen Wrapper với fade-in animation
+import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import Animated, {
+    Easing,
     useAnimatedStyle,
     useSharedValue,
     withTiming,
-    Easing,
 } from "react-native-reanimated";
-import PropTypes from "prop-types";
 
 export default function ScreenWrapper({ children, style }) {
     const opacity = useSharedValue(0);

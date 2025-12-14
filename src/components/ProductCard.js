@@ -1,21 +1,21 @@
 // Component: Product Card cho Home screen
-import React, { useEffect } from "react";
-import { View, StyleSheet, Pressable, Image } from "react-native";
-import { Text, Badge } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import * as Haptics from "expo-haptics";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { Image, Pressable, StyleSheet, View } from "react-native";
+import { Badge, Text } from "react-native-paper";
 import Animated, {
+    Easing,
     useAnimatedStyle,
     useSharedValue,
     withSpring,
     withTiming,
-    Easing,
 } from "react-native-reanimated";
-import * as Haptics from "expo-haptics";
-import { wp } from "../utils/Responsive"; // Sử dụng wp để responsive
-import PropTypes from "prop-types";
-import { useRouter } from "expo-router";
 import { useChatStore } from "../store/chatStore";
+import { wp } from "../utils/Responsive"; // Sử dụng wp để responsive
 
 export default function ProductCard(props) {
     const {

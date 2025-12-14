@@ -1,24 +1,23 @@
 // Screen: Messages - Tin nhắn
-/*
- * Chức năng:
+/* Chức năng:
  * Hiển thị danh sách tin nhắn với các quán ăn (thực)
  * Dữ liệu từ chatStore
  */
 
+import { useRouter } from "expo-router";
 import React, { useMemo } from "react";
 import {
-    View,
-    StyleSheet,
     FlatList,
     StatusBar,
+    StyleSheet,
     TouchableOpacity,
+    View,
 } from "react-native";
-import { Text, Avatar, List, Divider, Button } from "react-native-paper";
-import { useRouter } from "expo-router";
+import { Avatar, Button, Divider, List, Text } from "react-native-paper";
 import ScreenWrapper from "../../src/components/ScreenWrapper";
 import { useTheme } from "../../src/context/ThemeContext";
-import { useChatStore } from "../../src/store/chatStore";
 import { shops } from "../../src/data/shops";
+import { useChatStore } from "../../src/store/chatStore";
 import { useUserStore } from "../../src/store/userStore";
 
 export default function MessagesScreen() {

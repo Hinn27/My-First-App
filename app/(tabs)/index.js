@@ -1,29 +1,28 @@
 // Screen: Index - Home
-/*
- * Chức năng:
+/* Chức năng:
  * File redirect mặc định cho root
  * Expo Router sẽ lấy index.js làm Home
  */
 
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import * as Haptics from "expo-haptics";
+import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
-    View,
-    StyleSheet,
+    Alert,
     FlatList,
+    Platform,
     ScrollView,
     StatusBar,
-    Alert,
-    Platform,
+    StyleSheet,
+    View,
 } from "react-native";
-import { useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
-import { Text, TextInput, IconButton, Chip, Menu } from "react-native-paper";
-import * as Haptics from "expo-haptics";
+import { Chip, IconButton, Menu, Text, TextInput } from "react-native-paper";
+import ProductCard from "../../src/components/ProductCard";
+import ScreenWrapper from "../../src/components/ScreenWrapper";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useProductStore } from "../../src/store/productStore";
 import { useUserStore } from "../../src/store/userStore";
-import ProductCard from "../../src/components/ProductCard";
-import ScreenWrapper from "../../src/components/ScreenWrapper";
 
 // Get categories from data
 const getCategoriesFromData = (data, hasViewed = false) => {
@@ -114,7 +113,7 @@ export default function EnhancedHomeScreen() {
                 );
             }
 
-            let sorted = [...list];
+            const sorted = [...list];
             if (type === "price_asc") {
                 sorted.sort((a, b) => {
                     const priceA =
@@ -499,8 +498,8 @@ export default function EnhancedHomeScreen() {
                             {categoryIndex.category === "Quán ăn 0 đồng"
                                 ? "Hiện tại chưa có quán ăn đăng món, quý khách vui lòng quay lại sau"
                                 : foodList.length === 0
-                                ? "Đang tải dữ liệu..."
-                                : "Không tìm thấy sản phẩm"}
+                                  ? "Đang tải dữ liệu..."
+                                  : "Không tìm thấy sản phẩm"}
                         </Text>
                     </View>
                 }

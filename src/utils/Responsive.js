@@ -28,4 +28,4 @@ const hp = (heightPercent) => {
     return PixelRatio.roundToNearestPixel((SCREEN_HEIGHT * elemHeight) / 100);
 };
 
-export { wp, hp, SCREEN_WIDTH, SCREEN_HEIGHT };
+export { hp, SCREEN_HEIGHT, SCREEN_WIDTH, wp };

@@ -55,13 +55,10 @@ class Logger {
         const errorMessage = error?.message || "Unknown API error";
         const statusCode = error?.response?.status || "N/A";
 
-        Logger.error(
-            `API Error at ${endpoint} (Status: ${statusCode})`,
-            {
-                message: errorMessage,
-                ...context,
-            }
-        );
+        Logger.error(`API Error at ${endpoint} (Status: ${statusCode})`, {
+            message: errorMessage,
+            ...context,
+        });
     }
 }
 

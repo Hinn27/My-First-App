@@ -1,19 +1,19 @@
 // Screen: Favorites - Danh sách yêu thích
 /* Chức năng:
- * - Hiển thị danh sách sản phẩm đã thêm vào mục yêu thích
- * - Chuyển đến chi tiết sản phẩm
- * - Xóa khỏi mục yêu thích
- * - Sử dụng Zustand store để quản lý state
+ * Hiển thị danh sách sản phẩm đã thêm vào mục yêu thích
+ * Chuyển đến chi tiết sản phẩm
+ * Xóa khỏi mục yêu thích
+ * Sử dụng Zustand store để quản lý state
  */
-import React from "react";
-import { View, StyleSheet, FlatList, StatusBar, Alert } from "react-native";
 import { useRouter } from "expo-router";
-import { Text, Button, IconButton } from "react-native-paper";
+import React from "react";
+import { Alert, FlatList, StatusBar, StyleSheet, View } from "react-native";
+import { Button, IconButton, Text } from "react-native-paper";
+import ProductCard from "../../src/components/ProductCard";
+import ScreenWrapper from "../../src/components/ScreenWrapper";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useProductStore } from "../../src/store/productStore";
 import { useUserStore } from "../../src/store/userStore";
-import ProductCard from "../../src/components/ProductCard";
-import ScreenWrapper from "../../src/components/ScreenWrapper";
 
 export default function FavoritesScreen() {
     const router = useRouter();

@@ -20,8 +20,8 @@ module.exports = defineConfig([
             "react/react-in-jsx-scope": "off", // Not needed in React Native
 
             // Code style
-            "semi": ["error", "always"],
-            "quotes": ["warn", "double", { avoidEscape: true }],
+            semi: ["error", "always"],
+            quotes: ["warn", "double", { avoidEscape: true }],
         },
     },
 ]);

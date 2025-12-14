@@ -1,14 +1,14 @@
+import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { View } from "react-native";
-import PropTypes from "prop-types";
 import { Badge } from "react-native-paper";
-import AnimatedTabIcon from "./AnimatedTabIcon";
 import Animated, {
-    useSharedValue,
     useAnimatedStyle,
-    withTiming,
+    useSharedValue,
     withSpring,
+    withTiming,
 } from "react-native-reanimated";
+import AnimatedTabIcon from "./AnimatedTabIcon";
 
 function formatBadge(n) {
     if (!n) return "";

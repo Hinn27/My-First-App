@@ -1,7 +1,7 @@
 // Component: Cart Item
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Text, Card, IconButton, Chip } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { Card, Chip, IconButton, Text } from "react-native-paper";
 
 import PropTypes from "prop-types";
 

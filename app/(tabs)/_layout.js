@@ -1,11 +1,11 @@
 // Layout cho tabs
 /* Define bottom tabs and icons */
-import { Tabs } from "expo-router";
-import { useTheme } from "../../src/context/ThemeContext";
 import * as Haptics from "expo-haptics";
+import { Tabs } from "expo-router";
+import React, { useMemo } from "react";
 import { Platform } from "react-native";
 import TabBarIconWithBadge from "../../src/components/TabBarIconWithBadge";
-import React, { useMemo } from "react";
+import { useTheme } from "../../src/context/ThemeContext";
 import { useChatStore } from "../../src/store/chatStore";
 import { useUserStore } from "../../src/store/userStore";
 

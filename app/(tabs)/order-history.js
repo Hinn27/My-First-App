@@ -1,2 +1,2 @@
-// Bridge file so the Tabs segment recognizes the order-history route
+// Lịch sử mua hàng (đã ấn)
 export { default } from "../order-history";

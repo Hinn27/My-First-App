@@ -8,37 +8,37 @@
 
 ### Cho khách hàng> Ứng dụng đặt đồ ăn & đồ uống, quản lý bán hàng với giao diện Material You Design
 
--   🏠 **Trang chủ**: Xem danh sách đồ ăn, tìm kiếm, lọc theo danh mục
+- 🏠 **Trang chủ**: Xem danh sách đồ ăn, tìm kiếm, lọc theo danh mục
 
--   🛒 **Giỏ hàng**: Thêm/xóa sản phẩm, chỉnh sửa số lượng**[🌍 English Version Below](#english-version)**
+- 🛒 **Giỏ hàng**: Thêm/xóa sản phẩm, chỉnh sửa số lượng**[🌍 English Version Below](#english-version)**
 
--   ❤️ **Yêu thích**: Lưu những sản phẩm yêu thích
+- ❤️ **Yêu thích**: Lưu những sản phẩm yêu thích
 
--   💬 **Tin nhắn**: Nhắn tin trực tiếp với các quán ăn## 📱 Screenshots
+- 💬 **Tin nhắn**: Nhắn tin trực tiếp với các quán ăn## 📱 Screenshots
 
--   📋 **Lịch sử đơn**: Xem những đơn hàng đã đặt
+- 📋 **Lịch sử đơn**: Xem những đơn hàng đã đặt
 
--   💳 **Thanh toán**: Nhiều phương thức thanh toán- 🏠 Home Screen với category filters
+- 💳 **Thanh toán**: Nhiều phương thức thanh toán- 🏠 Home Screen với category filters
 
--   🛒 Shopping Cart với quantity controls
+- 🛒 Shopping Cart với quantity controls
 
 ### Cho người bán- ❤️ Favorites với beautiful cards
 
--   📝 **Đăng ký bán**: Tạo tài khoản bán hàng- 💳 Payment với multiple methods
+- 📝 **Đăng ký bán**: Tạo tài khoản bán hàng- 💳 Payment với multiple methods
 
--   ➕ **Thêm sản phẩm**: Đăng sản phẩm với ảnh, giá tiền, mô tả - 🎨 Material Design 3 với React Native Paper
+- ➕ **Thêm sản phẩm**: Đăng sản phẩm với ảnh, giá tiền, mô tả - 🎨 Material Design 3 với React Native Paper
 
--   📊 **Quản lý doanh thu**: Xem đơn hàng và thu nhập- ✨ Smooth animations & haptic feedback
+- 📊 **Quản lý doanh thu**: Xem đơn hàng và thu nhập- ✨ Smooth animations & haptic feedback
 
--   🎭 Font Playfair Display việt hóa
+- 🎭 Font Playfair Display việt hóa
 
 ## 🚀 Cài đặt- 💙 Light Blue color scheme
 
 ### Yêu cầu---
 
--   Node.js (phiên bản 18 trở lên)
+- Node.js (phiên bản 18 trở lên)
 
--   npm hoặc yarn## ✨ Tính năng chính
+- npm hoặc yarn## ✨ Tính năng chính
 
 ### Hướng dẫn### 👥 Cho người mua (Buyer)
 
@@ -68,7 +68,7 @@ npm start-   ✅ **Lịch sử đơn hàng**: Xem lại các đơn đã đặt
 
 ## 📱 Chạy trên điện thoại
 
--   ✅ **Đăng ký bán hàng**: Form đăng ký với thông tin cửa hàng, upload ảnh
+- ✅ **Đăng ký bán hàng**: Form đăng ký với thông tin cửa hàng, upload ảnh
 
 ### Android - Status: Pending → chờ duyệt trong 24h
 
@@ -327,21 +327,21 @@ npx expo start --tunnel
 
 ### Core
 
--   **React Native 0.81** - Framework
--   **Expo 54** - Development platform
--   **Expo Router 6** - File-based routing
+- **React Native 0.81** - Framework
+- **Expo 54** - Development platform
+- **Expo Router 6** - File-based routing
 
 ### State Management
 
--   **zustand** - Lightweight state management
--   **immer** - Immutable state updates
+- **zustand** - Lightweight state management
+- **immer** - Immutable state updates
 
 ### Storage & UI
 
--   **@react-native-async-storage/async-storage** - Persistent storage
--   **expo-linear-gradient** - Gradient backgrounds
--   **expo-image-picker** - Image selection
--   **@expo/vector-icons** - Icon library
+- **@react-native-async-storage/async-storage** - Persistent storage
+- **expo-linear-gradient** - Gradient backgrounds
+- **expo-image-picker** - Image selection
+- **@expo/vector-icons** - Icon library
 
 ---
 
@@ -350,27 +350,23 @@ npx expo start --tunnel
 ### Cho người mua
 
 1. **Xem sản phẩm**
-
     - Mở tab **"Home"** (Trang chủ)
     - Dùng search bar để tìm kiếm
     - Chọn category để lọc (Món khô, Món ướt, Ăn vặt, Cà phê, Trà...)
 
 2. **Thêm vào giỏ hàng**
-
     - Tap vào sản phẩm để xem chi tiết
     - Chọn size (S/M/L)
     - Tap nút "Thêm vào giỏ hàng"
     - Hoặc tap nút "+" trực tiếp từ ProductCard
 
 3. **Quản lý giỏ hàng**
-
     - Vào tab "Giỏ hàng"
     - Tăng/giảm số lượng bằng nút +/-
     - Item tự động xóa khi số lượng = 0
     - Xem tổng tiền tự động
 
 4. **Thanh toán**
-
     - Tap "Thanh toán" trong Cart
     - Chọn phương thức thanh toán
     - Xác nhận → Success animation
@@ -384,7 +380,6 @@ npx expo start --tunnel
 ### Cho người bán
 
 1. **Đăng ký bán hàng**
-
     - Vào tab "Profile"
     - Ấn vào "Đăng ký bán hàng"
     - Điền thông tin: Tên, tên cửa hàng, địa chỉ, số điện thoại
@@ -392,7 +387,6 @@ npx expo start --tunnel
     - Submit → Status "Chờ duyệt trong 24h"
 
 2. **Đăng sản phẩm** (sau khi được duyệt)
-
     - Vào tab "Profile"
     - Ấn vào "Đăng sản phẩm"
     - Điền form:
@@ -406,7 +400,6 @@ npx expo start --tunnel
     - Submit → Sản phẩm tự động lưu vào store
 
 3. **Xem sản phẩm của bạn**
-
     - Ấn vào "Xem sản phẩm của bạn" trong Profile
     - Xem danh sách tất cả sản phẩm đã đăng (lưu trong Zustand store)
     - Hiển thị ảnh thật hoặc icon emoji (fallback)
@@ -415,7 +408,6 @@ npx expo start --tunnel
     - Ấn vào "Xóa" để xóa sản phẩm → Tự động xóa khỏi store
 
 4. **Quản lí doanh thu**
-
     - Ấn vào "Quản lí doanh thu" trong Profile
     - Xem 3 stats cards:
         - Doanh thu đơn mới
@@ -439,51 +431,51 @@ npx expo start --tunnel
 
 Ứng dụng sử dụng **React Native Paper** (Material UI cho React Native) và tuân theo **Material Design 3** guidelines:
 
--   **UI Components**: TextInput, Button, Card, List, Chip, IconButton từ React Native Paper
--   **Dynamic Color System**: Màu sắc chủ đạo Light Blue (#87CEEB)
--   **Elevation System**: 6 levels từ 0 (flat) đến 5 (highest)
--   **Shape System** - Bo góc mềm mại:
-    -   Extra Small: 10px radius
-    -   Small: 14px radius
-    -   Medium: 18px radius
-    -   Large: 28px radius
-    -   Extra Large: 36px radius
--   **Typography**: Playfair Display font
--   **Roundness**: 16px cho Paper components
--   **Components**:
-    -   Flat Cards (không viền, bo góc mềm mại)
-    -   Elevated Cards với shadow
-    -   Filled/Outlined/Text buttons
-    -   Bottom Navigation với animations
-    -   Smooth tab transitions với haptic feedback
+- **UI Components**: TextInput, Button, Card, List, Chip, IconButton từ React Native Paper
+- **Dynamic Color System**: Màu sắc chủ đạo Light Blue (#87CEEB)
+- **Elevation System**: 6 levels từ 0 (flat) đến 5 (highest)
+- **Shape System** - Bo góc mềm mại:
+    - Extra Small: 10px radius
+    - Small: 14px radius
+    - Medium: 18px radius
+    - Large: 28px radius
+    - Extra Large: 36px radius
+- **Typography**: Playfair Display font
+- **Roundness**: 16px cho Paper components
+- **Components**:
+    - Flat Cards (không viền, bo góc mềm mại)
+    - Elevated Cards với shadow
+    - Filled/Outlined/Text buttons
+    - Bottom Navigation với animations
+    - Smooth tab transitions với haptic feedback
 
 ### Color Palette - Light Blue Theme
 
--   **Primary**: #87CEEB (Sky Blue) - Main brand color
--   **Primary Container**: #E0F6FF - Light blue container
--   **Secondary**: #B0E0E6 (Powder Blue) - Supporting elements
--   **Tertiary**: #ADD8E6 (Light Blue) - Accents
--   **Surface**: #FFFBFE - Card backgrounds
--   **Background**: #FFFBFE - App background
--   **Error**: #B3261E - Error states
+- **Primary**: #87CEEB (Sky Blue) - Main brand color
+- **Primary Container**: #E0F6FF - Light blue container
+- **Secondary**: #B0E0E6 (Powder Blue) - Supporting elements
+- **Tertiary**: #ADD8E6 (Light Blue) - Accents
+- **Surface**: #FFFBFE - Card backgrounds
+- **Background**: #FFFBFE - App background
+- **Error**: #B3261E - Error states
 
 ### Elevation Levels
 
--   **Level 0**: Flat surfaces (no shadow)
--   **Level 1**: Low elevation (cards, chips)
--   **Level 2**: Medium elevation (app bar)
--   **Level 3**: High elevation (FAB, dialogs)
--   **Level 4**: Very high elevation (menus)
--   **Level 5**: Highest elevation (modals)
+- **Level 0**: Flat surfaces (no shadow)
+- **Level 1**: Low elevation (cards, chips)
+- **Level 2**: Medium elevation (app bar)
+- **Level 3**: High elevation (FAB, dialogs)
+- **Level 4**: Very high elevation (menus)
+- **Level 5**: Highest elevation (modals)
 
 ### Categories
 
--   **Món khô**: Phở, Bún chả, Cơm tấm, Bánh xèo,...
--   **Món ướt**: Bánh mì, Hủ tiếu, Bún bò Huế,...
--   **Ăn vặt**: Gỏi cuốn,...
--   **Cà phê**: Cà phê sữa đá, đen đá, Cappuccino, Latte,...
--   **Trà**: Matcha latte, Trà đào cam sả,...
--   **Trà sữa, Sinh tố, Nước ép, Soda**
+- **Món khô**: Phở, Bún chả, Cơm tấm, Bánh xèo,...
+- **Món ướt**: Bánh mì, Hủ tiếu, Bún bò Huế,...
+- **Ăn vặt**: Gỏi cuốn,...
+- **Cà phê**: Cà phê sữa đá, đen đá, Cappuccino, Latte,...
+- **Trà**: Matcha latte, Trà đào cam sả,...
+- **Trà sữa, Sinh tố, Nước ép, Soda**
 
 ---
 
@@ -521,8 +513,8 @@ npx react-native start --reset-cache
 
 ### AsyncStorage reset
 
--   Vào Profile → Test Functions → Clear cache (if available)
--   Hoặc xóa app và cài lại
+- Vào Profile → Test Functions → Clear cache (if available)
+- Hoặc xóa app và cài lại
 
 ### iOS/Android build errors
 
@@ -541,37 +533,37 @@ npm install
 
 ### ✅ Completed
 
--   [x] **Seller Management**: Đăng ký bán hàng, đăng sản phẩm
--   [x] **Revenue Management**: Quản lí đơn hàng và doanh thu
--   [x] **Product Management**: Xem/xóa sản phẩm của seller
--   [x] **Product Image Upload**: Upload ảnh thật cho sản phẩm
--   [x] **Zustand Store**: User state và product state với persist
--   [x] **Dynamic Greeting**: Hiển thị tên user trên Home
--   [x] **Category UI**: Chips với animations khi chuyển đổi các tab
--   [x] **Material Design 3**: Light Blue color theme (#87CEEB)
--   [x] **React Native Paper**: Tích hợp Material UI components
--   [x] **Playfair Display Font**: Font chữ t hỗ trợ tiếng Việt
--   [x] **Animations**: Screen transitions, tab animations, haptic feedback
--   [x] **Border Radius**: Bo góc mềm mại (10-36px)
--   [x] **Code Refactor**: Merge duplicate files (home-enhanced, cart-enhanced)
--   [x] **File Comments**: Thêm comments mô tả chức năng cho tất cả screens
+- [x] **Seller Management**: Đăng ký bán hàng, đăng sản phẩm
+- [x] **Revenue Management**: Quản lí đơn hàng và doanh thu
+- [x] **Product Management**: Xem/xóa sản phẩm của seller
+- [x] **Product Image Upload**: Upload ảnh thật cho sản phẩm
+- [x] **Zustand Store**: User state và product state với persist
+- [x] **Dynamic Greeting**: Hiển thị tên user trên Home
+- [x] **Category UI**: Chips với animations khi chuyển đổi các tab
+- [x] **Material Design 3**: Light Blue color theme (#87CEEB)
+- [x] **React Native Paper**: Tích hợp Material UI components
+- [x] **Playfair Display Font**: Font chữ t hỗ trợ tiếng Việt
+- [x] **Animations**: Screen transitions, tab animations, haptic feedback
+- [x] **Border Radius**: Bo góc mềm mại (10-36px)
+- [x] **Code Refactor**: Merge duplicate files (home-enhanced, cart-enhanced)
+- [x] **File Comments**: Thêm comments mô tả chức năng cho tất cả screens
 
 ### 🚧 In Progress
 
--   [ ] **Edit Product**: Chức năng sửa sản phẩm cho seller
--   [ ] **Order Management**: Khách hàng đặt đơn thật
+- [ ] **Edit Product**: Chức năng sửa sản phẩm cho seller
+- [ ] **Order Management**: Khách hàng đặt đơn thật
 
 ### 📋 Planned
 
--   [ ] **Backend API integration**: Supabase hoặc Node.js
--   [ ] **Real-time notifications**: Thông báo đơn hàng mới
--   [ ] **Payment gateway**: Tích hợp VNPay, MoMo, ZaloPay,...
--   [ ] **Google Maps**: Theo dõi giao hàng
--   [ ] **Chat support**: Khách và seller chat trực tiếp
--   [ ] **Multi-language**: EN/VI
--   [ ] **Product reviews & ratings**: Đánh giá sản phẩm
--   [ ] **Seller analytics**: Biểu đồ doanh thu, thống kê
--   [ ] **Push notifications**: Expo Notifications
+- [ ] **Backend API integration**: Supabase hoặc Node.js
+- [ ] **Real-time notifications**: Thông báo đơn hàng mới
+- [ ] **Payment gateway**: Tích hợp VNPay, MoMo, ZaloPay,...
+- [ ] **Google Maps**: Theo dõi giao hàng
+- [ ] **Chat support**: Khách và seller chat trực tiếp
+- [ ] **Multi-language**: EN/VI
+- [ ] **Product reviews & ratings**: Đánh giá sản phẩm
+- [ ] **Seller analytics**: Biểu đồ doanh thu, thống kê
+- [ ] **Push notifications**: Expo Notifications
 
 ---
 
@@ -589,14 +581,14 @@ npm install
 
 ## 📱 Screenshots
 
--   🏠 Home Screen with category filters (soft rounded corners)
--   🛒 Shopping Cart with quantity controls
--   ❤️ Favorites with beautiful cards
--   💳 Payment with multiple methods
--   🎨 Material Design 3 with React Native Paper
--   ✨ Smooth animations & haptic feedback
--   🎭 Playfair Display font (Vietnamese support)
--   💙 Light Blue color scheme
+- 🏠 Home Screen with category filters (soft rounded corners)
+- 🛒 Shopping Cart with quantity controls
+- ❤️ Favorites with beautiful cards
+- 💳 Payment with multiple methods
+- 🎨 Material Design 3 with React Native Paper
+- ✨ Smooth animations & haptic feedback
+- 🎭 Playfair Display font (Vietnamese support)
+- 💙 Light Blue color scheme
 
 ---
 
@@ -604,46 +596,46 @@ npm install
 
 ### 👥 For Buyers
 
--   ✅ **Enhanced Home Page**: Search, filter by category, grid layout
-    -   Display "Hello, {Username}!"
-    -   Category chips with smooth animations
-    -   Haptic feedback on interactions
--   ✅ **Product Details**: View full information, select size, ratings
--   ✅ **Shopping Cart**: Add/remove/edit quantity, auto-calculate total
--   ✅ **Favorites**: Save favorite products, quick add to cart
--   ✅ **Payment**: Multiple methods (E-wallet, Cash, Card, Banking)
--   ✅ **Order History**: View past orders
+- ✅ **Enhanced Home Page**: Search, filter by category, grid layout
+    - Display "Hello, {Username}!"
+    - Category chips with smooth animations
+    - Haptic feedback on interactions
+- ✅ **Product Details**: View full information, select size, ratings
+- ✅ **Shopping Cart**: Add/remove/edit quantity, auto-calculate total
+- ✅ **Favorites**: Save favorite products, quick add to cart
+- ✅ **Payment**: Multiple methods (E-wallet, Cash, Card, Banking)
+- ✅ **Order History**: View past orders
 
 ### 🏪 For Sellers
 
--   ✅ **Seller Registration**: Registration form with store info, image upload
-    -   Status: Pending → awaiting approval within 24h
-    -   Status: Approved → Can sell products
--   ✅ **Add Products**: Complete form with validation
-    -   Upload real product images
-    -   Enter name, description, category
-    -   Set prices by size (S/M/L)
-    -   Ingredients and features
-    -   Auto-save to store with AsyncStorage
--   ✅ **View Your Products**: Manage posted products list
-    -   Display all posted products
-    -   View images, names, prices
-    -   Edit products (coming soon)
-    -   Delete products from store
--   ✅ **Revenue Management**: Track orders and revenue
-    -   "New Orders" tab: New orders from customers
-    -   "Delivered" tab: Completed order history
-    -   Stats cards: Revenue from new orders, delivered orders, total revenue
-    -   Mark as delivered to move orders to "Delivered" tab
+- ✅ **Seller Registration**: Registration form with store info, image upload
+    - Status: Pending → awaiting approval within 24h
+    - Status: Approved → Can sell products
+- ✅ **Add Products**: Complete form with validation
+    - Upload real product images
+    - Enter name, description, category
+    - Set prices by size (S/M/L)
+    - Ingredients and features
+    - Auto-save to store with AsyncStorage
+- ✅ **View Your Products**: Manage posted products list
+    - Display all posted products
+    - View images, names, prices
+    - Edit products (coming soon)
+    - Delete products from store
+- ✅ **Revenue Management**: Track orders and revenue
+    - "New Orders" tab: New orders from customers
+    - "Delivered" tab: Completed order history
+    - Stats cards: Revenue from new orders, delivered orders, total revenue
+    - Mark as delivered to move orders to "Delivered" tab
 
 ### 🔐 Authentication & State Management
 
--   ✅ **Login**: Email/Password with Zustand + AsyncStorage
--   ✅ **Registration**: New user registration form
--   ✅ **Profile**: Manage personal information
--   ✅ **Zustand Store**: State management with persist
-    -   User data auto-saves and restores on app reopen
-    -   Data syncs across all screens
+- ✅ **Login**: Email/Password with Zustand + AsyncStorage
+- ✅ **Registration**: New user registration form
+- ✅ **Profile**: Manage personal information
+- ✅ **Zustand Store**: State management with persist
+    - User data auto-saves and restores on app reopen
+    - Data syncs across all screens
 
 ---
 
@@ -697,10 +689,10 @@ My-First-App/
 
 ### System Requirements
 
--   Node.js >= 18.x
--   npm or yarn
--   Expo CLI
--   iOS Simulator or Android Emulator (or Expo Go app)
+- Node.js >= 18.x
+- npm or yarn
+- Expo CLI
+- iOS Simulator or Android Emulator (or Expo Go app)
 
 ### Installation
 
@@ -753,29 +745,29 @@ npx expo start --tunnel
 
 ### Core
 
--   **React Native 0.81** - Framework
--   **Expo 54** - Development platform
--   **Expo Router 6** - File-based routing
+- **React Native 0.81** - Framework
+- **Expo 54** - Development platform
+- **Expo Router 6** - File-based routing
 
 ### State Management
 
--   **zustand** - Lightweight state management
--   **immer** - Immutable state updates
+- **zustand** - Lightweight state management
+- **immer** - Immutable state updates
 
 ### UI Components & Design
 
--   **react-native-paper** - Material Design 3 components (MUI)
--   **@expo-google-fonts/playfair-display** - Playfair Display font (Vietnamese support)
--   **@expo/vector-icons** - Icon library
--   **expo-linear-gradient** - Gradient backgrounds
--   **expo-image-picker** - Image selection
--   **expo-haptics** - Haptic feedback for better UX
+- **react-native-paper** - Material Design 3 components (MUI)
+- **@expo-google-fonts/playfair-display** - Playfair Display font (Vietnamese support)
+- **@expo/vector-icons** - Icon library
+- **expo-linear-gradient** - Gradient backgrounds
+- **expo-image-picker** - Image selection
+- **expo-haptics** - Haptic feedback for better UX
 
 ### Storage & Utilities
 
--   **@react-native-async-storage/async-storage** - Persistent storage
--   **react-native-reanimated** - Smooth animations
--   **react-native-gesture-handler** - Gesture handling
+- **@react-native-async-storage/async-storage** - Persistent storage
+- **react-native-reanimated** - Smooth animations
+- **react-native-gesture-handler** - Gesture handling
 
 ---
 
@@ -784,27 +776,23 @@ npx expo start --tunnel
 ### For Buyers
 
 1. **View Products**
-
     - Open the **"Home"** tab
     - Use search bar to find products
     - Select category to filter (Dry dishes, Wet dishes, Snacks, Coffee, Tea...)
 
 2. **Add to Cart**
-
     - Tap on a product to view details
     - Select size (S/M/L)
     - Tap "Add to Cart" button
     - Or tap "+" button directly from ProductCard
 
 3. **Manage Cart**
-
     - Go to "Cart" tab
     - Increase/decrease quantity with +/- buttons
     - Item auto-removes when quantity = 0
     - View auto-calculated total
 
 4. **Checkout**
-
     - Tap "Checkout" in Cart
     - Select payment method
     - Confirm → Success animation
@@ -818,7 +806,6 @@ npx expo start --tunnel
 ### For Sellers
 
 1. **Register as Seller**
-
     - Go to "Profile" tab
     - Tap "Register as Seller"
     - Fill in information: Name, store name, address, phone
@@ -826,7 +813,6 @@ npx expo start --tunnel
     - Submit → Status "Pending approval within 24h"
 
 2. **Add Products** (after approval)
-
     - Go to "Profile" tab
     - Tap "Add Product"
     - Fill form:
@@ -840,7 +826,6 @@ npx expo start --tunnel
     - Submit → Product auto-saves to store
 
 3. **View Your Products**
-
     - Tap "View Your Products" in Profile
     - View list of all posted products (saved in Zustand store)
     - Display real images or emoji icons (fallback)
@@ -849,7 +834,6 @@ npx expo start --tunnel
     - Tap "Delete" to remove product → Auto-removes from store
 
 4. **Revenue Management**
-
     - Tap "Revenue Management" in Profile
     - View 3 stats cards:
         - Revenue from new orders
@@ -873,62 +857,62 @@ npx expo start --tunnel
 
 The app follows **Material Design 3** guidelines by Google:
 
--   **UI Components**: TextInput, Button, Card, List, Chip, IconButton from React Native Paper
--   **Dynamic Color System**: Primary color Light Blue (#87CEEB)
--   **Elevation System**: 6 levels from 0 (flat) to 5 (highest)
--   **Shape System** - Soft rounded corners:
-    -   Extra Small: 10px radius
-    -   Small: 14px radius
-    -   Medium: 18px radius
-    -   Large: 28px radius
-    -   Extra Large: 36px radius
--   **Typography**: Playfair Display font (full Vietnamese support)
--   **Roundness**: 16px for Paper components
--   **Components**:
-    -   Flat Cards (no border, soft rounded corners)
-    -   Elevated Cards with shadow
-    -   Filled/Outlined/Text buttons
-    -   Bottom Navigation with animations
-    -   Smooth tab transitions with haptic feedback
+- **UI Components**: TextInput, Button, Card, List, Chip, IconButton from React Native Paper
+- **Dynamic Color System**: Primary color Light Blue (#87CEEB)
+- **Elevation System**: 6 levels from 0 (flat) to 5 (highest)
+- **Shape System** - Soft rounded corners:
+    - Extra Small: 10px radius
+    - Small: 14px radius
+    - Medium: 18px radius
+    - Large: 28px radius
+    - Extra Large: 36px radius
+- **Typography**: Playfair Display font (full Vietnamese support)
+- **Roundness**: 16px for Paper components
+- **Components**:
+    - Flat Cards (no border, soft rounded corners)
+    - Elevated Cards with shadow
+    - Filled/Outlined/Text buttons
+    - Bottom Navigation with animations
+    - Smooth tab transitions with haptic feedback
 
 ### Color Palette - Light Blue Theme
 
--   **Primary**: #87CEEB (Sky Blue) - Main brand color
--   **Primary Container**: #E0F6FF - Light blue container
--   **Secondary**: #B0E0E6 (Powder Blue) - Supporting elements
--   **Tertiary**: #ADD8E6 (Light Blue) - Accents
--   **Surface**: #FFFBFE - Card backgrounds
--   **Background**: #FFFBFE - App background
--   **Error**: #B3261E - Error states
+- **Primary**: #87CEEB (Sky Blue) - Main brand color
+- **Primary Container**: #E0F6FF - Light blue container
+- **Secondary**: #B0E0E6 (Powder Blue) - Supporting elements
+- **Tertiary**: #ADD8E6 (Light Blue) - Accents
+- **Surface**: #FFFBFE - Card backgrounds
+- **Background**: #FFFBFE - App background
+- **Error**: #B3261E - Error states
 
 ### Animations & Interactions
 
--   **Screen Transitions**: Fade-in and slide-up animations when switching screens
--   **Tab Animations**: Scale and opacity animations for tab icons
--   **Product Cards**: Press animations with scale effect
--   **Haptic Feedback**:
-    -   Light impact when switching tabs
-    -   Light impact when selecting category
-    -   Success notification when adding to cart
--   **Smooth Scrolling**: Optimized FlatList and ScrollView
+- **Screen Transitions**: Fade-in and slide-up animations when switching screens
+- **Tab Animations**: Scale and opacity animations for tab icons
+- **Product Cards**: Press animations with scale effect
+- **Haptic Feedback**:
+    - Light impact when switching tabs
+    - Light impact when selecting category
+    - Success notification when adding to cart
+- **Smooth Scrolling**: Optimized FlatList and ScrollView
 
 ### Elevation Levels
 
--   **Level 0**: Flat surfaces (no shadow) - Profile cards
--   **Level 1**: Low elevation (cards, chips)
--   **Level 2**: Medium elevation (app bar, tab bar)
--   **Level 3**: High elevation (FAB, dialogs)
--   **Level 4**: Very high elevation (menus)
--   **Level 5**: Highest elevation (modals)
+- **Level 0**: Flat surfaces (no shadow) - Profile cards
+- **Level 1**: Low elevation (cards, chips)
+- **Level 2**: Medium elevation (app bar, tab bar)
+- **Level 3**: High elevation (FAB, dialogs)
+- **Level 4**: Very high elevation (menus)
+- **Level 5**: Highest elevation (modals)
 
 ### Categories
 
--   **Dry Dishes**: Pho, Bun Cha, Com Tam, Banh Xeo
--   **Wet Dishes**: Banh Mi, Hu Tieu, Bun Bo Hue
--   **Snacks**: Goi Cuon
--   **Coffee**: Vietnamese Iced Coffee, Black Coffee, Cappuccino, Latte
--   **Tea**: Matcha Latte, Peach Tea with Orange & Lemongrass
--   **Milk Tea, Smoothies, Juice, Soda**
+- **Dry Dishes**: Pho, Bun Cha, Com Tam, Banh Xeo
+- **Wet Dishes**: Banh Mi, Hu Tieu, Bun Bo Hue
+- **Snacks**: Goi Cuon
+- **Coffee**: Vietnamese Iced Coffee, Black Coffee, Cappuccino, Latte
+- **Tea**: Matcha Latte, Peach Tea with Orange & Lemongrass
+- **Milk Tea, Smoothies, Juice, Soda**
 
 ---
 
@@ -966,8 +950,8 @@ npx react-native start --reset-cache
 
 ### AsyncStorage reset
 
--   Go to Profile → Test Functions → Clear cache (if available)
--   Or delete app and reinstall
+- Go to Profile → Test Functions → Clear cache (if available)
+- Or delete app and reinstall
 
 ### iOS/Android build errors
 
@@ -986,37 +970,37 @@ npm install
 
 ### ✅ Completed
 
--   [x] **Seller Management**: Seller registration, add products
--   [x] **Revenue Management**: Manage orders and revenue
--   [x] **Product Management**: View/delete seller products
--   [x] **Product Image Upload**: Upload real product images
--   [x] **Zustand Store**: User state and product state with persist
--   [x] **Dynamic Greeting**: Display username on Home
--   [x] **Category UI**: Chips with smooth animations
--   [x] **Material Design 3**: Light Blue color theme (#87CEEB)
--   [x] **React Native Paper**: Material UI components integration
--   [x] **Playfair Display Font**: Beautiful font with Vietnamese support
--   [x] **Animations**: Screen transitions, tab animations, haptic feedback
--   [x] **Border Radius**: Soft rounded corners (10-36px)
--   [x] **Code Refactor**: Merge duplicate files (home-enhanced, cart-enhanced)
--   [x] **File Comments**: Add function descriptions for all screens
+- [x] **Seller Management**: Seller registration, add products
+- [x] **Revenue Management**: Manage orders and revenue
+- [x] **Product Management**: View/delete seller products
+- [x] **Product Image Upload**: Upload real product images
+- [x] **Zustand Store**: User state and product state with persist
+- [x] **Dynamic Greeting**: Display username on Home
+- [x] **Category UI**: Chips with smooth animations
+- [x] **Material Design 3**: Light Blue color theme (#87CEEB)
+- [x] **React Native Paper**: Material UI components integration
+- [x] **Playfair Display Font**: Beautiful font with Vietnamese support
+- [x] **Animations**: Screen transitions, tab animations, haptic feedback
+- [x] **Border Radius**: Soft rounded corners (10-36px)
+- [x] **Code Refactor**: Merge duplicate files (home-enhanced, cart-enhanced)
+- [x] **File Comments**: Add function descriptions for all screens
 
 ### 🚧 In Progress
 
--   [ ] **Edit Product**: Product editing feature for sellers
--   [ ] **Order Management**: Real customer orders
+- [ ] **Edit Product**: Product editing feature for sellers
+- [ ] **Order Management**: Real customer orders
 
 ### 📋 Planned
 
--   [ ] **Backend API integration**: Supabase or Node.js
--   [ ] **Real-time notifications**: New order notifications
--   [ ] **Payment gateway**: Integrate VNPay, MoMo, ZaloPay
--   [ ] **Google Maps**: Delivery tracking
--   [ ] **Chat support**: Direct chat between customers and sellers
--   [ ] **Multi-language**: EN/VI
--   [ ] **Product reviews & ratings**: Product reviews
--   [ ] **Seller analytics**: Revenue charts, statistics
--   [ ] **Push notifications**: Expo Notifications
+- [ ] **Backend API integration**: Supabase or Node.js
+- [ ] **Real-time notifications**: New order notifications
+- [ ] **Payment gateway**: Integrate VNPay, MoMo, ZaloPay
+- [ ] **Google Maps**: Delivery tracking
+- [ ] **Chat support**: Direct chat between customers and sellers
+- [ ] **Multi-language**: EN/VI
+- [ ] **Product reviews & ratings**: Product reviews
+- [ ] **Seller analytics**: Revenue charts, statistics
+- [ ] **Push notifications**: Expo Notifications
 
 ---
 
@@ -1040,19 +1024,19 @@ This project is licensed under the **MIT License**.
 
 ✅ **You can:**
 
--   Use this code for personal or commercial projects
--   Modify and distribute the code
--   Use it in private projects
--   Sell software that includes this code
+- Use this code for personal or commercial projects
+- Modify and distribute the code
+- Use it in private projects
+- Sell software that includes this code
 
 ❗ **You must:**
 
--   Include the original copyright notice
--   Include the MIT License text
+- Include the original copyright notice
+- Include the MIT License text
 
 ⚠️ **You cannot:**
 
--   Hold the author liable for any damages
+- Hold the author liable for any damages
 
 See the [LICENSE](LICENSE) file for full details.
 
@@ -1062,18 +1046,18 @@ See the [LICENSE](LICENSE) file for full details.
 
 **Hinn27**
 
--   GitHub: [@Hinn27](https://github.com/Hinn27)
--   Email: hduc27760@gmail.com
+- GitHub: [@Hinn27](https://github.com/Hinn27)
+- Email: hduc27760@gmail.com
 
 ---
 
 ## 🙏 Acknowledgments
 
--   Inspired by [Coffee-Shop-App](https://github.com/darshanpawar101/Coffee-Shop-App)
--   Material You Design by Google
--   Icons by Expo Vector Icons
--   Built with ❤️ using React Native & Expo
--   Document by GPT-4
+- Inspired by [Coffee-Shop-App](https://github.com/darshanpawar101/Coffee-Shop-App)
+- Material You Design by Google
+- Icons by Expo Vector Icons
+- Built with ❤️ using React Native & Expo
+- Document by GPT-4
 
 ---
 
@@ -1081,8 +1065,8 @@ See the [LICENSE](LICENSE) file for full details.
 
 If you have any questions or need help, please:
 
--   Open an issue on GitHub
--   Email: hduc27760@gmail.com
+- Open an issue on GitHub
+- Email: hduc27760@gmail.com
 
 ---
 

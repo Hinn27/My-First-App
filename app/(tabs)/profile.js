@@ -4,6 +4,7 @@
  * - Menu seller (nếu là seller): Đăng sản phẩm, Xem sản phẩm, Quản lí doanh thu
  * - Settings: Theme, notifications
  * - Test functions: Set seller status
+ * - Test functions: Xóa dữ liệu app
  * - Đăng xuất
  */
 

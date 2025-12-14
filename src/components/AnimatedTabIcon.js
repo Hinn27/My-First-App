@@ -1,11 +1,11 @@
-import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
+import React from "react";
 import Animated, {
     useAnimatedStyle,
     withSpring,
     withTiming,
 } from "react-native-reanimated";
-import PropTypes from "prop-types";
 
 export default function AnimatedTabIcon({
     focused,
