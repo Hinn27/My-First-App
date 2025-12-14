@@ -7,7 +7,7 @@ import FoodData from "../data/FoodData";
 
 export const useProductStore = create(
     persist(
-        (set, get) => {
+        (set, _get) => {
             return {
                 foodList: FoodData,
                 drinkList: [],

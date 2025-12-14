@@ -5,20 +5,20 @@
  * - Hiển thị ngày giờ, tổng tiền
  * - Empty state khi chưa có đơn hàng
  */
-import React from "react";
-import {
-    View,
-    Text,
-    StyleSheet,
-    ScrollView,
-    StatusBar,
-    Pressable,
-    Platform,
-    Alert,
-} from "react-native";
-import { useRouter, Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { Stack, useRouter } from "expo-router";
+import React from "react";
+import {
+    Alert,
+    Platform,
+    Pressable,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View,
+} from "react-native";
 import { useTheme } from "../src/context/ThemeContext";
 import { useProductStore } from "../src/store/productStore";
 
@@ -30,7 +30,7 @@ export default function OrderHistoryScreen() {
     // Store
     const orderHistoryList = useProductStore((state) => state.orderHistoryList);
 
-    const handleReview = (orderId) => {
+    const handleReview = (_orderId) => {
         Alert.alert("Đánh giá", "Tính năng đánh giá đang được phát triển");
     };
 

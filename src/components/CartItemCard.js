@@ -12,7 +12,7 @@ export default function CartItemCard({
     special_ingredient,
     roasted,
     prices,
-    type,
+    _type,
     incrementHandler,
     decrementHandler,
 }) {

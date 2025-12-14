@@ -1,26 +1,25 @@
-import React, { useEffect, useState, useRef, useMemo, useCallback } from "react";
+import { useFocusEffect, useLocalSearchParams } from "expo-router";
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from "react";
 import {
-    View,
-    StyleSheet,
     FlatList,
     KeyboardAvoidingView,
     Platform,
+    StyleSheet,
+    View,
 } from "react-native";
-import {
-    Text,
-    TextInput,
-    IconButton,
-    Button,
-    Avatar,
-} from "react-native-paper";
-import { useLocalSearchParams, useRouter, useFocusEffect } from "expo-router";
-import { useChatStore } from "../../src/store/chatStore";
-import { shops } from "../../src/data/shops";
+import { Avatar, Button, Text, TextInput } from "react-native-paper";
 import { useTheme } from "../../src/context/ThemeContext";
+import { shops } from "../../src/data/shops";
+import { useChatStore } from "../../src/store/chatStore";
 
 export default function ChatScreen() {
     const { shopId } = useLocalSearchParams();
-    const router = useRouter();
     const { theme } = useTheme();
     const styles = createStyles(theme);
 

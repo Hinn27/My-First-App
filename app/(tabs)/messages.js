@@ -165,7 +165,7 @@ export default function MessagesScreen() {
                             <List.Item
                                 title={item.name}
                                 description={item.message}
-                                left={(props) => (
+                                left={(_props) => (
                                     <Avatar.Icon
                                         size={48}
                                         icon="store"
@@ -175,7 +175,7 @@ export default function MessagesScreen() {
                                         }}
                                     />
                                 )}
-                                right={(props) => (
+                                right={(_props) => (
                                     <View style={styles.metaContainer}>
                                         <Text
                                             variant="bodySmall"

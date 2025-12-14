@@ -24,9 +24,10 @@ import {
 } from "react-native-paper";
 import ScreenWrapper from "../../src/components/ScreenWrapper";
 import { useTheme } from "../../src/context/ThemeContext";
-import { useChatStore } from "../../src/store/chatStore"; // Import Chat Store
+import { useChatStore } from "../../src/store/chatStore";
 import { useProductStore } from "../../src/store/productStore";
 import { useUserStore } from "../../src/store/userStore";
+import Logger from "../../src/utils/logger";
 
 export default function ProfileScreen() {
     const { theme } = useTheme();

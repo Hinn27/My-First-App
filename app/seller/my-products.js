@@ -17,11 +17,11 @@ import {
     Alert,
     StatusBar,
     Platform,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useRouter, Stack } from 'expo-router';
-import { useTheme } from '../../src/context/ThemeContext';
-import { useProductStore } from '../../src/store/productStore';
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter, Stack } from "expo-router";
+import { useTheme } from "../../src/context/ThemeContext";
+import { useProductStore } from "../../src/store/productStore";
 // useUserStore not used here
 
 export default function MyProductsScreen() {
@@ -42,14 +42,14 @@ export default function MyProductsScreen() {
     const products = allProducts;
 
     const handleDeleteProduct = (productId, productType) => {
-        Alert.alert('Xác nhận xóa', 'Bạn có chắc muốn xóa sản phẩm này?', [
-            { text: 'Hủy', style: 'cancel' },
+        Alert.alert("Xác nhận xóa", "Bạn có chắc muốn xóa sản phẩm này?", [
+            { text: "Hủy", style: "cancel" },
             {
-                text: 'Xóa',
-                style: 'destructive',
+                text: "Xóa",
+                style: "destructive",
                 onPress: () => {
                     deleteProduct(productId, productType);
-                    Alert.alert('Thành công', 'Đã xóa sản phẩm!');
+                    Alert.alert("Thành công", "Đã xóa sản phẩm!");
                 },
             },
         ]);
@@ -71,7 +71,7 @@ export default function MyProductsScreen() {
                     />
                 </Pressable>
                 <Text style={styles.headerTitle}>Sản phẩm của bạn</Text>
-                <Pressable onPress={() => router.push('/seller/add-product')}>
+                <Pressable onPress={() => router.push("/seller/add-product")}>
                     <Ionicons
                         name="add-circle"
                         size={28}
@@ -101,7 +101,7 @@ export default function MyProductsScreen() {
                                 {product.imagelink_square ? (
                                     <Image
                                         source={
-                                            typeof product.imagelink_square === 'string'
+                                            typeof product.imagelink_square === "string"
                                                 ? { uri: product.imagelink_square }
                                                 : product.imagelink_square
                                         }
@@ -135,7 +135,7 @@ export default function MyProductsScreen() {
                                         product.prices.length > 0
                                             ? `${parseInt(
                                                   product.prices[0].price,
-                                              ).toLocaleString('vi-VN')}đ${
+                                              ).toLocaleString("vi-VN")}đ${
                                                   product.prices.length > 1
                                                       ? ` - ${parseInt(
                                                             product.prices[
@@ -143,11 +143,11 @@ export default function MyProductsScreen() {
                                                                     .length - 1
                                                             ].price,
                                                         ).toLocaleString(
-                                                            'vi-VN',
+                                                            "vi-VN",
                                                         )}đ`
-                                                      : ''
+                                                      : ""
                                               }`
-                                            : 'Chưa có giá'}
+                                            : "Chưa có giá"}
                                     </Text>
 
                                     <View style={styles.productActions}>
@@ -156,8 +156,8 @@ export default function MyProductsScreen() {
                                             onPress={() => {
                                                 // TODO: Navigate to edit screen
                                                 Alert.alert(
-                                                    'Thông báo',
-                                                    'Chức năng sửa sản phẩm sẽ được cập nhật sau',
+                                                    "Thông báo",
+                                                    "Chức năng sửa sản phẩm sẽ được cập nhật sau",
                                                 );
                                             }}
                                         >
@@ -217,12 +217,12 @@ const createStyles = (theme) =>
             backgroundColor: theme.background,
         },
         header: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
             paddingHorizontal: 16,
             paddingVertical: 12,
-            paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 24) + 12 : 50, // Add padding top for status bar
+            paddingTop: Platform.OS === "android" ? (StatusBar.currentHeight || 24) + 12 : 50, // Add padding top for status bar
             backgroundColor: theme.surface,
             borderBottomWidth: 1,
             borderBottomColor: theme.outlineVariant,
@@ -232,7 +232,7 @@ const createStyles = (theme) =>
         },
         headerTitle: {
             fontSize: 18,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
             flex: 1,
             marginLeft: 12,
@@ -241,21 +241,21 @@ const createStyles = (theme) =>
             flex: 1,
         },
         emptyContainer: {
-            alignItems: 'center',
-            justifyContent: 'center',
+            alignItems: "center",
+            justifyContent: "center",
             paddingVertical: 80,
             paddingHorizontal: 32,
         },
         emptyTitle: {
             fontSize: 20,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
             marginTop: 16,
         },
         emptyText: {
             fontSize: 14,
             color: theme.onSurfaceVariant,
-            textAlign: 'center',
+            textAlign: "center",
             marginTop: 8,
             lineHeight: 20,
         },
@@ -263,7 +263,7 @@ const createStyles = (theme) =>
             padding: 16,
         },
         productCard: {
-            flexDirection: 'row',
+            flexDirection: "row",
             backgroundColor: theme.surface,
             borderRadius: 12,
             padding: 12,
@@ -281,8 +281,8 @@ const createStyles = (theme) =>
             height: 80,
             borderRadius: 8,
             backgroundColor: theme.surfaceVariant,
-            alignItems: 'center',
-            justifyContent: 'center',
+            alignItems: "center",
+            justifyContent: "center",
         },
         emoji: {
             fontSize: 40,
@@ -290,11 +290,11 @@ const createStyles = (theme) =>
         productInfo: {
             flex: 1,
             marginLeft: 12,
-            justifyContent: 'space-between',
+            justifyContent: "space-between",
         },
         productName: {
             fontSize: 16,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.onSurface,
         },
         productCategory: {
@@ -304,22 +304,22 @@ const createStyles = (theme) =>
         },
         productPrice: {
             fontSize: 15,
-            fontWeight: '600',
+            fontWeight: "600",
             color: theme.primary,
             marginTop: 4,
         },
         productActions: {
-            flexDirection: 'row',
+            flexDirection: "row",
             marginTop: 8,
             gap: 12,
         },
         actionButton: {
-            flexDirection: 'row',
-            alignItems: 'center',
+            flexDirection: "row",
+            alignItems: "center",
             gap: 4,
         },
         actionText: {
             fontSize: 14,
-            fontWeight: '500',
+            fontWeight: "500",
         },
     });

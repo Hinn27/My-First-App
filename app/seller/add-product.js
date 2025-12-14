@@ -101,7 +101,7 @@ export default function AddProductScreen() {
             if (permissionResult.granted === false) {
                 Alert.alert(
                     "Thông báo",
-                    "Bạn cần cấp quyền truy cập thư viện ảnh!",
+                    "Bạn cần cấp quyền truy cập thư viện ảnh!"
                 );
                 return;
             }
@@ -154,7 +154,7 @@ export default function AddProductScreen() {
                 p.price !== "" &&
                 (isFreeFood
                     ? parseFloat(p.price) >= 0
-                    : parseFloat(p.price) > 0),
+                    : parseFloat(p.price) > 0)
         );
         if (!hasPrice) {
             Alert.alert("Lỗi", "Vui lòng nhập ít nhất 1 giá cho sản phẩm");
@@ -398,8 +398,8 @@ export default function AddProductScreen() {
                                 color={theme.primary}
                             />
                             <Text style={styles.infoText}>
-                                Món này thuộc "Quán ăn 0 đồng" - Giá tự động
-                                được đặt là 0đ
+                                Món này thuộc &quot;Quán ăn 0 đồng&quot; - Giá
+                                tự động được đặt là 0đ
                             </Text>
                         </View>
                     )}

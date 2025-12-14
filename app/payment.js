@@ -1,21 +1,21 @@
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-    View,
-    Text,
-    StyleSheet,
-    ScrollView,
-    Pressable,
     Alert,
-    StatusBar,
     Animated,
     Modal,
+    Pressable,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View,
 } from "react-native";
-import { useRouter } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
 import { useTheme } from "../src/context/ThemeContext";
-import { useProductStore } from "../src/store/productStore";
 import { useChatStore } from "../src/store/chatStore";
+import { useProductStore } from "../src/store/productStore";
 
 export default function PaymentScreen() {
     const router = useRouter();
@@ -60,7 +60,7 @@ export default function PaymentScreen() {
                 if (shopId) {
                     addMessage(shopId, {
                         id: `thank-you-${shopId}-${Date.now()}`,
-                        text: `Cảm ơn bạn đã đặt hàng! Chúng tôi sẽ chuẩn bị sớm nhất.`,
+                        text: "Cảm ơn bạn đã đặt hàng! Chúng tôi sẽ chuẩn bị sớm nhất.",
                         from: "me",
                         timestamp: Date.now(),
                     });

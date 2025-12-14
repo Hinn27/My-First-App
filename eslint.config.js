@@ -10,7 +10,10 @@ module.exports = defineConfig([
     {
         rules: {
             // Enforce best practices
-            "no-console": ["warn", { allow: ["warn", "error"] }],
+            "no-console": [
+                "warn",
+                { allow: ["warn", "error", "log", "debug"] },
+            ],
             "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
             "prefer-const": "warn",
             "no-var": "error",
