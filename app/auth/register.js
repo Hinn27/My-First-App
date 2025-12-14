@@ -1,20 +1,21 @@
 // Screen: Register
-import {
-    View,
-    StyleSheet,
-    KeyboardAvoidingView,
-    Platform,
-    Alert,
-    ScrollView,
-} from "react-native";
-import { useState } from "react";
-import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
-import { Text, TextInput, Button, Card } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { useState } from "react";
+import {
+    Alert,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    View,
+} from "react-native";
+import { Button, Card, Text, TextInput } from "react-native-paper";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useUserStore } from "../../src/store/userStore";
+import Logger from "../../src/utils/logger";
 
 export default function RegisterScreen() {
     const { theme } = useTheme();
@@ -86,7 +87,8 @@ export default function RegisterScreen() {
                 },
             ]);
         } catch (_error) {
-            console.error("Error registering:", _error);
+            Logger.error("Error registering", _error);
+            Alert.alert("Lỗi", "Không thể đăng ký. Vui lòng thử lại.");
             setLoading(false);
         }
     };

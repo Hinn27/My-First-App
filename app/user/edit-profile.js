@@ -1,21 +1,22 @@
 // Screen: Edit Profile - Chỉnh sửa thông tin cá nhân
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, Alert, Platform } from "react-native";
+import { Alert, Platform, ScrollView, StyleSheet, View } from "react-native";
 import {
-    Text,
-    TextInput,
     Button,
     Card,
+    IconButton,
     SegmentedButtons,
     Surface,
-    IconButton,
+    Text,
+    TextInput,
 } from "react-native-paper";
-import { useRouter } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import ScreenWrapper from "../../src/components/ScreenWrapper";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useUserStore } from "../../src/store/userStore";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import ScreenWrapper from "../../src/components/ScreenWrapper";
+import Logger from "../../src/utils/logger";
 
 export default function EditProfileScreen() {
     const { theme } = useTheme();
@@ -93,7 +94,7 @@ export default function EditProfileScreen() {
                 },
             ]);
         } catch (error) {
-            console.error("Error updating profile:", error);
+            Logger.error("Error updating profile", error);
             Alert.alert("Lỗi", "Không thể cập nhật thông tin");
         } finally {
             setLoading(false);

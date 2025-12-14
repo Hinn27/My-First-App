@@ -7,19 +7,20 @@
  * - Mock data (trong production sẽ lấy từ API)
  */
 
-import {
-    View,
-    Text,
-    StyleSheet,
-    ScrollView,
-    Pressable,
-    StatusBar,
-    Platform,
-} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import {
+    Platform,
+    Pressable,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View,
+} from "react-native";
 import { useTheme } from "../../src/context/ThemeContext";
+import Logger from "../../src/utils/logger";
 
 export default function RevenueScreen() {
     const { theme } = useTheme();
@@ -84,7 +85,8 @@ export default function RevenueScreen() {
 
             setOrders(mockOrders);
         } catch (error) {
-            console.error("Error loading orders:", error);
+            Logger.error("Error loading orders", error);
+            Alert.alert("Lỗi", "Không thể tải danh sách đơn hàng");
         }
     };
 

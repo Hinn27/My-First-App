@@ -8,23 +8,24 @@
  * - Chỉ seller đã được approve mới truy cập được
  */
 
-import React, { useState } from "react";
-import {
-    View,
-    Text,
-    StyleSheet,
-    TextInput,
-    ScrollView,
-    Pressable,
-    Alert,
-    Switch,
-    Image,
-} from "react-native";
-import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
+import {
+    Alert,
+    Image,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Switch,
+    Text,
+    TextInput,
+    View,
+} from "react-native";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useProductStore } from "../../src/store/productStore";
+import Logger from "../../src/utils/logger";
 
 export default function AddProductScreen() {
     const router = useRouter();
@@ -116,7 +117,7 @@ export default function AddProductScreen() {
                 handleChange("productImage", result.assets[0].uri);
             }
         } catch (error) {
-            console.error("Error picking image:", error);
+            Logger.error("Error picking image", error);
             Alert.alert("Lỗi", "Không thể chọn ảnh. Vui lòng thử lại.");
         }
     };

@@ -8,24 +8,24 @@
  */
 
 // UI
-import { View, StyleSheet, ScrollView, Alert } from "react-native";
-import {
-    Text,
-    Button,
-    Card,
-    List,
-    Switch,
-    IconButton,
-    Divider,
-} from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useTheme } from "../../src/context/ThemeContext";
-import { useUserStore } from "../../src/store/userStore";
-import { useProductStore } from "../../src/store/productStore";
-import { useChatStore } from "../../src/store/chatStore"; // Import Chat Store
+import { Alert, ScrollView, StyleSheet, View } from "react-native";
+import {
+    Button,
+    Card,
+    Divider,
+    IconButton,
+    List,
+    Switch,
+    Text,
+} from "react-native-paper";
 import ScreenWrapper from "../../src/components/ScreenWrapper";
+import { useTheme } from "../../src/context/ThemeContext";
+import { useChatStore } from "../../src/store/chatStore"; // Import Chat Store
+import { useProductStore } from "../../src/store/productStore";
+import { useUserStore } from "../../src/store/userStore";
 
 export default function ProfileScreen() {
     const { theme } = useTheme();
@@ -58,7 +58,8 @@ export default function ProfileScreen() {
             await AsyncStorage.removeItem("user");
             setUser(null);
         } catch (error) {
-            console.error("Error logging out:", error);
+            Logger.error("Error logging out", error);
+            Alert.alert("Lỗi", "Không thể đăng xuất. Vui lòng thử lại.");
         }
     };
 
@@ -86,7 +87,7 @@ export default function ProfileScreen() {
             // 6. Navigate to Home (Guest mode)
             router.replace("/(tabs)");
         } catch (error) {
-            console.error("Error clearing data:", error);
+            Logger.error("Error clearing data", error);
             Alert.alert("Lỗi", "Không thể xoá dữ liệu.");
         }
     };
@@ -116,7 +117,8 @@ export default function ProfileScreen() {
                 "Đã set user thành seller đã được duyệt! Menu sẽ cập nhật ngay."
             );
         } catch (error) {
-            console.error("Error setting seller:", error);
+            Logger.error("Error setting seller", error);
+            Alert.alert("Lỗi", "Không thể cập nhật. Vui lòng thử lại.");
         }
     };
 

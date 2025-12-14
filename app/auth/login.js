@@ -1,20 +1,21 @@
 // Screen: Login
-import {
-    View,
-    StyleSheet,
-    KeyboardAvoidingView,
-    Platform,
-    Alert,
-    ScrollView,
-} from "react-native";
-import { useState } from "react";
-import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
-import { Text, Button, Card, TextInput, Divider } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { useState } from "react";
+import {
+    Alert,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    View,
+} from "react-native";
+import { Button, Card, Divider, Text, TextInput } from "react-native-paper";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useUserStore } from "../../src/store/userStore";
+import Logger from "../../src/utils/logger";
 
 export default function LoginScreen() {
     const { theme } = useTheme();
@@ -76,7 +77,7 @@ export default function LoginScreen() {
                 },
             ]);
         } catch (_error) {
-            console.error("Error logging in:", _error);
+            Logger.error("Error logging in", _error);
             setLoading(false);
             setAuthError("Không thể đăng nhập");
         } finally {

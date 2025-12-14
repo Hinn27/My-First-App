@@ -6,25 +6,26 @@
  * - Lưu vào Zustand userStore với status "pending"
  * - Hiển thị thông báo chờ duyệt 24h
  */
+import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as ImagePicker from "expo-image-picker";
+import { useRouter } from "expo-router";
+import { useState } from "react";
 import {
-    View,
-    Text,
-    TextInput,
-    Pressable,
-    StyleSheet,
+    Alert,
+    Image,
     KeyboardAvoidingView,
     Platform,
-    Alert,
+    Pressable,
     ScrollView,
-    Image,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
 } from "react-native";
-import { useState } from "react";
-import { useRouter } from "expo-router";
-import * as ImagePicker from "expo-image-picker";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useUserStore } from "../../src/store/userStore";
+import Logger from "../../src/utils/logger";
 
 export default function SellerRegisterScreen() {
     const { theme } = useTheme();
@@ -126,7 +127,7 @@ export default function SellerRegisterScreen() {
                 ]
             );
         } catch (_error) {
-            console.error("Error submitting seller registration:", _error);
+            Logger.error("Error submitting seller registration", _error);
             Alert.alert("Lỗi", "Đăng ký thất bại. Vui lòng thử lại.");
         } finally {
             setLoading(false);
