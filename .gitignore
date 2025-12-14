@@ -2,6 +2,8 @@
 
 # dependencies
 node_modules/
+package-lock.json
+yarn.lock
 
 # Expo
 .expo/
@@ -31,10 +33,17 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
 .env*.local
+.env.development
+.env.production
 
 # typescript
 *.tsbuildinfo
+
+# testing
+coverage/
+*.log
 
 app-example
 
@@ -45,3 +54,6 @@ app-example
 # IDEs
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
